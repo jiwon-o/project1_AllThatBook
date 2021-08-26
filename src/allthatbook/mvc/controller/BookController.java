@@ -14,6 +14,7 @@ public class BookController {
 	 * */
 	public static void bookSelect() {
 		System.out.println("김성은이 추가");
+		System.out.println("오지원이 추가");
 		try {
 			List<Book> list = bookService.bookSelect();
 			EndView.printBookList(list);
