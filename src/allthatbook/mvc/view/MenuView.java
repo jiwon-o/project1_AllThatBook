@@ -1,10 +1,13 @@
 package allthatbook.mvc.view;
 
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import allthatbook.mvc.controller.BookController;
 import allthatbook.mvc.controller.UserController;
+import allthatbook.mvc.exception.PwdCheckException;
+import allthatbook.mvc.model.dto.User;
 import allthatbook.mvc.session.SessionSet;
 
 public class MenuView {
@@ -19,10 +22,10 @@ public class MenuView {
 			int menu = Integer.parseInt(sc.nextLine());
 			switch(menu) {
 			case 1 :
-				MenuView.login();// 로그인
+				MenuView.login(); //로그인
 				break;
 			case 2 :
-				//MenuView.register(); // 가입
+				MenuView.register(); //회원가입
 				break;
 
 			case 9 : 
@@ -33,6 +36,8 @@ public class MenuView {
 	}
 	
 	
+	
+
 	public static void printMenu() {
 		System.out.println("=== AllThatBook Library ===");
 		System.out.println("1. 로그인   |   2. 회원가입   |  9. 종료");
@@ -84,15 +89,39 @@ public class MenuView {
 	 * 로그인 메뉴
 	 * */
 	public static void login() {
-		 System.out.print("ID : ");
-		 String userId = sc.nextLine();
+		System.out.print("아이디 : ");
+		String userId = sc.nextLine();
 		 
-		 System.out.println("password : ");
-		 String userPwd = sc.nextLine();
+		System.out.print("비밀번호 : ");
+		String userPwd = sc.nextLine();
 		 
-		 UserController.login(userId, userPwd);
+		UserController.login(userId, userPwd);
 	}
 	
+	/**
+	 * 회원가입 메뉴
+	 */
+	private static void register() {
+		System.out.print("아이디 : ");
+		String userId = sc.nextLine();
+		 
+		System.out.print("비밀번호 : ");
+		String userPwd = sc.nextLine();
+		
+		System.out.print("비밀번호 확인 : ");
+		String pwdCheck = sc.nextLine();
+		
+		System.out.print("이름 : ");
+		String userName = sc.nextLine();
+		
+		System.out.print("전화번호 : ");
+		String userPhone = sc.nextLine();
+		
+		User user = new User(0, userId, userPwd, userName, userPhone, null);
+		UserController.register(user, pwdCheck);
+		
+	}
+
 	/**
 	 * 로그아웃
 	 * */

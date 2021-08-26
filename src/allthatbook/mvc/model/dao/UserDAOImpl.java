@@ -13,15 +13,6 @@ import allthatbook.mvc.util.DbUtil;
 public class UserDAOImpl implements UserDAO {
 
 	/**
-	 * 회원가입
-	 */
-	@Override
-	public int SignUp(User user) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	/**
 	 * 로그인
 	 */
 	@Override
@@ -48,7 +39,29 @@ public class UserDAOImpl implements UserDAO {
 		return user;
 	}
 
-	
+	/**
+	 * 회원가입
+	 */
+	@Override
+	public int register(User user) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		//insert into board (board_no, subject, writer, content, board_date) values (board_seq.nextval, ?, ?, ?, sysdate)
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("insert into users(회원번호, 회원ID, 패스워드, 회원이름, 연락처, 등록일자) values (user_seq_no.nextval, ?, ?, ?, ?, sysdate)");
+			ps.setString(1, user.getUserId());
+			ps.setString(2, user.getUserPwd());
+			ps.setString(3, user.getUserName());
+			ps.setString(4, user.getUserPhone());
+			
+			result = ps.executeUpdate();
+		}finally {
+			DbUtil.close(con, ps);
+		}
+		return result;
+	}
 
 
 }
