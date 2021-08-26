@@ -6,13 +6,13 @@ public class User {
 	private String userPwd;
 	private String userName;
 	private String userPhone;
-	private String regDate; //가입일
-	private int userOverdue;
+	private String regDate; //등록일자
+	//private int userOverdue;
   
 	public User() {}
 
-	public User(int userNo, String userId, String userPwd, String userName, String userPhone, String regDate,
-			int userOverdue) {
+	//나중에 userOverdue 추가
+	public User(int userNo, String userId, String userPwd, String userName, String userPhone, String regDate) {
 		super();
 		this.userNo = userNo;
 		this.userId = userId;
@@ -20,7 +20,6 @@ public class User {
 		this.userName = userName;
 		this.userPhone = userPhone;
 		this.regDate = regDate;
-		this.userOverdue = userOverdue;
 	}
 
 	public int getUserNo() {
@@ -69,14 +68,6 @@ public class User {
 
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
-	}
-
-	public int getUserOverdue() {
-		return userOverdue;
-	}
-
-	public void setUserOverdue(int userOverdue) {
-		this.userOverdue = userOverdue;
 	}
 	
   

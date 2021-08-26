@@ -4,6 +4,7 @@ package allthatbook.mvc.view;
 import java.util.Scanner;
 
 import allthatbook.mvc.controller.BookController;
+import allthatbook.mvc.controller.UserController;
 import allthatbook.mvc.session.SessionSet;
 
 public class MenuView {
@@ -18,10 +19,10 @@ public class MenuView {
 			int menu = Integer.parseInt(sc.nextLine());
 			switch(menu) {
 			case 1 :
-				//MenuView.register(); // 가입
+				MenuView.login();// 로그인
 				break;
 			case 2 :
-				MenuView.login();// 로그인
+				//MenuView.register(); // 가입
 				break;
 
 			case 9 : 
@@ -33,8 +34,8 @@ public class MenuView {
 	
 	
 	public static void printMenu() {
-		System.out.println("=== Heejung Shopping Mall ===");
-		System.out.println("1. 회원가입   |   2. 로그인   |  9. 종료");
+		System.out.println("=== AllThatBook Library ===");
+		System.out.println("1. 로그인   |   2. 회원가입   |  9. 종료");
 	}
 	
 	
@@ -83,7 +84,13 @@ public class MenuView {
 	 * 로그인 메뉴
 	 * */
 	public static void login() {
+		 System.out.print("ID : ");
+		 String userId = sc.nextLine();
 		 
+		 System.out.println("password : ");
+		 String userPwd = sc.nextLine();
+		 
+		 UserController.login(userId, userPwd);
 	}
 	
 	/**
