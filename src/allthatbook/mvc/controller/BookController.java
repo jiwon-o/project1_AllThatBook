@@ -13,6 +13,7 @@ public class BookController {
 	 * 전체 책 조회
 	 * */
 	public static void bookSelect() {
+		System.out.println("김성은이 추가");
 		try {
 			List<Book> list = bookService.bookSelect();
 			EndView.printBookList(list);
