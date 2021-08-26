@@ -34,7 +34,7 @@ public class MenuView {
 	
 	public static void printMenu() {
 		System.out.println("=== Heejung Shopping Mall ===");
-		System.out.println("1. 가입   |   2. 로그인   |  9. 종료");
+		System.out.println("1. 회원가입   |   2. 로그인   |  9. 종료");
 	}
 	
 	

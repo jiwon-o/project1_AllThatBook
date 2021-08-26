@@ -1,12 +1,12 @@
 package allthatbook.mvc.controller;
 
 import allthatbook.mvc.model.dto.User;
-import allthatbook.mvc.model.service.UserService;
+import allthatbook.mvc.model.service.UserServiceImpl;
 import allthatbook.mvc.view.FailView;
 import allthatbook.mvc.view.MenuView;
 
 public class UserController {
-	static UserService userService = new UserService();
+	static UserServiceImpl userService = new UserServiceImpl();
 	/**
 	 * ·Î±×ÀÎ
 	 * */

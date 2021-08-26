@@ -1,19 +1,28 @@
-package allthatbook.mvc.model.dao;
+package allthatbook.mvc.model.service;
 
 import java.sql.SQLException;
 import java.util.List;
+
+import allthatbook.mvc.exception.NotFoundException;
+import allthatbook.mvc.model.dao.BookDAO;
+import allthatbook.mvc.model.dao.BookDAOImpl;
 import allthatbook.mvc.model.dto.Book;
-import allthatbook.mvc.util.DbUtil;
 
 
-public class BookDAOImpl implements BookDAO {
-
-	@Override
-	public List<Book> bookSelect() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+public class BookServiceImpl implements BookService {
+	BookDAO bookDao = new BookDAOImpl();
+    /**
+     * 전체 책 조회
+     * */
+	public List<Book> bookSelect() throws NotFoundException , SQLException{
+		List<Book> list = bookDao.bookSelect();
+		if(list.size()==0)throw new NotFoundException("현재 상품이 없습니다.");
+		return list;
 	}
-
+	
+	/**
+	 * 책 번호에 해당하는 상품검색
+	 * */
 	@Override
 	public Book bookSelectByBookNo(String bookNo) throws SQLException {
 		// TODO Auto-generated method stub
@@ -39,21 +48,20 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 	@Override
-	public int bookInsert(Book book) throws SQLException {
+	public void bookInsert(Book book) throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		
 	}
 
 	@Override
-	public int bookUpdate(Book book) throws SQLException {
+	public void bookUpdate(Book book) throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		
 	}
 
 	@Override
-	public int bookDelete(Book book) throws SQLException {
+	public void bookDelete(Book book) throws SQLException {
 		// TODO Auto-generated method stub
-		return 0;
+		
 	}
-
 }
