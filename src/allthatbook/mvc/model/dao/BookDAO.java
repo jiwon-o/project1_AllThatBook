@@ -1,9 +1,9 @@
 package allthatbook.mvc.model.dao;
 
+import allthatbook.mvc.model.dto.Book;
 import java.sql.SQLException;
 import java.util.List;
 
-import allthatbook.mvc.model.dto.Book;
 
 public interface BookDAO {
 	/**

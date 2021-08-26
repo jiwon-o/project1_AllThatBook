@@ -2,9 +2,9 @@ package allthatbook.mvc.model.dao;
 
 import java.sql.SQLException;
 import java.util.List;
-
 import allthatbook.mvc.model.dto.Book;
 import allthatbook.mvc.util.DbUtil;
+
 
 public class BookDAOImpl implements BookDAO {
 
