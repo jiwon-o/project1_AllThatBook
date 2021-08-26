@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 import allthatbook.mvc.controller.BookController;
 import allthatbook.mvc.controller.UserController;
-import allthatbook.mvc.exception.PwdCheckException;
 import allthatbook.mvc.model.dto.User;
+import allthatbook.mvc.session.Session;
 import allthatbook.mvc.session.SessionSet;
 
 public class MenuView {
@@ -49,28 +49,30 @@ public class MenuView {
 			SessionSet ss = SessionSet.getInstance();
 			System.out.println(ss.getSet()); //Set객체
 			System.out.println("-----" +userId+ " 로그인 중 -----");
-			System.out.println(" 1.로그아웃 |  2.상품보기  |  3.주문하기  | 4. 주문내역보기  |  5.장바구니담기  |  6.장바구니보기 ");
+			System.out.println(" 1.전체목록  |  2.도서검색  | 3.도서대여  |  4.도서반납  |  5.책신청  |  6.장바구니  |  7.회원정보  |  9.로그아웃 ");
 			int menu =Integer.parseInt( sc.nextLine());
 			switch(menu) {
-				case 1 :
-					logout(userId);// 
-					return;
-					//break;
-				case 2 :
-					BookController.bookSelect();//전체 상품조회
-					break;
-				case 3 :
-					
-					break;
-				case 4 :
-					break;
-				case 5 :
-					
-					break;
-				case 6 : 
-					
-					break;
-				}
+			case 1 :
+				BookController.bookSelect();//전체 상품조회
+				break;
+			case 2 :
+				
+				break;
+			case 3 :
+				
+				break;
+			case 4 :
+				break;
+			case 5 :
+				
+				break;
+			case 6 : 
+				
+				break;
+			case 9 :
+				logout(userId);
+				return;
+			}
 		}
 		
 	}
@@ -126,7 +128,10 @@ public class MenuView {
 	 * 로그아웃
 	 * */
 	public static void logout(String userId) {
+		Session session = new Session(userId);
 		
+		SessionSet ss = SessionSet.getInstance();
+		ss.remove(session);	
 	}
 }
 
