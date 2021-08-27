@@ -27,7 +27,7 @@ public class BookServiceImpl implements BookService {
 	public Book bookSelectByBookNo(int bookNo) throws SQLException {
 		Book book = bookDao.bookSelectByBookNo(bookNo);
 		if(book == null) throw new SQLException(bookNo + "에 해당하는 책은 현재 없습니다.");
-		return null;
+		return book;
 	}
 
 	@Override
