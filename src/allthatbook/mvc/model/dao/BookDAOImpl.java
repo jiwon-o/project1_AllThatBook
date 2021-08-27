@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
 import allthatbook.mvc.model.dto.Book;
 import allthatbook.mvc.util.DbUtil;
-import kosta.mvc.model.dto.Goods;
 
 
 public class BookDAOImpl implements BookDAO {
