@@ -15,9 +15,6 @@ public class BookController {
 	 * 전체 책 조회
 	 * */
 	public static void bookSelect() {
-		System.out.println("김성은이 추가");
-		System.out.println("윤솔이추가 ");
-
 		try {
 			List<Book> list = bookService.bookSelect();
 			EndView.printBookList(list);
@@ -26,6 +23,7 @@ public class BookController {
 		}
 	}
 	
+
 	/**
 	 * 도서번호에 해당하는 책 조회
 	 */
@@ -39,3 +37,8 @@ public class BookController {
 		}
 	}
 }
+
+
+
+
+
