@@ -10,9 +10,8 @@ public class Book {
 	private int bookState; //대여가능: 0, 대여중: 1, 예약 대기상태: 2
   
     public Book() {}
+	public Book(int bookNo, String bookName, String bookWriter, String bookPublisher, String pubDate, int bookState) {
 
-	public Book(int bookNo, String bookName, String bookWriter, String bookPublisher, String pubDate, 
-			int bookState) {
 		super();
 		this.bookNo = bookNo;
 		this.bookName = bookName;

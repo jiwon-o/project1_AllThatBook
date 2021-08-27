@@ -16,7 +16,7 @@ public interface BookDAO {
 	/**
 	 * bookNo에 해당하는 정보 검색
 	 * */
-	Book bookSelectByBookNo(String bookNo)throws SQLException;
+	Book bookSelectByBookNo(int bookNo)throws SQLException;
 	
 	/**
 	 * 저자명에 해당하는 정보 검색

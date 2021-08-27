@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import allthatbook.mvc.model.dto.Book;
 import allthatbook.mvc.util.DbUtil;
-import kosta.mvc.model.dto.BoardDTO;
+
 
 
 public class BookDAOImpl implements BookDAO {
@@ -35,7 +35,8 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 	@Override
-	public Book bookSelectByBookNo(String bookNo) throws SQLException {
+
+	public Book bookSelectByBookNo(int bookNo) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -43,17 +44,15 @@ public class BookDAOImpl implements BookDAO {
 		
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement("book.bookSelectByBookNo");
-			ps.setString(1 ,bookNo);
-			rs = ps.executeQuery();
-			if(rs.next()) {
-				Book = new Book(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6));
-			}
-		}finally {
-			DbUtil.close(con, ps,rs);
-		}
-		
-		return book;
+			ps= con.prepareStatement("select * from books where Ã¥¹øÈ£=?");
+			ps.setInt(1, bookNo);
+			rs = ps.executeQuery(); 
+	        
+	        if(rs.next()) {
+	        	book  = new Book(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5));
+	        	
+	        }
+		return null;
 	}
 
 	@Override
