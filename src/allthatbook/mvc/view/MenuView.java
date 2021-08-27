@@ -1,7 +1,5 @@
 package allthatbook.mvc.view;
 
-
-import java.sql.SQLException;
 import java.util.Scanner;
 
 import allthatbook.mvc.controller.BookController;
@@ -23,6 +21,7 @@ public class MenuView {
 			switch(menu) {
 			case 1 :
 				MenuView.login(); //로그인
+				
 				break;
 			case 2 :
 				MenuView.register(); //회원가입
@@ -81,10 +80,23 @@ public class MenuView {
 		System.out.println("1. 수정   |  2.탈퇴   | 9. 나가기");
 	}
 	
-	public static void printAdminMenu() {
+	public static void printAdminMenu(String userId) {
 		System.out.println("-- 관리자 메뉴 --");
-		System.out.println("1. ID로 검색   |  2.이름으로 검색  | 3.전체 검색  |  9. 나가기");
-		
+		System.out.println("1. 회원관리   |  2. 도서관리  | 3. 대출관리 |  9. 나가기");
+		int menu=Integer.parseInt(sc.nextLine());
+		switch(menu) {
+		case 1 :
+			AdminMenuView.userAdminMenu();
+			break;
+		case 2 :
+			AdminMenuView.bookAdminMenu();
+			break;
+		case 3 :
+			break;
+		case 9 :
+			logout(userId);
+			return;
+		}
 	}
 	
 	/**
@@ -133,6 +145,9 @@ public class MenuView {
 		SessionSet ss = SessionSet.getInstance();
 		ss.remove(session);	
 	}
+	
+
+
 }
 
 
