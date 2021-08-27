@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.List;
 import allthatbook.mvc.model.dto.Book;
 import allthatbook.mvc.util.DbUtil;
-import kosta.mvc.model.dto.Goods;
 
 
 public class BookDAOImpl implements BookDAO {
@@ -31,10 +30,13 @@ public class BookDAOImpl implements BookDAO {
 			rs = ps.executeQuery(); 
 	        
 	        if(rs.next()) {
-	        	book  = new Book(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5));
+	        	book = new Book(rs.getInt(1),  rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
 	        	
 	        }
-		return null;
+		}finally {
+			DbUtil.close(con, ps, rs);
+		}
+		return book;
 	}
 
 	@Override

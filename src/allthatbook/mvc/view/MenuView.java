@@ -3,6 +3,7 @@ package allthatbook.mvc.view;
 
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 
 import allthatbook.mvc.controller.BookController;
 import allthatbook.mvc.controller.CartController;
@@ -57,7 +58,7 @@ public class MenuView {
 				BookController.bookSelect();//전체 상품조회
 				break;
 			case 2 :
-				
+				selectBookByNo();
 				break;
 			case 3 :
 				
@@ -88,6 +89,39 @@ public class MenuView {
 		
 	}
 	
+	/**
+	 * 책번호로 검색하기
+	 */
+	public static void selectBookByNo() {
+		try {
+			System.out.println("책번호 입력 > ");
+			int no = Integer.parseInt(sc.nextLine());
+			
+			BookController.bookSelectByBookNo(no);
+		}catch (NumberFormatException e) {
+			e.printStackTrace();
+			System.out.println("숫자만 입력해주세요.");
+			System.out.println("다시 하시겠습니까? (yes or no)");
+			String choice = sc.nextLine();
+			if(choice.equals("yes")) {
+				selectBookByNo();
+			}
+		}
+	}
+	
+	/**
+     * 장바구니 담기
+     * */
+    public static void putCart(String userId) {
+		System.out.println("----장바구니 담기----");
+		System.out.print("책번호 : ");
+		int bookNo = Integer.parseInt(sc.nextLine());
+		
+		CartController.putCart(userId, bookNo);
+	
+		
+	}
+    
 	/**
 	 * 로그인 메뉴
 	 * */
@@ -135,18 +169,6 @@ public class MenuView {
 		ss.remove(session);	
 	}
 	
-	/**
-     * 장바구니 담기
-     * */
-    public static void putCart(String userId) {
-		System.out.println("----장바구니 담기----");
-		System.out.print("책번호 : ");
-		int bookNo = Integer.parseInt(sc.nextLine());
-		
-		CartController.putCart(userId, bookNo);
-	
-		
-	}
 }
 
 
