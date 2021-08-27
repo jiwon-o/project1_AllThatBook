@@ -24,8 +24,9 @@ public class BookServiceImpl implements BookService {
 	 * 책 번호에 해당하는 상품검색
 	 * */
 	@Override
-	public Book bookSelectByBookNo(String bookNo) throws SQLException {
-		// TODO Auto-generated method stub
+	public Book bookSelectByBookNo(int bookNo) throws SQLException {
+		Book book = bookDao.bookSelectByBookNo(bookNo);
+		if(book == null) throw new SQLException(bookNo + "에 해당하는 책은 현재 없습니다.");
 		return null;
 	}
 

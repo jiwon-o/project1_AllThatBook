@@ -7,20 +7,17 @@ public class Book {
 	private String bookWriter;
 	private String bookPublisher;
 	private String pubDate; //출간일
-	private String regDate; //등록일
 	private int bookState; //대여가능: 0, 대여중: 1, 예약 대기상태: 2
   
     public Book() {}
 
-	public Book(int bookNo, String bookName, String bookWriter, String bookPublisher, String pubDate, String regDate,
-			int bookState) {
+	public Book(int bookNo, String bookName, String bookWriter, String bookPublisher, String pubDate, int bookState) {
 		super();
 		this.bookNo = bookNo;
 		this.bookName = bookName;
 		this.bookWriter = bookWriter;
 		this.bookPublisher = bookPublisher;
 		this.pubDate = pubDate;
-		this.regDate = regDate;
 		this.bookState = bookState;
 	}
 	
@@ -63,14 +60,6 @@ public class Book {
 
 	public void setPubDate(String pubDate) {
 		this.pubDate = pubDate;
-	}
-
-	public String getRegDate() {
-		return regDate;
-	}
-
-	public void setRegDate(String regDate) {
-		this.regDate = regDate;
 	}
 
 	public int getBookState() {

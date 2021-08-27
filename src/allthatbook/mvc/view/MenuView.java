@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import allthatbook.mvc.controller.BookController;
+import allthatbook.mvc.controller.CartController;
 import allthatbook.mvc.controller.UserController;
 import allthatbook.mvc.model.dto.User;
 import allthatbook.mvc.session.Session;
@@ -49,7 +50,7 @@ public class MenuView {
 			SessionSet ss = SessionSet.getInstance();
 			System.out.println(ss.getSet()); //Set객체
 			System.out.println("-----" +userId+ " 로그인 중 -----");
-			System.out.println(" 1.전체목록  |  2.도서검색  | 3.도서대여  |  4.도서반납  |  5.책신청  |  6.장바구니  |  7.회원정보  |  9.로그아웃 ");
+			System.out.println(" 1.전체목록  |  2.도서검색  | 3.도서대여  |  4.도서반납  |  5.책신청  |  6.장바구니담기  |  7.회원정보  |  9.로그아웃 ");
 			int menu =Integer.parseInt( sc.nextLine());
 			switch(menu) {
 			case 1 :
@@ -67,7 +68,7 @@ public class MenuView {
 				
 				break;
 			case 6 : 
-				
+				MenuView.putCart(userId);
 				break;
 			case 9 :
 				logout(userId);
@@ -132,6 +133,19 @@ public class MenuView {
 		
 		SessionSet ss = SessionSet.getInstance();
 		ss.remove(session);	
+	}
+	
+	/**
+     * 장바구니 담기
+     * */
+    public static void putCart(String userId) {
+		System.out.println("----장바구니 담기----");
+		System.out.print("책번호 : ");
+		int bookNo = Integer.parseInt(sc.nextLine());
+		
+		CartController.putCart(userId, bookNo);
+	
+		
 	}
 }
 
