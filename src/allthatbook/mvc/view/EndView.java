@@ -10,6 +10,10 @@ public class EndView {
 		
 	}
 	
+	public static void printSelectByNo(Book book) {
+		System.out.println(book + "\n");
+	}
+	
 	public static void printMessage(String message) {
 		System.out.println(message);
 	}
