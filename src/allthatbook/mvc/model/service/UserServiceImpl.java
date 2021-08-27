@@ -1,6 +1,7 @@
 package allthatbook.mvc.model.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import allthatbook.mvc.exception.NotFoundException;
 import allthatbook.mvc.exception.PwdCheckException;
@@ -74,5 +75,26 @@ public class UserServiceImpl implements UserService {
 		
 		
 	}
-	
+
+	/**
+	 * 전체회원조회
+	 */
+	public List<User> allSelect()  throws NotFoundException, SQLException{
+		List<User> userList = UserDAOImpl.allSelect();
+		if(userList.size()==0)throw new NotFoundException("현재상품이없습니다.");	
+		return userList;
+	}
+
+	public User selectByUserId(String userId) throws NotFoundException, SQLException{
+		User user = UserDAOImpl.selectByUserId(userId);
+		if(user==null)throw new NotFoundException("해당 userId가 존재하지 않습니다.");
+		return user;
+	}
+
+	public User selectByUserNo(int userNo) throws NotFoundException, SQLException{
+		User user = UserDAOImpl.selectByUserNo(userNo);
+		if(user==null)throw new NotFoundException("해당 userNo가 존재하지 않습니다.");
+		return user;
+	}
+
 }

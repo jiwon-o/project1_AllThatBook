@@ -5,9 +5,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import allthatbook.mvc.model.dto.User;
 import allthatbook.mvc.util.DbUtil;
+
 
 
 public class UserDAOImpl implements UserDAO {
@@ -63,6 +66,7 @@ public class UserDAOImpl implements UserDAO {
 		return result;
 	}
 
+
 	@Override
 	public int updateUserInfo(User user) throws SQLException {
 		Connection con = null;
@@ -85,5 +89,80 @@ public class UserDAOImpl implements UserDAO {
 	
 	
 	
+
+	/**
+	 * 전체회원 조회
+	 * @return userList
+	 */
+	public static List<User> allSelect() throws SQLException{
+		  Connection con=null;
+		  PreparedStatement ps=null;
+		  ResultSet rs=null;
+		  List<User> userList = new ArrayList<>();
+		  String sql="select*from users";
+		 try {
+		   con = DbUtil.getConnection();
+		   ps= con.prepareStatement(sql);
+	       rs = ps.executeQuery(); 
+	        
+	        while(rs.next()) {
+	        	User user  = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+	        	userList.add(user);
+	        }
+    }finally {
+    	DbUtil.close(con, ps, rs);
+    }
+		return userList;
+	}
+	
+	/**
+	 * userNo로 조회
+	 * @return
+	 */
+	public static User selectByUserNo(int userNo) throws SQLException {
+		Connection con=null;
+		  PreparedStatement ps=null;
+		  ResultSet rs=null;
+		  User user = new User();
+		  String sql="select*from users where 회원번호=?";
+		 try {
+		   con = DbUtil.getConnection();
+		   ps= con.prepareStatement(sql);
+		   ps.setInt(1, userNo);
+	       rs = ps.executeQuery(); 
+	        
+	        if(rs.next()) {
+	        	user  = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+	        }
+  }finally {
+  	DbUtil.close(con, ps, rs);
+  }
+		return user;
+	}
+	
+	/**
+	 * userId로 조회
+	 * @return
+	 */
+	public static User selectByUserId(String userId) throws SQLException {
+		Connection con=null;
+		  PreparedStatement ps=null;
+		  ResultSet rs=null;
+		  User user = new User();
+		  String sql="select*from users where 회원ID=?";
+		 try {
+		   con = DbUtil.getConnection();
+		   ps= con.prepareStatement(sql);
+		   ps.setString(1, userId);
+	       rs = ps.executeQuery(); 
+	        
+	        if(rs.next()) {
+	        	user  = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+	        }
+  }finally {
+  	DbUtil.close(con, ps, rs);
+  }
+		return user;
+	}
 
 }

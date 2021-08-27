@@ -69,6 +69,26 @@ public class User {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("User [userNo=");
+		builder.append(userNo);
+		builder.append(", userId=");
+		builder.append(userId);
+		builder.append(", userPwd=");
+		builder.append(userPwd);
+		builder.append(", userName=");
+		builder.append(userName);
+		builder.append(", userPhone=");
+		builder.append(userPhone);
+		builder.append(", regDate=");
+		builder.append(regDate);
+		builder.append("]");
+		return builder.toString();
+	}
+	
 	
   
 }
