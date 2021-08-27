@@ -41,4 +41,39 @@ public class UserController {
 			FailView.errorMessage(e.getMessage());
 		}
 	}
+	
+	/**
+	 * 회원정보 수정
+	 */
+	public static void ChangeInformation(String userId, String userPwd) {
+		try {
+			User user = userService.ChangeInformation(userId,userPwd);
+			MenuView.printSubMenu("회원정보가 수정되었습니다.");
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
+	/**
+	 * 회원탈퇴 
+	 */
+	public static void revoke(User user, String userPwd) {
+		try {
+			userService.revoke(user, userPwd);
+				MenuView.printSubMenu("회원탈퇴가 완료되었습니다.");
+		}catch (SQLException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
+	
+	
+	
+	
+	
 }

@@ -21,7 +21,6 @@ public class UserServiceImpl implements UserService {
 		if(user==null) {
 			throw new NotFoundException("아이디 또는 비밀번호가 잘못 입력되었습니다. 정확히 입력해주세요.");
 		}
-		
 		//로그인 된 정보 저장하기
 		Session session = new Session(userId);
 		
@@ -31,6 +30,7 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
+	
 	/**
 	 * 회원가입
 	 */
@@ -43,6 +43,44 @@ public class UserServiceImpl implements UserService {
 		}else if(!user.getUserPwd().equals(pwdCheck)) {
 			throw new PwdCheckException("비밀번호가 일치하지 않습니다.");
 		}
+		
+		
+	
+		
+	/**
+	* 회원정보 수정
+    */	
+	public void ChangeInformation(String userId, String userPwd) throws NotFoundException, SQLException{
+		User user=userDao.ChangeInformation(userId, userPwd);
+		if(user==null) {
+			throw new NotFoundException("아이디 또는 비밀번호가 잘못 입력되었습니다. 정확히 입력해주세요.");
+		}
+		
+	
+		
+		
+		
+	}
+		
+	
+	
+	
+		
+		
+		
+	
+	/**
+	 * 회원탈퇴 
+	 */
+	
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	}
 }
