@@ -13,9 +13,22 @@ public interface UserService {
 	 * */
 	User login(String userId, String userPwd) throws NotFoundException, SQLException;
 	
+	
 	/**
 	 * 회원가입
 	 */
 	void register(User user, String pwdCheck) throws SQLException, PwdCheckException;
+	
+	
+	/**
+	 * 회원수정
+	 */
+	void updateUserInfo(User user) throws SQLException;
+	
+	
+	/**
+	 * 회원탈퇴
+	 */
+	void revoke(User user)throws SQLException;
 	
 }

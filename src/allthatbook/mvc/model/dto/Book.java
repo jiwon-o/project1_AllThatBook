@@ -11,7 +11,6 @@ public class Book {
   
     public Book() {}
 	public Book(int bookNo, String bookName, String bookWriter, String bookPublisher, String pubDate, int bookState) {
-
 		super();
 		this.bookNo = bookNo;
 		this.bookName = bookName;

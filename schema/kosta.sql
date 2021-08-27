@@ -11,3 +11,5 @@ insert into users(회원번호, 회원ID, 패스워드, 회원이름, 연락처, 등록일자) values
 delete from users where 회원ID='zxcv';
 
 select * from books;
+
+update users set 패스워드 = 'ccc',연락처 = '111-111-1111' where 회원ID ='aaa';

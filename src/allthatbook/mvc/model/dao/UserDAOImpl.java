@@ -11,7 +11,7 @@ import allthatbook.mvc.util.DbUtil;
 
 
 public class UserDAOImpl implements UserDAO {
-
+	
 	/**
 	 * 로그인
 	 */
@@ -63,5 +63,27 @@ public class UserDAOImpl implements UserDAO {
 		return result;
 	}
 
+	@Override
+	public int updateUserInfo(User user) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("update users set 패스워드 = ?,연락처 = ? where 회원ID =?");
+			ps.setString(1, user.getUserPwd());
+			ps.setString(2, user.getUserPhone());
+			ps.setString(3, user.getUserId());
+			
+			result = ps.executeUpdate();
+		}finally {
+			DbUtil.close(con, ps);
+		}
+		return result;
+	}
+
+	
+	
+	
 
 }
