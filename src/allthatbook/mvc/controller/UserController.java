@@ -25,7 +25,6 @@ public class UserController {
 			} else {
 				MenuView.printUserMenu(user);
 			}
-			// MenuView.menu();
 		} catch (Exception e) {
 			// e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
@@ -57,11 +56,9 @@ public class UserController {
 
 			if (result == 0) {
 				FailView.errorMessage("수정이 실패하였습니다.");
-				MenuView.updateTemp(user);
 			} else if (result == 1) {	// 수정 성공 했을때 > 화면: 첫번째 메인메뉴
 				EndView.printMessage("수정이 성공되었습니다. 다시 로그인 해주세요");
 				MenuView.logout(user.getUserId()); //수정 되어서 다시 로그인 시키기
-				return;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
