@@ -22,3 +22,6 @@ select * from books where 책번호=3;
 select * from books where 도서명 like ('%가%') order by 책번호;
 
 insert into books (책번호, 도서명, 저자명, 출판사명, 출간일, 분야, 상태) values (BOOK_SEQ_NO.nextval, '첫 파이썬', '엘리스', '이지퍼블리싱', SYSDATE, '컴퓨터/IT', 0);
+
+select * from users where 회원ID='bbb';
+
