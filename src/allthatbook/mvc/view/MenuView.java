@@ -1,7 +1,6 @@
 package allthatbook.mvc.view;
 
 import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 
 import allthatbook.mvc.controller.BookController;
 import allthatbook.mvc.controller.CartController;
@@ -58,7 +57,7 @@ public class MenuView {
 				BookController.bookSelect();//전체 상품조회
 				break;
 			case 2 :
-				selectBookByNo();
+				printSelectMenu(userId);
 				break;
 			case 3 :
 				
@@ -78,7 +77,6 @@ public class MenuView {
 			case 8 :
 				MenuView.updateTemp();
 				break;
-			
 			case 9 :
 				logout(userId);
 				return;
@@ -89,15 +87,52 @@ public class MenuView {
 		}
 		
 	}
-	
-	public static void printSubMenu() {
-		System.out.println("\n");
-		System.out.println(" 1. 수정   |  2.회원탈퇴  | 9. 나가기  |");
+	/**
+	 * 검색 메뉴
+	 */
+	public static void printSelectMenu(String userId) {
+		while(true) {
+			System.out.println("1.도서번호로 검색  |  2.도서명으로 검색  |  3.저자명으로 검색  |  4.출판사로 검색  |  5.도서분야로 검색  |  6.대여여부로 검색  |  9.돌아가기");
+			
+			int menu =Integer.parseInt(sc.nextLine());
+			switch(menu) {
+			case 1 :
+				selectBookByNo(userId); //도서번호로 검색
+				break;
+			case 2 :
+				selectBookByName(userId); //도서명으로 검색
+				break;
+			case 3 :
+				selectBookByWriter(userId); //저자명으로 검색
+				break;
+			case 4 :
+				selectBookByPublisher(userId); //출판사로 검색
+				break;
+			case 5 :
+				selectBookByCategory(userId); //분야로 검색
+				break;
+			case 6 : 
+				
+				break;
+			case 9 :
+				printUserMenu(userId);
+				break;
+			}
+		}
 	}
 	
+
+	/**
+	 * 회원정보 메뉴
+	 */
+	public static void printSubMenu() {
+		System.out.println("1. 수정  |  2.회원탈퇴  |  9. 나가기");
+	}
 	
-	
-	
+
+	/**
+	 * 관리자메뉴
+	 */
 	public static void printAdminMenu(String userId) {
 		System.out.println("-- 관리자 메뉴 --");
 		System.out.println("1. 회원관리   |  2. 도서관리  | 3. 대출관리 |  9. 나가기");
@@ -117,27 +152,91 @@ public class MenuView {
 		}
 	}
 	
+//////////////////////   검색   /////////////////////
 	/**
-	 * 책번호로 검색하기
+	 * 도서번호로 검색하기
 	 */
-	public static void selectBookByNo() {
+	public static void selectBookByNo(String userId) {
 		try {
 			System.out.println("책번호 입력 > ");
 			int no = Integer.parseInt(sc.nextLine());
 			
-			BookController.bookSelectByBookNo(no);
+			BookController.bookSelectByBookNo(userId, no);
 		}catch (NumberFormatException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			System.out.println("숫자만 입력해주세요.");
 			System.out.println("다시 하시겠습니까? (yes or no)");
 			String choice = sc.nextLine();
 			if(choice.equals("yes")) {
-				selectBookByNo();
+				selectBookByNo(userId);
 			}
 		}
 	}
 	
+	/**
+	 * 도서명으로 검색하기
+	 */
+	public static void selectBookByName(String userId) {
+		try {
+			System.out.println("단어 검색 > ");
+			String keyword = sc.nextLine();
+			
+			BookController.bookSelectByBookName(userId, keyword);
+		}catch (Exception e) {
+			e.printStackTrace();
 
+			
+		}
+	}
+	
+	/**
+	 * 저자명으로 검색하기
+	 */
+	public static void selectBookByWriter(String userId) {
+		try {
+			System.out.println("저자 검색 > ");
+			String writer = sc.nextLine();
+			
+			BookController.bookSelectByWriter(userId, writer);
+		}catch (Exception e) {
+			e.printStackTrace();
+
+		}
+	}
+	
+	/**
+	 * 출판사로 검색하기
+	 */
+	public static void selectBookByPublisher(String userId) {
+		try {
+			System.out.println("출판사 검색 > ");
+			String publisher = sc.nextLine();
+			
+			BookController.bookSelectByPublisher(userId, publisher);
+		}catch (Exception e) {
+			e.printStackTrace();
+
+		}
+	}
+	
+	/**
+	 * 도서분야로 검색하기
+	 */
+	public static void selectBookByCategory(String userId) {
+		try {
+			System.out.println("도서분야 검색 > ");
+			String category = sc.nextLine();
+			
+			BookController.bookSelectByCategory(userId, category);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+///////////////////////   장바구니   //////////////////////
+	
 	/**
      * 장바구니 담기
      * */
@@ -154,12 +253,12 @@ public class MenuView {
     /**
      * 장바구니 보기
      * */
-	public static void viewCart(String id) {
-		CartController.viewCart(id);
-		
-		
+	public static void viewCart(String userId) {
+		CartController.viewCart(userId);
 		
 	}
+	
+	
 	
 	/**
 	 * 로그인 메뉴

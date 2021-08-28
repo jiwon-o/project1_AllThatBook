@@ -1,6 +1,7 @@
 package allthatbook.mvc.model.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import allthatbook.mvc.model.dto.User;
 
@@ -27,5 +28,7 @@ public interface UserDAO {
 	 */
 	
 	int revoke(User user) throws SQLException;
+
+	List<User> allSelect() throws SQLException;
 	
 }
