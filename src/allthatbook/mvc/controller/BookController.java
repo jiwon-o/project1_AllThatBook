@@ -118,6 +118,65 @@ public class BookController {
 		}
 		
 	}
+	
+	/**
+	 * 관리자-도서관리-1.도서등록 
+	 * @param book
+	 * @return int result
+	 */
+	public static int bookInsert(Book book) {
+		int result=0;
+		try {
+			result = bookService.bookInsert(book);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+		return result;
+	}
+
+	/**
+	 * 관리자-도서관리-도서삭제
+	 * @param bookNo
+	 * @return int result
+	 */
+	public static int bookDelete(int bookNo) {
+		int result=0;
+		try {
+			result = bookService.bookDelete(bookNo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+		return result;
+	}
+	
+	/**
+	 * 관리자-도서관리-대출중도서조회
+	 * */
+	public static void bookRentalSelect() {
+		try {
+			List<Book> list = bookService.bookRentalSelect();
+			EndView.printBookList(list);
+		}catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+
+
+	/**
+	 * 관리자-도서관리-예약된 도서 조회
+	 */
+	public static void bookReserveSelect() {
+		try {
+			List<Book> list = bookService.bookReserveSelect();
+			EndView.printBookList(list);
+		}catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		
+	}
+
 }
 
 
