@@ -47,6 +47,36 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/**
+	 * 회원정보 수정
+	 */
+
+	@Override
+	public void updateUserInfo(User user) throws SQLException {
+		int result = userDao.updateUserInfo(user);
+		if (result == 0) {
+			throw new SQLException("회원정보수정에 실패했습니다.");
+		} else if (!user.getUserPwd().equals(pwdCheck)) {
+			throw new PwdCheckException("비밀번호가 일치하지 않습니다.");
+		}
+
+	}
+
+	/**
+	 * 회원탈퇴
+	 */
+	
+	@Override
+	public void revoke(User user) throws SQLException {
+		int result = UserDAO.revoke(user);
+		if (result == 0) {
+			throw new SQLException("회원탈퇴에 실패했습니다.");
+		}else if(!user.)
+		
+		
+		
+	}
+
+	/**
 	 * 전체회원조회
 	 */
 	public List<User> allSelect()  throws NotFoundException, SQLException{
@@ -67,39 +97,4 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
-	
-	/**
-	 * 회원정보 수정
-	 */
-	@Override
-	public int updateUserInfo(User user) throws SQLException {
-		int result = userDao.updateUserInfo(user);
-		
-		if (result == 0) {
-			System.out.print("회원정보수정에 실패했습니다.");
-		} else if (result == 1) {
-			System.out.print("회원정보가 변경되었습니다.");
-		}
-		
-		return result;		
-
-	}
-
-
-	/**
-	 * 회원탈퇴
-	 * 
-	 */
-	
-	@Override
-	public int revoke(User user) throws SQLException {
-		int result = userDao.revoke(user);
-		
-		if (result == 0) {
-			throw new SQLException("회원탈퇴에 실패했습니다.");
-		}else if(result == 1) {
-			System.out.println("회원탈퇴 되었습니다.");
-		}
-		return result;
-	}
 }

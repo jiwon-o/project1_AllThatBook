@@ -20,12 +20,11 @@ public interface UserDAO {
 	 * 회원수정하기
 	 */
 	int updateUserInfo(User user) throws SQLException;
-
-
+	
 	/**
 	 * 회원탈퇴하기 
 	 */
 	
-	int revoke(User user) throws SQLException;
+	
 	
 }
