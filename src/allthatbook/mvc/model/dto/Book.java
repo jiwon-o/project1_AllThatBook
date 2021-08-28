@@ -89,12 +89,17 @@ public class Book {
     @Override
 	public int hashCode() {
     	
-		return 0;
+		return bookName.hashCode();
 	}
 	 
 	@Override
 	public boolean equals(Object obj) {
-		return false;
+		Book other = (Book) obj;
+		if(bookName.equals(other.bookName)) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	@Override

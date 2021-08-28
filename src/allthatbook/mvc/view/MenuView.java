@@ -48,7 +48,10 @@ public class MenuView {
 			SessionSet ss = SessionSet.getInstance();
 			System.out.println(ss.getSet()); //Set객체
 			System.out.println("-----" +userId+ " 로그인 중 -----");
-			System.out.println(" 1.전체목록  |  2.도서검색  | 3.도서대여  |  4.도서반납  |  5.책신청  |  6.장바구니담기  |  7.회원정보  |  8.회원정보수정  |  9.로그아웃 | ");
+
+			System.out.println(" 1.전체목록  |  2.도서검색  | 3.도서대여  |  4.도서반납  |  5.책신청  |  6.장바구니담기  |  7.회원정보  |  8.회원정보수정  |  9.로그아웃 |  10.장바구니보기");
+
+
 			int menu =Integer.parseInt( sc.nextLine());
 			switch(menu) {
 			case 1 :
@@ -79,6 +82,9 @@ public class MenuView {
 			case 9 :
 				logout(userId);
 				return;
+			case 10 :
+				viewCart(userId);
+				
 			}
 		}
 		
@@ -147,6 +153,16 @@ public class MenuView {
 		
 	}
     
+    /**
+     * 장바구니 보기
+     * */
+	public static void viewCart(String id) {
+		CartController.viewCart(id);
+		
+		
+		
+	}
+	
 	/**
 	 * 로그인 메뉴
 	 * */
