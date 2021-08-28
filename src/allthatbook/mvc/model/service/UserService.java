@@ -41,4 +41,9 @@ public interface UserService {
 	 */
 	int revoke(User user)throws SQLException;
 	
+	/**
+	 * 회원 비밀번호 체크
+	 */
+	User userPwdCheck(String userId, String userPwd) throws NotFoundException, SQLException;
+	
 }

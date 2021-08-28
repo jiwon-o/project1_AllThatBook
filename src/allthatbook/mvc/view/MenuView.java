@@ -1,7 +1,6 @@
 package allthatbook.mvc.view;
 
 import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 
 import allthatbook.mvc.controller.BookController;
 import allthatbook.mvc.controller.CartController;
@@ -71,7 +70,7 @@ public class MenuView {
 				break;
 			case 7 : 
 				
-				
+				break;
 			case 8 :
 				MenuView.updateTemp();
 				break;
@@ -83,14 +82,6 @@ public class MenuView {
 		}
 		
 	}
-	
-	public static void printSubMenu() {
-		System.out.println("\n");
-		System.out.println(" 1. 수정   |  2.회원탈퇴  | 9. 나가기  |");
-	}
-	
-	
-	
 	
 	public static void printAdminMenu(String userId) {
 		System.out.println("-- 관리자 메뉴 --");
@@ -187,23 +178,33 @@ public class MenuView {
 	 * 회원정보수정 화면으로 가기위한 페이지
 	 * */
 	public static void updateTemp() {
+		boolean flag =true;
 		
-		MenuView.printSubMenu();
-		int menu = Integer.parseInt(sc.nextLine());
-		switch(menu) {
-		case 1 :
-			MenuView.update(); //수정
-			break;
-		case 2 :
-			MenuView.delete();
-			break;
-		case 9 : 
-			MenuView.printMenu();
-			break; 
+		while(flag) {
+			MenuView.printSubMenu();
+			int menu = Integer.parseInt(sc.nextLine());
+			System.out.print("비밀번호를 입력해 주세요 > ");
+			String pwdCheck = sc.nextLine();
+			
+			switch(menu) {
+			case 1 :
+				MenuView.update(); //수정
+				break;
+			case 2 :
+				MenuView.delete();
+				break;
+			case 9 : 
+				MenuView.printMenu();
+				break; 
+			}
 		}
 		
 		//System.out.print(수정);
 		String update = sc.nextLine(); 
+	}
+	public static void printSubMenu() {
+		System.out.println(" 1. 수정   |  2.회원탈퇴  | 9. 나가기  |");
+		System.out.print("번호 선택 > ");
 	}
 	
 	/**

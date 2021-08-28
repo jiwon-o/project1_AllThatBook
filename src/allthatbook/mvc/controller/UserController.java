@@ -3,12 +3,10 @@ package allthatbook.mvc.controller;
 import java.sql.SQLException;
 import java.util.List;
 
+import allthatbook.mvc.exception.NotFoundException;
 import allthatbook.mvc.exception.PwdCheckException;
 import allthatbook.mvc.model.dto.User;
-import allthatbook.mvc.model.service.UserService;
 import allthatbook.mvc.model.service.UserServiceImpl;
-import allthatbook.mvc.session.Session;
-import allthatbook.mvc.session.SessionSet;
 import allthatbook.mvc.view.EndView;
 import allthatbook.mvc.view.FailView;
 import allthatbook.mvc.view.MenuView;
@@ -31,7 +29,6 @@ public class UserController {
 		}catch (Exception e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
-			
 		}
 	}
 	
@@ -51,6 +48,18 @@ public class UserController {
 		}
 	}
 	
+	/**
+	 * 회원 비밀번호 체크
+	 */
+	public static User userPwdCheck(String userId, String userPwd){
+		User user = null;
+		try {
+			user = userService.login(userId, userPwd);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
 	
 	/**
 	 * 회원정보 수정 처리

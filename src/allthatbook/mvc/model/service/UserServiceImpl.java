@@ -90,7 +90,6 @@ public class UserServiceImpl implements UserService {
 	 * 회원탈퇴
 	 * 
 	 */
-	
 	@Override
 	public int revoke(User user) throws SQLException {
 		int result = userDao.revoke(user);
@@ -101,5 +100,17 @@ public class UserServiceImpl implements UserService {
 			System.out.println("회원탈퇴 되었습니다.");
 		}
 		return result;
+	}
+	
+	/**
+	 * 회원 비밀번호 체크
+	 */
+	@Override
+	public User userPwdCheck(String userId, String userPwd) throws NotFoundException, SQLException {
+		User user = userDao.login(userId, userPwd);
+		if (user == null) {
+			throw new NotFoundException("비밀번호가 잘못 입력되었습니다. 정확히 입력해주세요.");
+		}
+		return user;
 	}
 }
