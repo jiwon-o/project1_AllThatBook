@@ -59,5 +59,4 @@ public class DbUtil {
 			e.printStackTrace();
 		}
 	}
-
 }

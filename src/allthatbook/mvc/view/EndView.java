@@ -9,7 +9,7 @@ import allthatbook.mvc.model.dto.User;
 
 
 public class EndView {
-
+	
 	public static void printBookList(String userId, List<Book> bookList) {
 		System.out.println("----- 총 도서 수: " + bookList.size() + "개 ----------");
 		for(Book book : bookList) {
@@ -17,6 +17,8 @@ public class EndView {
 		}
 		
 		printCartMenu(userId);
+		
+		
 	}
 	
 	public static void printSelectByNo(String userId, Book book) {
@@ -100,10 +102,19 @@ public class EndView {
 				MenuView.printSelectMenu(userId);
 				break;
 			case 9:
-				//MenuView.printUserMenu(userId);
+				MenuView.printUserMenu(userId);
 				return;
 			}
+		System.out.println("1.대여하기  |  9.나가기");
+		switch(Integer.parseInt(sc.nextLine())) {
+		case 1:
+			//rental = new Rental()....
+			//넣는데 만약 중간에 문제 있는세 생기다면
+			break;
+		case 9:
+			break;
 		}
+	 }
 	}
 }
 
