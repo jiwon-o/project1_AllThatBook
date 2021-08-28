@@ -9,7 +9,7 @@ import allthatbook.mvc.model.dto.User;
 
 
 public class EndView {
-
+	
 	public static void printBookList(String userId, List<Book> bookList) {
 		System.out.println("----- ÃÑ µµ¼­ ¼ö: " + bookList.size() + "°³ ----------");
 		for(Book book : bookList) {
@@ -17,6 +17,8 @@ public class EndView {
 		}
 		
 		printCartMenu(userId);
+		
+		
 	}
 	
 	public static void printSelectByNo(String userId, Book book) {
@@ -100,7 +102,7 @@ public class EndView {
 				MenuView.printSelectMenu(userId);
 				break;
 			case 9:
-				//MenuView.printUserMenu(userId);
+				MenuView.printUserMenu(userId);
 				return;
 			}
 		}

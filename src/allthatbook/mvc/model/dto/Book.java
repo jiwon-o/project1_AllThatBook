@@ -71,9 +71,7 @@ public class Book {
 	}
 
 	public void setBookState(int bookState) {
-		if(bookState == 0 || bookState == 1 || bookState ==2) {
-			this.bookState = bookState;
-		}
+		this.bookState = bookState;
 	}
 	
 	public String getBookField() {

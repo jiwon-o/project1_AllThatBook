@@ -25,21 +25,20 @@ public interface UserService {
 	 * 전체회원 조회
 	 */
 	List<User> allSelect()  throws NotFoundException, SQLException;
+	
 
-	User selectByUserId(String userId) throws NotFoundException, SQLException;
-
-	User selectByUserNo(int userNo) throws NotFoundException, SQLException;
+	
 	
 	
 	/**
 	 * 회원수정
 	 */
-	void updateUserInfo(User user) throws SQLException;
+	int updateUserInfo(User user) throws SQLException;
 	
 	
 	/**
 	 * 회원탈퇴
 	 */
-	void deleteUserInfo(User user)throws SQLException;
+	int revoke(User user)throws SQLException;
 	
 }
