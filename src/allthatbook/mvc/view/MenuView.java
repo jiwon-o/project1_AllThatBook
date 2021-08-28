@@ -93,21 +93,23 @@ public class MenuView {
 	
 	
 	public static void printAdminMenu(String userId) {
-		System.out.println("-- 관리자 메뉴 --");
-		System.out.println("1. 회원관리   |  2. 도서관리  | 3. 대출관리 |  9. 나가기");
-		int menu=Integer.parseInt(sc.nextLine());
-		switch(menu) {
-		case 1 :
-			AdminMenuView.userAdminMenu();
-			break;
-		case 2 :
-			AdminMenuView.bookAdminMenu();
-			break;
-		case 3 :
-			break;
-		case 9 :
-			logout(userId);
-			return;
+		while(true) {
+			System.out.println("-- 관리자 메뉴 --");
+			System.out.println("1. 회원관리   |  2. 도서관리  | 3. 대출관리 |  9. 나가기");
+			int menu=Integer.parseInt(sc.nextLine());
+			switch(menu) {
+			case 1 :
+				AdminMenuView.userAdminMenu();
+				break;
+			case 2 :
+				AdminMenuView.bookAdminMenu();
+				break;
+			case 3 :
+				break;
+			case 9 :
+				logout(userId);
+				return;
+			}
 		}
 	}
 	

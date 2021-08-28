@@ -133,6 +133,20 @@ public class UserController {
 			FailView.errorMessage(e.getMessage());
 		}		
 	}
+	
+	/**
+	 * 회원번호를 받아 해당 회원번호 정보 수정
+	 */
+	public static void updateAdminUserInfo(int userNo) {
+		try {
+			User user = userService.selectByUserNo(userNo);
+			//User updateUser = userService.updateUserInfo(user);
+		} catch (Exception e) {
+			FailView.errorMessage(e.getMessage());
+		}
+		
+	}
+	
 
 
 }
