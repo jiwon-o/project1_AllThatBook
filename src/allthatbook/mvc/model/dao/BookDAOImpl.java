@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import allthatbook.mvc.model.dto.Book;
 import allthatbook.mvc.util.DbUtil;
 
@@ -24,7 +25,7 @@ public class BookDAOImpl implements BookDAO {
 			ps = con.prepareStatement("select * from books order by books_no desc");
 			rs= ps.executeQuery();
 			while(rs.next()) {
-				Book book  = new Book(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6),rs.getInt(7));
+				Book book  = new Book(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6));
 	        	list.add(book);
 			}
 		}finally {
