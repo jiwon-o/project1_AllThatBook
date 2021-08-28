@@ -11,7 +11,9 @@ import allthatbook.mvc.model.dto.User;
 public class EndView {
 	
 	public static void printBookList(List<Book> list) {
-		
+		for(Book book : list) {
+			System.out.println(book);
+		}
 	}
 	
 	public static void printSelectByNo(Book book) {

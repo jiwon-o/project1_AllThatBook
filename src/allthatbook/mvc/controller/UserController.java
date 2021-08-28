@@ -116,8 +116,9 @@ public class UserController {
 	 */
 	public static void updateAdminUserInfo(int userNo) {
 		try {
+			//¹Ù²Ü 
 			User user = userService.selectByUserNo(userNo);
-			//User updateUser = userService.updateUserInfo(user);
+			
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
