@@ -30,6 +30,8 @@ public class MenuView {
 				
 			case 9 : 
 				System.exit(0);
+			default :
+				System.out.println("메뉴에 있는 번호를 입력해주세요");
 			}
 		}
 
@@ -42,15 +44,13 @@ public class MenuView {
 	}
 	
 	
-	public static void printUserMenu(String userId) {
+	public static void printUserMenu(User user) {
 		while(true) {
 			SessionSet ss = SessionSet.getInstance();
 			System.out.println(ss.getSet()); //Set객체
-			System.out.println("-----" +userId+ " 로그인 중 -----");
-
-			System.out.println(" 1.전체목록  |  2.도서검색  | 3.도서대여  |  4.도서반납  |  5.책신청  |  6.장바구니담기  |  7.회원정보  |  8.회원정보수정  |  9.로그아웃 |  10.장바구니보기");
-
-
+			System.out.println("-----" +user.getUserId()+ " 로그인 중 -----");
+			System.out.println(" 1.전체목록  |  2.도서검색  | 3.도서대여  |  4.도서반납  |  5.책신청  |  6.장바구니담기  |  7.회원정보  |  8.회원정보수정  |  9.로그아웃 | ");
+			System.out.print("번호 입력 > ");
 			int menu =Integer.parseInt( sc.nextLine());
 			switch(menu) {
 			case 1 :
@@ -69,27 +69,25 @@ public class MenuView {
 				
 				break;
 			case 6 : 
-				MenuView.putCart(userId);
+				MenuView.putCart(user.getUserId());
 				break;
 			case 7 : 
 				
 				break;
 			case 8 :
-				MenuView.updateTemp();
-				break;
-			
+				MenuView.updateTemp(user);
+				continue;
 			case 9 :
-				logout(userId);
+				logout(user.getUserId());
 				return;
-			case 10 :
-				viewCart(userId);
-				
+			default :
+				System.out.println("메뉴에 있는 번호를 입력해주세요");
 			}
 		}
 		
 	}
 	
-	public static void printAdminMenu(String userId) {
+	public static void printAdminMenu(User user) {
 		System.out.println("-- 관리자 메뉴 --");
 		System.out.println("1. 회원관리   |  2. 도서관리  | 3. 대출관리 |  9. 나가기");
 		int menu=Integer.parseInt(sc.nextLine());
@@ -103,8 +101,10 @@ public class MenuView {
 		case 3 :
 			break;
 		case 9 :
-			logout(userId);
+			logout(user.getUserId());
 			return;
+		default :
+			System.out.println("메뉴에 있는 번호를 입력해주세요");
 		}
 	}
 	
@@ -142,16 +142,6 @@ public class MenuView {
 		
 	}
     
-    /**
-     * 장바구니 보기
-     * */
-	public static void viewCart(String id) {
-		CartController.viewCart(id);
-		
-		
-		
-	}
-	
 	/**
 	 * 로그인 메뉴
 	 * */
@@ -193,18 +183,24 @@ public class MenuView {
 	/**
 	 * 회원정보수정 화면으로 가기위한 페이지
 	 * */
-	public static void updateTemp() {
-		boolean flag =true;
+	public static void updateTemp(User user) {
 		
-		while(flag) {
+		while(true) {
+			System.out.println("비밀번호를 입력해 주세요. (수정을 취소하려면 \"exid\" 눌러주세요)");
+			String userPwd = sc.nextLine();
+			if(userPwd == "exid") {
+				System.out.println("다시 메뉴로 돌아갑니다.");
+				continue;
+			}else if( !(user.getUserPwd().equals(userPwd)) ) {
+				System.out.println("비밀번호를 잘못입력 하셨습니다. 다시 메뉴로 돌아갑니다.");
+				continue;
+			}
+			
 			MenuView.printSubMenu();
 			int menu = Integer.parseInt(sc.nextLine());
-			System.out.print("비밀번호를 입력해 주세요 > ");
-			String pwdCheck = sc.nextLine();
-			
 			switch(menu) {
 			case 1 :
-				MenuView.update(); //수정
+				MenuView.update(user); //수정
 				break;
 			case 2 :
 				MenuView.delete();
@@ -212,11 +208,10 @@ public class MenuView {
 			case 9 : 
 				MenuView.printMenu();
 				break; 
+			default :
+				System.out.println("메뉴에 있는 번호를 입력해주세요");
 			}
 		}
-		
-		//System.out.print(수정);
-		String update = sc.nextLine(); 
 	}
 	public static void printSubMenu() {
 		System.out.println(" 1. 수정   |  2.회원탈퇴  | 9. 나가기  |");
@@ -226,30 +221,44 @@ public class MenuView {
 	/**
 	 * 회원정보 수정
 	 * */
-	public static void update() {
-		System.out.print("아이디 : ");
-		String userId = sc.nextLine();
-		 
-		System.out.print("변경할 비밀번호 : ");
-		String userPwd = sc.nextLine();
+	public static void update(User user) {
+		int menu = 0;
+		String userPwd = user.getUserPwd();		//바꾸기전 비밀번호 기억하기
+		String userPhone = user.getUserPhone();	//바꾸기전 전화번호 기억하기
 		
-		System.out.print("변경할 전화번호 : ");
-		String userPhone = sc.nextLine();
-		
-		
-		User user = new User();
-		
-		user.setUserId(userId); 
-		user.setUserPwd(userPwd);
-		user.setUserPhone(userPhone);
-		 
-		UserController.updateUserInfo(user);
+		while(true) {
+			System.out.println("1. 비밀번호 변경  2. 전화번호 변경  3. 변경 완료하기");
+			menu=Integer.parseInt(sc.nextLine());
+			switch(menu) {
+				case 1:
+					System.out.print("변경할 비밀번호 : ");
+					userPwd = sc.nextLine();
+					System.out.print("변경할 비밀번호 확인: ");
+					String cheuserPwd = sc.nextLine();
+					if(!userPwd.equals(cheuserPwd)) userPwd=user.getUserPwd();
+					break;
+				case 2:
+					System.out.print("변경할 전화번호 : ");
+					userPhone = sc.nextLine();
+					break;
+				case 3:
+					System.out.println("앞에 입력하신 정보로 변경 중입니다.");
+					user.setUserPwd(userPwd);
+					user.setUserPhone(userPhone);
+					
+					UserController.updateUserInfo(user);
+					return;
+				default :
+					System.out.println("메뉴에 있는 번호를 입력해주세요");
+			}
+		}
 	}
 	
 
 	/**
 	 * 회원탈퇴 화면으로가기위한 임시페이지
 	 * */
+	/*
 	public static void deleteTemp() {
 		
 		MenuView.printSubMenu();
@@ -267,6 +276,7 @@ public class MenuView {
 		//System.out.print("2. 탈퇴 ");
 		String delete = sc.nextLine();
 	}
+	*/
 	
 	/**
 	 * 회원탈퇴

@@ -103,15 +103,4 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 	
-	/**
-	 * 회원 비밀번호 체크
-	 */
-	@Override
-	public User userPwdCheck(String userId, String userPwd) throws NotFoundException, SQLException {
-		User user = userDao.login(userId, userPwd);
-		if (user == null) {
-			throw new NotFoundException("비밀번호가 잘못 입력되었습니다. 정확히 입력해주세요.");
-		}
-		return user;
-	}
 }

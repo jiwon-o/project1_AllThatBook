@@ -16,22 +16,22 @@ public class UserController {
 
 	/**
 	 * 로그인
-	 * */
+	 */
 	public static void login(String userId, String userPwd) {
 		try {
 			User user = userService.login(userId, userPwd);
-			if(userId.equals("admin")) {
-				MenuView.printAdminMenu(userId);
-			}else{
-				MenuView.printUserMenu(userId);
+			if (user.getUserId().equals("admin")) {
+				MenuView.printAdminMenu(user);
+			} else {
+				MenuView.printUserMenu(user);
 			}
-			//MenuView.menu();
-		}catch (Exception e) {
-			//e.printStackTrace();
+			// MenuView.menu();
+		} catch (Exception e) {
+			// e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * 회원가입
 	 */
@@ -39,75 +39,62 @@ public class UserController {
 		try {
 			userService.register(user, pwdCheck);
 			EndView.printMessage("회원가입이 완료되었습니다.");
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
-		}catch (PwdCheckException e) { //비밀번호가 일치하지 않을 때
+		} catch (PwdCheckException e) { // 비밀번호가 일치하지 않을 때
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 	}
-	
-	/**
-	 * 회원 비밀번호 체크
-	 */
-	public static User userPwdCheck(String userId, String userPwd){
-		User user = null;
-		try {
-			user = userService.login(userId, userPwd);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return user;
-	}
-	
+
 	/**
 	 * 회원정보 수정 처리
 	 */
 	public static void updateUserInfo(User user) {
 		try {
 			int result = userService.updateUserInfo(user);
-			
-			if(result == 0) {
-				// 수정 쿼리 실패했을때 > 화면: 다시 수정, 탈퇴, 나가기
-				MenuView.updateTemp();
-			} else if(result == 1) {
-				// 수정 성공 했을때 > 화면: 첫번째 메인메뉴
-				MenuView.printUserMenu(user.getUserId());
-			} else if(result == 2) {
-				// 아이디나 패스워드가 일치하지 않을때 > 화면: 다시 수정, 탈퇴, 나가기
-				MenuView.updateTemp();
+
+			if (result == 0) {
+				FailView.errorMessage("수정이 실패하였습니다.");
+				MenuView.updateTemp(user);
+			} else if (result == 1) {	// 수정 성공 했을때 > 화면: 첫번째 메인메뉴
+				EndView.printMessage("수정이 성공되었습니다. 다시 로그인 해주세요");
+				MenuView.logout(user.getUserId()); //수정 되어서 다시 로그인 시키기
+				return;
 			}
-			MenuView.printSubMenu();
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	/**
-	 * 회원탈퇴 
+	 * 회원탈퇴
 	 */
+	
+	
 	public static void revoke(User user) {
+		/*
 		try {
 			int result = userService.revoke(user);
-			
-			if(result == 0) {
+
+			if (result == 0) {
 				// 탈퇴 쿼리 실패했을때 > 화면: 다시 수정, 탈퇴, 나가기
-				MenuView.updateTemp();
-			}else if(result == 1) {
+				MenuView.updateTemp(user);
+			} else if (result == 1) {
 				// 탈퇴 성공 했을때 > 화면: 로그인 회원가입 종료 (처음메뉴)
 				MenuView.printMenu();
-			}else if(result == 2) {
+			} else if (result == 2) {
 				// 아이디나 패스워드가 일치하지 않을때 > 화면: 다시 수정, 탈퇴, 나가기
-				MenuView.updateTemp();
+				MenuView.updateTemp(user);
 			}
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-	}	
-}
-
+		}
+		*/
+	}
 	
+
 	/**
 	 * 전체 회원 조회
 	 */
@@ -129,8 +116,9 @@ public class UserController {
 			EndView.printSelectByUserId(user);
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
-		}		
+		}
 	}
+
 	/**
 	 * userId로 조회
 	 */
@@ -140,8 +128,7 @@ public class UserController {
 			EndView.printSelectByUserId(user);
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
-		}		
+		}
 	}
-
 
 }
