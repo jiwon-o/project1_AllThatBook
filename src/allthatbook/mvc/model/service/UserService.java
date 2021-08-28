@@ -33,12 +33,12 @@ public interface UserService {
 	/**
 	 * È¸¿ø¼öÁ¤
 	 */
-	void updateUserInfo(User user) throws SQLException;
+	int updateUserInfo(User user) throws SQLException;
 	
 	
 	/**
 	 * È¸¿øÅ»Åð
 	 */
-	void revoke(User user)throws SQLException;
+	int revoke(User user)throws SQLException;
 	
 }
