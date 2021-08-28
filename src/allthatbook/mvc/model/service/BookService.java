@@ -17,6 +17,10 @@ public interface BookService {
 	 * bookNo에 해당하는 정보 검색
 	 * */
 	Book bookSelectByBookNo(int bookNo)throws SQLException;
+	/**
+	 * 도서명에 해당하는 정보 검색
+	 */
+	List<Book> bookSelectByBookName(String keyword) throws SQLException;
 	
 	/**
 	 * 저자명에 해당하는 정보 검색
@@ -32,7 +36,7 @@ public interface BookService {
 	 * 카테고리 이름에 해당하는 정보 검색
 	 * Join으로
 	 */
-	List<Book> bookSelectByCatName(String bookCatName) throws SQLException;
+	List<Book> bookSelectByCategory(String category) throws SQLException;
 	
 	/**
 	 * 책 등록
@@ -47,6 +51,7 @@ public interface BookService {
 	/**
 	 * 책 삭제
 	 */
+
 	int bookDelete(int bookNo) throws SQLException;
 
 	/**
@@ -59,5 +64,4 @@ public interface BookService {
 	 * */
 	List<Book> bookReserveSelect() throws NotFoundException, SQLException;
 	
-
 }

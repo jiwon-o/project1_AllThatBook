@@ -19,6 +19,11 @@ public interface BookDAO {
 	Book bookSelectByBookNo(int bookNo)throws SQLException;
 	
 	/**
+	 * 도서명에 해당하는 정보 검색
+	 */
+	List<Book> bookSelectByBookName(String keyword) throws SQLException;
+	
+	/**
 	 * 저자명에 해당하는 정보 검색
 	 */
 	List<Book> bookSelectByWriter(String bookWriter) throws SQLException;
@@ -32,7 +37,7 @@ public interface BookDAO {
 	 * 카테고리 이름에 해당하는 정보 검색
 	 * Join으로
 	 */
-	List<Book> bookSelectByCatName(String bookCatName) throws SQLException;
+	List<Book> bookSelectByCategory(String category) throws SQLException;
 	
 	/**
 	 * 책 등록
@@ -47,6 +52,7 @@ public interface BookDAO {
 	/**
 	 * 책 삭제
 	 */
+
 	int bookDelete(int bookNo) throws SQLException;
 	
 	/**

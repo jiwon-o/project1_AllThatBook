@@ -60,31 +60,103 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 	@Override
-	public List<Book> bookSelectByWriter(String bookWriter) throws SQLException {
+	public List<Book> bookSelectByBookName(String keyword) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		List<Book> bookList = new ArrayList<Book>();
 		
-		try {
+		try {//select * from board where upper(subject) like upper(?)
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement("book.bookSelectByWriter");
+			ps = con.prepareStatement("select * from books where upper(도서명) like upper(?) order by 책번호");
+			ps.setString(1, "%"+keyword+"%");
 			
-		}catch (Exception e) {
-		
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Book book = new Book(rs.getInt(1),  rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+				bookList.add(book);
+			}
+			
+		}finally {
+			DbUtil.close(con, ps, rs);
 		}
-		return null;
+		return bookList;
+	}
+	
+	@Override
+	public List<Book> bookSelectByWriter(String writer) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Book> bookList = new ArrayList<Book>();
+		
+		try {//select * from board where upper(subject) like upper(?)
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("select * from books where upper(저자명) like upper(?) order by 책번호");
+			ps.setString(1, "%"+writer+"%");
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Book book = new Book(rs.getInt(1),  rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+				bookList.add(book);
+			}
+			
+		}finally {
+			DbUtil.close(con, ps, rs);
+		}
+		return bookList;
 	}
 
 	@Override
-	public List<Book> bookSelectByPublisher(String bookPublisher) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Book> bookSelectByPublisher(String publisher) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Book> bookList = new ArrayList<Book>();
+		
+		try {//select * from board where upper(subject) like upper(?)
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("select * from books where upper(출판사명) like upper(?) order by 책번호");
+			ps.setString(1, "%"+publisher+"%");
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Book book = new Book(rs.getInt(1),  rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+				bookList.add(book);
+			}
+			
+		}finally {
+			DbUtil.close(con, ps, rs);
+		}
+		return bookList;
 	}
 
 	@Override
-	public List<Book> bookSelectByCatName(String bookCatName) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Book> bookSelectByCategory(String category) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Book> bookList = new ArrayList<Book>();
+		
+		try {//select * from board where upper(subject) like upper(?)
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("select * from books where upper(분야) like upper(?) order by 책번호");
+			ps.setString(1, "%"+category+"%");
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Book book = new Book(rs.getInt(1),  rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+				bookList.add(book);
+			}
+			
+		}finally {
+			DbUtil.close(con, ps, rs);
+		}
+		return bookList;
 	}
 
 	@Override
@@ -182,5 +254,7 @@ public class BookDAOImpl implements BookDAO {
 		}
 		return list;
 	}
+
+	
 
 }

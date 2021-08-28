@@ -9,15 +9,20 @@ import allthatbook.mvc.model.dto.User;
 
 
 public class EndView {
-	
-	public static void printBookList(List<Book> list) {
-		for(Book book : list) {
+
+	public static void printBookList(String userId, List<Book> bookList) {
+		System.out.println("----- 총 도서 수: " + bookList.size() + "개 ----------");
+		for(Book book : bookList) {
 			System.out.println(book);
 		}
+		
+		printCartMenu(userId);
 	}
 	
-	public static void printSelectByNo(Book book) {
+	public static void printSelectByNo(String userId, Book book) {
 		System.out.println(book + "\n");
+		
+		printCartMenu(userId);
 	}
 	
 	public static void printMessage(String message) {
@@ -60,13 +65,44 @@ public class EndView {
 		}
 		
 		Scanner sc = new Scanner(System.in);
-		System.out.println("1.주문하기  |  9.나가기");
-		switch(Integer.parseInt(sc.nextLine())) {
-		case 1:
-			
-			break;
-		case 9:
-			break;
+		while(true) {
+			System.out.println("1.대여하기  |  2.목록 삭제하기  |  3.장바구니 비우기  |  4.돌아가기");
+			switch(Integer.parseInt(sc.nextLine())) {
+			case 1:
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				return;
+			}
+		}
+	}
+	
+	/**
+	 * 장바구니 메뉴
+	 */
+	public static void printCartMenu(String userId) {
+		Scanner sc = new Scanner(System.in);
+		while(true) {
+			System.out.println("1.대여하기  |  2.장바구니 담기  |  3.장바구니 보기  |  4.돌아가기  |  9.메인메뉴로 가기");
+			switch(Integer.parseInt(sc.nextLine())) {
+			case 1:
+				break;
+			case 2:
+				MenuView.putCart(userId);
+				break;
+			case 3:
+				MenuView.viewCart(userId);
+				break;
+			case 4:
+				MenuView.printSelectMenu(userId);
+				break;
+			case 9:
+				//MenuView.printUserMenu(userId);
+				return;
+			}
 		}
 	}
 }

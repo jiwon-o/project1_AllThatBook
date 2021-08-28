@@ -59,17 +59,37 @@ public class CartController {
 	}
 	
 	/**
+	 * 장바구니 비우기
+	 */
+	public static void removeCart(String userId) {
+		try {
+			//id에 해당하는 세션찾기
+			SessionSet ss = SessionSet.getInstance();
+			Session session = ss.get(userId);
+			
+			Set<Book> cart = (Set<Book>)session.removeAttribute(userId); // 책 저장
+			
+		
+		}catch (Exception e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+		
+		
+	}
+	
+	/**
 	 * 장바구니 보기
 	 */
-	public static void viewCart(String id) {
+	public static void viewCart(String userId) {
 		SessionSet ss = SessionSet.getInstance();
-		Session session = ss.get(id);
+		Session session = ss.get(userId);
 		
 		Set<Book> cart = (Set<Book>) session.getAttribute("cart");
 		if(cart == null) { // 장바구니가 없는 고객
 			FailView.errorMessage("장바구니가 비었습니다");
 		}else {
-			EndView.printViewCart(id , cart);
+			EndView.printViewCart(userId , cart);
 		}
 	}
 }

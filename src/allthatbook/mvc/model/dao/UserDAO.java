@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import allthatbook.mvc.model.dto.User;
@@ -32,7 +32,9 @@ public interface UserDAO {
 	 * È¸¿øÅ»ÅðÇÏ±â 
 	 */
 	
+
 	int deleteUserInfo(User user) throws SQLException;
+
 	
 	List<User> allSelect() throws SQLException ;
 
