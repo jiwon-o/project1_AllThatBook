@@ -65,8 +65,10 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return result;
 	}
-
-
+	/**
+	 * 회원정보 수정하기
+	 */
+	
 	@Override
 	public int updateUserInfo(User user) throws SQLException {
 		Connection con = null;
@@ -85,6 +87,29 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return result;
 	}
+
+	
+	/**
+	 * 회원탈퇴
+	 */
+	@Override
+	public int revoke(User user) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("delete from users where 회원ID =?");
+			ps.setString(1, user.getUserId());
+			
+			result = ps.executeUpdate();
+			
+		}finally {
+			DbUtil.close(con, ps);
+		}
+		return result;
+	}
+
 
 	
 	
