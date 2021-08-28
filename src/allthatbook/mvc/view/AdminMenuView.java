@@ -26,6 +26,16 @@ public class AdminMenuView {
 			String userId=InputUserId();
 			UserController.selectByUserId(userId);
 			break;
+		case 4 : 
+			userNo=InputUserNo();
+			UserController.updateAdminUserInfo(userNo);
+			//회원번호를 받아 해당 회원번호 정보 수정
+			
+			break;
+		case 5 : 
+			userNo=InputUserNo();
+			//회원번호를 받아 해당회원정보 수정 
+			break;
 		case 9 :  			
 			return;
 		}
@@ -36,7 +46,7 @@ public class AdminMenuView {
 	 */
 	public static void bookAdminMenu() {
 		System.out.println("---관리자 도서 관리---");
-		System.out.println("1. 도서등록 | 2. 도서수정 | 3. 도서삭제 | 4. 도서조회 | 5. 대출한도서 조회 | 6. 예약한도서 조회 | 9. 나가기");
+		System.out.println("1. 도서등록 | 2. 도서정보수정 | 3. 도서삭제 | 4. 도서조회 | 5. 대출한도서 조회 | 6. 예약한도서 조회 | 9. 나가기");
 		int menu=Integer.parseInt(sc.nextLine());
 		switch(menu) {
 		case 1 :
@@ -77,4 +87,6 @@ public class AdminMenuView {
 		String userId = sc.nextLine();
 		return userId;
 	}
+	
+	
 }
