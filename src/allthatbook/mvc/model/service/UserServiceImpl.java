@@ -51,19 +51,19 @@ public class UserServiceImpl implements UserService {
 	 * 전체회원조회
 	 */
 	public List<User> allSelect()  throws NotFoundException, SQLException{
-		List<User> userList = UserDAOImpl.allSelect();
-		if(userList.size()==0)throw new NotFoundException("현재상품이없습니다.");	
+		List<User> userList = userDao.allSelect();
+		if(userList.size()==0) throw new NotFoundException("현재상품이없습니다.");	
 		return userList;
 	}
 
 	public User selectByUserId(String userId) throws NotFoundException, SQLException{
-		User user = UserDAOImpl.selectByUserId(userId);
+		User user = userDao.selectByUserId(userId);
 		if(user==null)throw new NotFoundException("해당 userId가 존재하지 않습니다.");
 		return user;
 	}
 
 	public User selectByUserNo(int userNo) throws NotFoundException, SQLException{
-		User user = UserDAOImpl.selectByUserNo(userNo);
+		User user = userDao.selectByUserNo(userNo);
 		if(user==null)throw new NotFoundException("해당 userNo가 존재하지 않습니다.");
 		return user;
 	}
@@ -73,17 +73,9 @@ public class UserServiceImpl implements UserService {
 	 * 회원정보 수정
 	 */
 	@Override
-	public int updateUserInfo(User user) throws SQLException {
+	public void updateUserInfo(User user) throws SQLException {
 		int result = userDao.updateUserInfo(user);
-		
-		if (result == 0) {
-			System.out.print("회원정보수정에 실패했습니다.");
-		} else if (result == 1) {
-			System.out.print("회원정보가 변경되었습니다.");
-		}
-		
-		return result;		
-
+		if (result == 0) throw new SQLException("정보가 변경되지 않았습니다.");
 	}
 
 
@@ -92,15 +84,9 @@ public class UserServiceImpl implements UserService {
 	 * 
 	 */
 	@Override
-	public int revoke(User user) throws SQLException {
-		int result = userDao.revoke(user);
-		
-		if (result == 0) {
-			throw new SQLException("회원탈퇴에 실패했습니다.");
-		}else if(result == 1) {
-			System.out.println("회원탈퇴 되었습니다.");
-		}
-		return result;
+	public void deleteUserInfo(User user) throws SQLException {
+		int result = userDao.deleteUserInfo(user);
+		if (result == 0) throw new SQLException("회원탈퇴가 되지 않았습니다.");
 	}
 	
 }

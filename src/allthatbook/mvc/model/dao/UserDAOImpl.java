@@ -29,7 +29,6 @@ public class UserDAOImpl implements UserDAO {
 			ps.setString(2, userPwd);
 
 			rs = ps.executeQuery();
-
 			if (rs.next()) {
 				user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
 						rs.getString(6));
@@ -48,8 +47,6 @@ public class UserDAOImpl implements UserDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;
-		// insert into board (board_no, subject, writer, content, board_date) values
-		// (board_seq.nextval, ?, ?, ?, sysdate)
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(
@@ -92,17 +89,17 @@ public class UserDAOImpl implements UserDAO {
 	 * 회원탈퇴
 	 */
 	@Override
-	public int revoke(User user) throws SQLException {
+	public int deleteUserInfo(User user) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement("delete from users where 회원ID =?");
+			ps = con.prepareStatement("delete from users where 회원ID =? and 패스워드 =?");
 			ps.setString(1, user.getUserId());
+			ps.setString(2, user.getUserPwd());
 
 			result = ps.executeUpdate();
-
 		} finally {
 			DbUtil.close(con, ps);
 		}
@@ -111,10 +108,8 @@ public class UserDAOImpl implements UserDAO {
 
 	/**
 	 * 전체회원 조회
-	 * 
-	 * @return userList
 	 */
-	public static List<User> allSelect() throws SQLException {
+	public List<User> allSelect() throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -138,10 +133,8 @@ public class UserDAOImpl implements UserDAO {
 
 	/**
 	 * userNo로 조회
-	 * 
-	 * @return
 	 */
-	public static User selectByUserNo(int userNo) throws SQLException {
+	public User selectByUserNo(int userNo) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -165,10 +158,8 @@ public class UserDAOImpl implements UserDAO {
 
 	/**
 	 * userId로 조회
-	 * 
-	 * @return
 	 */
-	public static User selectByUserId(String userId) throws SQLException {
+	public User selectByUserId(String userId) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
