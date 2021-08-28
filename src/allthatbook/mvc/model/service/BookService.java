@@ -41,7 +41,7 @@ public interface BookService {
 	/**
 	 * 책 등록
 	 */
-	void bookInsert(Book book) throws SQLException;
+	int bookInsert(Book book) throws SQLException;
 	
 	/**
 	 * 책 수정
@@ -51,8 +51,17 @@ public interface BookService {
 	/**
 	 * 책 삭제
 	 */
-	void bookDelete(Book book) throws SQLException;
 
+	int bookDelete(int bookNo) throws SQLException;
 
+	/**
+	 * 대출중 도서 조회
+	 * */
+	List<Book> bookRentalSelect() throws NotFoundException, SQLException;
+	
+	/**
+	 * 예약중 도서 조회
+	 * */
+	List<Book> bookReserveSelect() throws NotFoundException, SQLException;
 	
 }
