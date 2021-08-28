@@ -13,6 +13,7 @@ public class AdminMenuView {
 		System.out.println("---관리자 회원 관리---");
 		System.out.println("1. 전체회원 조회 | 2. 회원번호로 조회 | 3. 회원ID로 조회 | 4.회원정보수정 | 5.회원정보삭제| 9. 나가기");
 		int menu=Integer.parseInt(sc.nextLine());
+		
 		switch(menu) {
 		case 1 :
 			UserController.userSelect();
@@ -28,6 +29,7 @@ public class AdminMenuView {
 		case 9 :  			
 			return;
 		}
+		
 	}
 	/**
 	 * 도서관리 메뉴
