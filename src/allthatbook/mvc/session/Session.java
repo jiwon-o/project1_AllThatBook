@@ -3,6 +3,8 @@ package allthatbook.mvc.session;
 import java.util.HashMap;
 import java.util.Map;
 
+import allthatbook.mvc.model.dto.Book;
+
 /**
  * 사용자 객체
  * 로그인된 사용자의 정보를 로그인이 유지되는 동안
@@ -10,7 +12,7 @@ import java.util.Map;
  * */
 public class Session {
 	private String sessionId;
-	private Map<String,Object> attributes; //장바구니, blog, cafe
+	private Map<String,Object> attributes; //key: cart, value: book
 	
 	
 	public Session() {}
@@ -21,9 +23,6 @@ public class Session {
 	public String getSessionId() {
 		return sessionId;
 	}
-	
-	
-	
 	
 	public void setSessionId(String sessionId) {
 		this.sessionId = sessionId;
@@ -38,7 +37,7 @@ public class Session {
 	}
 	
 	//추가
-	public void setAttribute(String name, Object value) {//cart , Map<Goods, Integer>
+	public void setAttribute(String name, Object value) {//cart , List<Book>
 		attributes.put(name,value);
 	}
 	
