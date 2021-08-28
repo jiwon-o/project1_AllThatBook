@@ -120,6 +120,7 @@ public class UserDAOImpl implements UserDAO {
 	 * @return userList
 	 */
 	public static List<User> allSelect() throws SQLException{
+	//public static List<User> allSelect() throws SQLException{
 		  Connection con=null;
 		  PreparedStatement ps=null;
 		  ResultSet rs=null;

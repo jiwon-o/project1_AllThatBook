@@ -49,9 +49,9 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public void bookInsert(Book book) throws SQLException {
-		// TODO Auto-generated method stub
-		
+	public int bookInsert(Book book) throws SQLException {
+		int result = bookDao.bookInsert(book);
+		return result;
 	}
 
 	@Override
@@ -61,8 +61,22 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public void bookDelete(Book book) throws SQLException {
-		// TODO Auto-generated method stub
-		
+	public int bookDelete(int bookNo) throws SQLException {
+		int result = bookDao.bookDelete(bookNo);
+		return result;
+	}
+
+	@Override
+	public List<Book> bookRentalSelect() throws NotFoundException, SQLException {
+		List<Book> list = bookDao.bookRentalSelect();
+		if(list.size()==0)throw new NotFoundException("모든 도서 대출가능합니다.");
+		return list;
+	}
+
+	@Override
+	public List<Book> bookReserveSelect() throws NotFoundException, SQLException {
+		List<Book> list = bookDao.bookReserveSelect();
+		if(list.size()==0)throw new NotFoundException("모든 도서 예약가능합니다.");
+		return list;
 	}
 }
