@@ -2,14 +2,17 @@ package allthatbook.mvc.view;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
+import allthatbook.mvc.controller.BookController;
 import allthatbook.mvc.model.dto.Book;
+import allthatbook.mvc.model.dto.Cart;
+import allthatbook.mvc.model.dto.CartDetail;
 import allthatbook.mvc.model.dto.User;
 
 
 public class EndView {
-
+	
+	
 	public static void printBookList(String userId, List<Book> bookList) {
 		System.out.println("----- 총 도서 수: " + bookList.size() + "개 ----------");
 		for(Book book : bookList) {
@@ -26,10 +29,10 @@ public class EndView {
 		}
 
 	}
+
 	
 	public static void printSelectByNo(String userId, Book book) {
 		System.out.println(book + "\n");
-		
 		printCartMenu(userId);
 	}
 	
@@ -58,18 +61,12 @@ public class EndView {
 	/**
 	 * 장바구니 출력
 	 */
-	public static void printViewCart(String id, Set<Book> cart) {
+	public static void printViewCart(String id, Cart cart) {
 		System.out.println("---장바구니내용---");
-		
-		for(Book book : cart) {
-			int bookNo = book.getBookNo(); //책번호
-			String bookName = book.getBookName(); //책이름
-			String bookWriter = book.getBookWriter(); //저자
-			String bookPublisher = book.getBookPublisher(); //출판사
-			String bookField = book.getBookField(); //책 분야
-			int bookState = book.getBookState();
-			
-			System.out.println(bookNo + " | " + bookName + " | " + bookWriter + " | " + bookPublisher + " | " + bookField + " | " + bookState);
+		List<CartDetail> list = cart.getCartDetailList();
+		for(CartDetail cartDetail : list) {
+			int bookNo = cartDetail.getBookNo(); //책번호
+			BookController.bookSelectByBookNo(id, bookNo);
 		}
 		
 		Scanner sc = new Scanner(System.in);

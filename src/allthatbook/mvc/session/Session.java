@@ -37,7 +37,7 @@ public class Session {
 	}
 	
 	//Ãß°¡
-	public void setAttribute(String name, Object value) {//cart , List<Book>
+	public void setAttribute(String name, Object value) {//cart , List<Book> ---> cart, Cart°´Ã¼
 		attributes.put(name,value);
 	}
 	
