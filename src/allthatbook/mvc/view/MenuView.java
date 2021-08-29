@@ -49,7 +49,6 @@ public class MenuView {
 			case 1:
 				BookController.bookSelect();// 전체 상품조회
 				break;
-
 			case 2 :
 				printSelectMenu(user.getUserId());
 
@@ -81,8 +80,6 @@ public class MenuView {
 				System.out.println("메뉴에 있는 번호를 입력해주세요");
 			}
 		}
-
-		
 	}
 	/**
 	 * 검색 메뉴
