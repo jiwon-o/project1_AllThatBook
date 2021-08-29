@@ -290,6 +290,25 @@ public class MenuView {
 		UserController.register(user, pwdCheck);
 	}
 
+	/**
+	 * 로그인된 자기정보 가져오기 (7.회원정보)
+	 */
+	
+	private static void selectInformation(User user) {
+		System.out.println(user + "님의 정보는" +"입니다");
+			
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	/**
 	 * 회원정보수정 화면으로 가기위한 페이지
@@ -414,6 +433,7 @@ public class MenuView {
 			System.out.println("***네/아니오 중에서 입력해 주세요***");
 		}
 	}
+	
 
 	/**
 	 * 로그아웃

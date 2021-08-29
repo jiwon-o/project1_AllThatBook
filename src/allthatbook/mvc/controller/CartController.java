@@ -67,7 +67,7 @@ public class CartController {
 			SessionSet ss = SessionSet.getInstance();
 			Session session = ss.get(userId);
 			
-			Set<Book> cart = (Set<Book>)session.removeAttribute(userId); // 책 저장
+			//Set<Book> cart = (Set<Book>)session.removeAttribute(userId); // 책 저장
 			
 		
 		}catch (Exception e) {
