@@ -79,7 +79,7 @@ public class AdminMenuView {
 					result = BookController.bookDelete(bookNo);	
 					if(result==1)System.out.println(bookNo+"번호가 삭제되었습니다.");
 					break;
-				case 4 : //도서조회 --- 장바구니 안뜨게 !!!
+				case 4 : //도서조회 --- 장바구니 말고 수정, 삭제로 연결되게 
 					MenuView.printSelectMenu(user.getUserId());
 					break;
 				case 5 : //대출한도서 : 상태가 1인도서 조회 
