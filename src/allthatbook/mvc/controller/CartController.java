@@ -70,6 +70,7 @@ public class CartController {
 	/**
 	 * 장바구니 비우기
 	 */
+
 //	public static void removeCart(String userId) {
 //		try {
 //			//id에 해당하는 세션찾기
@@ -86,6 +87,7 @@ public class CartController {
 //		
 //		
 //	}
+
 	
 	/**
 	 * 장바구니 보기

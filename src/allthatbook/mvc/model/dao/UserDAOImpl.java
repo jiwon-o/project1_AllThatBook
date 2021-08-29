@@ -106,6 +106,26 @@ public class UserDAOImpl implements UserDAO {
 		return result;
 	}
 
+	
+	/**
+	 *  관리자에서 userNo로 회원 삭제 
+	 */
+	@Override
+	public int deleteUserInfo(int userNo) throws SQLException{
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("delete from users where 회원번호=?");
+			ps.setInt(1, userNo);
+			result = ps.executeUpdate();
+		} finally {
+			DbUtil.close(con, ps);
+		}
+		return result;
+	}
+
 	/**
 	 * 전체회원 조회
 	 */
@@ -181,5 +201,29 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return user;
 	}
-	
+	/**
+	 * 관리자 회원정보수정 
+	 */
+	@Override
+	public int updateAdminUserInfo(User updateUser) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql="update users set 회원ID=?, 패스워드=?, 회원이름=?, 연락처=? where 회원번호=?";
+		int result=0;	
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, updateUser.getUserId());
+			ps.setString(2, updateUser.getUserPwd());
+			ps.setString(3, updateUser.getUserName());
+			ps.setString(4, updateUser.getUserPhone());
+			ps.setInt(5, updateUser.getUserNo());
+			result=ps.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DbUtil.close(con, ps);
+		}
+		return result;
+	}
 }

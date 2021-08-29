@@ -37,16 +37,15 @@ public class MenuView {
 				default:
 					System.out.println("메뉴에 있는 번호를 입력해주세요");
 				}
-			}catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				System.out.println("메뉴는 숫자만 가능합니다.");
 			}
 		}
-		
-		
+
 	}
 
 	public static void printUserMenu(User user) {
-		
+
 		while (true) {
 
 			SessionSet ss = SessionSet.getInstance();
@@ -61,7 +60,7 @@ public class MenuView {
 				BookController.bookSelect();// 전체 상품조회
 				break;
 
-			case 2 :
+			case 2:
 				printSelectMenu(user.getUserId());
 
 				break;
@@ -71,90 +70,96 @@ public class MenuView {
 			case 4:
 
 				break;
-			case 5:         
+			case 5:
 				MenuView.putCart(user.getUserId());
 				break;
 			case 6:
 				MenuView.viewCart(user.getUserId());
 				break;
 			case 7:
-				
-				break;
 
+				break;
 
 			}
 		}
 
-		
 	}
+
 	/**
 	 * 검색 메뉴
 	 */
 	public static void printSelectMenu(String userId) {
-		
-		while(true) {
+
+		while (true) {
 			try {
-				System.out.println("1.도서번호로 검색  |  2.도서명으로 검색  |  3.저자명으로 검색  |  4.출판사로 검색  |  5.도서분야로 검색  |  6.대여여부로 검색  |  9.메인메뉴로 가기");
-				
-				int menu =Integer.parseInt(sc.nextLine());
-				switch(menu) {
-				case 1 :
-					selectBookByNo(userId); //도서번호로 검색
+				System.out.println(
+						"1.도서번호로 검색  |  2.도서명으로 검색  |  3.저자명으로 검색  |  4.출판사로 검색  |  5.도서분야로 검색  |  6.대여여부로 검색  |  9.메인메뉴로 가기");
+
+				int menu = Integer.parseInt(sc.nextLine());
+				switch (menu) {
+				case 1:
+					selectBookByNo(userId); // 도서번호로 검색
 					break;
-				case 2 :
-					selectBookByName(userId); //도서명으로 검색
+				case 2:
+					selectBookByName(userId); // 도서명으로 검색
 					break;
-				case 3 :
-					selectBookByWriter(userId); //저자명으로 검색
+				case 3:
+					selectBookByWriter(userId); // 저자명으로 검색
 					break;
-				case 4 :
-					selectBookByPublisher(userId); //출판사로 검색
+				case 4:
+					selectBookByPublisher(userId); // 출판사로 검색
 					break;
-				case 5 :
-					selectBookByCategory(userId); //분야로 검색
+				case 5:
+					selectBookByCategory(userId); // 분야로 검색
 					break;
-				case 6 : 
-					
+				case 6:
+
 					break;
-				case 9 :
-					//printUserMenu(user);
+				case 9:
+					// printUserMenu(user);
 					return;
 				default:
 					System.out.println("메뉴에 있는 번호를 입력해주세요");
 				}
-			}catch (NumberFormatException e) {
+			} catch (NumberFormatException e) {
 				System.out.println("메뉴는 숫자만 가능합니다.");
 
 			}
 		}
-		
+
 	}
-	
 
 	/**
 	 * 관리자메뉴
 	 */
 
 	public static void printAdminMenu(User user) {
-		System.out.println("-- 관리자 메뉴 --");
-		System.out.println("1. 회원관리   |  2. 도서관리  | 3. 대출관리 |  9. 나가기");
-		int menu = Integer.parseInt(sc.nextLine());
+
 
 		try {
-			switch (menu) {
-			case 1:
-				AdminMenuView.userAdminMenu();
-				break;
-			case 2:
-				AdminMenuView.bookAdminMenu();
-				break;
-			case 3:
-				break;
-			case 9:
-				logout(user.getUserId());
-				return;
-			default:
-				System.out.println("메뉴에 있는 번호를 입력해주세요");
+
+			while(true) {
+				System.out.println("-- 관리자 메뉴 --");
+				System.out.println("1. 회원관리   |  2. 도서관리  | 3. 대출관리 |  9. 나가기");
+				int menu = Integer.parseInt(sc.nextLine());
+	
+				switch (menu) {
+				case 1:
+					AdminMenuView.userAdminMenu();
+					break;
+				case 2:
+	
+					AdminMenuView.bookAdminMenu(user);
+	
+					break;
+				case 3:
+					break;
+				case 9:
+					logout(user.getUserId());
+					return;
+				default:
+					System.out.println("메뉴에 있는 번호를 입력해주세요");
+				}
 			}
 		}catch (NumberFormatException e) {
 			System.out.println("메뉴는 숫자만 가능합니다.");
@@ -163,29 +168,27 @@ public class MenuView {
 		
 	}
 
-	
 //////////////////////   검색   /////////////////////
-
 
 	/**
 	 * 도서번호로 검색하기
 	 */
 	public static void selectBookByNo(String user) {
-		while(true) {
+		while (true) {
 			try {
 				System.out.println("책번호 입력 > ");
 				int no = Integer.parseInt(sc.nextLine());
-				
+
 				BookController.bookSelectByBookNo(user, no);
-			}catch (NumberFormatException e) {
-				//e.printStackTrace();
+			} catch (NumberFormatException e) {
+				// e.printStackTrace();
 				System.out.println("숫자만 입력해주세요.");
-				
+
 			}
 		}
-		
+
 	}
-	
+
 	/**
 	 * 도서명으로 검색하기
 	 */
@@ -193,15 +196,14 @@ public class MenuView {
 		try {
 			System.out.println("단어 검색 > ");
 			String keyword = sc.nextLine();
-			
-			BookController.bookSelectByBookName(userId, keyword);
-		}catch (Exception e) {
-			///e.printStackTrace();
 
-			
+			BookController.bookSelectByBookName(userId, keyword);
+		} catch (Exception e) {
+			/// e.printStackTrace();
+
 		}
 	}
-	
+
 	/**
 	 * 저자명으로 검색하기
 	 */
@@ -209,14 +211,14 @@ public class MenuView {
 		try {
 			System.out.println("저자 검색 > ");
 			String writer = sc.nextLine();
-			
+
 			BookController.bookSelectByWriter(user, writer);
-		}catch (Exception e) {
-			//e.printStackTrace();
+		} catch (Exception e) {
+			// e.printStackTrace();
 
 		}
 	}
-	
+
 	/**
 	 * 출판사로 검색하기
 	 */
@@ -224,14 +226,14 @@ public class MenuView {
 		try {
 			System.out.println("출판사 검색 > ");
 			String publisher = sc.nextLine();
-			
+
 			BookController.bookSelectByPublisher(user, publisher);
-		}catch (Exception e) {
-			//e.printStackTrace();
+		} catch (Exception e) {
+			// e.printStackTrace();
 
 		}
 	}
-		
+
 	/**
 	 * 도서분야로 검색하기
 	 */
@@ -239,17 +241,16 @@ public class MenuView {
 		try {
 			System.out.println("도서분야 검색 > ");
 			String category = sc.nextLine();
-			
+
 			BookController.bookSelectByCategory(user, category);
-		}catch (Exception e) {
-			//e.printStackTrace();
+		} catch (Exception e) {
+			// e.printStackTrace();
 		}
-		
+
 	}
-	
-	
+
 ///////////////////////   장바구니   //////////////////////
-	
+
 	/**
 	 * 장바구니 담기
 	 */
@@ -260,21 +261,19 @@ public class MenuView {
 			int bookNo = Integer.parseInt(sc.nextLine());
 
 			CartController.putCart(userId, bookNo);
-		}catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			System.out.println("숫자를 입력해주세요.");
 		}
 
-
 	}
-    
-    /**
-     * 장바구니 보기
-     * */
+
+	/**
+	 * 장바구니 보기
+	 */
 	public static void viewCart(String userId) {
 		CartController.viewCart(userId);
-		
+
 	}
-	
 
 //	/**
 //	 * 장바구니 비우기
@@ -301,7 +300,7 @@ public class MenuView {
 //		
 //		CartController.deleteCartList(userId);
 //	}
-	
+
 	/**
 	 * 로그인 메뉴
 	 */
@@ -332,7 +331,6 @@ public class MenuView {
 		User user = new User(0, userId, userPwd, userName, userPhone, null);
 		UserController.register(user, pwdCheck);
 	}
-
 
 	/**
 	 * 회원정보수정 화면으로 가기위한 페이지
@@ -419,12 +417,12 @@ public class MenuView {
 	public static void delete(User user) {
 		System.out.println("***회원 탈퇴를 하시겠습니까? (네/아니오)***");
 		String checkDeleteID = sc.nextLine();
-		switch(checkDeleteID) {
-		case "네" :
-			while(true) {
+		switch (checkDeleteID) {
+		case "네":
+			while (true) {
 				System.out.print("탈퇴하실 아이디 : ");
 				String userId = sc.nextLine();
-				if( !(user.getUserId().equals(userId)) ) {
+				if (!(user.getUserId().equals(userId))) {
 					System.out.println("***아이디가 틀렸습니다.***");
 					continue;
 				}
@@ -432,28 +430,28 @@ public class MenuView {
 				String userPwd = sc.nextLine();
 				System.out.print("탈퇴하실 비밀번호 확인 : ");
 				String checkUserPwd = sc.nextLine();
-				if( !(user.getUserPwd().equals(userPwd) && user.getUserPwd().equals(checkUserPwd)) ) {	// !(참&&참)
+				if (!(user.getUserPwd().equals(userPwd) && user.getUserPwd().equals(checkUserPwd))) { // !(참&&참)
 					System.out.println("***비밀번호가 틀렸습니다.***");
 					continue;
 				}
-				
-				String checkString = "탈퇴하겠습니다";				//나중에 문구 수정을 위해서 빼놓음
+
+				String checkString = "탈퇴하겠습니다"; // 나중에 문구 수정을 위해서 빼놓음
 				System.out.println("***정말 회원 탈퇴를 하시겠습니까?***");
-				System.out.println("***탈퇴하시려면 괄호안의 문자("+checkString+")를 적어주세요***");
-				if(!sc.nextLine().equals(checkString)) {
+				System.out.println("***탈퇴하시려면 괄호안의 문자(" + checkString + ")를 적어주세요***");
+				if (!sc.nextLine().equals(checkString)) {
 					System.out.println("***입력문자가 잘못 되었습니다.***");
 					continue;
 				}
-				
+
 				user.setUserId(userId);
 				user.setUserPwd(userPwd);
 				UserController.deleteUserInfo(user);
 				return;
 			}
-		case "아니오" :
+		case "아니오":
 			System.out.println("***메뉴로 돌아갑니다.***");
-		break;
-		default :
+			break;
+		default:
 			System.out.println("***네/아니오 중에서 입력해 주세요***");
 		}
 	}
@@ -467,6 +465,5 @@ public class MenuView {
 		SessionSet ss = SessionSet.getInstance();
 		ss.remove(session);
 	}
-
 
 }

@@ -27,7 +27,7 @@ public interface UserDAO {
 	 */
 	int updateUserInfo(User user) throws SQLException;
 
-
+	int updateAdminUserInfo(User updateUser)throws SQLException; 
 	/**
 	 * È¸¿øÅ»ÅðÇÏ±â 
 	 */
@@ -47,4 +47,8 @@ public interface UserDAO {
 	 * userId·Î Á¶È¸
 	 */
 	User selectByUserId(String userId) throws SQLException;
+
+
+	int deleteUserInfo(int userNo) throws SQLException;
+
 }

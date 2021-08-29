@@ -46,7 +46,7 @@ public interface BookService {
 	/**
 	 * 책 수정
 	 */
-	void bookUpdate(Book book) throws SQLException;
+	int bookUpdate(Book updatebook) throws SQLException;
 	
 	/**
 	 * 책 삭제
