@@ -61,6 +61,7 @@ public class Book {
 	public String getPubDate() {
 		return pubDate;
 	}
+	
 
 	public void setPubDate(String pubDate) {
 		this.pubDate = pubDate;

@@ -140,7 +140,7 @@ public class MenuView {
 			AdminMenuView.userAdminMenu();
 			break;
 		case 2:
-			AdminMenuView.bookAdminMenu();
+			AdminMenuView.bookAdminMenu(user);
 			break;
 		case 3:
 			break;

@@ -185,9 +185,26 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 	@Override
-	public int bookUpdate(Book book) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int bookUpdate(Book updatebook) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql="update books set 도서명=?, 저자명=?, 출판사명=?, 분야=? where 책번호=?";
+		int result=0;	
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, updatebook.getBookName());
+			ps.setString(2, updatebook.getBookWriter());
+			ps.setString(3, updatebook.getBookPublisher());
+			ps.setString(4, updatebook.getBookField());
+			ps.setInt(5, updatebook.getBookNo());
+			result=ps.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DbUtil.close(con, ps);
+		}
+		return result;
 	}
 
 	@Override

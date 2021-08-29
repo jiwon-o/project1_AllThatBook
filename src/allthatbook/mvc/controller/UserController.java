@@ -74,7 +74,19 @@ public class UserController {
 			FailView.errorMessage(e.getMessage());
 		} 
 	}
-
+	
+	/**
+	 * 회원삭제
+	 */
+	public static void deleteAdminUserInfo(int userNo) {
+		try {
+			userService.deleteUserInfo(userNo);
+			EndView.printMessage("회원삭제가 되었습니다.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		} 
+	}
 	/**
 	 * 전체 회원 조회
 	 */
@@ -116,8 +128,7 @@ public class UserController {
 	 */
 	public static void updateAdminUserInfo(int userNo) {
 		try {
-			//바꿀 
-			User user = userService.selectByUserNo(userNo);
+			
 			
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());

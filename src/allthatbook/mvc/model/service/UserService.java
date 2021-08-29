@@ -41,5 +41,12 @@ public interface UserService {
 	 * È¸¿øÅ»Åð
 	 */
 	void deleteUserInfo(User user)throws SQLException;
+	void deleteUserInfo(int userNo)throws SQLException;
+	
+	
+	/**
+	 * È¸¿ø»èÁ¦
+	 */
+	void deleteAdminUserInfo(User user)throws SQLException;
 	
 }

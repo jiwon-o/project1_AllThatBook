@@ -47,7 +47,7 @@ public interface BookDAO {
 	/**
 	 * 책 수정
 	 */
-	int bookUpdate(Book book) throws SQLException;
+	int bookUpdate(Book updatebook) throws SQLException;
 	
 	/**
 	 * 책 삭제
