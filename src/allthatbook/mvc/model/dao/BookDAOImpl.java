@@ -182,6 +182,7 @@ public class BookDAOImpl implements BookDAO {
 			DbUtil.close(con, ps);
 		}
 		return result;
+
 	}
 
 	@Override
@@ -205,6 +206,7 @@ public class BookDAOImpl implements BookDAO {
 			DbUtil.close(con, ps);
 		}
 		return result;
+
 	}
 
 	@Override
@@ -226,7 +228,7 @@ public class BookDAOImpl implements BookDAO {
 		return result;
 	}
 
-	@Override
+
 	public List<Book> bookRentalSelect() throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;

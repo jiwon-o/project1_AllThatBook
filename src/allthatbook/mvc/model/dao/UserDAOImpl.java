@@ -105,6 +105,7 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return result;
 	}
+
 	
 	/**
 	 *  관리자에서 userNo로 회원 삭제 
@@ -199,6 +200,5 @@ public class UserDAOImpl implements UserDAO {
 			DbUtil.close(con, ps, rs);
 		}
 		return user;
-	}	
-	
+	}
 }

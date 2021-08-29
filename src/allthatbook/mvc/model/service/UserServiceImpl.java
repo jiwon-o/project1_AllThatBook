@@ -89,6 +89,7 @@ public class UserServiceImpl implements UserService {
 		if (result == 0) throw new SQLException("회원탈퇴가 되지 않았습니다.");
 	}
 
+
 	/**
 	 * 회원삭제
 	 */
@@ -103,5 +104,6 @@ public class UserServiceImpl implements UserService {
 		int result = userDao.deleteUserInfo(userNo);
 		if(result==0)throw new SQLException("회원삭제가 되지 않았습니다.");
 	}
+
 	
 }

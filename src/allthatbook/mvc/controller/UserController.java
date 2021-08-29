@@ -74,7 +74,7 @@ public class UserController {
 			FailView.errorMessage(e.getMessage());
 		} 
 	}
-	
+
 	/**
 	 * 회원삭제
 	 */
@@ -128,7 +128,10 @@ public class UserController {
 	 */
 	public static void updateAdminUserInfo(int userNo) {
 		try {
-			
+
+			//바꿀 
+			User user = userService.selectByUserNo(userNo);
+
 			
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());

@@ -3,10 +3,12 @@ package allthatbook.mvc.view;
 import java.util.Scanner;
 
 import allthatbook.mvc.controller.BookController;
+
 import allthatbook.mvc.controller.UpdateAdminController;
 import allthatbook.mvc.controller.UserController;
 import allthatbook.mvc.model.dto.Book;
 import allthatbook.mvc.model.dto.User;
+
 
 public class AdminMenuView {
 	private static Scanner sc = new Scanner(System.in);
@@ -40,6 +42,7 @@ public class AdminMenuView {
 		case 5 : 
 			userNo=InputUserNo();
 			UserController.deleteAdminUserInfo(userNo);
+
 			break;
 		case 9 :  			
 			return;
@@ -52,6 +55,7 @@ public class AdminMenuView {
 	 */
 	public static void bookAdminMenu(User user) {
 		System.out.println("---관리자 도서 관리---");
+
 		System.out.println("1. 새 도서등록 | 2. 도서정보수정 | 3. 도서삭제 | 4. 도서조회 | 5. 대출한도서 조회 | 6. 예약한도서 조회 | 9. 나가기");
 		int menu=Integer.parseInt(sc.nextLine());
 		//while문 사용할지...?
@@ -89,6 +93,10 @@ public class AdminMenuView {
 		}
 	}
 	
+	public static void bookUpdateAdminMenu() {
+		System.out.println("무엇을 수정하시겠습니까? 1.도서명 2.저자명 3.출판사명 4.분야");
+	}
+	
 
 	/**
 	 * 계속하시겠습니까?
@@ -112,7 +120,7 @@ public class AdminMenuView {
 		String userId = sc.nextLine();
 		return userId;
 	}
-		
+
 	/**
 	 *	bookInsert에 필요한 book정보 넣기 
 	 */
@@ -144,6 +152,7 @@ public class AdminMenuView {
 		return bookNo;
 	}
 	
+
 	/**
 	 * User 수정할 데이터 입력받기 
 	 */

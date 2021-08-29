@@ -48,5 +48,7 @@ public interface UserDAO {
 	 */
 	User selectByUserId(String userId) throws SQLException;
 
+
 	int deleteUserInfo(int userNo) throws SQLException;
+
 }
