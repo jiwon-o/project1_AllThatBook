@@ -13,7 +13,6 @@ import allthatbook.mvc.model.service.BookService;
 import allthatbook.mvc.model.service.BookServiceImpl;
 
 public class EndView {
-
 	public static void printBookList(String userId, List<Book> bookList) {
 		System.out.println("----- ÃÑ µµ¼­ ¼ö: " + bookList.size() + "°³ ----------");
 		for(Book book : bookList) {
