@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import allthatbook.mvc.controller.BookController;
+import allthatbook.mvc.controller.CartController;
 import allthatbook.mvc.model.dto.Book;
 import allthatbook.mvc.model.dto.Cart;
 import allthatbook.mvc.model.dto.CartDetail;
@@ -74,6 +75,7 @@ public class EndView {
 			System.out.println("1.대여하기  |  2.목록 삭제하기  |  3.장바구니 비우기  |  4.돌아가기");
 			switch(Integer.parseInt(sc.nextLine())) {
 			case 1:
+				CartController.rentalCartBook(id, cart);
 				break;
 			case 2:
 				break;

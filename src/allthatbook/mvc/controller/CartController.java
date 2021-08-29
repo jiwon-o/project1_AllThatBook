@@ -2,10 +2,12 @@ package allthatbook.mvc.controller;
 
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import allthatbook.mvc.model.dto.Book;
 import allthatbook.mvc.model.dto.Cart;
+import allthatbook.mvc.model.dto.CartDetail;
 import allthatbook.mvc.model.dto.User;
 import allthatbook.mvc.model.service.BookService;
 import allthatbook.mvc.model.service.BookServiceImpl;
@@ -31,8 +33,6 @@ public class CartController {
 		
 		try {
 			int userNo = userService.selectByUserId(userId).getUserNo(); //userId에 해당하는 userNo
-			
-
 			//id에 해당하는 세션찾기
 			SessionSet ss = SessionSet.getInstance();
 			Session session = ss.get(userId);
@@ -100,4 +100,25 @@ public class CartController {
 			EndView.printViewCart(userId , cart);
 		}
 	}
+	
+	
+	/**
+	 * 장바구니에 담긴 책 대여
+	 * */
+	public static void rentalCartBook(String userId, Cart cart) {
+		try {
+			List<CartDetail> list = cart.getCartDetailList();
+			for (CartDetail cartDetail : list) {
+				int result = cartService.rentalCartBook(cart, cartDetail);
+				if (result == 0) FailView.errorMessage(cartDetail.getBookNo() + "는 대여불가입니다.");
+				else {
+					EndView.printMessage(cartDetail.getBookNo() +" 대여완료");
+				}
+				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
