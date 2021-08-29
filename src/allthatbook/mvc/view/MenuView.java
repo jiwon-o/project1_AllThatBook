@@ -49,7 +49,6 @@ public class MenuView {
 			case 1:
 				BookController.bookSelect();// 전체 상품조회
 				break;
-
 			case 2 :
 				printSelectMenu(user.getUserId());
 
@@ -67,9 +66,8 @@ public class MenuView {
 				MenuView.viewCart(user.getUserId());
 				break;
 			case 7:
-				
+				MenuView.selectUserInfo(user);
 				break;
-
 			case 8:
 				MenuView.updateTemp(user);
 				if(ss.getSet().size()==0) return;
@@ -81,9 +79,9 @@ public class MenuView {
 				System.out.println("메뉴에 있는 번호를 입력해주세요");
 			}
 		}
-
-		
 	}
+
+	
 	/**
 	 * 검색 메뉴
 	 */
@@ -118,7 +116,6 @@ public class MenuView {
 		}
 	}
 	
-
 	/**
 	 * 회원정보 메뉴
 	 */
@@ -130,7 +127,6 @@ public class MenuView {
 	/**
 	 * 관리자메뉴
 	 */
-
 	public static void printAdminMenu(User user) {
 		while(true) {
 			System.out.println("-- 관리자 메뉴 --");
@@ -292,13 +288,32 @@ public class MenuView {
 		UserController.register(user, pwdCheck);
 	}
 
+	/**
+	 * 로그인된 자기정보 가져오기 (7.회원정보)
+	 */
+	
+	private static void selectInformation(User user) {
+		System.out.println(user + "님의 정보는" +"입니다");
+			
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	/**
 	 * 회원정보수정 화면으로 가기위한 페이지
 	 */
 	public static void updateTemp(User user) {
 		while (true) {
-			System.out.println("정보수정/탈퇴를 위해 비밀번호를 입력해 주세요. (수정을 취소하려면 \"exid\" 눌러주세요)");
+			System.out.println("정보수정/탈퇴를 위해 비밀번호를 입력해 주세요. (수정을 취소하려면 \"exid\" 입력해주세요)");
 			String userPwd = sc.nextLine();
 			if (userPwd.equals("exid")) {
 				System.out.println("다시 메뉴로 돌아갑니다.");
@@ -416,7 +431,27 @@ public class MenuView {
 			System.out.println("***네/아니오 중에서 입력해 주세요***");
 		}
 	}
+	
 
+	/**
+	 * 회원 본인의 정보 확인
+	 */
+	public static void selectUserInfo(User user) {
+		while(true) {
+			System.out.println("정보조회를 위해 비밀번호를 입력해 주세요. (검색을 취소하려면 \"exid\" 입력해주세요)");
+			String userPwd = sc.nextLine();
+			if (userPwd.equals("exid")) {
+				System.out.println("다시 메뉴로 돌아갑니다.");
+				break;
+			} else if (!(user.getUserPwd().equals(userPwd))) {
+				System.out.println("비밀번호를 잘못입력 하셨습니다.");
+				continue;
+			}
+			UserController.selectByUserId(user.getUserId());
+			break;
+		}
+	}
+	
 	/**
 	 * 로그아웃
 	 */

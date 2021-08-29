@@ -19,7 +19,7 @@ public class BookController {
 	public static void bookSelect() {
 		try {
 			List<Book> list = bookService.bookSelect();
-			//EndView.printBookList(list);
+			EndView.printBookList(list);
 		}catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
