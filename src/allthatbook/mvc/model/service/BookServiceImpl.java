@@ -79,9 +79,9 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public void bookUpdate(Book book) throws SQLException {
-		// TODO Auto-generated method stub
-		
+	public int bookUpdate(Book updatebook) throws SQLException {
+		int result = bookDao.bookUpdate(updatebook);
+		return result;
 	}
 
 	@Override
