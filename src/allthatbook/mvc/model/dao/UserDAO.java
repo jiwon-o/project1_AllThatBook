@@ -27,7 +27,7 @@ public interface UserDAO {
 	 */
 	int updateUserInfo(User user) throws SQLException;
 
-
+	int updateAdminUserInfo(User updateUser)throws SQLException; 
 	/**
 	 * È¸¿øÅ»ÅðÇÏ±â 
 	 */

@@ -16,13 +16,19 @@ public class UpdateAdminController {
 	
 	public static int userUpdate(int userNo, User updateUser) {
 		int result=0;
-//		try { 여기하는중
-//			User user = userSelect(userNo);
-//			//updateUser.set
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			FailView.errorMessage(e.getMessage());
-//		}
+		try { 
+			User user = userSelect(userNo);
+			updateUser.setUserNo(userNo);
+			updateUser.setRegDate(user.getRegDate());
+			if(updateUser.getUserId().isEmpty())updateUser.setUserId(user.getUserId());
+			if(updateUser.getUserPwd().isEmpty())updateUser.setUserPwd(user.getUserPwd());
+			if(updateUser.getUserName().isEmpty())updateUser.setUserName(user.getUserName());
+			if(updateUser.getUserPhone().isEmpty())updateUser.setUserPhone(user.getUserPhone());
+			result=userService.userUpdate(updateUser);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
 		return result;
 	}
 	
@@ -36,18 +42,18 @@ public class UpdateAdminController {
 		return user;
 	}
 
-	public static int bookUpdate(int bookNo, Book updatebook) {
+	public static int bookUpdate(int bookNo, Book updateBook) {
 		int result=0;
 		try {
 			Book book = bookSelect(bookNo);
-			updatebook.setBookNo(bookNo);
-			updatebook.setPubDate(book.getPubDate());
-			updatebook.setBookState(book.getBookState());
-			if(updatebook.getBookName().isEmpty())updatebook.setBookName(book.getBookName()); 
-			if(updatebook.getBookWriter().isEmpty())updatebook.setBookWriter(book.getBookWriter()); 
-			if(updatebook.getBookPublisher().isEmpty())updatebook.setBookPublisher(book.getBookPublisher()); 
-			if(updatebook.getBookField().isEmpty())updatebook.setBookField(book.getBookField()); 
-			result = bookService.bookUpdate(updatebook);
+			updateBook.setBookNo(bookNo);
+			updateBook.setPubDate(book.getPubDate());
+			updateBook.setBookState(book.getBookState());
+			if(updateBook.getBookName().isEmpty())updateBook.setBookName(book.getBookName()); 
+			if(updateBook.getBookWriter().isEmpty())updateBook.setBookWriter(book.getBookWriter()); 
+			if(updateBook.getBookPublisher().isEmpty())updateBook.setBookPublisher(book.getBookPublisher()); 
+			if(updateBook.getBookField().isEmpty())updateBook.setBookField(book.getBookField()); 
+			result = bookService.bookUpdate(updateBook);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
