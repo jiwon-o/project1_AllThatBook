@@ -67,9 +67,9 @@ public class MenuView {
 				MenuView.putCart(user.getUserId());
 				break;
 			case 7:
-				
+				// 회원 정보 조회
+				UserController.selectByUserId(user.getUserId());
 				break;
-
 			case 8:
 				MenuView.updateTemp(user);
 				if(ss.getSet().size()==0) return;

@@ -18,6 +18,12 @@ public class EndView {
 		
 		printCartMenu(userId);
 	}
+	public static void printBookList(List<Book> bookList) {
+		System.out.println("----- ÃÑ µµ¼­ ¼ö: " + bookList.size() + "°³ ----------");
+		for(Book book : bookList) {
+			System.out.println(book);
+		}
+	}
 	
 	public static void printSelectByNo(String userId, Book book) {
 		System.out.println(book + "\n");
