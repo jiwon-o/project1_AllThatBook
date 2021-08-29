@@ -13,9 +13,7 @@ import allthatbook.mvc.model.service.BookService;
 import allthatbook.mvc.model.service.BookServiceImpl;
 
 public class EndView {
-	static BookService bookService = new BookServiceImpl();
 
-	
 	public static void printBookList(String userId, List<Book> bookList) {
 		System.out.println("----- ÃÑ µµ¼­ ¼ö: " + bookList.size() + "°³ ----------");
 		for(Book book : bookList) {
@@ -23,6 +21,7 @@ public class EndView {
 		}
 		
 		printCartMenu(userId);
+
 	}
 	
 	public static void printBookList(List<Book> bookList) {
@@ -32,6 +31,7 @@ public class EndView {
 		}
 
 	}
+
 
 	
 	public static void printSelectByNo(String userId, Book book) {

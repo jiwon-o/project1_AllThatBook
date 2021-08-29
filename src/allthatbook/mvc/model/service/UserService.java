@@ -41,5 +41,19 @@ public interface UserService {
 	 * 회원탈퇴
 	 */
 	void deleteUserInfo(User user)throws SQLException;
+
+	void deleteUserInfo(int userNo)throws SQLException;
+	
+	
+	/**
+	 * 회원삭제
+	 */
+	void deleteAdminUserInfo(User user)throws SQLException;
+
+	/**
+	 * 회원 정보 수정 
+	 * @return
+	 */
+	 int userUpdate(User updateUser) throws SQLException;
 	
 }
