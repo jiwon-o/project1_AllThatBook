@@ -52,7 +52,7 @@ public class CartDAOImpl implements CartDAO {
 	public int cartInsert(int userNo) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "INSERT INTO CART(장바구니번호, 회원번호) VALUES(CART_SEQ_NO, ?)";
+		String sql = "INSERT INTO CART(장바구니번호, 회원번호) VALUES(CART_SEQ_NO.NEXTVAL, ?)";
 		int result = 0;
 		int chk = 0;
 		try {
