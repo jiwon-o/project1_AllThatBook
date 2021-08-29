@@ -42,14 +42,13 @@ public class MenuView {
 			System.out.println(ss.getSet()); // Set객체
 			System.out.println("-----" + user.getUserId() + " 로그인 중 -----");
 			System.out.println(
-					" 1.전체목록  |  2.도서검색  | 3.도서대여  |  4.도서반납  |  5.책신청  |  6.장바구니담기  |  7.회원정보  |  8.회원정보수정  |  9.로그아웃 | ");
+					" 1.전체목록  | 2.도서검색(대여, 예약) | 3.도서반납  | 4.책신청 |  5.장바구니담기 | 6.장바구니보기 |  7.회원정보  |  8.회원정보수정  |  9.로그아웃 | ");
 			System.out.print("번호 입력 > ");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
 				BookController.bookSelect();// 전체 상품조회
 				break;
-
 			case 2 :
 				printSelectMenu(user.getUserId());
 
@@ -60,16 +59,15 @@ public class MenuView {
 			case 4:
 
 				break;
-			case 5:
-
-				break;
-			case 6:
+			case 5:         
 				MenuView.putCart(user.getUserId());
 				break;
-			case 7:
-				
+			case 6:
+				MenuView.viewCart(user.getUserId());
 				break;
-
+			case 7:
+				MenuView.selectUserInfo(user);
+				break;
 			case 8:
 				MenuView.updateTemp(user);
 				if(ss.getSet().size()==0) return;
@@ -81,9 +79,9 @@ public class MenuView {
 				System.out.println("메뉴에 있는 번호를 입력해주세요");
 			}
 		}
-
-		
 	}
+
+	
 	/**
 	 * 검색 메뉴
 	 */
@@ -118,7 +116,6 @@ public class MenuView {
 		}
 	}
 	
-
 	/**
 	 * 회원정보 메뉴
 	 */
@@ -130,25 +127,26 @@ public class MenuView {
 	/**
 	 * 관리자메뉴
 	 */
-
 	public static void printAdminMenu(User user) {
-		System.out.println("-- 관리자 메뉴 --");
-		System.out.println("1. 회원관리   |  2. 도서관리  | 3. 대출관리 |  9. 나가기");
-		int menu = Integer.parseInt(sc.nextLine());
-		switch (menu) {
-		case 1:
-			AdminMenuView.userAdminMenu();
-			break;
-		case 2:
-			AdminMenuView.bookAdminMenu();
-			break;
-		case 3:
-			break;
-		case 9:
-			logout(user.getUserId());
-			return;
-		default:
-			System.out.println("메뉴에 있는 번호를 입력해주세요");
+		while(true) {
+			System.out.println("-- 관리자 메뉴 --");
+			System.out.println("1. 회원관리   |  2. 도서관리  | 3. 대출관리 |  9. 나가기");
+			int menu = Integer.parseInt(sc.nextLine());
+			switch (menu) {
+			case 1:
+				AdminMenuView.userAdminMenu();
+				break;
+			case 2:
+				AdminMenuView.bookAdminMenu(user);
+				break;
+			case 3:
+				break;
+			case 9:
+				logout(user.getUserId());
+				return;
+			default:
+				System.out.println("메뉴에 있는 번호를 입력해주세요");
+			}
 		}
 	}
 
@@ -315,7 +313,7 @@ public class MenuView {
 	 */
 	public static void updateTemp(User user) {
 		while (true) {
-			System.out.println("정보수정/탈퇴를 위해 비밀번호를 입력해 주세요. (수정을 취소하려면 \"exid\" 눌러주세요)");
+			System.out.println("정보수정/탈퇴를 위해 비밀번호를 입력해 주세요. (수정을 취소하려면 \"exid\" 입력해주세요)");
 			String userPwd = sc.nextLine();
 			if (userPwd.equals("exid")) {
 				System.out.println("다시 메뉴로 돌아갑니다.");
@@ -435,6 +433,25 @@ public class MenuView {
 	}
 	
 
+	/**
+	 * 회원 본인의 정보 확인
+	 */
+	public static void selectUserInfo(User user) {
+		while(true) {
+			System.out.println("정보조회를 위해 비밀번호를 입력해 주세요. (검색을 취소하려면 \"exid\" 입력해주세요)");
+			String userPwd = sc.nextLine();
+			if (userPwd.equals("exid")) {
+				System.out.println("다시 메뉴로 돌아갑니다.");
+				break;
+			} else if (!(user.getUserPwd().equals(userPwd))) {
+				System.out.println("비밀번호를 잘못입력 하셨습니다.");
+				continue;
+			}
+			UserController.selectByUserId(user.getUserId());
+			break;
+		}
+	}
+	
 	/**
 	 * 로그아웃
 	 */

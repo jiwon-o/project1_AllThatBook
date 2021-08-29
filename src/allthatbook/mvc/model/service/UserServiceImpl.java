@@ -88,5 +88,31 @@ public class UserServiceImpl implements UserService {
 		int result = userDao.deleteUserInfo(user);
 		if (result == 0) throw new SQLException("회원탈퇴가 되지 않았습니다.");
 	}
+
+
+	/**
+	 * 회원삭제
+	 */
+	@Override
+	public void deleteAdminUserInfo(User user) throws SQLException {
+		int result = userDao.deleteUserInfo(user);
+		if(result==0)throw new SQLException("회원삭제가 되지 않았습니다.");
+	}
+
+	@Override
+	public void deleteUserInfo(int userNo) throws SQLException {
+		int result = userDao.deleteUserInfo(userNo);
+		if(result==0)throw new SQLException("회원삭제가 되지 않았습니다.");
+	}
+	
+	/**
+	 * 회원 정보 수정
+	 */
+	@Override
+	public int userUpdate(User updateUser) throws SQLException {
+		int result = userDao.updateAdminUserInfo(updateUser);
+		return result;
+	}
+
 	
 }
