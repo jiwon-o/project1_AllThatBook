@@ -46,7 +46,7 @@ public class CartDAOImpl implements CartDAO {
 	
 	
 	/**
-	 * 장바구니가 추가하는 메소드
+	 * 장바구니가 추가되는 메소드
 	 * */
 	@Override
 	public int cartInsert(int userNo) throws SQLException {
@@ -54,11 +54,11 @@ public class CartDAOImpl implements CartDAO {
 		PreparedStatement ps = null;
 		String sql = "INSERT INTO CART(장바구니번호, 회원번호) VALUES(CART_SEQ_NO.NEXTVAL, ?)";
 		int result = 0;
-		int chk = 0;
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, userNo);
+			result = ps.executeUpdate();
 		}finally {
 			DbUtil.close(con, ps, null);
 		}
@@ -135,15 +135,17 @@ public class CartDAOImpl implements CartDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Cart cart = null;
-		String sql = "select * from cart where 회원번호 = ?";
+		String sql = "select * from cart where 회원번호=?";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, userNo);
 			rs = ps.executeQuery();
-			int cartNo = rs.getInt(1);
-			cart = new Cart(cartNo, userNo);
-			cart.setCartDetailList(getCartDetailFromTable(cartNo));
+			if (rs.next()) {
+				int cartNo = rs.getInt(1);
+				cart = new Cart(cartNo, userNo);
+				cart.setCartDetailList(getCartDetailFromTable(cartNo));
+			}
 		}
 	    finally {
 	    	DbUtil.close(con, ps, rs);
@@ -165,7 +167,7 @@ public class CartDAOImpl implements CartDAO {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, cartNo);
-			rs = ps.executeQuery(sql);
+			rs = ps.executeQuery();
 			while (rs.next()) {
 				CartDetail cartDetail = new CartDetail(rs.getInt(1), rs.getInt(2));
 				list.add(cartDetail);

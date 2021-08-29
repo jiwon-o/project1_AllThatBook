@@ -48,51 +48,39 @@ public class MenuView {
 	public static void printUserMenu(User user) {
 		
 		while (true) {
-			try {
-				SessionSet ss = SessionSet.getInstance();
-				System.out.println(ss.getSet()); // Set객체
-				System.out.println("-----" + user.getUserId() + " 로그인 중 -----");
-				System.out.println(
-						" 1.전체목록  |  2.도서검색  | 3.도서대여  |  4.도서반납  |  5.책신청  |  6.장바구니담기  |  7.회원정보  |  8.회원정보수정  |  9.로그아웃 | ");
-				System.out.print("번호 입력 > ");
-				int menu = Integer.parseInt(sc.nextLine());
-				switch (menu) {
-				case 1:
-					BookController.bookSelect();// 전체 상품조회
-					break;
-	
-				case 2 :
-					printSelectMenu(user.getUserId());
-	
-					break;
-				case 3:
-	
-					break;
-				case 4:
-	
-					break;
-				case 5:
-	
-					break;
-				case 6:
-					MenuView.putCart(user.getUserId());
-					break;
-				case 7:
-					
-					break;
-	
-				case 8:
-					MenuView.updateTemp(user);
-					if(ss.getSet().size()==0) return;
-					break;
-				case 9:
-					logout(user.getUserId());
-					return;
-				default:
-					System.out.println("메뉴에 있는 번호를 입력해주세요");
-				}
-			}catch (NumberFormatException e) {
-				System.out.println("메뉴는 숫자만 가능합니다.");
+
+			SessionSet ss = SessionSet.getInstance();
+			System.out.println(ss.getSet()); // Set객체
+			System.out.println("-----" + user.getUserId() + " 로그인 중 -----");
+			System.out.println(
+					" 1.전체목록  | 2.도서검색(대여, 예약) | 3.도서반납  | 4.책신청 |  5.장바구니담기 | 6.장바구니보기 |  7.회원정보  |  8.회원정보수정  |  9.로그아웃 | ");
+			System.out.print("번호 입력 > ");
+			int menu = Integer.parseInt(sc.nextLine());
+			switch (menu) {
+			case 1:
+				BookController.bookSelect();// 전체 상품조회
+				break;
+
+			case 2 :
+				printSelectMenu(user.getUserId());
+
+				break;
+			case 3:
+
+				break;
+			case 4:
+
+				break;
+			case 5:         
+				MenuView.putCart(user.getUserId());
+				break;
+			case 6:
+				MenuView.viewCart(user.getUserId());
+				break;
+			case 7:
+				
+				break;
+
 
 			}
 		}
