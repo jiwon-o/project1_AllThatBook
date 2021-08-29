@@ -32,6 +32,31 @@ public class Cart {
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
+	
+	
+	public List<CartDetail> getCartDetailList() {
+		return cartDetailList;
+	}
+
+	public void setCartDetailList(List<CartDetail> cartDetailList) {
+		this.cartDetailList = cartDetailList;
+	}
+
+	public void addCartDetail(CartDetail cartDetail) {
+		cartDetailList.add(cartDetail);
+	}
+	
+	public void removeCartDetail(CartDetail cartDetail) {
+		cartDetailList.remove(cartDetail);
+	}
+	
+	public boolean chkCartDuplicate(int bookNo) {
+		for (CartDetail cartDetail : cartDetailList) {
+			if (cartDetail.getBookNo() == bookNo) return true;
+		}
+		return false;
+	}
+	
 
 	@Override
 	public String toString() {

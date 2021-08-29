@@ -16,6 +16,7 @@ public class MenuView {
 
 	public static void menu() {
 		while (true) {
+
 			try {
 				SessionSet ss = SessionSet.getInstance();
 				System.out.println(ss.getSet());
@@ -61,7 +62,7 @@ public class MenuView {
 					break;
 	
 				case 2 :
-					printSelectMenu(user);
+					printSelectMenu(user.getUserId());
 	
 					break;
 				case 3:
@@ -74,7 +75,7 @@ public class MenuView {
 	
 					break;
 				case 6:
-					MenuView.putCart(user);
+					MenuView.putCart(user.getUserId());
 					break;
 				case 7:
 					
@@ -92,14 +93,16 @@ public class MenuView {
 				}
 			}catch (NumberFormatException e) {
 				System.out.println("메뉴는 숫자만 가능합니다.");
+
 			}
 		}
+
 		
 	}
 	/**
 	 * 검색 메뉴
 	 */
-	public static void printSelectMenu(User user) {
+	public static void printSelectMenu(String userId) {
 		
 		while(true) {
 			try {
@@ -108,31 +111,32 @@ public class MenuView {
 				int menu =Integer.parseInt(sc.nextLine());
 				switch(menu) {
 				case 1 :
-					selectBookByNo(user); //도서번호로 검색
+					selectBookByNo(userId); //도서번호로 검색
 					break;
 				case 2 :
-					selectBookByName(user); //도서명으로 검색
+					selectBookByName(userId); //도서명으로 검색
 					break;
 				case 3 :
-					selectBookByWriter(user); //저자명으로 검색
+					selectBookByWriter(userId); //저자명으로 검색
 					break;
 				case 4 :
-					selectBookByPublisher(user); //출판사로 검색
+					selectBookByPublisher(userId); //출판사로 검색
 					break;
 				case 5 :
-					selectBookByCategory(user); //분야로 검색
+					selectBookByCategory(userId); //분야로 검색
 					break;
 				case 6 : 
 					
 					break;
 				case 9 :
-					printUserMenu(user);
+					//printUserMenu(user);
 					return;
 				default:
 					System.out.println("메뉴에 있는 번호를 입력해주세요");
 				}
 			}catch (NumberFormatException e) {
 				System.out.println("메뉴는 숫자만 가능합니다.");
+
 			}
 		}
 		
@@ -147,6 +151,7 @@ public class MenuView {
 		System.out.println("-- 관리자 메뉴 --");
 		System.out.println("1. 회원관리   |  2. 도서관리  | 3. 대출관리 |  9. 나가기");
 		int menu = Integer.parseInt(sc.nextLine());
+
 		try {
 			switch (menu) {
 			case 1:
@@ -165,6 +170,7 @@ public class MenuView {
 			}
 		}catch (NumberFormatException e) {
 			System.out.println("메뉴는 숫자만 가능합니다.");
+
 		}
 		
 	}
@@ -176,7 +182,7 @@ public class MenuView {
 	/**
 	 * 도서번호로 검색하기
 	 */
-	public static void selectBookByNo(User user) {
+	public static void selectBookByNo(String user) {
 		while(true) {
 			try {
 				System.out.println("책번호 입력 > ");
@@ -195,12 +201,12 @@ public class MenuView {
 	/**
 	 * 도서명으로 검색하기
 	 */
-	public static void selectBookByName(User user) {
+	public static void selectBookByName(String userId) {
 		try {
 			System.out.println("단어 검색 > ");
 			String keyword = sc.nextLine();
 			
-			BookController.bookSelectByBookName(user, keyword);
+			BookController.bookSelectByBookName(userId, keyword);
 		}catch (Exception e) {
 			///e.printStackTrace();
 
@@ -211,7 +217,7 @@ public class MenuView {
 	/**
 	 * 저자명으로 검색하기
 	 */
-	public static void selectBookByWriter(User user) {
+	public static void selectBookByWriter(String user) {
 		try {
 			System.out.println("저자 검색 > ");
 			String writer = sc.nextLine();
@@ -226,7 +232,7 @@ public class MenuView {
 	/**
 	 * 출판사로 검색하기
 	 */
-	public static void selectBookByPublisher(User user) {
+	public static void selectBookByPublisher(String user) {
 		try {
 			System.out.println("출판사 검색 > ");
 			String publisher = sc.nextLine();
@@ -234,13 +240,14 @@ public class MenuView {
 			BookController.bookSelectByPublisher(user, publisher);
 		}catch (Exception e) {
 			//e.printStackTrace();
+
 		}
 	}
 		
 	/**
 	 * 도서분야로 검색하기
 	 */
-	public static void selectBookByCategory(User user) {
+	public static void selectBookByCategory(String user) {
 		try {
 			System.out.println("도서분야 검색 > ");
 			String category = sc.nextLine();
@@ -258,53 +265,54 @@ public class MenuView {
 	/**
 	 * 장바구니 담기
 	 */
-	public static void putCart(User user) {
+	public static void putCart(String userId) {
 		try {
 			System.out.println("----장바구니 담기----");
 			System.out.print("책번호 : ");
 			int bookNo = Integer.parseInt(sc.nextLine());
 
-			CartController.putCart(user, bookNo);
+			CartController.putCart(userId, bookNo);
 		}catch (NumberFormatException e) {
 			System.out.println("숫자를 입력해주세요.");
 		}
-		
+
 
 	}
     
     /**
      * 장바구니 보기
      * */
-	public static void viewCart(User user) {
-		CartController.viewCart(user);
+	public static void viewCart(String userId) {
+		CartController.viewCart(userId);
 		
 	}
 	
-	/**
-	 * 장바구니 비우기
-	 */
-	public static void removeCart(User user) {
-		System.out.println("장바구니 목록을 모두 삭제하시겠습니까? (yes / no)");
-		String choice = sc.nextLine();
-		if(choice.equals("yes")) {
-			System.out.println("정말로 삭제하시겠습니까? (yes / no)");
-			String certain = sc.nextLine();
-			if(certain.equals("yes")) {
-				CartController.removeCart(user);
-				System.out.println("삭제되었습니다.");
-			}
-		}
-	}
-	
-	/**
-	 * 장바구니 목록 삭제하기
-	 */
-	public static void deleteCartList(User user) {
-		System.out.println("삭제할 도서번호를 입력하시오 > ");
-		int no = Integer.parseInt(sc.nextLine());
-		
-		CartController.deleteCartList(user);
-	}
+
+//	/**
+//	 * 장바구니 비우기
+//	 */
+//	public static void removeCart(String userId) {
+//		System.out.println("장바구니 목록을 모두 삭제하시겠습니까? (yes / no)");
+//		String choice = sc.nextLine();
+//		if(choice.equals("yes")) {
+//			System.out.println("정말로 삭제하시겠습니까? (yes / no)");
+//			String certain = sc.nextLine();
+//			if(certain.equals("yes")) {
+//				CartController.removeCart(userId);
+//				System.out.println("삭제되었습니다.");
+//			}
+//		}
+//	}
+//	
+//	/**
+//	 * 장바구니 목록 삭제하기
+//	 */
+//	public static void deleteCartList(String userId) {
+//		System.out.println("삭제할 도서번호를 입력하시오 > ");
+//		int no = Integer.parseInt(sc.nextLine());
+//		
+//		CartController.deleteCartList(userId);
+//	}
 	
 	/**
 	 * 로그인 메뉴
@@ -472,6 +480,5 @@ public class MenuView {
 		ss.remove(session);
 	}
 
-	
 
 }

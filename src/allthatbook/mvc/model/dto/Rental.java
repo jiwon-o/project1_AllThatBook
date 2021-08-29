@@ -15,7 +15,11 @@ public class Rental {
 	  
 	  public Rental() {}
 	  
-	  
+	  public Rental(int bookNo, int userNo) {
+		  this.bookNo = bookNo;
+		  this.userNo = userNo;
+		  
+	  }
 	  
 	  public Rental(int rentNo, int bookNo, int userNo, Date exreturnDate, Date rentDate, Date returnDate,
 			int returnState, int overdueState) {
