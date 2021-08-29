@@ -9,10 +9,12 @@ import allthatbook.mvc.model.dto.Book;
 import allthatbook.mvc.model.dto.Cart;
 import allthatbook.mvc.model.dto.CartDetail;
 import allthatbook.mvc.model.dto.User;
-
+import allthatbook.mvc.model.service.BookService;
+import allthatbook.mvc.model.service.BookServiceImpl;
 
 public class EndView {
-	
+	static BookService bookService = new BookServiceImpl();
+
 	
 	public static void printBookList(String userId, List<Book> bookList) {
 		System.out.println("----- 총 도서 수: " + bookList.size() + "개 ----------");
@@ -65,7 +67,9 @@ public class EndView {
 	public static void printViewCart(String id, Cart cart) {
 		System.out.println("---장바구니내용---");
 		List<CartDetail> list = cart.getCartDetailList();
+		System.out.println(list.size());
 		for(CartDetail cartDetail : list) {
+			
 			int bookNo = cartDetail.getBookNo(); //책번호
 			BookController.bookSelectByBookNo(id, bookNo);
 		}

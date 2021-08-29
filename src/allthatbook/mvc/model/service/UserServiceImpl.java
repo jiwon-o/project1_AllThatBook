@@ -27,7 +27,6 @@ public class UserServiceImpl implements UserService {
 
 		SessionSet sessionSet = SessionSet.getInstance();
 		sessionSet.add(session);
-
 		return user;
 	}
 
