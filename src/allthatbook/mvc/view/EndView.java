@@ -10,19 +10,27 @@ import allthatbook.mvc.model.dto.User;
 
 public class EndView {
 
-	public static void printBookList(String userId, List<Book> bookList) {
+	public static void printBookList(User user, List<Book> bookList) {
 		System.out.println("----- 총 도서 수: " + bookList.size() + "개 ----------");
 		for(Book book : bookList) {
 			System.out.println(book);
 		}
 		
-		printCartMenu(userId);
+		printCartMenu(user);
 	}
 	
-	public static void printSelectByNo(String userId, Book book) {
+	public static void printBookList(List<Book> bookList) {
+		System.out.println("----- 총 도서 수: " + bookList.size() + "개 ----------");
+		for(Book book : bookList) {
+			System.out.println(book);
+		}
+
+	}
+	
+	public static void printSelectByNo(User user, Book book) {
 		System.out.println(book + "\n");
 		
-		printCartMenu(userId);
+		printCartMenu(user);
 	}
 	
 	public static void printMessage(String message) {
@@ -50,7 +58,7 @@ public class EndView {
 	/**
 	 * 장바구니 출력
 	 */
-	public static void printViewCart(String id, Set<Book> cart) {
+	public static void printViewCart(User user, Set<Book> cart) {
 		System.out.println("---장바구니내용---");
 		
 		for(Book book : cart) {
@@ -71,11 +79,15 @@ public class EndView {
 			case 1:
 				break;
 			case 2:
+				MenuView.deleteCartList(user);
 				break;
 			case 3:
-				break;
+				MenuView.removeCart(user);
+				return;
 			case 4:
 				return;
+			default:
+				System.out.println("메뉴에 있는 번호를 입력해주세요");
 			}
 		}
 	}
@@ -83,36 +95,27 @@ public class EndView {
 	/**
 	 * 장바구니 메뉴
 	 */
-	public static void printCartMenu(String userId) {
+	public static void printCartMenu(User user) {
 		Scanner sc = new Scanner(System.in);
 		while(true) {
-			System.out.println("1.대여하기  |  2.장바구니 담기  |  3.장바구니 보기  |  4.돌아가기  |  9.메인메뉴로 가기");
+			System.out.println("1.대여하기  |  2.장바구니 담기  |  3.장바구니 보기  |  4.돌아가기");
 			switch(Integer.parseInt(sc.nextLine())) {
 			case 1:
 				break;
 			case 2:
-				MenuView.putCart(userId);
+				MenuView.putCart(user);
 				break;
 			case 3:
-				MenuView.viewCart(userId);
+				MenuView.viewCart(user);
 				break;
 			case 4:
-				MenuView.printSelectMenu(userId);
+				MenuView.printSelectMenu(user);
 				break;
-			case 9:
-				//MenuView.printUserMenu(userId);
-				return;
+			default:
+				System.out.println("메뉴에 있는 번호를 입력해주세요");
 			}
-		System.out.println("1.대여하기  |  9.나가기");
-		switch(Integer.parseInt(sc.nextLine())) {
-		case 1:
-			//rental = new Rental()....
-			//넣는데 만약 중간에 문제 있는세 생기다면
-			break;
-		case 9:
-			break;
 		}
-	 }
+
 	}
 }
 

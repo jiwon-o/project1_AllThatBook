@@ -6,6 +6,7 @@ import java.util.Set;
 
 import allthatbook.mvc.exception.NotFoundException;
 import allthatbook.mvc.model.dto.Book;
+import allthatbook.mvc.model.dto.User;
 import allthatbook.mvc.model.service.BookService;
 import allthatbook.mvc.model.service.BookServiceImpl;
 import allthatbook.mvc.session.Session;
@@ -21,7 +22,7 @@ public class CartController {
 	/**
 	 * 장바구니 담기
 	 */
-	public static void putCart(String userId, int bookNo) {
+	public static void putCart(User user, int bookNo) {
 		try {
 			//책번호에 해당하는 책 검색
 			Book book = bookService.bookSelectByBookNo(bookNo);
@@ -32,7 +33,7 @@ public class CartController {
 			
 			//id에 해당하는 세션찾기
 			SessionSet ss = SessionSet.getInstance();
-			Session session = ss.get(userId);
+			Session session = ss.get(user.getUserId());
 			
 			//세션에서 장바구니 찾기
 			Set<Book> cart = (Set<Book>)session.getAttribute("cart"); // 책 저장
@@ -53,43 +54,56 @@ public class CartController {
 			
 			
 		}catch(Exception e) {
-			//e.printStackTrace();
-			FailView.errorMessage(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 장바구니 보기
+	 */
+	public static void viewCart(User user) {
+		SessionSet ss = SessionSet.getInstance();
+		Session session = ss.get(user.getUserId());
+		
+		Set<Book> cart = (Set<Book>) session.getAttribute("cart");
+		if(cart == null) { // 장바구니가 없는 고객
+			FailView.errorMessage("장바구니가 비었습니다");
+		}else {
+			EndView.printViewCart(user , cart);
 		}
 	}
 	
 	/**
 	 * 장바구니 비우기
 	 */
-	public static void removeCart(String userId) {
+	public static void removeCart(User user) {
 		try {
 			//id에 해당하는 세션찾기
 			SessionSet ss = SessionSet.getInstance();
-			Session session = ss.get(userId);
+			Session session = ss.get(user.getUserId());
 			
-			Set<Book> cart = (Set<Book>)session.removeAttribute(userId); // 책 저장
+			session.removeAttribute("cart"); // 장바구니 목록 전체 삭제
 			
-		
 		}catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 		
 		
 	}
-	
+
 	/**
-	 * 장바구니 보기
+	 * 장바구니 목록 삭제
 	 */
-	public static void viewCart(String userId) {
+	public static void deleteCartList(User user) {
+		//id에 해당하는 세션찾기
 		SessionSet ss = SessionSet.getInstance();
-		Session session = ss.get(userId);
+		Session session = ss.get(user.getUserId());
 		
 		Set<Book> cart = (Set<Book>) session.getAttribute("cart");
-		if(cart == null) { // 장바구니가 없는 고객
-			FailView.errorMessage("장바구니가 비었습니다");
-		}else {
-			EndView.printViewCart(userId , cart);
+		
+		for(String value : cart) {
+			System.out.println(" -- " + value);
 		}
 	}
 }
