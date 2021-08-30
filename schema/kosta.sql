@@ -3,6 +3,8 @@ select * from books;
 select * from rental;
 commit
 
+select * from rental;
+
 -- 락걸린 테이블 확인
 SELECT  DO.OBJECT_NAME, DO.OWNER, DO.OBJECT_TYPE, DO.OWNER,
         VO.XIDUSN, VO.SESSION_ID, VO.LOCKED_MODE

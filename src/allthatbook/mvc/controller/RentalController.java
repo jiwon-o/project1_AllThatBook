@@ -18,8 +18,9 @@ public class RentalController {
 		try {
 			Rental rental = new Rental( book.getBookNo(), user.getUserNo() );
 			rentalService.insertRental(rental);
-			EndView.printMessage(book.getBookNo() + "번 도서 대여 성공");
+			EndView.printMessage(book.getBookNo() + "번의 도서를 대여했습니다.");
 		}catch (SQLException e) {
+			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 	}

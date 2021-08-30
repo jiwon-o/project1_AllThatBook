@@ -82,7 +82,6 @@ public class RentalDAOImpl implements RentalDAO {
 		} finally {
 			DbUtil.close(null, ps, rs);
 		}
-
 		return result;
 	}// 메소드 끝
 
