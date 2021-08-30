@@ -102,32 +102,38 @@ public class MenuView {
 	 */
 	public static void printSelectMenu(String userId) {
 		while(true) {
-			System.out.println("1.도서번호로 검색  |  2.도서명으로 검색  |  3.저자명으로 검색  |  4.출판사로 검색  |  5.도서분야로 검색  |  6.대여여부로 검색  |  9.돌아가기");
-			System.out.print("번호 입력 > ");
-			int menu =Integer.parseInt(sc.nextLine());
-			switch(menu) {
-			case 1 :
-				selectBookByNo(userId); //도서번호로 검색
-				break;
-			case 2 :
-				selectBookByName(userId); //도서명으로 검색
-				break;
-			case 3 :
-				selectBookByWriter(userId); //저자명으로 검색
-				break;
-			case 4 :
-				selectBookByPublisher(userId); //출판사로 검색
-				break;
-			case 5 :
-				selectBookByCategory(userId); //분야로 검색
-				break;
-			case 6 : 
-				
-				break;
-			case 9 :
-				//printUserMenu(user);
-				return;
+			try {
+				System.out.println("1.도서번호로 검색  |  2.도서명으로 검색  |  3.저자명으로 검색  |  4.출판사로 검색  |  5.도서분야로 검색  |  6.대여여부로 검색  |  9.돌아가기");
+				System.out.print("번호 입력 > ");
+				int menu =Integer.parseInt(sc.nextLine());
+				switch(menu) {
+				case 1 :
+					selectBookByNo(userId); //도서번호로 검색
+					break;
+				case 2 :
+					selectBookByName(userId); //도서명으로 검색
+					break;
+				case 3 :
+					selectBookByWriter(userId); //저자명으로 검색
+					break;
+				case 4 :
+					selectBookByPublisher(userId); //출판사로 검색
+					break;
+				case 5 :
+					selectBookByCategory(userId); //분야로 검색
+					break;
+				case 6 : 
+					
+					break;
+				case 9 :
+					//printUserMenu(user);
+					return;
+				}
+			}catch (NumberFormatException e) {
+				System.out.println("메뉴는 숫자만 입력해주세요.");
+
 			}
+			
 		}
 	}
 	
@@ -178,20 +184,19 @@ public class MenuView {
 	 * 도서번호로 검색하기
 	 */
 	public static void selectBookByNo(String userId) {
-		try {
-			System.out.print("책번호 입력 > ");
-			int no = Integer.parseInt(sc.nextLine());
-			
-			BookController.bookSelectByBookNo(userId, no);
-		}catch (NumberFormatException e) {
-			//e.printStackTrace();
-			System.out.println("숫자만 입력해주세요.");
-			System.out.println("다시 하시겠습니까? (yes or no)");
-			String choice = sc.nextLine();
-			if(choice.equals("yes")) {
-				selectBookByNo(userId);
+		while(true){
+			try {
+				System.out.print("책번호 입력 > ");
+				int no = Integer.parseInt(sc.nextLine());
+				
+				BookController.bookSelectByBookNo(userId, no);
+			}catch (NumberFormatException e) {
+				//e.printStackTrace();
+				System.out.println("숫자만 입력해주세요.");
+				
 			}
 		}
+		
 	}
 	
 	/**
