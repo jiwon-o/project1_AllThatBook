@@ -1,5 +1,6 @@
 package allthatbook.mvc.view;
 
+import java.util.List;
 import java.util.Scanner;
 
 import allthatbook.mvc.controller.BookController;
@@ -25,6 +26,7 @@ public class BookMenuView {
 				break;
 			case 2 :
 				BookMenuView.selectBookByName(user); //도서명으로 검색
+				CartMenuView.printCartMenu(user);
 				break;
 			case 3 :
 				BookMenuView.selectBookByWriter(user); //저자명으로 검색
@@ -54,13 +56,10 @@ public class BookMenuView {
 			try {
 				System.out.print("책번호 입력 > ");
 				int no = Integer.parseInt(sc.nextLine());
-				
 				book = BookController.bookSelectByBookNo(user, no);
 			}catch (NumberFormatException e) {
-				//e.printStackTrace();
 				System.out.println("숫자만 입력해주세요.");
 			}
-			
 		return book;
 		}
 	}
@@ -68,14 +67,16 @@ public class BookMenuView {
 	/**
 	 * 도서명으로 검색하기
 	 */
-	public static void selectBookByName(User user) {
+	public static List<Book> selectBookByName(User user) {
+		List<Book> bookList = null;
 		try {
 			System.out.print("단어 검색 > ");
 			String keyword = sc.nextLine();
-			BookController.bookSelectByBookName(user, keyword);
+			bookList = BookController.bookSelectByBookName(user, keyword);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		return bookList;
 	}
 	
 	/**

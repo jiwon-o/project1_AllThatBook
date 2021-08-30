@@ -1,5 +1,6 @@
 select * from users;
 select * from books;
+select * from rental;
 commit
 
 select * from rental;

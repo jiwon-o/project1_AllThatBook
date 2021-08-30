@@ -58,21 +58,16 @@ public class BookController {
 	/**
 	 * 도서명에 해당하는 책 조회
 	 */
-	public static void bookSelectByBookName(User user, String keyword) {
-		Scanner sc = new Scanner(System.in);
+	public static List<Book> bookSelectByBookName(User user, String keyword) {
+		List<Book> bookList = null;
 		try {
-			List<Book> bookList = bookService.bookSelectByBookName(keyword);
+			bookList = bookService.bookSelectByBookName(keyword);
 			EndView.printBookList(user, bookList);
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
-			System.out.println("다시 하시겠습니까? (yes or no)");
-			String choice = sc.nextLine();
-			if(choice.equals("yes")) {
-				BookMenuView.selectBookByName(user);
-			}
 		}
-		
+		return bookList;
 	}
 
 	/**

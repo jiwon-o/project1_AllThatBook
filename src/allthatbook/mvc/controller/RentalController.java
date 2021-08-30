@@ -24,4 +24,15 @@ public class RentalController {
 			FailView.errorMessage(e.getMessage());
 		}
 	}
+	
+	public static void insertRental(User user, int bookNo) {
+		try {
+			Rental rental = new Rental( bookNo, user.getUserNo() );
+			rentalService.insertRental(rental);
+			EndView.printMessage(bookNo + "번의 도서를 대여했습니다.");
+		}catch (SQLException e) {
+			//e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+	}
 }
