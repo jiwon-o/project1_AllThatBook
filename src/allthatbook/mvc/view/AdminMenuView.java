@@ -143,8 +143,14 @@ public class AdminMenuView {
 	 * UserNo 입력받기 
 	 */
 	public static int InputUserNo() {
-		System.out.print("userNo 입력 > ");
-		int userNo = Integer.parseInt(sc.nextLine());
+		int userNo=0;
+		try {
+			System.out.print("userNo 입력 > ");
+			userNo = Integer.parseInt(sc.nextLine());
+		} catch (Exception e) {
+			FailView.errorMessage("userNo을 다시입력하세요");
+		}
+
 		return userNo;
 	}
 	
