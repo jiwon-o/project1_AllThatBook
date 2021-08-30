@@ -123,7 +123,8 @@ public class EndView {
 	 */
 	public static void bookDeleteOrUpdateMenu(String userId, Book book) {
 		Scanner sc = new Scanner(System.in);
-		while(true) {
+		boolean flag = true;
+		while(flag) {
 			int result=0;
 			System.out.println("1. 선택도서 수정 | 2. 선택도서 삭제 | 3. 돌아가기 | 9. 메인메뉴로 가기");
 			int menu = Integer.parseInt(sc.nextLine());
@@ -138,10 +139,11 @@ public class EndView {
 					if(result==1)System.out.println(book.getBookNo()+"번호가 삭제되었습니다.");
 					break;
 				case 3:
+					flag = false;
 					MenuView.printSelectMenu(userId);
-					break;
-				case 4:
 					
+					break;
+				case 9:
 					return;
 			}
 		}
@@ -151,7 +153,8 @@ public class EndView {
 	 */
 	public static void bookDeleteOrUpdateListMenu(String userId) {
 		Scanner sc = new Scanner(System.in);
-		while(true) {
+		boolean flag = true;
+		while(flag) {
 			System.out.println("1. 선택도서 수정 | 2. 선택도서 삭제 | 3. 돌아가기 | 9. 메인메뉴로 가기");
 			int menu = Integer.parseInt(sc.nextLine());
 			int bookNo=0;
@@ -169,9 +172,11 @@ public class EndView {
 					if(result==1)System.out.println(bookNo+"번호가 삭제되었습니다.");
 					break;
 				case 3:
+					flag = false;
 					MenuView.printSelectMenu(userId);
+					
 					break;
-				case 4:
+				case 9:
 					return;
 			}
 			
