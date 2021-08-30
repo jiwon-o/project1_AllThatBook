@@ -43,6 +43,7 @@ public class MenuView {
 
 	public static void printUserMenu(User user) {
 		while (true) {
+
 			try {
 				SessionSet ss = SessionSet.getInstance();
 				System.out.println(ss.getSet()); // Set객체
@@ -83,13 +84,14 @@ public class MenuView {
 					return;
 					
 				case 100:
-					CartController.removeCart(user.getUserId());
+					CartController.clearCart(user.getUserId());
 					
 				default:
 					System.out.println("메뉴에 있는 번호를 입력해주세요");
 				}
 			}catch (NumberFormatException e) {
 				System.out.println("메뉴는 숫자만 입력해주세요.");
+
 			}
 			
 		}

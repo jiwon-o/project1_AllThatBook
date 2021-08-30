@@ -41,13 +41,26 @@ public class CartServiceImpl implements CartService {
 		}
 	}
 
-
+	/**
+	 * 장바구니 전체 비운다.
+	 * */
+    @Override
+    public void clearCartBook(Cart cart) throws SQLException {
+    	List<CartDetail> cartDetailList = cart.getCartDetailList();
+    	for (CartDetail cartDetail : cartDetailList) {
+    		cartDAO.deleteCartDetail(cart, cartDetail);
+    	}
+    	cartDetailList.clear();
+    }
+	
     /**
-     * 장바구니에 있는 책 삭제한다.
+     * 장바구니에 있는 책 하나 삭제한다.
      * */
 	@Override
 	public int deleteCartBook(Cart cart, CartDetail cartDetail) throws SQLException {
 		int result = cartDAO.deleteCartDetail(cart, cartDetail);
+		if (result == 1) {cart.removeCartDetail(cartDetail);}
+
 		return result;
 	}		
 	
