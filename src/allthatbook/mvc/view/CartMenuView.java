@@ -44,7 +44,7 @@ public class CartMenuView {
 			switch(Integer.parseInt(sc.nextLine())) {
 			case 1:
 				RentalController.insertRental(user, book);
-				break;
+				return;
 			case 2:
 				CartMenuView.putCart(user.getUserId());
 				break;

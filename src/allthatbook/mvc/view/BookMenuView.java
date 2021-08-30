@@ -20,20 +20,20 @@ public class BookMenuView {
 			int menu =Integer.parseInt(sc.nextLine());
 			switch(menu) {
 			case 1 :
-				Book book =  BookMenuView.selectBookByNo(user.getUserId()); //도서번호로 검색
+				Book book =  BookMenuView.selectBookByNo(user); //도서번호로 검색
 				CartMenuView.printCartMenu(user, book);
 				break;
 			case 2 :
-				BookMenuView.selectBookByName(user.getUserId()); //도서명으로 검색
+				BookMenuView.selectBookByName(user); //도서명으로 검색
 				break;
 			case 3 :
-				BookMenuView.selectBookByWriter(user.getUserId()); //저자명으로 검색
+				BookMenuView.selectBookByWriter(user); //저자명으로 검색
 				break;
 			case 4 :
-				BookMenuView.selectBookByPublisher(user.getUserId()); //출판사로 검색
+				BookMenuView.selectBookByPublisher(user); //출판사로 검색
 				break;
 			case 5 :
-				BookMenuView.selectBookByCategory(user.getUserId()); //분야로 검색
+				BookMenuView.selectBookByCategory(user); //분야로 검색
 				break;
 			case 6 : 
 				//대여여부로 검색
@@ -48,14 +48,14 @@ public class BookMenuView {
 	/**
 	 * 도서번호로 검색하기
 	 */
-	public static Book selectBookByNo(String userId) {
+	public static Book selectBookByNo(User user) {
 		Book book = null;
 		while(true) {
 			try {
 				System.out.print("책번호 입력 > ");
 				int no = Integer.parseInt(sc.nextLine());
 				
-				book = BookController.bookSelectByBookNo(userId, no);
+				book = BookController.bookSelectByBookNo(user, no);
 			}catch (NumberFormatException e) {
 				//e.printStackTrace();
 				System.out.println("숫자만 입력해주세요.");
@@ -68,11 +68,11 @@ public class BookMenuView {
 	/**
 	 * 도서명으로 검색하기
 	 */
-	public static void selectBookByName(String userId) {
+	public static void selectBookByName(User user) {
 		try {
 			System.out.print("단어 검색 > ");
 			String keyword = sc.nextLine();
-			BookController.bookSelectByBookName(userId, keyword);
+			BookController.bookSelectByBookName(user, keyword);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -81,11 +81,11 @@ public class BookMenuView {
 	/**
 	 * 저자명으로 검색하기
 	 */
-	public static void selectBookByWriter(String userId) {
+	public static void selectBookByWriter(User user) {
 		try {
 			System.out.print("저자 검색 > ");
 			String writer = sc.nextLine();
-			BookController.bookSelectByWriter(userId, writer);
+			BookController.bookSelectByWriter(user, writer);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -94,11 +94,11 @@ public class BookMenuView {
 	/**
 	 * 출판사로 검색하기
 	 */
-	public static void selectBookByPublisher(String userId) {
+	public static void selectBookByPublisher(User user) {
 		try {
 			System.out.print("출판사 검색 > ");
 			String publisher = sc.nextLine();
-			BookController.bookSelectByPublisher(userId, publisher);
+			BookController.bookSelectByPublisher(user, publisher);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -107,11 +107,11 @@ public class BookMenuView {
 	/**
 	 * 도서분야로 검색하기
 	 */
-	public static void selectBookByCategory(String userId) {
+	public static void selectBookByCategory(User user) {
 		try {
 			System.out.print("도서분야 검색 > ");
 			String category = sc.nextLine();
-			BookController.bookSelectByCategory(userId, category);
+			BookController.bookSelectByCategory(user, category);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -121,7 +121,7 @@ public class BookMenuView {
 	/**
 	 * 관리자 도서조회(도서번호) -> 삭제 or 수정 
 	 */
-	public static void bookDeleteOrUpdateMenu(String userId, Book book) {
+	public static void bookDeleteOrUpdateMenu(User user, Book book) {
 		Scanner sc = new Scanner(System.in);
 		boolean flag = true;
 		while(flag) {
@@ -151,7 +151,7 @@ public class BookMenuView {
 	/**
 	 * 관리자 도서조회(도서명 저자명 출판사 분야) -> 삭제 or 수정
 	 */
-	public static void bookDeleteOrUpdateListMenu(String userId) {
+	public static void bookDeleteOrUpdateListMenu(User user) {
 		Scanner sc = new Scanner(System.in);
 		boolean flag = true;
 		while(flag) {

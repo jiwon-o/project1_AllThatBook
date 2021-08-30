@@ -80,7 +80,6 @@ public class RentalDAOImpl implements RentalDAO {
 			 ps.setInt(1, rental.getBookNo());
 			 rs = ps.executeQuery();
 			 if(rs.next()) 
-				 System.out.println(result);
 				 result = rs.getInt(1);
 		  }	   
         finally {

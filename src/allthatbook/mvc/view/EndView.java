@@ -16,13 +16,13 @@ import allthatbook.mvc.model.service.BookService;
 import allthatbook.mvc.model.service.BookServiceImpl;
 
 public class EndView {
-	public static void printBookList(String userId, List<Book> bookList) {
+	public static void printBookList(User user, List<Book> bookList) {
 		System.out.println("----- ÃÑ µµ¼­ ¼ö: " + bookList.size() + "°³ ----------");
 		for(Book book : bookList) {
 			System.out.println(book);
 		}
-		if(userId.equals("admin")) {
-			BookMenuView.bookDeleteOrUpdateListMenu(userId);
+		if(user.getUserId().equals("admin")) {
+			BookMenuView.bookDeleteOrUpdateListMenu(user);
 		}
 		//else printCartMenu(userId);
 
@@ -38,10 +38,10 @@ public class EndView {
 
 
 	
-	public static void printSelectByNo(String userId, Book book) {
+	public static void printSelectByNo(User user, Book book) {
 		System.out.println(book + "\n");
-		if(userId.equals("admin")) {
-			BookMenuView.bookDeleteOrUpdateMenu(userId, book);
+		if(user.getUserId().equals("admin")) {
+			BookMenuView.bookDeleteOrUpdateMenu(user, book);
 		}
 		//else printCartMenu(userId);
 	}
