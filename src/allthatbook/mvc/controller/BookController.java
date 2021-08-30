@@ -38,6 +38,19 @@ public class BookController {
 			FailView.errorMessage(e.getMessage());
 		}
 	}
+	
+	
+	public static Book bookSelectByBookNo2(int bookNo) {
+		Book book = null;
+		try {
+			book = bookService.bookSelectByBookNo(bookNo);
+			return book;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+		return book;
+	}
 
 	/**
 	 * 도서명에 해당하는 책 조회

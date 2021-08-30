@@ -27,6 +27,11 @@ public interface CartService {
 	public int deleteCartBook(Cart cart, CartDetail cartDetail) throws SQLException;
 	
 	/**
+	 * 장바구니 비우기
+	 * */
+	public void clearCartBook(Cart cart) throws SQLException;
+	
+	/**
 	 * 장바구니 생성하기
 	 * */
 	public void createCart(int userNo) throws SQLException;
