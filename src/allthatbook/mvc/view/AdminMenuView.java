@@ -117,7 +117,7 @@ public class AdminMenuView {
 						if(result==1)System.out.println(bookNo+"번호가 삭제되었습니다.");
 						break;
 					case 4 : //도서조회 --- 장바구니 말고 수정, 삭제로 연결되게 
-						BookMenuView.printSelectMenu(user.getUserId());
+						BookMenuView.printSelectMenu(user);
 						break;
 					case 5 : //대출한도서 : 상태가 1인도서 조회 
 						BookController.bookRentalSelect();
