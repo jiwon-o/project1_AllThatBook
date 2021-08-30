@@ -101,34 +101,7 @@ public class EndView {
 		}
 	}
 	
-	/**
-	 * 장바구니 메뉴
-	 */
-
-	public static void printCartMenu(String userId, Book book) {
-
-		Scanner sc = new Scanner(System.in);
-		while(true) {
-			System.out.println("1.대여하기  |  2.장바구니 담기  |  3.장바구니 보기  |  4.돌아가기  |  9.메인메뉴로 가기");
-			switch(Integer.parseInt(sc.nextLine())) {
-			case 1:
-				//book객체 쓸거야
-				break;
-			case 2:
-				CartMenuView.putCart(userId);
-				break;
-			case 3:
-				CartMenuView.viewCart(userId);
-				break;
-			case 4:
-				BookMenuView.printSelectMenu(userId);
-				break;
-			case 9:
-				//MenuView.printUserMenu(userId);
-				return;
-			}
-		}
-	}
+	
 	
 	/**
 	 * 관리자 도서조회(도서번호) -> 삭제 or 수정 
