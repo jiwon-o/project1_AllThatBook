@@ -13,6 +13,7 @@ public class RentalController {
 	public static void insertRental(Rental rental) {
 		try {
 			rentalService.insertRental(rental);
+			//성공 출력 print
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}

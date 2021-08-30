@@ -9,9 +9,9 @@ import allthatbook.mvc.model.dto.User;
 import allthatbook.mvc.session.Session;
 import allthatbook.mvc.session.SessionSet;
 
-public class MenuView {
+public class UserMenuView {
 	private static Scanner sc = new Scanner(System.in);
-
+	
 	public static void menu() {
 		while (true) {
 			try {
@@ -23,12 +23,11 @@ public class MenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch (menu) {
 				case 1:
-					MenuView.login(); // 로그인
+					UserMenuView.login(); // 로그인
 					break;
 				case 2:
-					MenuView.register(); // 회원가입
+					UserMenuView.register(); // 회원가입
 					break;
-
 				case 9:
 					System.exit(0);
 				default:
@@ -39,247 +38,6 @@ public class MenuView {
 			}
 			
 		}
-	}
-
-	public static void printUserMenu(User user) {
-		while (true) {
-			try {
-				SessionSet ss = SessionSet.getInstance();
-				System.out.println(ss.getSet()); // Set객체
-				System.out.println("-----" + user.getUserId() + " 로그인 중 -----");
-				System.out.println(
-						" 1.전체목록  | 2.도서검색(대여, 예약) | 3.도서반납  | 4.책신청 |  5.장바구니담기 | 6.장바구니보기 |  7.회원정보  |  8.회원정보수정  |  9.로그아웃 | |100.장바구니 비우기");
-				System.out.print("번호 입력 > ");
-				int menu = Integer.parseInt(sc.nextLine());
-				switch (menu) {
-				case 1:
-					BookController.bookSelect();// 전체 상품조회
-					break;
-				case 2 :
-					printSelectMenu(user.getUserId());
-
-					break;
-				case 3:
-
-					break;
-				case 4:
-
-					break;
-				case 5:         
-					MenuView.putCart(user.getUserId());
-					break;
-				case 6:
-					MenuView.viewCart(user.getUserId());
-					break;
-				case 7:
-					MenuView.selectUserInfo(user);
-					break;
-				case 8:
-					MenuView.updateTemp(user);
-					if(ss.getSet().size()==0) return;
-					break;
-				case 9:
-					logout(user.getUserId());
-					return;
-					
-				case 100:
-					CartController.clearCart(user.getUserId());
-					
-				default:
-					System.out.println("메뉴에 있는 번호를 입력해주세요");
-				}
-			}catch (NumberFormatException e) {
-				System.out.println("메뉴는 숫자만 입력해주세요.");
-
-			}
-			
-		}
-	}
-
-	
-	/**
-	 * 검색 메뉴
-	 */
-	public static void printSelectMenu(String userId) {
-		while(true) {
-			try {
-				System.out.println("1.도서번호로 검색  |  2.도서명으로 검색  |  3.저자명으로 검색  |  4.출판사로 검색  |  5.도서분야로 검색  |  6.대여여부로 검색  |  9.돌아가기");
-				System.out.print("번호 입력 > ");
-				int menu =Integer.parseInt(sc.nextLine());
-				switch(menu) {
-				case 1 :
-					selectBookByNo(userId); //도서번호로 검색
-					break;
-				case 2 :
-					selectBookByName(userId); //도서명으로 검색
-					break;
-				case 3 :
-					selectBookByWriter(userId); //저자명으로 검색
-					break;
-				case 4 :
-					selectBookByPublisher(userId); //출판사로 검색
-					break;
-				case 5 :
-					selectBookByCategory(userId); //분야로 검색
-					break;
-				case 6 : 
-					
-					break;
-				case 9 :
-					//printUserMenu(user);
-					return;
-				}
-			}catch (NumberFormatException e) {
-				System.out.println("메뉴는 숫자만 입력해주세요.");
-
-			}
-			
-		}
-	}
-	
-	/**
-	 * 회원정보 메뉴
-	 */
-	public static void printSubMenu() {
-		System.out.println("1. 수정  |  2.회원탈퇴  |  9. 나가기");
-	}
-	
-
-	/**
-	 * 관리자메뉴
-	 */
-	public static void printAdminMenu(User user) {
-		while(true) {
-			try {
-				System.out.println("-- 관리자 메뉴 --");
-				System.out.println("1. 회원관리   |  2. 도서관리  | 3. 대출관리 |  9. 나가기");
-				int menu = Integer.parseInt(sc.nextLine());
-				switch (menu) {
-				case 1:
-					AdminMenuView.userAdminMenu();
-					break;
-				case 2:
-					AdminMenuView.bookAdminMenu(user);
-					break;
-				case 3:
-					break;
-				case 9:
-					logout(user.getUserId());
-					return;
-				default:
-					System.out.println("메뉴에 있는 번호를 입력해주세요");
-				}
-			} catch (NumberFormatException e) {
-				FailView.errorMessage("메뉴는 숫자만 입력가능합니다.");
-			}
-
-		}
-	}
-
-	
-//////////////////////   검색   /////////////////////
-
-
-	/**
-	 * 도서번호로 검색하기
-	 */
-	public static void selectBookByNo(String userId) {
-		while(true){
-			try {
-				System.out.print("책번호 입력 > ");
-				int no = Integer.parseInt(sc.nextLine());
-				
-				BookController.bookSelectByBookNo(userId, no);
-			}catch (NumberFormatException e) {
-				//e.printStackTrace();
-				System.out.println("숫자만 입력해주세요.");
-				
-			}
-		}
-		
-	}
-	
-	/**
-	 * 도서명으로 검색하기
-	 */
-	public static void selectBookByName(String userId) {
-		try {
-			System.out.print("단어 검색 > ");
-			String keyword = sc.nextLine();
-			
-			BookController.bookSelectByBookName(userId, keyword);
-		}catch (Exception e) {
-			e.printStackTrace();
-
-			
-		}
-	}
-	
-	/**
-	 * 저자명으로 검색하기
-	 */
-	public static void selectBookByWriter(String userId) {
-		try {
-			System.out.print("저자 검색 > ");
-			String writer = sc.nextLine();
-			
-			BookController.bookSelectByWriter(userId, writer);
-		}catch (Exception e) {
-			e.printStackTrace();
-
-		}
-	}
-	
-	/**
-	 * 출판사로 검색하기
-	 */
-	public static void selectBookByPublisher(String userId) {
-		try {
-			System.out.print("출판사 검색 > ");
-			String publisher = sc.nextLine();
-			
-			BookController.bookSelectByPublisher(userId, publisher);
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-		
-	/**
-	 * 도서분야로 검색하기
-	 */
-	public static void selectBookByCategory(String userId) {
-		try {
-			System.out.print("도서분야 검색 > ");
-			String category = sc.nextLine();
-			
-			BookController.bookSelectByCategory(userId, category);
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
-	
-	
-///////////////////////   장바구니   //////////////////////
-	
-	/**
-	 * 장바구니 담기
-	 */
-	public static void putCart(String userId) {
-		System.out.println("----장바구니 담기----");
-		System.out.print("책번호 : ");
-		int bookNo = Integer.parseInt(sc.nextLine());
-
-		CartController.putCart(userId, bookNo);
-
-	}
-    
-    /**
-     * 장바구니 보기
-     * */
-	public static void viewCart(String userId) {
-		CartController.viewCart(userId);
-		
 	}
 	
 	/**
@@ -297,7 +55,7 @@ public class MenuView {
 	/**
 	 * 회원가입 메뉴
 	 */
-	private static void register() {
+	public static void register() {
 		System.out.print("아이디 : ");
 		String userId = sc.nextLine();
 		System.out.print("비밀번호 : ");
@@ -312,27 +70,64 @@ public class MenuView {
 		User user = new User(0, userId, userPwd, userName, userPhone, null);
 		UserController.register(user, pwdCheck);
 	}
-
-	/**
-	 * 로그인된 자기정보 가져오기 (7.회원정보)
-	 */
 	
-	private static void selectInformation(User user) {
-		System.out.println(user + "님의 정보는" +"입니다");
-			
+	/**
+	 * 유저 매뉴창
+	 */
+	public static void printUserMenu(User user) {
+		while (true) {
+			try {
+				SessionSet ss = SessionSet.getInstance();
+				System.out.println(ss.getSet()); // Set객체
+				System.out.println("-----" + user.getUserId() + " 로그인 중 -----");
+				System.out.println(
+						" 1.전체목록  | 2.도서검색(대여, 예약) | 3.도서반납  | 4.책신청 |  5.장바구니담기 | 6.장바구니보기 |  7.회원정보  |  8.회원정보수정  |  9.로그아웃 | |100.장바구니 비우기");
+				System.out.print("번호 입력 > ");
+				int menu = Integer.parseInt(sc.nextLine());
+				switch (menu) {
+				case 1:
+					BookController.bookSelect();// 전체 상품조회
+					break;
+				case 2 :
+					BookMenuView.printSelectMenu(user.getUserId());
+					break;
+				case 3:
+
+					break;
+				case 4:
+
+					break;
+				case 5:         
+					CartMenuView.putCart(user.getUserId());
+					break;
+				case 6:
+					CartMenuView.viewCart(user.getUserId());
+					break;
+				case 7:
+					UserMenuView.selectUserInfo(user);
+					break;
+				case 8:
+					UserMenuView.updateTemp(user);
+					if(ss.getSet().size()==0) return;
+					break;
+				case 9:
+					logout(user.getUserId());
+					return;
+					
+				case 100:
+					CartController.clearCart(user.getUserId());
+					
+				default:
+					System.out.println("메뉴에 있는 번호를 입력해주세요");
+				}
+			}catch (NumberFormatException e) {
+				System.out.println("메뉴는 숫자만 입력해주세요.");
+
+			}
+		}
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 	/**
 	 * 회원정보수정 화면으로 가기위한 페이지
 	 */
@@ -353,10 +148,10 @@ public class MenuView {
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
-				MenuView.update(user); // 수정
+				UserMenuView.update(user); // 수정
 				return;
 			case 2:
-				MenuView.delete(user);
+				UserMenuView.delete(user);
 				return;
 			case 9:
 				System.out.println("수정화면이 종료 되었습니다.");
@@ -486,5 +281,4 @@ public class MenuView {
 		SessionSet ss = SessionSet.getInstance();
 		ss.remove(session);
 	}
-
 }
