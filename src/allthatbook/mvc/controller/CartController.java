@@ -23,10 +23,9 @@ import allthatbook.mvc.view.FailView;
 
 
 public class CartController {
-   private static BookService bookService = new BookServiceImpl();
+	private static BookService bookService = new BookServiceImpl();
     private static CartService cartService = new CartServiceImpl();
     private static UserService userService = new UserServiceImpl();    
-
 	/**
 	 * 장바구니 담기
 	 */
@@ -70,24 +69,55 @@ public class CartController {
 	/**
 	 * 장바구니 비우기
 	 */
+	public static void removeCart(String userId) {
+		try {
+			//id에 해당하는 세션찾기
+			SessionSet ss = SessionSet.getInstance();
+			Session session = ss.get(userId);
+			Cart cart = (Cart)session.getAttribute("cart"); // 책 저장
+			int result = 0;
+			List<CartDetail> cartDetailList = cart.getCartDetailList();
+			
+			for(CartDetail cartDetail: cartDetailList) {
+				result = cartService.deleteCartBook(cart, cartDetail);
+				if (result == 1) System.out.println("책번호 : "+ cartDetail.getBookNo() + " 장바구니에서 삭제 완료");
+				else System.out.println(cartDetail.getBookNo() + "장바구니에서 삭제 실패");
+			}
+			
+		
+		}catch (Exception e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+	}
 
-//	public static void removeCart(String userId) {
-//		try {
-//			//id에 해당하는 세션찾기
-//			SessionSet ss = SessionSet.getInstance();
-//			Session session = ss.get(userId);
-//			
-//			Set<Book> cart = (Set<Book>)session.removeAttribute(userId); // 책 저장
-//			
-//		
-//		}catch (Exception e) {
-//			e.printStackTrace();
-//			FailView.errorMessage(e.getMessage());
-//		}
-//		
-//		
-//	}
-
+	
+	/**
+	 * 장바구니에서 책 하나 제거하기
+	 * */
+	public static void removeCartDetai(String userId, int bookNo) {
+		try {
+			//id에 해당하는 세션찾기
+			SessionSet ss = SessionSet.getInstance();
+			Session session = ss.get(userId);
+			Cart cart = (Cart)session.getAttribute("cart"); // 책 저장
+			int result = 0;
+			List<CartDetail> cartDetailList = cart.getCartDetailList();
+			
+			for(CartDetail cartDetail: cartDetailList) {
+				if (cartDetail.getBookNo() == bookNo) {
+					cartService.deleteCartBook(cart, cartDetail);
+					System.out.println(cartDetail.getBookNo() + "는 장바구니에서 삭제 완료");
+					return;
+				}
+			}
+			System.out.println("삭제실패");
+		}catch (Exception e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
 	
 	/**
 	 * 장바구니 보기
@@ -125,4 +155,3 @@ public class CartController {
 	}
 	
 }
-

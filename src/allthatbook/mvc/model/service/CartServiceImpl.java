@@ -48,10 +48,7 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public int deleteCartBook(Cart cart, CartDetail cartDetail) throws SQLException {
 		int result = cartDAO.deleteCartDetail(cart, cartDetail);
-		if (result==0) return 1;
-		else {
-			throw new SQLException("장바구니에서 삭제실패");
-		}
+		return result;
 	}		
 	
 	

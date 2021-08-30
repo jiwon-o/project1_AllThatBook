@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import allthatbook.mvc.model.dto.Book;
-import allthatbook.mvc.model.dto.User;
 import allthatbook.mvc.model.service.BookService;
 import allthatbook.mvc.model.service.BookServiceImpl;
 import allthatbook.mvc.view.EndView;
@@ -19,8 +18,8 @@ public class BookController {
 	 * */
 	public static void bookSelect() {
 		try {
-			List<Book> bookList = bookService.bookSelect();
-			EndView.printBookList(bookList);
+			List<Book> list = bookService.bookSelect();
+			EndView.printBookList(list);
 		}catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
@@ -35,9 +34,22 @@ public class BookController {
 			Book book = bookService.bookSelectByBookNo(bookNo);
 			EndView.printSelectByNo(userId, book);
 		}catch (SQLException e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
+	}
+	
+	
+	public static Book bookSelectByBookNo2(int bookNo) {
+		Book book = null;
+		try {
+			book = bookService.bookSelectByBookNo(bookNo);
+			return book;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+		return book;
 	}
 
 	/**
