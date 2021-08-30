@@ -70,7 +70,9 @@ public class EndView {
 		for(CartDetail cartDetail : list) {
 			
 			int bookNo = cartDetail.getBookNo(); //책번호
-			BookController.bookSelectByBookNo(id, bookNo);
+			//책번호로 책정보를 출력하는 메소드
+			Book book = BookController.bookSelectByBookNo2(bookNo);
+			System.out.println(book);
 		}
 		
 		Scanner sc = new Scanner(System.in);

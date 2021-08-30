@@ -116,7 +116,7 @@ public class CartDAOImpl implements CartDAO {
 			ps.setInt(1, cartDetail.getCartId());
 			ps.setInt(2,  cartDetail.getBookNo());
 			result = ps.executeUpdate();
-			cart.removeCartDetail(cartDetail);
+			//cart.removeCartDetail(cartDetail); //카트객체에 있는 list에서도 제거
 		}
 	    finally {
 	    	DbUtil.close(null, ps);
