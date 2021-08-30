@@ -36,7 +36,7 @@ public class BookController {
 			book = bookService.bookSelectByBookNo(bookNo);
 			EndView.printSelectByNo(user, book);
 		}catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 		return book;
