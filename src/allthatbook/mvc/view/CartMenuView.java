@@ -3,6 +3,9 @@ package allthatbook.mvc.view;
 import java.util.Scanner;
 
 import allthatbook.mvc.controller.CartController;
+import allthatbook.mvc.controller.RentalController;
+import allthatbook.mvc.model.dto.Book;
+import allthatbook.mvc.model.dto.User;
 
 public class CartMenuView {
 	private static Scanner sc = new Scanner(System.in);
@@ -26,4 +29,30 @@ public class CartMenuView {
 		CartController.viewCart(userId);
 	}
 
+	/**
+	 * 장바구니 메뉴
+	 */
+	public static void printCartMenu(User user, Book book) {
+		Scanner sc = new Scanner(System.in);
+		while(true) {
+			System.out.println("1.대여하기  |  2.장바구니 담기  |  3.장바구니 보기  |  4.돌아가기  |  9.메인메뉴로 가기");
+			switch(Integer.parseInt(sc.nextLine())) {
+			case 1:
+				RentalController.insertRental(user, book);
+				break;
+			case 2:
+				CartMenuView.putCart(user.getUserId());
+				break;
+			case 3:
+				CartMenuView.viewCart(user.getUserId());
+				break;
+			case 4:
+				BookMenuView.printSelectMenu(user);
+				break;
+			case 9:
+				//MenuView.printUserMenu(userId);
+				return;
+			}
+		}
+	}
 }

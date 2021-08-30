@@ -73,12 +73,15 @@ public class RentalDAOImpl implements RentalDAO {
 		  PreparedStatement ps=null;
 		  ResultSet rs = null;
 		  String sql="select 상태 from books where 책번호=?";
+		  
 		  int result = 0;
 		 try {
 			 ps = con.prepareStatement(sql);
 			 ps.setInt(1, rental.getBookNo());
 			 rs = ps.executeQuery();
-			 result = rs.getInt(1);
+			 if(rs.next()) 
+				 System.out.println(result);
+				 result = rs.getInt(1);
 		  }	   
         finally {
     	    DbUtil.close(null, ps , rs);

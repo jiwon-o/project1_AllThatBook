@@ -10,7 +10,6 @@ public class RentalServiceImpl implements RentalService {
 	public void insertRental(Rental rental) throws SQLException {
     	int result = rentalDAO.rentalInsert(rental);
     	if(result ==0) throw new SQLException("대출실패");
-    	//1 일때 성공???
 	}
 
 }

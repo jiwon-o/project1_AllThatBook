@@ -89,7 +89,7 @@ public class UserMenuView {
 					BookController.bookSelect();// 전체 상품조회
 					break;
 				case 2 :
-					BookMenuView.printSelectMenu(user.getUserId());
+					BookMenuView.printSelectMenu(user);
 					break;
 				case 3:
 
