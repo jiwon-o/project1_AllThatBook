@@ -17,35 +17,39 @@ public class AdminMenuView {
 	 */
 	public static void userAdminMenu() {
 		while(true) {
-			System.out.println("---관리자 회원 관리---");
-			System.out.println("1. 전체회원 조회 | 2. 회원번호로 조회 | 3. 회원ID로 조회 | 4.회원정보수정 | 5.회원정보삭제| 9. 나가기");
-			int menu=Integer.parseInt(sc.nextLine());
-			int result=0;
-			int userNo=0;
-			switch(menu) {
-			case 1 :
-				UserController.userSelect();
-				break;
-			case 2 : 
-				userNo=InputUserNo();
-				UserController.selectByUserNo(userNo);
-				break;
-			case 3 :
-				String userId=InputUserId();
-				UserController.selectByUserId(userId);
-				break;
-			case 4 : //회원정보수정 
-				userNo = InputUserNo();
-				User updateuser = updateUser();
-				result = UpdateAdminController.userUpdate(userNo, updateuser);
-				if(result==1)System.out.println(userNo+"번 회원이 수정되었습니다.");
-				break;
-			case 5 : 
-				userNo=InputUserNo();
-				UserController.deleteAdminUserInfo(userNo);
-				break;
-			case 9 :  			
-				return;
+			try {	
+				System.out.println("---관리자 회원 관리---");
+				System.out.println("1. 전체회원 조회 | 2. 회원번호로 조회 | 3. 회원ID로 조회 | 4.회원정보수정 | 5.회원정보삭제| 9. 나가기");
+				int menu=Integer.parseInt(sc.nextLine());
+				int result=0;
+				int userNo=0;
+				switch(menu) {
+				case 1 :
+					UserController.userSelect();
+					break;
+				case 2 : 
+					userNo=InputUserNo();
+					UserController.selectByUserNo(userNo);
+					break;
+				case 3 :
+					String userId=InputUserId();
+					UserController.selectByUserId(userId);
+					break;
+				case 4 : //회원정보수정 
+					userNo = InputUserNo();
+					User updateuser = updateUser();
+					result = UpdateAdminController.userUpdate(userNo, updateuser);
+					if(result==1)System.out.println(userNo+"번 회원이 수정되었습니다.");
+					break;
+				case 5 : 
+					userNo=InputUserNo();
+					UserController.deleteAdminUserInfo(userNo);
+					break;
+				case 9 :  			
+					return;
+				}
+			} catch (NumberFormatException e) {
+				FailView.errorMessage("메뉴는 숫자만 입력가능합니다.");
 			}
 		}
 		
@@ -56,40 +60,45 @@ public class AdminMenuView {
 	 */
 	public static void bookAdminMenu(User user) {
 		while(true) {
-			System.out.println("---관리자 도서 관리---");
-			System.out.println("1. 새 도서등록 | 2. 도서정보수정 | 3. 도서삭제 | 4. 도서조회 | 5. 대출한도서 조회 | 6. 예약한도서 조회 | 9. 나가기");
-			int menu=Integer.parseInt(sc.nextLine());
-			int bookNo=0;
-			int result=0;
-			Book book=null;
-			switch(menu) {
-				case 1 :
-					book=InputBook();
-					result = BookController.bookInsert(book);
-					if(result==1) System.out.println(book.getBookNo()+"등록되었습니다.");
-					break;
-				case 2 : //도서정보수정
-					bookNo = InputBookNo();
-					Book updatebook = updateBook();
-					result = UpdateAdminController.bookUpdate(bookNo, updatebook);
-					if(result==1)System.out.println(bookNo+"번 해당 책이 수정되었습니다.");
-					break;
-				case 3 : 
-					bookNo = InputBookNo();
-					result = BookController.bookDelete(bookNo);	
-					if(result==1)System.out.println(bookNo+"번호가 삭제되었습니다.");
-					break;
-				case 4 : //도서조회 --- 장바구니 안뜨게 !!!
-					MenuView.printSelectMenu(user.getUserId());
-					break;
-				case 5 : //대출한도서 : 상태가 1인도서 조회 
-					BookController.bookRentalSelect();
-					break;
-				case 6 : //예약도서 조회 : 상태가 2인도서 조회
-					BookController.bookReserveSelect();
-					break;
-				case 9 :
-					return;
+			try {
+				System.out.println("---관리자 도서 관리---");
+				System.out.println("1. 새 도서등록 | 2. 도서정보수정 | 3. 도서삭제 | 4. 도서조회 | 5. 대출한도서 조회 | 6. 예약한도서 조회 | 9. 나가기");
+				int menu=Integer.parseInt(sc.nextLine());
+				int bookNo=0;
+				int result=0;
+				Book book=null;
+				switch(menu) {
+					case 1 :
+						book=InputBook();
+						result = BookController.bookInsert(book);
+						if(result==1) System.out.println(book.getBookNo()+"등록되었습니다.");
+						break;
+					case 2 : //도서정보수정
+						bookNo = InputBookNo();
+						Book updatebook = updateBook();
+						result = UpdateAdminController.bookUpdate(bookNo, updatebook);
+						if(result==1)System.out.println(bookNo+"번 해당 책이 수정되었습니다.");
+						break;
+					case 3 : 
+						bookNo = InputBookNo();
+						result = BookController.bookDelete(bookNo);	
+						if(result==1)System.out.println(bookNo+"번호가 삭제되었습니다.");
+						break;
+					case 4 : //도서조회 --- 장바구니 말고 수정, 삭제로 연결되게 
+						MenuView.printSelectMenu(user.getUserId());
+						break;
+					case 5 : //대출한도서 : 상태가 1인도서 조회 
+						BookController.bookRentalSelect();
+						break;
+					case 6 : //예약도서 조회 : 상태가 2인도서 조회
+						BookController.bookReserveSelect();
+						break;
+					case 9 :
+						return;
+				}
+				
+			} catch (NumberFormatException e) {
+				FailView.errorMessage("메뉴는 숫자만 입력가능합니다.");
 			}
 		}
 	}	

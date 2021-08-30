@@ -18,7 +18,6 @@ public class BookDAOImpl implements BookDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<Book> list = new ArrayList<Book>();
-		
 			try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement("select * from books order by Ã¥¹øÈ£ desc");
