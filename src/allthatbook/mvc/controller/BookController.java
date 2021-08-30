@@ -7,9 +7,9 @@ import java.util.Scanner;
 import allthatbook.mvc.model.dto.Book;
 import allthatbook.mvc.model.service.BookService;
 import allthatbook.mvc.model.service.BookServiceImpl;
+import allthatbook.mvc.view.BookMenuView;
 import allthatbook.mvc.view.EndView;
 import allthatbook.mvc.view.FailView;
-import allthatbook.mvc.view.MenuView;
 
 public class BookController {
 	static BookService bookService = new BookServiceImpl();
@@ -29,14 +29,16 @@ public class BookController {
 	/**
 	 * 도서번호에 해당하는 책 조회
 	 */
-	public static void bookSelectByBookNo(String userId, int bookNo) {
+	public static Book bookSelectByBookNo(String userId, int bookNo) {
+		Book book = null;
 		try {
-			Book book = bookService.bookSelectByBookNo(bookNo);
+			book = bookService.bookSelectByBookNo(bookNo);
 			EndView.printSelectByNo(userId, book);
 		}catch (SQLException e) {
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
+		return book;
 	}
 	
 	
@@ -66,7 +68,7 @@ public class BookController {
 			System.out.println("다시 하시겠습니까? (yes or no)");
 			String choice = sc.nextLine();
 			if(choice.equals("yes")) {
-				MenuView.selectBookByName(userId);
+				BookMenuView.selectBookByName(userId);
 			}
 		}
 		
@@ -86,7 +88,7 @@ public class BookController {
 			System.out.println("다시 하시겠습니까? (yes or no)");
 			String choice = sc.nextLine();
 			if(choice.equals("yes")) {
-				MenuView.selectBookByWriter(userId);
+				BookMenuView.selectBookByWriter(userId);
 			}
 		}
 		
@@ -106,7 +108,7 @@ public class BookController {
 			System.out.println("다시 하시겠습니까? (yes or no)");
 			String choice = sc.nextLine();
 			if(choice.equals("yes")) {
-				MenuView.selectBookByPublisher(userId);
+				BookMenuView.selectBookByPublisher(userId);
 			}
 		}
 		
@@ -126,7 +128,7 @@ public class BookController {
 			System.out.println("다시 하시겠습니까? (yes or no)");
 			String choice = sc.nextLine();
 			if(choice.equals("yes")) {
-				MenuView.selectBookByCategory(userId);
+				BookMenuView.selectBookByCategory(userId);
 			}
 		}
 		
