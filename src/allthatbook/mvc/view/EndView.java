@@ -22,7 +22,7 @@ public class EndView {
 			System.out.println(book);
 		}
 		if(userId.equals("admin")) {
-			bookDeleteOrUpdateListMenu(userId);
+			BookMenuView.bookDeleteOrUpdateListMenu(userId);
 		}
 		//else printCartMenu(userId);
 
@@ -41,7 +41,7 @@ public class EndView {
 	public static void printSelectByNo(String userId, Book book) {
 		System.out.println(book + "\n");
 		if(userId.equals("admin")) {
-			bookDeleteOrUpdateMenu(userId, book);
+			BookMenuView.bookDeleteOrUpdateMenu(userId, book);
 		}
 		//else printCartMenu(userId);
 	}
@@ -84,6 +84,7 @@ public class EndView {
 			System.out.println(book);
 		}
 		
+		
 		Scanner sc = new Scanner(System.in);
 		while(true) {
 			System.out.println("1.대여하기  |  2.목록 삭제하기  |  3.장바구니 비우기  |  4.돌아가기");
@@ -100,73 +101,10 @@ public class EndView {
 			}
 		}
 	}
+
 	
 	
 	
-	/**
-	 * 관리자 도서조회(도서번호) -> 삭제 or 수정 
-	 */
-	public static void bookDeleteOrUpdateMenu(String userId, Book book) {
-		Scanner sc = new Scanner(System.in);
-		boolean flag = true;
-		while(flag) {
-			int result=0;
-			System.out.println("1. 선택도서 수정 | 2. 선택도서 삭제 | 3. 돌아가기 | 9. 메인메뉴로 가기");
-			int menu = Integer.parseInt(sc.nextLine());
-			switch(menu) {
-				case 1 :
-					Book updatebook = AdminMenuView.updateBook();
-					result = UpdateAdminController.bookUpdate(book.getBookNo(), updatebook);
-					if(result==1)System.out.println(book.getBookNo()+"번 해당 책이 수정되었습니다.");
-					break;
-				case 2 :
-					result = BookController.bookDelete(book.getBookNo());	
-					if(result==1)System.out.println(book.getBookNo()+"번호가 삭제되었습니다.");
-					break;
-				case 3:
-					flag = false;
-					BookMenuView.printSelectMenu(userId);
-					
-					break;
-				case 9:
-					return;
-			}
-		}
-	}
-	/**
-	 * 관리자 도서조회(도서명 저자명 출판사 분야) -> 삭제 or 수정
-	 */
-	public static void bookDeleteOrUpdateListMenu(String userId) {
-		Scanner sc = new Scanner(System.in);
-		boolean flag = true;
-		while(flag) {
-			System.out.println("1. 선택도서 수정 | 2. 선택도서 삭제 | 3. 돌아가기 | 9. 메인메뉴로 가기");
-			int menu = Integer.parseInt(sc.nextLine());
-			int bookNo=0;
-			int result=0;
-			switch(menu) {
-				case 1:
-					bookNo = AdminMenuView.InputBookNo();
-					Book updatebook = AdminMenuView.updateBook();
-					result = UpdateAdminController.bookUpdate(bookNo, updatebook);
-					if(result==1)System.out.println(bookNo+"번 해당 책이 수정되었습니다.");
-					break;
-				case 2:
-					bookNo = AdminMenuView.InputBookNo();
-					result = BookController.bookDelete(bookNo);	
-					if(result==1)System.out.println(bookNo+"번호가 삭제되었습니다.");
-					break;
-				case 3:
-					flag = false;
-					BookMenuView.printSelectMenu(userId);
-					
-					break;
-				case 9:
-					return;
-			}
-			
-		}
-	}
 }
 
 

@@ -11,7 +11,6 @@ public class RentalServiceImpl implements RentalService {
     	int result = rentalDAO.rentalInsert(rental);
 
     	if(result ==0) throw new SQLException("대출실패");
-
 	}
 
 }
