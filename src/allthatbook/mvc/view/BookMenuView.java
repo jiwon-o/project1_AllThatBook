@@ -54,10 +54,8 @@ public class BookMenuView {
 			try {
 				System.out.print("책번호 입력 > ");
 				int no = Integer.parseInt(sc.nextLine());
-				
 				book = BookController.bookSelectByBookNo(userId, no);
 			}catch (NumberFormatException e) {
-				//e.printStackTrace();
 				System.out.println("숫자만 입력해주세요.");
 			}
 			

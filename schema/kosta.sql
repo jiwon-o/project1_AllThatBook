@@ -1,5 +1,6 @@
 select * from users;
 select * from books;
+select * from rental;
 commit
 
 -- 락걸린 테이블 확인

@@ -33,7 +33,7 @@ public class BookController {
 		Book book = null;
 		try {
 			book = bookService.bookSelectByBookNo(bookNo);
-			EndView.printSelectByNo(userId, book);
+			return book;
 		}catch (SQLException e) {
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
