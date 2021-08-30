@@ -7,9 +7,10 @@ import allthatbook.mvc.exception.PwdCheckException;
 import allthatbook.mvc.model.dto.User;
 import allthatbook.mvc.model.service.UserService;
 import allthatbook.mvc.model.service.UserServiceImpl;
+import allthatbook.mvc.view.AdminMenuView;
 import allthatbook.mvc.view.EndView;
 import allthatbook.mvc.view.FailView;
-import allthatbook.mvc.view.MenuView;
+import allthatbook.mvc.view.UserMenuView;
 
 public class UserController {
 	static UserService userService = new UserServiceImpl();
@@ -21,9 +22,9 @@ public class UserController {
 		try {
 			User user = userService.login(userId, userPwd);
 			if (user.getUserId().equals("admin")) {
-				MenuView.printAdminMenu(user);
+				AdminMenuView.printAdminMenu(user);
 			} else {
-				MenuView.printUserMenu(user);
+				UserMenuView.printUserMenu(user);
 			}
 		} catch (Exception e) {
 			// e.printStackTrace();
@@ -54,7 +55,7 @@ public class UserController {
 		try {
 			userService.updateUserInfo(user);
 			EndView.printMessage("수정이 성공되었습니다. 다시 로그인 해주세요");
-			MenuView.logout(user.getUserId()); //수정 되어서 다시 로그인 시키기
+			UserMenuView.logout(user.getUserId()); //수정 되어서 다시 로그인 시키기
 		} catch (SQLException e) {
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
@@ -68,7 +69,7 @@ public class UserController {
 		try {
 			userService.deleteUserInfo(user);
 			EndView.printMessage("회원탈퇴가 성공되었습니다. 로그인 화면으로 이동합니다.");
-			MenuView.logout(user.getUserId()); //수정 되어서 다시 로그인 시키기
+			UserMenuView.logout(user.getUserId()); //수정 되어서 다시 로그인 시키기
 		} catch (SQLException e) {
 			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());

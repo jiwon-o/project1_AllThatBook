@@ -12,6 +12,38 @@ import allthatbook.mvc.model.dto.User;
 
 public class AdminMenuView {
 	private static Scanner sc = new Scanner(System.in);
+	
+	/**
+	 * 관리자메뉴
+	 */
+	public static void printAdminMenu(User user) {
+		while(true) {
+			try {
+				System.out.println("-- 관리자 메뉴 --");
+				System.out.println("1. 회원관리   |  2. 도서관리  | 3. 대출관리 |  9. 나가기");
+				int menu = Integer.parseInt(sc.nextLine());
+				switch (menu) {
+				case 1:
+					AdminMenuView.userAdminMenu();
+					break;
+				case 2:
+					AdminMenuView.bookAdminMenu(user);
+					break;
+				case 3:
+					break;
+				case 9:
+					UserMenuView.logout(user.getUserId());
+					return;
+				default:
+					System.out.println("메뉴에 있는 번호를 입력해주세요");
+				}
+			} catch (NumberFormatException e) {
+				FailView.errorMessage("메뉴는 숫자만 입력가능합니다.");
+			}
+
+		}
+	}
+	
 	/**
 	 * 회원관리 메뉴
 	 */
@@ -85,7 +117,7 @@ public class AdminMenuView {
 						if(result==1)System.out.println(bookNo+"번호가 삭제되었습니다.");
 						break;
 					case 4 : //도서조회 --- 장바구니 말고 수정, 삭제로 연결되게 
-						MenuView.printSelectMenu(user.getUserId());
+						BookMenuView.printSelectMenu(user.getUserId());
 						break;
 					case 5 : //대출한도서 : 상태가 1인도서 조회 
 						BookController.bookRentalSelect();
@@ -157,7 +189,6 @@ public class AdminMenuView {
 		return bookNo;
 	}
 	
-
 	/**
 	 * User 수정할 데이터 입력받기 
 	 */
