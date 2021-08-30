@@ -21,12 +21,10 @@ public class BookDAOImpl implements BookDAO {
 		
 			try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement("select * from books order by books_no desc");
+			ps = con.prepareStatement("select * from books order by Ã¥¹øÈ£ desc");
 			rs= ps.executeQuery();
 			while(rs.next()) {
-
 				Book book = new Book(rs.getInt(1),  rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
-
 	        	list.add(book);
 			}
 		}finally {
@@ -51,7 +49,6 @@ public class BookDAOImpl implements BookDAO {
 	        
 	        if(rs.next()) {
 	        	book = new Book(rs.getInt(1),  rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
-	        	
 	        }
 		}finally {
 			DbUtil.close(con, ps, rs);

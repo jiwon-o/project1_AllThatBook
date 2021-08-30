@@ -102,7 +102,7 @@ public class AdminMenuView {
 	 * UserNo 입력받기 
 	 */
 	public static int InputUserNo() {
-		System.out.println("userNo 입력 > ");
+		System.out.print("userNo 입력 > ");
 		int userNo = Integer.parseInt(sc.nextLine());
 		return userNo;
 	}

@@ -50,7 +50,7 @@ public class MenuView {
 				BookController.bookSelect();// 전체 상품조회
 				break;
 			case 2 :
-				printSelectMenu(user.getUserId());
+				MenuView.printSelectMenu(user.getUserId());
 
 				break;
 			case 3:
@@ -88,7 +88,7 @@ public class MenuView {
 	public static void printSelectMenu(String userId) {
 		while(true) {
 			System.out.println("1.도서번호로 검색  |  2.도서명으로 검색  |  3.저자명으로 검색  |  4.출판사로 검색  |  5.도서분야로 검색  |  6.대여여부로 검색  |  9.돌아가기");
-			
+			System.out.print("번호 입력 > ");
 			int menu =Integer.parseInt(sc.nextLine());
 			switch(menu) {
 			case 1 :
@@ -159,7 +159,7 @@ public class MenuView {
 	 */
 	public static void selectBookByNo(String userId) {
 		try {
-			System.out.println("책번호 입력 > ");
+			System.out.print("책번호 입력 > ");
 			int no = Integer.parseInt(sc.nextLine());
 			
 			BookController.bookSelectByBookNo(userId, no);
@@ -179,7 +179,7 @@ public class MenuView {
 	 */
 	public static void selectBookByName(String userId) {
 		try {
-			System.out.println("단어 검색 > ");
+			System.out.print("단어 검색 > ");
 			String keyword = sc.nextLine();
 			
 			BookController.bookSelectByBookName(userId, keyword);
@@ -195,7 +195,7 @@ public class MenuView {
 	 */
 	public static void selectBookByWriter(String userId) {
 		try {
-			System.out.println("저자 검색 > ");
+			System.out.print("저자 검색 > ");
 			String writer = sc.nextLine();
 			
 			BookController.bookSelectByWriter(userId, writer);
@@ -210,7 +210,7 @@ public class MenuView {
 	 */
 	public static void selectBookByPublisher(String userId) {
 		try {
-			System.out.println("출판사 검색 > ");
+			System.out.print("출판사 검색 > ");
 			String publisher = sc.nextLine();
 			
 			BookController.bookSelectByPublisher(userId, publisher);
@@ -224,7 +224,7 @@ public class MenuView {
 	 */
 	public static void selectBookByCategory(String userId) {
 		try {
-			System.out.println("도서분야 검색 > ");
+			System.out.print("도서분야 검색 > ");
 			String category = sc.nextLine();
 			
 			BookController.bookSelectByCategory(userId, category);

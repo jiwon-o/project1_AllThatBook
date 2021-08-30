@@ -33,3 +33,8 @@ select * from users where 회원ID='bbb';
 
 delete from users where 회원번호=33;
 
+select 장바구니번호, 책번호, 도서명, 저자명, 출판사명, 출간일, 분야, 상태 from cart_detail join books using(책번호);
+
+update users set 패스워드=1111 where 회원ID='admin';
+commit
+
