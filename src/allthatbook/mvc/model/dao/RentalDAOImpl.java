@@ -52,6 +52,7 @@ public class RentalDAOImpl implements RentalDAO {
 					   //throw new SQLException(rental.getBookNo() + "는대출중인도서");
 				   }else {
 					   //상태가 2인 경우 예약된 회원번호와 대여하려는 회원의 번호가 같으면 대출진행
+					   // 2 --> 1
 				   }
 				}//else끝   
 				   

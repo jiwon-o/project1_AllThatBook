@@ -1,5 +1,6 @@
 package allthatbook.mvc.model.dao;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import allthatbook.mvc.model.dto.Rental;
@@ -12,4 +13,5 @@ public interface RentalDAO {
 	   *  3) 책상태 변경하기 (1로 수정)
 	   * */
 	   int rentalInsert(Rental rental) throws SQLException;
+	   
 }
