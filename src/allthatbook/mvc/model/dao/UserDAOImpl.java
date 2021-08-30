@@ -134,7 +134,7 @@ public class UserDAOImpl implements UserDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		List<User> userList = new ArrayList<>();
+		List<User> userList = null;
 		String sql = "select*from users";
 		try {
 			con = DbUtil.getConnection();
@@ -159,7 +159,7 @@ public class UserDAOImpl implements UserDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		User user = new User();
+		User user = null;
 		String sql = "select*from users where 회원번호=?";
 		try {
 			con = DbUtil.getConnection();
@@ -184,7 +184,7 @@ public class UserDAOImpl implements UserDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		User user = new User();
+		User user = null;
 		String sql = "select*from users where 회원ID=?";
 		try {
 			con = DbUtil.getConnection();

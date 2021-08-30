@@ -28,20 +28,15 @@ public class RentalDAOImpl implements RentalDAO {
 			con.setAutoCommit(false); // 자동커밋해지
 
 			ps = con.prepareStatement(sql);
-			System.out.println("1");
 			ps.setInt(1, rental.getBookNo());
-			System.out.println("2");
 			ps.setInt(2, rental.getUserNo());
-			System.out.println("3");
 			result = ps.executeUpdate();
-			System.out.println(result);
 			if (result == 0) { //
 				con.rollback();
 			} else {
 				// 책 꺼내오고 책 상태에 따라 진행
 
 				int re = getBookState(con, rental);
-				System.out.println(re);
 
 				if (re == 0) {
 					// 대여진행 --> 책상태 1로 변경

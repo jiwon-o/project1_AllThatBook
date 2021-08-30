@@ -24,8 +24,6 @@ public class EndView {
 		if(user.getUserId().equals("admin")) {
 			BookMenuView.bookDeleteOrUpdateListMenu(user);
 		}
-		//else printCartMenu(userId);
-
 	}
 	
 	public static void printBookList(List<Book> bookList) {
@@ -83,27 +81,8 @@ public class EndView {
 			Book book = BookController.bookSelectByBookNo2(bookNo);
 			System.out.println(book);
 		}
-		
-		
-		Scanner sc = new Scanner(System.in);
-		while(true) {
-			System.out.println("1.대여하기  |  2.목록 삭제하기  |  3.장바구니 비우기  |  4.돌아가기");
-			switch(Integer.parseInt(sc.nextLine())) {
-			case 1:
-				CartController.rentalCartBook(id, cart);
-				break;
-			case 2:
-				break;
-			case 3:
-				break;
-			case 4:
-				return;
-			}
-		}
 	}
 
-	
-	
 	
 }
 

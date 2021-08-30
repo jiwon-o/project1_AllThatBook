@@ -102,6 +102,7 @@ public class UserMenuView {
 					break;
 				case 6:
 					CartMenuView.viewCart(user.getUserId());
+					//CartMenuView.printCartMenu(user, null);
 					break;
 				case 7:
 					UserMenuView.selectUserInfo(user);
