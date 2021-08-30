@@ -122,8 +122,10 @@ public class UserMenuView {
 				}
 			}catch (NumberFormatException e) {
 				System.out.println("메뉴는 숫자만 입력해주세요.");
+
 			}
 		}
+		
 	}
 	
 	/**

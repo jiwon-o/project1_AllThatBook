@@ -20,7 +20,7 @@ public class BookDAOImpl implements BookDAO {
 		List<Book> list = new ArrayList<Book>();
 			try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement("select * from books order by 책번호 desc");
+			ps = con.prepareStatement("select * from books order by 책번호");
 			rs= ps.executeQuery();
 			while(rs.next()) {
 				Book book = new Book(rs.getInt(1),  rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
