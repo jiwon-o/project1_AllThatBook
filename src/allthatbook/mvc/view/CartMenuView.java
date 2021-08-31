@@ -56,7 +56,18 @@ public class CartMenuView {
 
 			switch(Integer.parseInt(sc.nextLine())) {
 			case 1:
-				RentalController.insertRental(user, book);
+				System.out.println(book.getBookNo() + ". < " + book.getBookName() + " > 책을 대여하시겠습니까? ( 네 or 아니오 )");
+				String checkRental = sc.nextLine();
+				if("네".equals(checkRental)) {
+					RentalController.insertRental(user, book);
+				}else if("아니오".equals(checkRental)) {
+					System.out.println("대출되지 않았습니다.");
+					return;
+				}else {
+					System.out.println("( 네 or 아니오 ) 중 하나만 입력해주세요.");
+					CartMenuView.printCartMenu(user, book);
+				}
+				
 				return;
 			case 2:
 				CartMenuView.putCart(user.getUserId(), book);
@@ -90,6 +101,34 @@ public class CartMenuView {
 				CartMenuView.putCart(user.getUserId());
 				break;
 
+			case 3:		/////////////////////////
+				CartMenuView.viewCart(user.getUserId());
+				SessionSet ss = SessionSet.getInstance();
+				Session session = ss.get(user.getUserId());
+
+				Cart cart = (Cart) session.getAttribute("cart");
+				CartController.rentalCartBook( user.getUserId(), cart);
+				//세션에 있는 cart객체 안에 있는 cartDetailList 안에 번호에 맞는 삭제
+				break;
+			case 4:
+				return;
+			}
+		}
+	}
+	
+	public static void printRentalMenu(User user) {
+		while(true) {
+			System.out.println("1.전체 목록 대여하기  |  4.돌아가기  ");
+			System.out.print("번호 입력 > ");
+			switch(Integer.parseInt(sc.nextLine())) {
+			case 1:
+				System.out.print("대여 하실책 번호 입력 > ");
+				int bookNo = Integer.parseInt(sc.nextLine());
+				RentalController.insertRental(user, bookNo);
+				break;
+			case 2:
+				CartMenuView.putCart(user.getUserId());
+				break;
 			case 3:		/////////////////////////
 				CartMenuView.viewCart(user.getUserId());
 				SessionSet ss = SessionSet.getInstance();

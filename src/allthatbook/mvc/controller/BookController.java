@@ -40,7 +40,9 @@ public class BookController {
 		}catch (SQLException e) {
 
 			FailView.errorMessage(e.getMessage());
+	
 			
+
 			boolean flag = true;
 			while(flag) {
 				System.out.println("다시 하시겠습니까? (yes or no)");
@@ -54,6 +56,7 @@ public class BookController {
 					System.out.println("'yes' or 'no'를 입력해주세요.");
 				}
 			}
+
 		}
 		return book;
 	}
@@ -82,6 +85,7 @@ public class BookController {
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
+
 			while(true) {
 				System.out.println("다시 하시겠습니까? (yes or no)");
 				String choice = sc.nextLine();
@@ -94,6 +98,7 @@ public class BookController {
 					System.out.println("'yes' or 'no'를 입력해주세요.");
 				}
 			}
+
 		}
 		return bookList;
 	}
@@ -109,6 +114,7 @@ public class BookController {
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
+
 			while(true) {
 				System.out.println("다시 하시겠습니까? ( yes or no )");
 				String choice = sc.nextLine();
@@ -163,7 +169,6 @@ public class BookController {
 			bookList = bookService.bookSelectByCategory(category);
 			EndView.printBookList(user, bookList);
 		}catch (SQLException e) {
-			
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 			while(true) {
@@ -193,7 +198,6 @@ public class BookController {
 			bookList = bookService.bookSelectByState(state);
 			EndView.printBookList(user, bookList);
 		}catch (SQLException e) {
-			
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 			while(true) {

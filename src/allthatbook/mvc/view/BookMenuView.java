@@ -183,7 +183,7 @@ public class BookMenuView {
 			int result=0;
 
 			System.out.println("1. 선택도서 수정    2. 선택도서 삭제    3. 돌아가기    9. 메인메뉴로 가기  ");
-			System.out.println("------------------------------------------------------------------------");
+			System.out.println("--------------------------------------------------------------------------");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch(menu) {
 				case 1 :

@@ -80,9 +80,14 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public List<Book> bookSelectByState(int state) throws SQLException {
 		List<Book> bookList = bookDao.bookSelectByState(state);
-		if(bookList == null || bookList.isEmpty()) {
-			throw new SQLException("입력하신 대여여부(" + state + ")에 해당하는 도서를 찾을 수 없습니다.");
+		if(0<=state && state <=2) {
+			if(bookList == null || bookList.isEmpty()) {
+				throw new SQLException("입력하신 대여여부(" + state + ")에 해당하는 도서를 찾을 수 없습니다.");
+			}
+		}else {
+			throw new SQLException("대출가능(0) or 대출중(1) or 예약중(2) 중 하나를 입력해주세요... 처음으로 돌아갑니다.");
 		}
+		
 		return bookList;
 	}
 	
