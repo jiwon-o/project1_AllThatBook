@@ -51,7 +51,8 @@ public class RentalDAOImpl implements RentalDAO {
 				} else if (re == 1) {
 					result = 0;
 					con.rollback();
-					throw new SQLException(rental.getBookNo() + "는대출중인도서");
+					throw new SQLException("*** '" + rental.getBookNo() + "'번 도서는 이미 대출중인 도서이므로 대출하실 수 없습니다."
+							+ " 처음 메뉴로 돌아갑니다. ***");
 				} else {
 					// 상태가 2인 경우
 					// 예약 테이블에선 삭제 시켜줘야한다.

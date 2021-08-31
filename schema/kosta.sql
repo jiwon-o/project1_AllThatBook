@@ -43,8 +43,11 @@ insert into books (책번호, 도서명, 저자명, 출판사명, 출간일, 분야, 상태) values 
 
 
 select * from users where 회원ID='bbb';
+select * from users where 회원번호=31;
 
 delete from users where 회원번호=33;
+delete from rental where 회원번호=31;
+select * from rental where 회원번호=31;
 
 select 장바구니번호, 책번호, 도서명, 저자명, 출판사명, 출간일, 분야, 상태 from cart_detail join books using(책번호);
 select 장바구니번호, 책번호, 도서명, 저자명, 출판사명, to_char(출간일, 'yy/mm/dd') 출간일, 분야, 상태 from cart_detail join books using(책번호);
@@ -61,6 +64,8 @@ select 장바구니번호, 회원번호 from cart;
 select * from cart_detail;
 select 장바구니번호, 책번호 from cart_detail;
 
+delete from cart;
+
 select * from books;
 select 책번호, 도서명, 저자명, 출판사명, to_char(출간일, 'yy/mm/dd')출간일, 분야, 상태 from books;
 
@@ -68,3 +73,5 @@ update users set 패스워드=1111 where 회원ID='admin';
 commit
 
 select * from books where 상태 = 1 order by 책번호
+
+select * from rental where 회원번호 = 31;

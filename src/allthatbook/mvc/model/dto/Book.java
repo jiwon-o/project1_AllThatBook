@@ -94,23 +94,20 @@ public class Book {
 		}
 	}
 
+
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("책번호: ");
-		builder.append(bookNo);
-		builder.append(", 도서명: ");
-		builder.append(bookName);
-		builder.append(", 저자명: ");
-		builder.append(bookWriter);
-		builder.append(", 출판사명: ");
-		builder.append(bookPublisher);
-		builder.append(", 분야: ");
-		builder.append(bookField);
-		builder.append(", 상태: ");
-		builder.append(bookState);
-		return builder.toString();
+		if(bookState == 1) {
+			return bookNo + ". 『 " + bookName + " 』,  " + bookWriter + ",  " + bookPublisher + ",  " + bookField + ",  (대출중)";
+		}else if(bookState == 2) {
+			return bookNo + ". 『 " + bookName + " 』,  " + bookWriter + ",  " + bookPublisher + ",  " + bookField + ",  (예약중)";
+		}
+		
+		return bookNo + ". 『 " + bookName + " 』,  " + bookWriter + ",  " + bookPublisher + ",  " + bookField + ",  (대출가능)";
+		
 	}
+
+	
   
 	
 }

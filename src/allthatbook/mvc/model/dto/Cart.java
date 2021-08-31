@@ -61,17 +61,18 @@ public class Cart {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("장바구니번호: ");
-		builder.append(cartId);
-		builder.append(", 회원번호");
+		
+		builder.append("[ 회원번호 : ");
 		builder.append(userNo);
-		if(cartDetailList != null) {
-			builder.append("\n<<<<<<장바구니 상세>>>>>>");
-			for (CartDetail cartDetail : cartDetailList) {
-				builder.append("\n");
-				builder.append(cartDetail);
-			}
-		}
+		builder.append(" , 장바구니번호 : ");
+		builder.append(cartId + " ]");
+//		if(cartDetailList != null) {
+//			builder.append("\n\n[장바구니 목록 : ");
+//			for (CartDetail cartDetail : cartDetailList) {
+//				builder.append("\n");
+//				builder.append(cartDetail);
+//			}
+//		}
 		return builder.toString();
 	}
 }

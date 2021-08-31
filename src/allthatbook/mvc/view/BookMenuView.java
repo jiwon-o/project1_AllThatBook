@@ -16,12 +16,10 @@ public class BookMenuView {
 	 */
 	public static void printSelectMenu(User user) {
 		while (true) {
-			System.out.println("\n");
-			System.out.println(
-					"1. 도서번호로 검색    2. 도서명으로 검색    3. 저자명으로 검색    4. 출판사로 검색     5. 도서분야로 검색     6. 대여여부로 검색    9. 돌아가기    ");
-			System.out.println(
-					"--------------------------------------------------------------------------------------------------------------------------------------");
-			System.out.print("원하시는 서비스의 번호를 입력해주세요 :  ");
+			System.out.println("\n----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("      1.   도서번호로 검색      2.   도서명으로 검색      3.   저자명으로 검색      4.   출판사로 검색      5.   도서분야로 검색      6.   대여여부로 검색      9.   돌아가기     ");
+			System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.print("메뉴 입력 : ");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
@@ -67,22 +65,22 @@ public class BookMenuView {
 		Book book = null;
 		while (true) {
 			try {
-				System.out.print("도서번호를 입력해주세요 : ");
+				System.out.println("*** 도서번호로 검색합니다. ***\n");
+				System.out.print("도서번호 입력 : ");
 				int no = Integer.parseInt(sc.nextLine());
-				System.out.println("\n");
 				book = BookController.bookSelectByBookNo(user, no);
 				if (book == null) {
 
-					System.out.println("다시 하시겠습니까? ( 네 or 아니오 )");
+					System.out.println("다시 하시겠습니까? ( 네 / 아니오 )");
 					String choice = sc.nextLine();
 					switch (choice) {
 					case "네":
 						continue;
 					case "아니오":
-						System.out.println("처음으로 돌아갑니다.");
+						System.out.println("*** '아니오'를 입력하셨습니다. 처음으로 돌아갑니다. ***");
 						break;
 					default:
-						System.out.println("네 or 아니오 중 하나를 입력해주세요... 처음으로 돌아갑니다.");
+						System.out.println("*** ( 네 / 아니오 ) 중 하나만 입력해주세요. 처음으로 돌아갑니다. ***\n");
 					}
 				}
 			} catch (NumberFormatException e) {
@@ -101,24 +99,24 @@ public class BookMenuView {
 	public static List<Book> selectBookByName(User user) {
 		List<Book> bookList = null;
 		while (true) {
-				System.out.print("책의 이름을 입력해주세요 : ");
-				String keyword = sc.nextLine();
-				System.out.println("\n");
-				bookList = BookController.bookSelectByBookName(user, keyword);
-				if (bookList == null) {
-					System.out.println("다시 하시겠습니까? ( 네 or 아니오 )");
-					String choice = sc.nextLine();
-					switch (choice) {
-					case "네":
-						continue;
-					case "아니오":
-						System.out.println("처음으로 돌아갑니다.");
-						break;
-					default:
-						System.out.println("네 or 아니오 중 하나를 입력해주세요... 처음으로 돌아갑니다.");
-					}
+			System.out.println("*** 도서명으로 검색합니다. ***\n");
+			System.out.print("도서명 입력 : ");
+			String keyword = sc.nextLine();
+			bookList = BookController.bookSelectByBookName(user, keyword);
+			if (bookList == null) {
+				System.out.println("다시 하시겠습니까? ( 네 / 아니오 )");
+				String choice = sc.nextLine();
+				switch (choice) {
+				case "네":
+					continue;
+				case "아니오":
+					System.out.println("*** '아니오'를 입력하셨습니다. 처음으로 돌아갑니다. ***");
+					break;
+				default:
+					System.out.println("*** ( 네 / 아니오 ) 중 하나만 입력해주세요. 처음으로 돌아갑니다. ***\n");
 				}
-				break;
+			}
+			break;
 		}
 		System.out.println("\n");
 		return bookList;
@@ -132,21 +130,19 @@ public class BookMenuView {
 		while (true) {
 				System.out.print("저자를 입력해주세요 : ");
 				String writer = sc.nextLine();
-
-				System.out.println("\n");
 				bookList = BookController.bookSelectByWriter(user, writer);
 				if (bookList == null) {
 
-					System.out.println("다시 하시겠습니까? ( 네 or 아니오 )");
+					System.out.println("다시 하시겠습니까? ( 네 / 아니오 )");
 					String choice = sc.nextLine();
 					switch (choice) {
 					case "네":
 						continue;
 					case "아니오":
-						System.out.println("처음으로 돌아갑니다.");
+						System.out.println("*** '아니오'를 입력하셨습니다. 처음으로 돌아갑니다. ***");
 						break;
 					default:
-						System.out.println("네 or 아니오 중 하나를 입력해주세요... 처음으로 돌아갑니다.");
+						System.out.println("*** ( 네 / 아니오 ) 중 하나만 입력해주세요. 처음으로 돌아갑니다. ***\n");
 					}
 				}
 				break;
@@ -165,20 +161,19 @@ public class BookMenuView {
 				System.out.print("출판사를 입력해주세요 : ");
 				String publisher = sc.nextLine();
 
-				System.out.println("\n");
 				bookList = BookController.bookSelectByPublisher(user, publisher);
 
 				if (bookList == null) {
-					System.out.println("다시 하시겠습니까? ( 네 or 아니오 )");
+					System.out.println("다시 하시겠습니까? ( 네 / 아니오 )");
 					String choice = sc.nextLine();
 					switch (choice) {
 					case "네":
 						continue;
 					case "아니오":
-						System.out.println("처음으로 돌아갑니다.");
+						System.out.println("*** '아니오'를 입력하셨습니다. 처음으로 돌아갑니다. ***");
 						break;
 					default:
-						System.out.println("네 or 아니오 중 하나를 입력해주세요... 처음으로 돌아갑니다.");
+						System.out.println("*** ( 네 / 아니오 ) 중 하나만 입력해주세요. 처음으로 돌아갑니다. ***\n");
 					}
 				}
 				break;
@@ -200,21 +195,20 @@ public class BookMenuView {
 				System.out.print("찾으시는 분야를 입력해주세요 : ");
 				String category = sc.nextLine();
 
-				System.out.println("\n");
 				bookList = BookController.bookSelectByCategory(user, category);
 
 				if (bookList == null) {
 
-					System.out.println("다시 하시겠습니까? ( 네 or 아니오 )");
+					System.out.println("다시 하시겠습니까? ( 네 / 아니오 )");
 					String choice = sc.nextLine();
 					switch (choice) {
 					case "네":
 						continue;
 					case "아니오":
-						System.out.println("처음으로 돌아갑니다.");
+						System.out.println("*** '아니오'를 입력하셨습니다. 처음으로 돌아갑니다. ***");
 						break;
 					default:
-						System.out.println("네 or 아니오 중 하나를 입력해주세요... 처음으로 돌아갑니다.");
+						System.out.println("*** ( 네 / 아니오 ) 중 하나만 입력해주세요. 처음으로 돌아갑니다. ***\n");
 					}
 				}
 				break;

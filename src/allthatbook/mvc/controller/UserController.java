@@ -40,12 +40,11 @@ public class UserController {
 	public static void register(User user, String pwdCheck) {
 		try {
 			userService.register(user, pwdCheck);
-			System.out.println("\n");
-			EndView.printMessage("회원가입이 완료되었습니다. ");
+			EndView.printMessage("*** 회원가입이 완료되었습니다. ***\n");
 		} catch (SQLException e) {
 			FailView.errorMessage(e.getMessage());
 		} catch (PwdCheckException e) { // 비밀번호가 일치하지 않을 때
-			e.printStackTrace();
+			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 	}
@@ -56,7 +55,7 @@ public class UserController {
 	public static void updateUserInfo(User user) {
 		try {
 			userService.updateUserInfo(user);
-			EndView.printMessage("수정이 완료되었습니다 다시 로그인 해주세요. ");
+			EndView.printMessage("*** 수정이 완료되었습니다 다시 로그인 해주세요. ***");
 			UserMenuView.logout(user.getUserId()); //수정 되어서 다시 로그인 시키기
 		} catch (SQLException e) {
 			e.printStackTrace();

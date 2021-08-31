@@ -128,7 +128,7 @@ public class CartController {
 	}
 
 	/**
-	 * 장바구니에 담긴 책 전체 대여
+	 * 장바구니에 담긴 책 전체 대출
 	 * */
 	public static void rentalCartBook(String userId, Cart cart) {
 		List<CartDetail> list = cart.getCartDetailList();
@@ -136,7 +136,7 @@ public class CartController {
 		for (CartDetail cartDetail : list) {
 			try {
 				cartService.rentalCartBook(cart, cartDetail);
-				EndView.printMessage(cartDetail.getBookNo() + "번 대여 성공했습니다. ");
+				EndView.printMessage(cartDetail.getBookNo() + "번 대출 성공했습니다. ");
 				tempList.add(cartDetail);
 			} catch (SQLException e) {
 				//e.printStackTrace();

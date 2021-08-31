@@ -53,13 +53,13 @@ public class Session {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("***ID: ");
+		
+		builder.append("*** '");
 		builder.append(sessionId);
-		builder.append(" 님 접속중***");
-		builder.append("\n");
+		builder.append("' 님 접속 중 ***]\n");
+		builder.append("[");
 		Set<String> keySet = attributes.keySet();
 		for (Object key : keySet) {
-			builder.append("장바구니: ");
 			builder.append(attributes.get(key));
 		}
 		return builder.toString();
@@ -87,41 +87,6 @@ public class Session {
 		}
 		
 	}
-	
-	
-	
-//	@Override
-//	public int hashCode() {
-//		final int prime = 31;
-//		int result = 1;
-//		result = prime * result + ((sessionId == null) ? 0 : sessionId.hashCode());
-//		return result;
-//	}
-//	
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (this == obj)
-//			return true;
-//		if (obj == null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		Session other = (Session) obj;
-//		if (sessionId == null) {
-//			if (other.sessionId != null)
-//				return false;
-//		} else if (!sessionId.equals(other.sessionId))
-//			return false;
-//		return true;
-//	}
-	
-	
-	//자료구조 할때
-	//Set, Map-key 중복 안된다.
-	//어떻게 중복인지 아닌지를 체크하나?
-	//hashcode를 비교하고 같으면 equals를 비교해서 true 리턴하면 같다..
-	
-	
 	
 	
 }
