@@ -33,6 +33,11 @@ public interface BookService {
 	List<Book> bookSelectByPublisher(String bookPublisher) throws SQLException;
 	
 	/**
+	 * 대출 여부에 따른 정보 검색
+	 */
+	List<Book> bookSelectByState(int state) throws SQLException;
+	
+	/**
 	 * 카테고리 이름에 해당하는 정보 검색
 	 * Join으로
 	 */
@@ -52,7 +57,7 @@ public interface BookService {
 	 * 책 삭제
 	 */
 
-	int bookDelete(int bookNo) throws SQLException;
+	void bookDelete(int bookNo) throws SQLException;
 
 	/**
 	 * 대출중 도서 조회
@@ -63,5 +68,8 @@ public interface BookService {
 	 * 예약중 도서 조회
 	 * */
 	List<Book> bookReserveSelect() throws NotFoundException, SQLException;
+
+
+	
 	
 }

@@ -85,7 +85,6 @@ public class UserController {
 			userService.deleteUserInfo(userNo);
 			EndView.printMessage("회원삭제가 되었습니다.");
 		} catch (SQLException e) {
-			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		} 
 	}
@@ -104,13 +103,16 @@ public class UserController {
 	/**
 	 * userNo로 조회
 	 */
-	public static void selectByUserNo(int userNo) {
+	public static User selectByUserNo(int userNo) {
+		User user=null;
 		try {
-			User user = userService.selectByUserNo(userNo);
+			user = userService.selectByUserNo(userNo);
 			EndView.printSelectByUserId(user);
+			
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
+		return user;
 	}
 
 	/**

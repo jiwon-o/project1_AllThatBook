@@ -1,6 +1,9 @@
 select * from users;
 select * from books;
+select * from rental;
 commit
+
+select * from rental;
 
 -- 락걸린 테이블 확인
 SELECT  DO.OBJECT_NAME, DO.OWNER, DO.OBJECT_TYPE, DO.OWNER,
@@ -39,3 +42,4 @@ select 장바구니번호, 책번호, 도서명, 저자명, 출판사명, 출간일, 분야, 상태 from c
 update users set 패스워드=1111 where 회원ID='admin';
 commit
 
+select * from books where 상태 = 1 order by 책번호

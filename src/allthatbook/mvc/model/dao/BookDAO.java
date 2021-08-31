@@ -34,6 +34,11 @@ public interface BookDAO {
 	List<Book> bookSelectByPublisher(String bookPublisher) throws SQLException;
 	
 	/**
+	 * 대출 여부에 따른 정보 검색
+	 */
+	List<Book> bookSelectByState(int state) throws SQLException;
+	
+	/**
 	 * 카테고리 이름에 해당하는 정보 검색
 	 * Join으로
 	 */
@@ -64,5 +69,8 @@ public interface BookDAO {
 	 * 예약된 도서 조회
 	 */
 	List<Book> bookReserveSelect()throws SQLException;
+
+
+	
 
 }
