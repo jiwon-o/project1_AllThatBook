@@ -1,10 +1,12 @@
 package allthatbook.mvc.model.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.PseudoColumnUsage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import allthatbook.mvc.model.dto.Rental;
 import allthatbook.mvc.model.dto.Reservation;
@@ -59,8 +61,19 @@ public class ReservationDAOImpl implements ReservationDAO {
 
 	@Override
 	public int deleteReservation(Connection con, Reservation reservation) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql = "delete from reservation where 회원번호 = ? and 책번호 = ?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, reservation.getUserNo());
+			ps.setInt(2, reservation.getBookNo());
+			result = ps.executeUpdate();
+		}finally {
+			DbUtil.close(null, ps);
+		}
+	
+		return result;
 	}
 	
 	/**

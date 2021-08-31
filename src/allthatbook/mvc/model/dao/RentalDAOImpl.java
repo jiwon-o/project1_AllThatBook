@@ -8,10 +8,11 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 import allthatbook.mvc.model.dto.Rental;
+import allthatbook.mvc.model.dto.Reservation;
 import allthatbook.mvc.util.DbUtil;
 
 public class RentalDAOImpl implements RentalDAO {
-
+    ReservationDAO reservationDAO = new ReservationDAOImpl();
 	/**
 	 * 대여하기 1) 책상태 확인하기 (0이면 대여가능) 2) Rental 테이블에 insert 3) 책상태 변경하기 (1로 수정)
 	 */
@@ -48,11 +49,19 @@ public class RentalDAOImpl implements RentalDAO {
 					   con.rollback();
 					   //throw new SQLException(rental.getBookNo() + "는대출중인도서");
 				   }else {
-					   //상태가 2인 경우 예약된 회원번호와 대여하려는 회원의 번호가 같으면 대출진행
+					   //상태가 2인 경우 
+					   // 예약 테이블에선 삭제 시켜줘야한다.
 					   // 2 --> 1
+					   if (checkReservation(con, rental) == rental.getUserNo()) {//예약된 회원번호와 대여하려는 회원의 번호가 같으면 대출진행
+						   changeBookState(con, rental, 1);
+						   Reservation reservation = new Reservation(rental.getBookNo(), rental.getUserNo());
+						   if (reservationDAO.deleteReservation(con, reservation ) == 0) {con.rollback();  throw new SQLException("예약된 도서입니다.");}   
+					   }else {
+						   con.rollback();
+						   throw new SQLException("예약된 도서입니다.");
+					   }
 				   }
-				}//else끝   	   
-			con.commit();
+				}//else끝   
 	     }finally {
 	    	con.commit();
 	      	DbUtil.close(con, ps , null);
@@ -129,11 +138,11 @@ public class RentalDAOImpl implements RentalDAO {
 				//대여중인 도서가 존재하므로 반납진행
 				rental = new Rental(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getDate(4));
 				int ur = updateRental(con, rental);
-				System.out.println(ur);
 				if (ur == 1) {
 					//해당하는 책번호 상태 변경, 만약 예약자가 존재하면 상태 2로, 존재하지 않으면 0으로
 					int chkRez = checkReservation(con, rental); // 1이면 예약존재
-					if (chkRez ==1) {
+					System.out.println(chkRez);
+					if (chkRez > 0) {
 						changeBookState(con, rental, 2);
 					}else {
 						changeBookState(con, rental, 0);
@@ -181,7 +190,7 @@ public class RentalDAOImpl implements RentalDAO {
 	}
 	
 	/**
-	 * 책번호에 해당하는 예약자가 존재하는지 확인하는 메소드
+	 * 책번호에 해당하는 예약자가 존재하는지 확인하고 예약자의 회원번호 리턴
 	 * */
 	public int checkReservation(Connection con,Rental rental) throws SQLException{
 		PreparedStatement ps = null;
@@ -192,7 +201,7 @@ public class RentalDAOImpl implements RentalDAO {
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, rental.getBookNo());
 			rs = ps.executeQuery();
-			if (rs.next()) result = 1;
+			if (rs.next()) result = rs.getInt("회원번호");
 		}finally {
 			DbUtil.close(null, ps, rs);
 		}
