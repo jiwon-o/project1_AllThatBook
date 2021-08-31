@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import allthatbook.mvc.exception.PwdCheckException;
+import allthatbook.mvc.model.dto.Rental;
+import allthatbook.mvc.model.dto.Reservation;
 import allthatbook.mvc.model.dto.User;
 import allthatbook.mvc.model.service.UserService;
 import allthatbook.mvc.model.service.UserServiceImpl;
@@ -142,5 +144,28 @@ public class UserController {
 		
 	}
 	
-
+	/**
+	 * 회원번호를 받아 대여목록을 출력
+	 * */
+	public static void selectRentalByUserNo(int userNo){
+		try {
+		    List<Rental> rentalList = userService.selectRentalByUserNo(userNo);
+		    EndView.printRental(rentalList);
+		}catch (SQLException e) {
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
+	/**
+	 * 회원번호를 받아 예약목록을 출력
+	 * */
+	public static void selectReservationByUserNo(int userNo){
+		try {
+		    List<Reservation> reservationList = userService.selectReservationByUserNo(userNo);
+		    EndView.printReservation(reservationList);
+		}catch (SQLException e) {
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
 }
