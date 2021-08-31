@@ -42,6 +42,7 @@ public class EndView {
 
 	
 	public static void printSelectByNo(User user, Book book) {
+		System.out.println("----------------------------------------------    검색 된 도서   -------------------------------------------");
 		System.out.println(book + "\n");
 
 		if(user.getUserId().equals("admin")) {

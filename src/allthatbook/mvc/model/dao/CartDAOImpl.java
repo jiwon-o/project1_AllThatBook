@@ -14,8 +14,6 @@ import allthatbook.mvc.util.DbUtil;
 
 public class CartDAOImpl implements CartDAO {
 	
-	
-	
 	/**
 	장바구니에 책을 추가하는 메소드
 	cart객체에 있는 detail_list에 추가
@@ -41,9 +39,6 @@ public class CartDAOImpl implements CartDAO {
 		}
 		return result;
 	}
-	
-	
-	
 	
 	/**
 	 * 장바구니가 추가되는 메소드
@@ -90,15 +85,12 @@ public class CartDAOImpl implements CartDAO {
 		return result;
 	}
 	
-	
 	/**
 	 * 대여상세정보 가져오기
 	 * */
 	public List<CartDetail> selectCartDetail(Cart cart) {
 		return cart.getCartDetailList();
 	}
-	
-	
 	
 	/**
 	 * 장바구니에서 대출된 책들을
@@ -117,13 +109,13 @@ public class CartDAOImpl implements CartDAO {
 			result = ps.executeUpdate();
 
 			//cart.removeCartDetail(cartDetail); //카트객체에 있는 list에서도 제거
-
 		}
 	    finally {
 	    	DbUtil.close(null, ps);
 	    }
 		return result;
 	}
+	
 	/**
 	 * 장바구니에서
 	 * 대여상세를 하나씩 삭제하는 메소드
@@ -142,15 +134,12 @@ public class CartDAOImpl implements CartDAO {
 			result = ps.executeUpdate();
 			
 			//cart.removeCartDetail(cartDetail); //카트객체에 있는 list에서도 제거
-			
 		}
 		finally {
 			DbUtil.close(con, ps);
 		}
 		return result;
 	}
-
-
 
 	/**
 	 * 테이블에서 회원번호에 해당하는 장바구니 불러와서 장바구니 객체 리턴하기
@@ -161,12 +150,13 @@ public class CartDAOImpl implements CartDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Cart cart = null;
-		String sql = "select * from cart where 회원번호=?";
+		String sql = "select 장바구니번호, 회원번호 from cart where 회원번호=?";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, userNo);
 			rs = ps.executeQuery();
+			
 			if (rs.next()) {
 				int cartNo = rs.getInt(1);
 				cart = new Cart(cartNo, userNo);
@@ -179,7 +169,6 @@ public class CartDAOImpl implements CartDAO {
 		return cart;
 	}
 	
-	
 	/**
 	 * 카트번호에 해당하는 cart_detail_list들 return하기
 	 * */
@@ -187,7 +176,7 @@ public class CartDAOImpl implements CartDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "select * from cart_detail where 장바구니번호 = ?";
+		String sql = "select 장바구니번호, 책번호 from cart_detail where 장바구니번호 = ?";
 		List<CartDetail> list = new ArrayList<CartDetail>();
 		try {
 			con = DbUtil.getConnection();
@@ -203,6 +192,4 @@ public class CartDAOImpl implements CartDAO {
 		}
 		return list;
 	}
-	
-	
 }

@@ -111,7 +111,7 @@ public class CartController {
 	/**
 	 * 장바구니 보기
 	 */
-	public static void viewCart(String userId) {
+	public static Cart viewCart(String userId) {
 		SessionSet ss = SessionSet.getInstance();
 		Session session = ss.get(userId);
 
@@ -121,6 +121,8 @@ public class CartController {
 		} else {
 			EndView.printViewCart(userId, cart);
 		}
+		
+		return cart;
 	}
 
 	/**

@@ -19,7 +19,6 @@ public class UserMenuView {
 		while (true) {
 			try {
 				SessionSet ss = SessionSet.getInstance();
-				System.out.println(ss.getSet());
 				System.out.println("=========================================================");
 				System.out.println("                                                         ");
 				System.out.println("                      AllThatBook                        ");
@@ -28,8 +27,8 @@ public class UserMenuView {
 				System.out.println("---------------------------------------------------------");
 				System.out.println("    1.   로그인       2.    회원가입        9.     종료        ");
 				System.out.println("---------------------------------------------------------");
-				//System.out.println("원하시는 서비스의 번호를 입력해주세요. ");
-
+				
+				System.out.print("원하시는 서비스의 번호를 입력해주세요. ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch (menu) {
 				case 1:
@@ -95,12 +94,9 @@ public class UserMenuView {
 			try {
 				SessionSet ss = SessionSet.getInstance();
 				System.out.println(ss.getSet()); // Set객체
-				System.out.println(" " + user.getUserId() + "님이 로그인 중입니다.");
-				System.out.println("\n");
-				System.out.println(
-
-						"1. 전체목록    2. 도서검색 (대여, 예약)   3. 도서반납   4. 책신청   5. 장바구니담기    6. 장바구니보기    7. 회원정보     8. 회원정보수정    9. 로그아웃    100. 장바구니 비우기");
-				System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------");
+				System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+				System.out.println("1. 전체목록    2. 도서검색 (대여, 예약)   3. 도서반납   4. 책신청   5. 장바구니담기    6. 장바구니보기    7. 회원정보     8. 회원정보수정    9. 로그아웃    100. 장바구니 비우기");
+				System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 				System.out.print("원하시는 서비스의 번호를 입력해주세요 :  ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch (menu) {
@@ -191,8 +187,9 @@ public class UserMenuView {
 				continue;
 			}
 
+			System.out.println("-------------------------------------------------------------");
 			System.out.println("      1.  수정          2.회원탈퇴         9.   나가기       ");
-			System.out.println("--------------------------------------------------------");
+			System.out.println("-------------------------------------------------------------");
 			System.out.print("번호를 선택해주세요 : ");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
@@ -222,8 +219,9 @@ public class UserMenuView {
 
 		while (true) {
 			System.out.println("\n");
+			System.out.println("----------------------------------------------------------------------------------------------");
 			System.out.println("1. 비밀번호 변경    2. 이름 변경    3. 전화번호 변경    0. 변경 완료하기 (0번 누를때까지 반복)");
-			System.out.println("---------------------------------------------------------------------------");
+			System.out.println("----------------------------------------------------------------------------------------------");
 			System.out.print("번호를 입력해주세요 :  ");
 			menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {

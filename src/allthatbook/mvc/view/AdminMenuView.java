@@ -197,13 +197,11 @@ public class AdminMenuView {
 	        String bookWriter = sc.nextLine();
 	        System.out.print("bookPublisher 입력 : ");
 	        String bookPublisher = sc.nextLine();
-	        System.out.println("출간일은 자동배정됩니다.");
-	        String pubDate = sc.nextLine();
 	        System.out.print("bookField 입력 : ");
 	        String bookField = sc.nextLine();
 	        System.out.println("bookState 기본 대출가능0으로 들어갑니다.");
 	        
-	        book = new Book(0, bookName, bookWriter, bookPublisher, pubDate, bookField, 0);
+	        book = new Book(0, bookName, bookWriter, bookPublisher, bookField, 0);
 	        break;
 		}
 
