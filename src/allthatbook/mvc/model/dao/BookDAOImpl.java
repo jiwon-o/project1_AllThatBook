@@ -189,7 +189,9 @@ public class BookDAOImpl implements BookDAO {
 	public int bookInsert(Book book) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
+
 		String sql="insert into books (책번호, 도서명, 저자명, 출판사명, 분야, 상태) values (BOOK_SEQ_NO.nextval, ?, ?, ?, ?, 0)";
+
 		int result=0;
 
 		try {
@@ -198,11 +200,11 @@ public class BookDAOImpl implements BookDAO {
 			ps.setString(1, book.getBookName());
 			ps.setString(2, book.getBookWriter());
 			ps.setString(3, book.getBookPublisher());
+
 			ps.setString(4, book.getBookField());
+
 			
 			result=ps.executeUpdate();
-		}catch (Exception e) {
-			e.printStackTrace();
 		}finally {
 			DbUtil.close(con, ps);
 		}
@@ -215,6 +217,7 @@ public class BookDAOImpl implements BookDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql="update books set 도서명=?, 저자명=?, 출판사명=?, 분야=? where 책번호=?";
+		
 		int result=0;	
 		try {
 			con = DbUtil.getConnection();
@@ -224,10 +227,8 @@ public class BookDAOImpl implements BookDAO {
 			ps.setString(3, updatebook.getBookPublisher());
 			ps.setString(4, updatebook.getBookField());
 			ps.setInt(5, updatebook.getBookNo());
-			
+
 			result=ps.executeUpdate();
-		}catch (Exception e) {
-			e.printStackTrace();
 		}finally {
 			DbUtil.close(con, ps);
 		}
@@ -246,13 +247,12 @@ public class BookDAOImpl implements BookDAO {
 			ps.setInt(1, bookNo);			
 			
 			result=ps.executeUpdate();
-		}catch (Exception e) {
-			e.printStackTrace();
 		}finally {
 			DbUtil.close(con, ps);
 		}
 		return result;
 	}
+
 
 	public List<Book> bookPossibleRentalSelect() throws SQLException {
 		Connection con = null;
@@ -318,4 +318,5 @@ public class BookDAOImpl implements BookDAO {
 		}
 		return list;
 	}
+
 }

@@ -222,15 +222,13 @@ public class BookController {
 	 * @param book
 	 * @return int result
 	 */
-	public static int bookInsert(Book book) {
-		int result=0;
+	public static void bookInsert(Book book) {
 		try {
-			result = bookService.bookInsert(book);
+			bookService.bookInsert(book);
+			EndView.printMessage("등록 성공했습니다.");
 		} catch (SQLException e) {
-			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
-		return result;
 	}
 
 	/**
@@ -244,36 +242,7 @@ public class BookController {
 		} catch (SQLException e) {
 			FailView.errorMessage(e.getMessage());
 		}
-	}
-	
-	/**
-	 * 관리자-도서관리-대출중도서조회
-	 * */
-	public static void bookRentalSelect() {
-		try {
-			List<Book> list = bookService.bookRentalSelect();
-			EndView.printBookList(list);
-		}catch (Exception e) {
-			FailView.errorMessage(e.getMessage());
-		}
-	}
-
-
-	/**
-	 * 관리자-도서관리-예약된 도서 조회
-	 */
-	public static void bookReserveSelect() {
-		try {
-			List<Book> list = bookService.bookReserveSelect();
-			EndView.printBookList(list);
-		}catch (Exception e) {
-			FailView.errorMessage(e.getMessage());
-		}
-		
-	}
-
-
-	
+	}	
 
 }
 
