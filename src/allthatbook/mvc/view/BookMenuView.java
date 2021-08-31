@@ -21,7 +21,6 @@ public class BookMenuView {
 			switch(menu) {
 			case 1 :
 				Book book =  BookMenuView.selectBookByNo(user.getUserId()); //도서번호로 검색
-				CartMenuView.printCartMenu(user, book);
 				break;
 			case 2 :
 				BookMenuView.selectBookByName(user.getUserId()); //도서명으로 검색
@@ -123,10 +122,10 @@ public class BookMenuView {
 	 */
 	public static void bookDeleteOrUpdateMenu(String userId, Book book) {
 		Scanner sc = new Scanner(System.in);
-		boolean flag = true;
-		while(flag) {
+
+		while(true) {
 			int result=0;
-			System.out.println("1. 선택도서 수정 | 2. 선택도서 삭제 | 3. 돌아가기 | 9. 메인메뉴로 가기");
+			System.out.println("1. 선택도서 수정 | 2. 선택도서 삭제 | 3. 돌아가기");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch(menu) {
 				case 1 :
@@ -135,15 +134,9 @@ public class BookMenuView {
 					if(result==1)System.out.println(book.getBookNo()+"번 해당 책이 수정되었습니다.");
 					break;
 				case 2 :
-					result = BookController.bookDelete(book.getBookNo());	
-					if(result==1)System.out.println(book.getBookNo()+"번호가 삭제되었습니다.");
+					BookController.bookDelete(book.getBookNo());	
 					break;
 				case 3:
-					flag = false;
-					//BookMenuView.printSelectMenu(userId);
-					
-					break;
-				case 9:
 					return;
 			}
 		}
@@ -153,9 +146,8 @@ public class BookMenuView {
 	 */
 	public static void bookDeleteOrUpdateListMenu(String userId) {
 		Scanner sc = new Scanner(System.in);
-		boolean flag = true;
-		while(flag) {
-			System.out.println("1. 선택도서 수정 | 2. 선택도서 삭제 | 3. 돌아가기 | 9. 메인메뉴로 가기");
+		while(true) {
+			System.out.println("1. 선택도서 수정 | 2. 선택도서 삭제 | 3. 돌아가기");
 			int menu = Integer.parseInt(sc.nextLine());
 			int bookNo=0;
 			int result=0;
@@ -168,15 +160,9 @@ public class BookMenuView {
 					break;
 				case 2:
 					bookNo = AdminMenuView.InputBookNo();
-					result = BookController.bookDelete(bookNo);	
-					if(result==1)System.out.println(bookNo+"번호가 삭제되었습니다.");
+					BookController.bookDelete(bookNo);	
 					break;
 				case 3:
-					flag = false;
-					//BookMenuView.printSelectMenu(userId);
-					
-					break;
-				case 9:
 					return;
 			}
 			

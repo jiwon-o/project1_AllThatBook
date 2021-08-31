@@ -40,9 +40,9 @@ public class EndView {
 	
 	public static void printSelectByNo(String userId, Book book) {
 		System.out.println(book + "\n");
-		if(userId.equals("admin")) {
-			BookMenuView.bookDeleteOrUpdateMenu(userId, book);
-		}
+//		if(userId.equals("admin")) {
+//			BookMenuView.bookDeleteOrUpdateMenu(userId, book);
+//		}
 		//else printCartMenu(userId);
 	}
 	

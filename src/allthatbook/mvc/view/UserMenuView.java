@@ -19,7 +19,7 @@ public class UserMenuView {
 				System.out.println(ss.getSet());
 
 				System.out.println("=== AllThatBook Library ===");
-				System.out.println("1. 로그인   |   2. 회원가입   |  9. 종료");
+				System.out.println("1. 로그인   |   2. 회원가입   |  9. 로그아웃");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch (menu) {
 				case 1:
