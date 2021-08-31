@@ -7,6 +7,8 @@ import allthatbook.mvc.model.dto.Rental;
 import allthatbook.mvc.model.dto.User;
 import allthatbook.mvc.model.service.RentalService;
 import allthatbook.mvc.model.service.RentalServiceImpl;
+import allthatbook.mvc.view.EndView;
+import allthatbook.mvc.view.FailView;
 
 public class RentalController {
     
@@ -14,11 +16,23 @@ public class RentalController {
 	
 	public static void insertRental(User user, Book book) {
 		try {
-			Rental rental = new Rental( user.getUserNo(), book.getBookNo() );
+			Rental rental = new Rental( book.getBookNo(), user.getUserNo() );
 			rentalService.insertRental(rental);
-			//성공 출력 print
+			EndView.printMessage(book.getBookNo() + "번의 도서를 대여했습니다.");
 		}catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
+	public static void insertRental(User user, int bookNo) {
+		try {
+			Rental rental = new Rental( bookNo, user.getUserNo() );
+			rentalService.insertRental(rental);
+			EndView.printMessage(bookNo + "번의 도서를 대여했습니다.");
+		}catch (SQLException e) {
+			//e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
 		}
 	}
 }

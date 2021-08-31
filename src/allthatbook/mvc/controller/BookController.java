@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import allthatbook.mvc.model.dto.Book;
+import allthatbook.mvc.model.dto.User;
 import allthatbook.mvc.model.service.BookService;
 import allthatbook.mvc.model.service.BookServiceImpl;
 import allthatbook.mvc.view.BookMenuView;
@@ -29,12 +30,13 @@ public class BookController {
 	/**
 	 * 도서번호에 해당하는 책 조회
 	 */
-	public static Book bookSelectByBookNo(String userId, int bookNo) {
+	public static Book bookSelectByBookNo(User user, int bookNo) {
 		Book book = null;
 		try {
 			book = bookService.bookSelectByBookNo(bookNo);
-			EndView.printSelectByNo(userId, book);
+			EndView.printSelectByNo(user, book);
 		}catch (SQLException e) {
+
 			FailView.errorMessage(e.getMessage());
 		}
 		return book;
@@ -56,38 +58,33 @@ public class BookController {
 	/**
 	 * 도서명에 해당하는 책 조회
 	 */
-	public static void bookSelectByBookName(String userId, String keyword) {
-		Scanner sc = new Scanner(System.in);
+	public static List<Book> bookSelectByBookName(User user, String keyword) {
+		List<Book> bookList = null;
 		try {
-			List<Book> bookList = bookService.bookSelectByBookName(keyword);
-			EndView.printBookList(userId, bookList);
+			bookList = bookService.bookSelectByBookName(keyword);
+			EndView.printBookList(user, bookList);
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
-			System.out.println("다시 하시겠습니까? (yes or no)");
-			String choice = sc.nextLine();
-			if(choice.equals("yes")) {
-				BookMenuView.selectBookByName(userId);
-			}
 		}
-		
+		return bookList;
 	}
 
 	/**
 	 * 저자명에 해당하는 책 조회
 	 */
-	public static void bookSelectByWriter(String userId, String writer) {
+	public static void bookSelectByWriter(User user, String writer) {
 		Scanner sc = new Scanner(System.in);
 		try {
 			List<Book> bookList = bookService.bookSelectByWriter(writer);
-			EndView.printBookList(userId, bookList);
+			EndView.printBookList(user, bookList);
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 			System.out.println("다시 하시겠습니까? (yes or no)");
 			String choice = sc.nextLine();
 			if(choice.equals("yes")) {
-				BookMenuView.selectBookByWriter(userId);
+				BookMenuView.selectBookByWriter(user);
 			}
 		}
 		
@@ -96,18 +93,18 @@ public class BookController {
 	/**
 	 * 출판사에 해당하는 책 조회
 	 */
-	public static void bookSelectByPublisher(String userId, String publisher) {
+	public static void bookSelectByPublisher(User user, String publisher) {
 		Scanner sc = new Scanner(System.in);
 		try {
 			List<Book> bookList = bookService.bookSelectByPublisher(publisher);
-			EndView.printBookList(userId, bookList);
+			EndView.printBookList(user, bookList);
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 			System.out.println("다시 하시겠습니까? (yes or no)");
 			String choice = sc.nextLine();
 			if(choice.equals("yes")) {
-				BookMenuView.selectBookByPublisher(userId);
+				BookMenuView.selectBookByPublisher(user);
 			}
 		}
 		
@@ -116,18 +113,18 @@ public class BookController {
 	/**
 	 * 도서분야에 해당하는 책 조회
 	 */
-	public static void bookSelectByCategory(String userId, String category) {
+	public static void bookSelectByCategory(User user, String category) {
 		Scanner sc = new Scanner(System.in);
 		try {
 			List<Book> bookList = bookService.bookSelectByCategory(category);
-			EndView.printBookList(userId, bookList);
+			EndView.printBookList(user, bookList);
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 			System.out.println("다시 하시겠습니까? (yes or no)");
 			String choice = sc.nextLine();
 			if(choice.equals("yes")) {
-				BookMenuView.selectBookByCategory(userId);
+				BookMenuView.selectBookByCategory(user);
 			}
 		}
 		
