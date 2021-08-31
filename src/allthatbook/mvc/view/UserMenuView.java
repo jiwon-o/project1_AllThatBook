@@ -43,7 +43,7 @@ public class UserMenuView {
 					System.exit(0);
 				default:
 					System.out.println();
-					System.out.println(" 메뉴에 있는 번호를 입력해주세요. ");
+					System.out.println(" 메뉴에 있는 '번호'를 입력해주세요. ");
 					System.out.println();
 				}
 			}catch (NumberFormatException e) {
@@ -100,7 +100,7 @@ public class UserMenuView {
 				System.out.println(
 
 						"1. 전체목록    2. 도서검색 (대여, 예약)   3. 도서반납   4. 책신청   5. 장바구니담기    6. 장바구니보기    7. 회원정보     8. 회원정보수정    9. 로그아웃    100. 장바구니 비우기");
-				System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------");
+				System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------");
 				System.out.print("원하시는 서비스의 번호를 입력해주세요 :  ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch (menu) {
@@ -150,11 +150,11 @@ public class UserMenuView {
 
 				default:
 					System.out.println("\n");
-					System.out.println(" 메뉴에 있는 번호를 입력해주세요");
+					System.out.println(" 메뉴에 있는 '번호'를 입력해주세요");
 				}
 			}catch (NumberFormatException e) {
 				System.out.println("\n");
-				System.out.println(" 메뉴는 숫자만 입력해주세요.");
+				System.out.println(" 메뉴는 '숫자'만 입력해주세요.");
 
 			}
 		}
@@ -166,7 +166,7 @@ public class UserMenuView {
 	 */
 	public static void clearCart(User user) {
 		
-		System.out.println("정말 삭제하시겠습니까? (네/아니오) ");
+		System.out.println("정말 삭제하시겠습니까? ( 네 or 아니오 ) ");
 		String checkClearCart = sc.nextLine();
 		
 		if("네".equals(checkClearCart)) {
@@ -192,7 +192,7 @@ public class UserMenuView {
 			}
 
 			System.out.println("      1.  수정          2.회원탈퇴         9.   나가기       ");
-			System.out.println("-------------------------------------------------------------------");
+			System.out.println("---------------------------------------------------------------------");
 			System.out.print("번호를 선택해주세요 : ");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
@@ -206,7 +206,7 @@ public class UserMenuView {
 				System.out.println("수정화면이 종료 되었습니다. ");
 				return;
 			default:
-				System.out.println("메뉴에 있는 번호를 입력해주세요. ");
+				System.out.println("메뉴에 있는 '번호'를 입력해주세요. ");
 			}
 		}
 	}
@@ -223,7 +223,7 @@ public class UserMenuView {
 		while (true) {
 			System.out.println("\n");
 			System.out.println("1. 비밀번호 변경    2. 이름 변경    3. 전화번호 변경    0. 변경 완료하기 (0번 누를때까지 반복)");
-			System.out.println("--------------------------------------------------------------------------------------");
+			System.out.println("-----------------------------------------------------------------------------------------");
 			System.out.print("번호를 입력해주세요 :  ");
 			menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
@@ -253,7 +253,7 @@ public class UserMenuView {
 				UserController.updateUserInfo(user);
 				return;
 			default:
-				System.out.println("메뉴에 있는 번호를 입력해주세요");
+				System.out.println("메뉴에 있는 '번호'를 입력해주세요");
 			}
 		}
 	}

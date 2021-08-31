@@ -48,10 +48,10 @@ public class CartController {
 
 			// 장바구니에서 상품찾기
 			if (cart.chkCartDuplicate(bookNo)) { // true면 중복되는책 존재
-				throw new SQLException("이미 장바구니에 담은 책은 중복해서 담을 수 없습니다.");
+				throw new SQLException("이미 장바구니에 담은 책은 중복해서 담을 수 없습니다. ");
 			}
 			cartService.insertBook(bookNo, cart);
-			EndView.printMessage("장바구니에 담았습니다");
+			EndView.printMessage("장바구니에 담았습니다. ");
 			System.out.println("\n");
 		}catch(Exception e) {
 			//e.printStackTrace();
@@ -97,12 +97,12 @@ public class CartController {
 				if (cartDetail.getBookNo() == bookNo) {
 					cartService.deleteCartBook(cart, cartDetail);
 
-					System.out.println("책번호 : " + cartDetail.getBookNo() + "장바구니에서 삭제 완료");
+					System.out.println("도서번호 : " + cartDetail.getBookNo() + "장바구니에서 삭제 완료되었습니다. ");
 
 					return;
 				}
 			}
-			System.out.println("삭제실패");
+			System.out.println(" 삭제실패 ");
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}
@@ -117,7 +117,7 @@ public class CartController {
 
 		Cart cart = (Cart) session.getAttribute("cart");
 		if (cart == null) { // 장바구니가 없는 고객
-			FailView.errorMessage("장바구니가 비었습니다");
+			FailView.errorMessage("장바구니가 비었습니다. ");
 		} else {
 			EndView.printViewCart(userId, cart);
 		}
@@ -134,7 +134,7 @@ public class CartController {
 		for (CartDetail cartDetail : list) {
 			try {
 				cartService.rentalCartBook(cart, cartDetail);
-				EndView.printMessage(cartDetail.getBookNo() + "번 대여 성공했습니다.");
+				EndView.printMessage(cartDetail.getBookNo() + "번 대여 성공했습니다. ");
 				tempList.add(cartDetail);
 			} catch (SQLException e) {
 				//e.printStackTrace();

@@ -97,7 +97,7 @@ public class BookMenuView {
 					System.out.println("처음으로 돌아갑니다.");
 					break;
 				default:
-					System.out.println("네 or 아니오 중 하나를 입력해주세요... 처음으로 돌아갑니다.");					}
+					System.out.println("( 네 or 아니오 ) 중 하나를 입력해주세요  처음으로 돌아갑니다. ");					}
 			}
 			break;
 			
@@ -131,7 +131,7 @@ public class BookMenuView {
 					System.out.println("처음으로 돌아갑니다.");
 					break;
 				default:
-					System.out.println("네 or 아니오 중 하나를 입력해주세요... 처음으로 돌아갑니다.");					}
+					System.out.println("( 네 or 아니오 ) 중 하나를 입력해주세요  처음으로 돌아갑니다. ");					}
 			}
 			break;
 			
@@ -164,7 +164,7 @@ public class BookMenuView {
 					System.out.println("처음으로 돌아갑니다.");
 					break;
 				default:
-					System.out.println("네 or 아니오 중 하나를 입력해주세요... 처음으로 돌아갑니다.");					}
+					System.out.println("( 네 or 아니오 ) 중 하나를 입력해주세요  처음으로 돌아갑니다. ");					}
 			}
 			break;
 
@@ -197,7 +197,7 @@ public class BookMenuView {
 					System.out.println("처음으로 돌아갑니다.");
 					break;
 				default:
-					System.out.println("네 or 아니오 중 하나를 입력해주세요... 처음으로 돌아갑니다.");					}
+					System.out.println("( 네 or 아니오 ) 중 하나를 입력해주세요  처음으로 돌아갑니다. ");					}
 			}
 			
 			break;
@@ -213,14 +213,16 @@ public class BookMenuView {
 		List<Book> bookList = null;
 		while(true) {
 			try {
-				System.out.print("대여 여부 검색 (대출가능: 0, 대출 중: 1, 예약 중: 2)\n > ");
+				System.out.print("대여 여부 ( 대출가능 : 0, 대출 중 : 1, 예약 중 : 2 )\n");
+				System.out.println("\n");
+				System.out.println("원하시는 서비스의 번호를 입력해주세요 : ");
 				int state = Integer.parseInt(sc.nextLine());
 
 				System.out.println("\n");
 				bookList = BookController.bookSelectByState(user, state);
 				break;
 			} catch (NumberFormatException e) {
-				FailView.errorMessage("숫자만 입력해주세요.");
+				FailView.errorMessage("메뉴에 있는 '숫자'만 입력해주세요. ");
 			}
 		}
 		return bookList;

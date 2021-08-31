@@ -36,11 +36,11 @@ public class ReservationDAOImpl implements ReservationDAO {
 			ps.setInt(2, reservation.getUserNo());
 			//1. 해당 책번호와 회원번호에 해당하는 예약이 예약 테이블에 존재하는지 확인
 			int chk = chkDuplicate(con, reservation);
-			if (chk == 1) throw new SQLException("예약불가능(1명만가능)");
+			if (chk == 1) throw new SQLException(" 예약불가능 ( 1명만가능 ) ");
 			
 			//2. bookstate가 1인지 확인
 			chk = getBookState(con, reservation);
-			if (chk != 1) throw new SQLException("대출중인 도서만 예약가능");
+			if (chk != 1) throw new SQLException(" 대출중인 도서만 예약가능 ");
 			result = ps.executeUpdate();
 		}finally {
 			DbUtil.close(con, ps);

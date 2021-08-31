@@ -21,7 +21,7 @@ public class AdminMenuView {
 				System.out.println("                        관리자 메뉴                         ");
 				System.out.println("\n");
 				System.out.println("    1. 회원관리      2. 도서관리     3. 대출관리     9. 나가기     ");
-				System.out.println("--------------------------------------------------------------------");
+				System.out.println("---------------------------------------------------------------------");
 				
 				int menu = Integer.parseInt(sc.nextLine());
 				switch (menu) {
@@ -125,7 +125,7 @@ public class AdminMenuView {
 						}
 						Book updatebook = updateBook();
 						result = UpdateAdminController.bookUpdate(bookNo, updatebook);
-						if(result==1)System.out.println(bookNo+"번 해당 책이 수정되었습니다. ");
+						if(result==1)System.out.println(bookNo+"번 해당 도서가 수정되었습니다. ");
 						break;
 					case 3 : 
 						bookNo = InputBookNo();
@@ -181,7 +181,7 @@ public class AdminMenuView {
 	 * UserId 입력받기 
 	 */
 	public static String InputUserId() {
-		System.out.print("userId 입력 : ");
+		System.out.print("UserId 입력 : ");
 		String userId = sc.nextLine();
 		return userId;
 	}
@@ -198,7 +198,7 @@ public class AdminMenuView {
 	        System.out.print("도서이름 입력 : ");
 	        String bookName = sc.nextLine();
 	        if(bookName.equals("")) {
-	        	System.out.println("도서이름은 입력 필수입니다. ");
+	        	System.out.println("도서이름의 입력은 필수입니다. ");
 	        	continue;
 	        }
 	        System.out.print("저자명 입력 : ");
@@ -240,13 +240,13 @@ public class AdminMenuView {
 	 */
 	private static User updateUser() {
 		User updateUser = new User();
-		System.out.println("수정할 USER ID 입력(수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
+		System.out.println("수정할 UserID 입력 (수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
 		updateUser.setUserId(sc.nextLine());
-		System.out.println("수정할 USER PASSWORD 입력(수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
+		System.out.println("수정할 UserPASSWORD 입력 (수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
 		updateUser.setUserPwd(sc.nextLine());
-		System.out.println("수정할 USER NAME 입력(수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
+		System.out.println("수정할 UserNAME 입력 (수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
 		updateUser.setUserName(sc.nextLine());
-		System.out.println("수정할 USER PHONE 입력(수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
+		System.out.println("수정할 UserPHONE 입력 (수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
 		updateUser.setUserPhone(sc.nextLine()); 
 
 		return updateUser;
@@ -257,13 +257,13 @@ public class AdminMenuView {
 	 */
 	public static Book updateBook() {
 		Book updateBook = new Book();		
-		System.out.print("수정할 bookName 입력(수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
+		System.out.print("수정할 도서이름 입력 (수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
 		updateBook.setBookName(sc.nextLine());
-		System.out.print("수정할 bookWriter 입력(수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
+		System.out.print("수정할 저자명 입력 (수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
 		updateBook.setBookWriter(sc.nextLine());
-		System.out.print("수정할 bookPublisher 입력(수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
+		System.out.print("수정할 출판사 입력 (수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
 		updateBook.setBookPublisher(sc.nextLine());
-		System.out.print("수정할 bookField 입력 >(수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
+		System.out.print("수정할 도서분야 입력 (수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
 		updateBook.setBookField(sc.nextLine());
 		
 		return updateBook;
