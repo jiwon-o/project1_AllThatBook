@@ -166,14 +166,6 @@ public class AdminMenuView {
 		}finally {
 			return userNo;
 		}
-//		System.out.print("userNo 입력 > ");
-//	while (!sc.hasNextInt()) { //값이 숫자인지 판별		
-//        String userNo = sc.next();  //값이 숫자가 아니면 버린다.
-//        System.out.print("에러! 숫자가 아닙니다. \n재 선택 : ");
-//		}
-//		int userNo = Integer.parseInt(sc.nextLine()); //위에서 값이 숫자일 경우 이쪽으로 값을 넣어준다.
-//		return userNo;
-
 	}
 	
 	/**
@@ -191,9 +183,9 @@ public class AdminMenuView {
 	public static Book InputBook() {
 		Book book = null;
 		while(true) {
-	        System.out.println("책번호는 자동배정됩니다.");
+	        System.out.println("bookNo은 자동배정됩니다.");
 	        
-	        System.out.print("책이름 입력 : ");
+	        System.out.print("bookName 입력 : ");
 	        String bookName = sc.nextLine();
 	        if(bookName.equals("")) {
 	        	System.out.println("bookName은 입력 필수");
