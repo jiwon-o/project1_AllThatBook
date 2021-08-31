@@ -11,10 +11,13 @@ import allthatbook.mvc.util.DbUtil;
 public class ReservationDAOImpl implements ReservationDAO {
 
 	/**
-	 * 예약하기 그전에 중복해서 예약할 수 없으므로 중복체크 예약은 한명만 가능하므로 우선 예약테이블에 책번호에 해당하는 예약이 있는지 확인 또한
-	 * 예약은 대출중인 도서에만 가능하므로 book_state가 1인지도 확인 확인이 끝난 도서는 예약테이블에 넣어준다.
-	 */
-	@Override
+	 * 예약하기
+	 * 내가 대출한 책인지 확인
+	 * 그전에 중복해서 예약할 수 없으므로 중복체크
+	 * 예약은 한명만 가능하므로 우선 예약테이블에 책번호에 해당하는 예약이 있는지 확인
+	 * 또한 예약은 대출중인 도서에만 가능하므로 book_state가 1인지도 확인
+	 * 확인이 끝난 도서는 예약테이블에 넣어준다.
+	 * */	
 	public int insertReservation(Reservation reservation) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -30,10 +33,14 @@ public class ReservationDAOImpl implements ReservationDAO {
 			int chk = chkDuplicate(con, reservation);
 			if (chk == 1)
 				throw new SQLException("예약불가능(1명만가능)");
+			
 			// 2. bookstate가 1인지 확인
 			chk = getBookState(con, reservation);
-			if (chk != 1)
-				throw new SQLException("대출중인 도서만 예약가능");
+			if (chk != 1) throw new SQLException("대출중인 도서만 예약가능");
+			
+			//3. 대출중인 사람이 본인인지 확인
+			chk = getUserState(con, reservation);
+			if (chk == reservation.getUserNo()) throw new SQLException("본인이 대출한 도서를 예약할 수 없습니다.");
 			result = ps.executeUpdate();
 		} finally {
 			DbUtil.close(con, ps);
@@ -90,21 +97,46 @@ public class ReservationDAOImpl implements ReservationDAO {
 		}
 		return result;
 	}
-
-	public int getBookState(Connection con, Reservation reservation) throws SQLException {
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		String sql = "select 상태 from books where 책번호=?";
-		int result = 0;
-		try {
-			ps = con.prepareStatement(sql);
-			ps.setInt(1, reservation.getBookNo());
-			rs = ps.executeQuery();
-			if (rs.next())
-				result = rs.getInt(1);
-		} finally {
-			DbUtil.close(null, ps, rs);
-		}
+	
+	
+	public int getBookState(Connection con, Reservation reservation) throws SQLException{
+		  PreparedStatement ps=null;
+		  ResultSet rs = null;
+		  String sql="select 상태 from books where 책번호=?";
+		  int result = 0;
+		 try {
+			 ps = con.prepareStatement(sql);
+			 ps.setInt(1, reservation.getBookNo());
+			 rs = ps.executeQuery();
+			 if (rs.next()) result = rs.getInt(1);
+		  }	   
+      finally {
+  	    DbUtil.close(null, ps , rs);
+      }
+		
 		return result;
-	}// 메소드 끝
+	}//메소드 끝
+
+	
+	public int getUserState(Connection con, Reservation reservation) throws SQLException{
+		  PreparedStatement ps=null;
+		  ResultSet rs = null;
+		  String sql = "select * from rental where 회원번호 = ? and 책번호 = ? and 반납여부 = 0";
+		  int result = 0;
+		 try {
+			 ps = con.prepareStatement(sql);
+			 ps.setInt(1, reservation.getUserNo());
+			 ps.setInt(2, reservation.getBookNo());
+			 rs = ps.executeQuery();
+			 if (rs.next()) { 
+				 result = rs.getInt("회원번호");
+				 }
+		  }	   
+    finally {
+	    DbUtil.close(null, ps , rs);
+    }
+		
+		return result;
+	}//메소드 끝
+
 }

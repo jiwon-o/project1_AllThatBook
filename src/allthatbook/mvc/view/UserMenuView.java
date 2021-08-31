@@ -95,7 +95,9 @@ public class UserMenuView {
 				SessionSet ss = SessionSet.getInstance();
 				System.out.println(ss.getSet()); // Set객체
 				System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-				System.out.println("1. 전체목록    2. 도서검색 (대여, 예약)   3. 도서반납   4. 책신청   5. 장바구니담기    6. 장바구니보기    7. 회원정보     8. 회원정보수정    9. 로그아웃    100. 장바구니 비우기");
+
+				System.out.println("1. 전체목록    2. 도서검색 (대여, 예약)   3. 도서반납   5. 장바구니담기    6. 장바구니보기    7. 회원정보     8. 회원정보수정    9. 로그아웃   ");
+
 				System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 				System.out.print("원하시는 서비스의 번호를 입력해주세요 :  ");
 				int menu = Integer.parseInt(sc.nextLine());
@@ -108,7 +110,8 @@ public class UserMenuView {
 					break;
 				case 3:
 					System.out.print("반납할 책 번호: ");
-					RentalController.returnBook(user, sc.nextInt());
+					int bookNo = Integer.parseInt(sc.nextLine());
+					RentalController.returnBook(user, bookNo);
 					break;
 				case 4:
 					CartMenuView.putCart(user.getUserId());

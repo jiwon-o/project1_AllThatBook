@@ -182,7 +182,7 @@ public class RentalDAOImpl implements RentalDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = "select 대여번호, 책번호, 회원번호, "
-				+ "to_char(반납예정일자, 'yy/mm/dd')반납예정일자, to_char(대여일자, 'yy/mm/dd')대여일자, to_char(반납일자, 'yy/mm/dd')반납일자, "
+				+ "반납예정일자, 대여일자, 반납일자, "
 				+ "반납여부, 연체여부 from rental where 책번호 = ? and 회원번호 = ? and 반납여부 = 0";
 		ResultSet rs = null;
 		try {
@@ -199,7 +199,6 @@ public class RentalDAOImpl implements RentalDAO {
 				if (ur == 1) {
 					// 해당하는 책번호 상태 변경, 만약 예약자가 존재하면 상태 2로, 존재하지 않으면 0으로
 					int chkRez = checkReservation(con, rental); // 1이면 예약존재
-					System.out.println(chkRez);
 					if (chkRez > 0) {
 						changeBookState(con, rental, 2);
 					} else {

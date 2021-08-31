@@ -16,8 +16,7 @@ public class ReservationContoller {
 	private static ReservationService reservationService = new ReservationServiceImpl();
 	
 	public static void insertReservation(User user, int bookNo) {
-	//public static void insertReservation(User user, Book book) {
-		//Reservation reservation = new Reservation(book.getBookNo(), user.getUserNo());
+	
 		Reservation reservation = new Reservation(bookNo, user.getUserNo());
 		try {
 		    reservationService.insertReservation(reservation);
