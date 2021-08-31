@@ -68,7 +68,7 @@ public class UserController {
 	public static void deleteUserInfo(User user) {
 		try {
 			userService.deleteUserInfo(user);
-			EndView.printMessage("회원탈퇴가 성공되었습니다. 로그인 화면으로 이동합니다.");
+			EndView.printMessage("회원탈퇴가 완료되었습니다. 로그인 화면으로 이동합니다.");
 			UserMenuView.logout(user.getUserId()); //수정 되어서 다시 로그인 시키기
 		} catch (SQLException e) {
 			e.printStackTrace();

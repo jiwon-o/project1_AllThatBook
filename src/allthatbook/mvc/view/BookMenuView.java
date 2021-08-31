@@ -19,7 +19,7 @@ public class BookMenuView {
 		while(true) {
 			System.out.println("\n");
 			System.out.println("1. 도서번호로 검색    2. 도서명으로 검색    3. 저자명으로 검색    4. 출판사로 검색     5. 도서분야로 검색     6. 대여여부로 검색    9. 돌아가기    ");
-			System.out.println("-----------------------------------------------------------------------------------------------------------------------");
+			System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
 			System.out.print("원하시는 서비스의 번호를 입력해주세요 :  ");
 			int menu =Integer.parseInt(sc.nextLine());
 			switch(menu) {
@@ -183,7 +183,7 @@ public class BookMenuView {
 			int result=0;
 
 			System.out.println("1. 선택도서 수정    2. 선택도서 삭제    3. 돌아가기    9. 메인메뉴로 가기  ");
-			System.out.println("-------------------------------------------------------------");
+			System.out.println("------------------------------------------------------------------------");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch(menu) {
 				case 1 :
@@ -207,7 +207,7 @@ public class BookMenuView {
 		boolean flag = true;
 		while(flag) {
 			System.out.println("1. 선택도서 수정    2. 선택도서 삭제    3. 돌아가기    9. 메인메뉴로 가기 ");
-			System.out.println("------------------------------------------------------------");
+			System.out.println("---------------------------------------------------------------------------");
 			int menu = Integer.parseInt(sc.nextLine());
 			int bookNo=0;
 			int result=0;

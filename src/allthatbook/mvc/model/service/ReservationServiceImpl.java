@@ -10,7 +10,7 @@ public class ReservationServiceImpl implements ReservationService{
 	@Override
 	public void insertReservation(Reservation reservation) throws SQLException {
 		int result = reservationDAO.insertReservation(reservation);
-		if (result == 0) throw new SQLException("예약실패");
+		if (result == 0) throw new SQLException(" 예약실패 ");
 		
 	}
 

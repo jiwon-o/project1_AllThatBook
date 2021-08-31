@@ -16,7 +16,7 @@ public class BookServiceImpl implements BookService {
      * */
 	public List<Book> bookSelect() throws NotFoundException , SQLException{
 		List<Book> list = bookDao.bookSelect();
-		if(list.size()==0)throw new NotFoundException("현재 상품이 없습니다.");
+		if(list.size()==0)throw new NotFoundException("현재 도서가 없습니다.");
 		return list;
 	}
 	
@@ -26,7 +26,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public Book bookSelectByBookNo(int bookNo) throws SQLException {
 		Book book = bookDao.bookSelectByBookNo(bookNo);
-		if(book == null) throw new SQLException("해당 bookNo에 해당하는 책은 현재 없습니다.");
+		if(book == null) throw new SQLException("해당 도서번호에 해당하는 책은 현재 없습니다.");
 		return book;
 	}
 

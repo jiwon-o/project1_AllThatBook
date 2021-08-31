@@ -51,7 +51,7 @@ public class CartMenuView {
 		while(true) {
 
 			System.out.println("1. 대여하기    2. 장바구니 담기   3. 장바구니 보기    4. 돌아가기    9. 메인메뉴로 가기  ");
-			System.out.println("------------------------------------------------------------------------");
+			System.out.println("------------------------------------------------------------------------------------");
 			System.out.print("번호 입력 :  ");
 
 			switch(Integer.parseInt(sc.nextLine())) {
@@ -78,7 +78,7 @@ public class CartMenuView {
 	public static void printCartMenu(User user) {
 		while(true) {
 			System.out.println("1. 대여하기    2. 장바구니 담기   3. 장바구니 보기    4. 돌아가기   ");
-			System.out.println("--------------------------------------------------------");
+			System.out.println("------------------------------------------------------------------");
 			System.out.print("번호 입력 :  ");
 			switch(Integer.parseInt(sc.nextLine())) {
 			case 1:
