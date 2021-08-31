@@ -69,8 +69,8 @@ public class RentalDAOImpl implements RentalDAO {
 					}
 				}
 			} // else끝
-			con.commit();
 		} finally {
+			con.commit();
 			DbUtil.close(con, ps, null);
 		}
 		return result;
@@ -124,10 +124,9 @@ public class RentalDAOImpl implements RentalDAO {
 						throw new SQLException("책번호 " +rental.getBookNo() + "는 예약된 도서입니다.");
 					}
 				} // else끝
-
-				con.commit();
 			}
 		} finally {
+			con.commit();
 			DbUtil.close(con, ps, null);
 		}
 		return result;
@@ -169,7 +168,6 @@ public class RentalDAOImpl implements RentalDAO {
 		} finally {
 			DbUtil.close(null, ps);
 		}
-
 		return result;
 	}// 메소드 끝
 
@@ -183,7 +181,9 @@ public class RentalDAOImpl implements RentalDAO {
 		int result = 0;
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "select * from rental where 책번호 = ? and 회원번호 = ? and 반납여부 = 0";
+		String sql = "select 대여번호, 책번호, 회원번호, "
+				+ "to_char(반납예정일자, 'yy/mm/dd')반납예정일자, to_char(대여일자, 'yy/mm/dd')대여일자, to_char(반납일자, 'yy/mm/dd')반납일자, "
+				+ "반납여부, 연체여부 from rental where 책번호 = ? and 회원번호 = ? and 반납여부 = 0";
 		ResultSet rs = null;
 		try {
 			con = DbUtil.getConnection();
@@ -209,16 +209,13 @@ public class RentalDAOImpl implements RentalDAO {
 				} else {
 					con.rollback();
 				}
-
 			} else {
 				throw new SQLException("대여중인 도서가 아닙니다.");
 			}
-
 		} finally {
 			con.commit();
 			DbUtil.close(con, ps, rs);
 		}
-
 		return result;
 	}
 
@@ -229,8 +226,7 @@ public class RentalDAOImpl implements RentalDAO {
 		PreparedStatement ps = null;
 		int result = 0;
 		String sql = "update rental set 반납일자 = sysdate, 반납여부 = 1, 연체여부 = ? where 회원번호 = ? and 책번호 = ? and 반납여부 = 0";
-		Date date = new Date(LocalDate.now().getYear() - 1900, LocalDate.now().getMonthValue() - 1,
-				LocalDate.now().getDayOfMonth());
+		Date date = new Date(LocalDate.now().getYear() - 1900, LocalDate.now().getMonthValue() - 1,	LocalDate.now().getDayOfMonth());
 		try {
 			ps = con.prepareStatement(sql);
 			if (rental.getExreturnDate().after(date)) {
@@ -244,7 +240,6 @@ public class RentalDAOImpl implements RentalDAO {
 		} finally {
 			DbUtil.close(null, ps);
 		}
-
 		return result;
 	}
 
@@ -254,7 +249,7 @@ public class RentalDAOImpl implements RentalDAO {
 	public int checkReservation(Connection con, Rental rental) throws SQLException {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "select * from reservation where 책번호 = ?";
+		String sql = "select 예약번호, 책번호, 회원번호, to_char(예약일자, 'yy/mm/dd')예약일자 from reservation where 책번호 = ?";
 		int result = 0;
 		try {
 			ps = con.prepareStatement(sql);
@@ -265,8 +260,6 @@ public class RentalDAOImpl implements RentalDAO {
 		} finally {
 			DbUtil.close(null, ps, rs);
 		}
-
 		return result;
 	}
-
 }// 클래스 끝

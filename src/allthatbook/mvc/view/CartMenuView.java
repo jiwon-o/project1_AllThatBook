@@ -1,6 +1,5 @@
 package allthatbook.mvc.view;
 
-import java.util.List;
 import java.util.Scanner;
 
 import allthatbook.mvc.controller.CartController;
@@ -21,7 +20,7 @@ public class CartMenuView {
 	 */
 	public static void putCart(String userId) {
 		System.out.println("\n");
-		System.out.println(">>>>>> 장바구니 담기 >>>>>>");
+		System.out.println(">>>>>>>>> 장바구니 담기 >>>>>>>>>");
 		System.out.print("도서번호 :  ");
 		int bookNo = Integer.parseInt(sc.nextLine());
 
@@ -32,7 +31,7 @@ public class CartMenuView {
 	 * 장바구니 담기(책번호로 검색했을 때)
 	 */
 	public static void putCart(String userId, Book book) {
-		System.out.println(">>>>>> 장바구니 담기 >>>>>>");
+		System.out.println(">>>>>>>>> 장바구니 담기 >>>>>>>>>");
 		
 		CartController.putCart(userId, book.getBookNo());
 	}
@@ -45,7 +44,6 @@ public class CartMenuView {
 	 */
 	public static void printCartMenu(User user, Book book) {
 		while(true) {
-
 			System.out.println(" 1. 대여하기    2. 예약하기    3. 장바구니 담기    4. 장바구니 보기    5. 돌아가기 ");
 			System.out.println("------------------------------------------------------------------------");
 			System.out.print("번호 입력 :  ");

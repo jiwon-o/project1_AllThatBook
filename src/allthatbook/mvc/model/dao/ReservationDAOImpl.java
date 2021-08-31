@@ -1,14 +1,10 @@
 package allthatbook.mvc.model.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.PseudoColumnUsage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
-import allthatbook.mvc.model.dto.Rental;
 import allthatbook.mvc.model.dto.Reservation;
 import allthatbook.mvc.util.DbUtil;
 
@@ -22,23 +18,23 @@ public class ReservationDAOImpl implements ReservationDAO {
 	 * 또한 예약은 대출중인 도서에만 가능하므로 book_state가 1인지도 확인
 	 * 확인이 끝난 도서는 예약테이블에 넣어준다.
 	 * */	
-	@Override
 	public int insertReservation(Reservation reservation) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = "insert into reservation values(reservation_seq_no.nextval, ?, ?, sysdate)";
 		int result = 0;
-		
+
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, reservation.getBookNo());
 			ps.setInt(2, reservation.getUserNo());
-			//1. 해당 책번호와 회원번호에 해당하는 예약이 예약 테이블에 존재하는지 확인
+			// 1. 해당 책번호와 회원번호에 해당하는 예약이 예약 테이블에 존재하는지 확인
 			int chk = chkDuplicate(con, reservation);
-			if (chk == 1) throw new SQLException("예약불가능(1명만가능)");
+			if (chk == 1)
+				throw new SQLException("예약불가능(1명만가능)");
 			
-			//2. bookstate가 1인지 확인
+			// 2. bookstate가 1인지 확인
 			chk = getBookState(con, reservation);
 			if (chk != 1) throw new SQLException("대출중인 도서만 예약가능");
 			
@@ -46,17 +42,16 @@ public class ReservationDAOImpl implements ReservationDAO {
 			chk = getUserState(con, reservation);
 			if (chk == reservation.getUserNo()) throw new SQLException("본인이 대출한 도서를 예약할 수 없습니다.");
 			result = ps.executeUpdate();
-		}finally {
+		} finally {
 			DbUtil.close(con, ps);
 		}
 		return result;
 	}
 
-	
-	 /**
-	 * 1. 대출에서 대출대기중인 상태의 책을 대출하면 예약테이블에서 삭제 --> 대출에서 connection 인수로 받아서
-	 * 2. 예약테이블에서 바로 삭제	  
-	 * */
+	/**
+	 * 1. 대출에서 대출대기중인 상태의 책을 대출하면 예약테이블에서 삭제 --> 대출에서 connection 인수로 받아서 2. 예약테이블에서
+	 * 바로 삭제
+	 */
 	@Override
 	public int deleteReservation(Reservation reservation) throws SQLException {
 		// TODO Auto-generated method stub
@@ -73,20 +68,20 @@ public class ReservationDAOImpl implements ReservationDAO {
 			ps.setInt(1, reservation.getUserNo());
 			ps.setInt(2, reservation.getBookNo());
 			result = ps.executeUpdate();
-		}finally {
+		} finally {
 			DbUtil.close(null, ps);
 		}
-	
 		return result;
 	}
-	
+
 	/**
 	 * 중복된 책을 예약하는지 체크해주는 메소드
-	 * */
-	public int chkDuplicate(Connection con, Reservation reservation) throws SQLException{
+	 */
+	public int chkDuplicate(Connection con, Reservation reservation) throws SQLException {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "select * from reservation where 책번호 = ? and 회원번호 = ? ";
+		String sql = "select 예약번호, 책번호, 회원번호, to_char(예약일자, 'yy/mm/dd')예약일자 from reservation"
+				+ " where 책번호 = ? and 회원번호 = ? ";
 		int result = 0;
 		int bookNo = reservation.getBookNo();
 		int userNo = reservation.getUserNo();
@@ -95,8 +90,9 @@ public class ReservationDAOImpl implements ReservationDAO {
 			ps.setInt(1, bookNo);
 			ps.setInt(2, userNo);
 			rs = ps.executeQuery();
-			if (rs.next()) result =1;
-		}finally {
+			if (rs.next())
+				result = 1;
+		} finally {
 			DbUtil.close(null, ps, rs);
 		}
 		return result;

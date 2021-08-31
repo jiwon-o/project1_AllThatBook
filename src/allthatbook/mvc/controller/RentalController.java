@@ -43,7 +43,7 @@ public class RentalController {
 		try {
 			Rental rental = new Rental(bookNo, user.getUserNo());
 			rentalService.returnBook(rental);
-			EndView.printMessage(bookNo + "번 반납 성공");
+			EndView.printMessage(bookNo + "번 반납 성공하였습니다.");
 		}catch (SQLException e) {
 			FailView.errorMessage(e.getMessage());
 		}

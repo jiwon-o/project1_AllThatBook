@@ -2,8 +2,7 @@ package allthatbook.mvc.session;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import allthatbook.mvc.model.dto.Book;
+import java.util.Set;
 
 /**
  * 사용자 객체
@@ -51,12 +50,20 @@ public class Session {
 		attributes.remove(name);
 	}
 		
-		
 	@Override
 	public String toString() {
-		return "Session [sessionId=" + sessionId + ", attributes=" + attributes + "]"+"\n";
+		StringBuilder builder = new StringBuilder();
+		builder.append("***ID: ");
+		builder.append(sessionId);
+		builder.append(" 님 접속중***");
+		builder.append("\n");
+		Set<String> keySet = attributes.keySet();
+		for (Object key : keySet) {
+			builder.append("장바구니: ");
+			builder.append(attributes.get(key));
+		}
+		return builder.toString();
 	}
-	
 	
 	@Override
 	public int hashCode() {
