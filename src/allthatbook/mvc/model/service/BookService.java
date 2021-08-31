@@ -59,17 +59,5 @@ public interface BookService {
 
 	void bookDelete(int bookNo) throws SQLException;
 
-	/**
-	 * 대출중 도서 조회
-	 * */
-	List<Book> bookRentalSelect() throws NotFoundException, SQLException;
-	
-	/**
-	 * 예약중 도서 조회
-	 * */
-	List<Book> bookReserveSelect() throws NotFoundException, SQLException;
-
-
-	
 	
 }

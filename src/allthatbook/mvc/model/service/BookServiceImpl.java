@@ -95,6 +95,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public int bookUpdate(Book updatebook) throws SQLException {
 		int result = bookDao.bookUpdate(updatebook);
+		if(result==0)throw new SQLException("책수정 실패했습니다.");
 		return result;
 	}
 
@@ -104,21 +105,4 @@ public class BookServiceImpl implements BookService {
 		if(result==0)throw new SQLException("도서삭제가 되지 않았습니다.");
 	}
 
-	@Override
-	public List<Book> bookRentalSelect() throws NotFoundException, SQLException {
-		List<Book> list = bookDao.bookRentalSelect();
-		if(list.size()==0)throw new NotFoundException("모든 도서 대출가능합니다.");
-		return list;
-	}
-
-	@Override
-	public List<Book> bookReserveSelect() throws NotFoundException, SQLException {
-		List<Book> list = bookDao.bookReserveSelect();
-		if(list.size()==0)throw new NotFoundException("모든 도서 예약가능합니다.");
-		return list;
-	}
-
-	
-
-	
 }

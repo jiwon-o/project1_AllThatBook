@@ -1,5 +1,6 @@
 package allthatbook.mvc.view;
 
+import java.util.List;
 import java.util.Scanner;
 import allthatbook.mvc.controller.BookController;
 import allthatbook.mvc.controller.UpdateAdminController;
@@ -108,9 +109,9 @@ public class AdminMenuView {
 	public static void bookAdminMenu(User user) {
 		while(true) {
 			try {
-				System.out.println("                                       관리자 도서 관리                                          ");
-				System.out.println("1. 새 도서등록   2. 도서정보수정   3. 도서삭제   4. 도서조회   5. 대출한도서 조회   6. 예약한도서 조회   9. 나가기  ");
-				System.out.println("---------------------------------------------------------------------------------------------");
+				System.out.println("                              관리자 도서 관리                                   ");
+				System.out.println("1. 새 도서등록   2. 도서정보수정   3. 도서삭제   4. 도서조회 9. 나가기  ");
+				System.out.println("---------------------------------------------------------------------------------");
 				int menu=Integer.parseInt(sc.nextLine());
 				int bookNo=0;
 				int result=0;
@@ -134,14 +135,8 @@ public class AdminMenuView {
 						bookNo = InputBookNo();
 						BookController.bookDelete(bookNo);	
 						break;
-					case 4 : //도서조회 --- 장바구니 말고 수정, 삭제로 연결되게 
-						//BookMenuView.printSelectMenu(user);
-						break;
-					case 5 : //대출한도서 : 상태가 1인도서 조회 
-						BookController.bookRentalSelect();
-						break;
-					case 6 : //예약도서 조회 : 상태가 2인도서 조회
-						BookController.bookReserveSelect();
+					case 4 : 
+						printSelectMenu(user);
 						break;
 					case 9 :
 						return;
@@ -155,7 +150,40 @@ public class AdminMenuView {
 		}
 	}	
 	
-	
+	/**
+	 * 관리자 도서 검색 메뉴
+	 */
+	public static void printSelectMenu(User user) {
+		while(true) {
+			System.out.println("\n");
+			System.out.println("1. 도서번호로 검색    2. 도서명으로 검색    3. 저자명으로 검색    4. 출판사로 검색     5. 도서분야로 검색     6. 대여여부로 검색    9. 돌아가기    ");
+			System.out.println("-----------------------------------------------------------------------------------------------------------------------");
+			System.out.print("원하시는 서비스의 번호를 입력해주세요 :  ");
+			int menu =Integer.parseInt(sc.nextLine());
+			switch(menu) {
+			case 1 :
+				Book book =  BookMenuView.selectBookByNo(user); //도서번호로 검색
+				return;
+			case 2 :
+				List<Book> bookListByName = BookMenuView.selectBookByName(user); //도서명으로 검색
+				return;
+			case 3 :
+				List<Book> bookListByWriter = BookMenuView.selectBookByWriter(user); //저자명으로 검색
+				return;
+			case 4 :
+				List<Book> bookListByPublisher = BookMenuView.selectBookByPublisher(user); //출판사로 검색
+				return;
+			case 5 :
+				List<Book> bookListByCateory = BookMenuView.selectBookByCategory(user); //분야로 검색
+				return;
+			case 6 : 
+				List<Book> bookListByState = BookMenuView.selectBookByState(user); //대여 여부로 검색(0: 대여가능, 1: 대여중, 2: 예약중)
+				return;
+			case 9 :
+				return;
+			}
+		}
+	}
 
 	/**
 	 * UserNo 입력받기 
@@ -171,16 +199,8 @@ public class AdminMenuView {
 		}finally {
 			return userNo;
 		}
-//		System.out.print("userNo 입력 > ");
-//	while (!sc.hasNextInt()) { //값이 숫자인지 판별		
-//        String userNo = sc.next();  //값이 숫자가 아니면 버린다.
-//        System.out.print("에러! 숫자가 아닙니다. \n재 선택 : ");
-//		}
-//		int userNo = Integer.parseInt(sc.nextLine()); //위에서 값이 숫자일 경우 이쪽으로 값을 넣어준다.
-//		return userNo;
-
 	}
-	
+
 	/**
 	 * UserId 입력받기 
 	 */
@@ -192,84 +212,31 @@ public class AdminMenuView {
 
 	/**
 	 *	bookInsert에 필요한 book정보 넣기 
-	 */
-//	public static Book InputBook() {
-//		Book book=null;
-//		//Book book = new Book();
-//		
-//			
-////			System.out.println("bookNo은 자동배정됩니다.");
-////			
-////			System.out.print("bookName 입력 : ");
-////			book.setBookName(sc.nextLine());
-////			if(book.getBookName()==null) {
-////				System.out.println("bookName을 입력해주세요.");
-////				continue;
-////			}
-////			System.out.print("bookWriter 입력 : ");
-////			book.setBookWriter(sc.nextLine());
-////			System.out.print("bookPublisher 입력 : ");
-////			book.setBookPublisher(sc.nextLine());
-////			System.out.println("출간일은 자동배정됩니다.");
-////
-////			System.out.print("bookField 입력 : ");
-////			book.setBookField(sc.nextLine());
-////			System.out.println("bookState 기본 대출가능0으로 들어갑니다.");
-////			break;
-////			System.out.println("bookNo은 자동배정됩니다.");
-//			
-////		for(int i=1; i<=3; i++) {
-////			System.out.print("bookName 입력 : ");
-////			String bookName = (sc.nextLine());
-////			if(bookName== null || bookName.isBlank()) {
-////				System.out.println(i+"번째 실행중입니다. (총 기회 3번)");
-////				continue;
-////			}
-////			System.out.print("bookWriter 입력 : ");
-////			String bookWriter = (sc.nextLine());
-////			System.out.print("bookPublisher 입력 : ");
-////			String bookPublisher = (sc.nextLine());
-////			System.out.println("pubDate 입력 : ");
-////			String pubDate = (sc.nextLine());
-////			System.out.print("bookField 입력 : ");
-////			String bookField = (sc.nextLine());
-////			System.out.println("bookState 기본 대출가능0으로 들어갑니다.");
-////			
-////			
-////			book = new Book(0, bookName, bookWriter, bookPublisher, pubDate, bookField, 0);
-////			break;
-////		}
-////		return book;
-//		
-//		
-//	}
-	
+	 */	
 	public static Book InputBook() {
-		Book book = null;
-		while(true) {
-	        System.out.println("bookNo 자동배정됩니다.");
-	        
-	        System.out.print("bookName 입력 : ");
-	        String bookName = sc.nextLine();
-	        if(bookName.equals("")) {
-	        	System.out.println("bookName은 입력 필수");
-	        	continue;
-	        }
-	        System.out.print("bookWriter 입력 : ");
-	        String bookWriter = sc.nextLine();
-	        System.out.print("bookPublisher 입력 : ");
-	        String bookPublisher = sc.nextLine();
-	        System.out.println("출간일은 자동배정됩니다.");
-	        String pubDate = sc.nextLine();
-	        System.out.print("bookField 입력 : ");
-	        String bookField = sc.nextLine();
-	        System.out.println("bookState 기본 대출가능0으로 들어갑니다.");
-	        
-	        book = new Book(0, bookName, bookWriter, bookPublisher, pubDate, bookField, 0);
-	        break;
-		}
+	      Book book = null;
+	      while(true) {
+	           System.out.println("bookNo은 자동배정됩니다.");
+	           
+	           System.out.print("bookName 입력 : ");
+	           String bookName = sc.nextLine();
+	           System.out.print("bookWriter 입력 : ");
+	           String bookWriter = sc.nextLine();
+	           System.out.print("bookPublisher 입력 : ");
+	           String bookPublisher = sc.nextLine();
+	           System.out.print("bookField 입력 : ");
+	           String bookField = sc.nextLine();
+	           System.out.println("bookState 기본 대출가능(0)으로 들어갑니다.\n");
+	           if(bookName.equals("")||bookWriter.equals("")||bookPublisher.equals("")||bookField.equals("")) {
+		              System.out.println("<bookName, bookWriter, bookPublisher, bookField은 입력 필수>");
+		              continue;
+		           }
+	           book = new Book(0, bookName, bookWriter, bookPublisher, bookField, 0);
+	           break;
+	      }
+
 	      return book;
-	}
+	   }
 
 	
 	/**

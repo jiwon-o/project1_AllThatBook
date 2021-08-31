@@ -12,14 +12,13 @@ public class Book {
   
     public Book() {}
 
-	public Book(int bookNo, String bookName, String bookWriter, String bookPublisher, String pubDate, String bookField, 
+	public Book(int bookNo, String bookName, String bookWriter, String bookPublisher,  String bookField, 
 				int bookState) {
 		super();
 		this.bookNo = bookNo;
 		this.bookName = bookName;
 		this.bookWriter = bookWriter;
 		this.bookPublisher = bookPublisher;
-		this.pubDate = pubDate;
 		this.bookField = bookField;
 		this.bookState = bookState;
 	}
