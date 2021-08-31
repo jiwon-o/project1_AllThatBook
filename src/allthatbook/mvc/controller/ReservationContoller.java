@@ -10,6 +10,7 @@ import allthatbook.mvc.model.service.ReservationService;
 import allthatbook.mvc.model.service.ReservationServiceImpl;
 import allthatbook.mvc.view.EndView;
 import allthatbook.mvc.view.FailView;
+import allthatbook.mvc.view.UserMenuView;
 
 public class ReservationContoller {
 	private static ReservationService reservationService = new ReservationServiceImpl();
@@ -40,13 +41,15 @@ public class ReservationContoller {
 		
 	}
 	
-	public static void deleteReservation(int userNo, int bookNo){
+	public static void deleteReservation(User user, int bookNo){
 		try {
-		    reservationService.deleteReservation(userNo, bookNo);
-		    EndView.printMessage(bookNo+"번 도서 예약이 삭제되었습니다");
-
+		    reservationService.deleteReservation(user.getUserNo(), bookNo);
+		    EndView.printMessage("*** '" + bookNo+"'번 도서예약이 삭제되었습니다. ***\n");
+		    UserMenuView.reservationDeleteMenu(user);
 		}catch (SQLException e) {
 			FailView.errorMessage(e.getMessage());
+			UserMenuView.reservationDeleteMenu(user);
+			
 		}
 	}
 

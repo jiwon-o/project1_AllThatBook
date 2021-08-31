@@ -55,7 +55,7 @@ public class UserController {
 	public static void updateUserInfo(User user) {
 		try {
 			userService.updateUserInfo(user);
-			EndView.printMessage("*** 수정이 완료되었습니다 다시 로그인 해주세요. ***");
+			EndView.printMessage("*** 수정이 완료되었습니다. 다시 로그인 해주세요. ***\n");
 			UserMenuView.logout(user.getUserId()); //수정 되어서 다시 로그인 시키기
 		} catch (SQLException e) {
 			e.printStackTrace();

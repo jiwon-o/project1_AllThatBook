@@ -19,7 +19,7 @@ public class ReservationServiceImpl implements ReservationService{
 	
 	public void deleteReservation(int userNo, int bookNo) throws SQLException {
 		int result = reservationDAO.deleteReservation(userNo, bookNo);
-		if (result == 0) throw new SQLException(" 예약 삭제 실패 ");
+		if (result == 0) throw new SQLException("*** 예약목록에 없는 도서는 삭제할 수 없습니다. ***\n");
 	}
 
 }

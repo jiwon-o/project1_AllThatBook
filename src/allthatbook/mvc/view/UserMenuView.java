@@ -32,10 +32,24 @@ public class UserMenuView {
 					UserMenuView.register(); // 회원가입
 					break;
 				case 9:
-					System.out.println("\n-------------------------------------------------------------");
-					System.out.println("   감사합니다. 다음에 또 'AllThatBook' 과 함께해주세요.    ");
-					System.out.println("-------------------------------------------------------------");
-					System.exit(0);
+					System.out.println("*** 정말 종료하시겠습니까? ( 네 / 아니오 ) ***");
+					String checkLogout = sc.nextLine();
+					if("네".equals(checkLogout)) {
+						
+						System.out.println("\n--------------------------------------------------------------------------------------\n");
+						System.out.println("                    감사합니다. 다음에 또 'AllThatBook' 과 함께해주세요.              ");
+						System.out.println("\n--------------------------------------------------------------------------------------");
+						System.exit(0);
+						
+					}else if("아니오".equals(checkLogout)) {
+						System.out.println("*** '아니오'를 입력하셨습니다. *** ");
+						break;
+					}else {
+						System.out.println("*** ( 네 / 아니오 ) 중 하나만 입력해주세요. ***\n");
+						break;
+					}
+					
+					
 				default:
 					System.out.println("*** 메뉴에 있는 번호를 입력해주세요. ***\n");
 
@@ -94,7 +108,7 @@ public class UserMenuView {
 				System.out.println("\n");
 				System.out.println(ss.getSet()); // Set객체
 				System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-				System.out.println("      1.  전체목록      2.  도서검색(대여, 예약)      3.  도서반납      4.   장바구니담기      5.   장바구니보기      6.   회원정보      7.   회원정보수정      9.   로그아웃      ");
+				System.out.println("      1.  전체목록      2.  도서검색(대여, 예약)      3.  도서반납      4.   회원정보조회      5.   회원정보수정      9.   로그아웃      ");
 				System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 				System.out.print("메뉴 입력 : ");
 
@@ -109,25 +123,35 @@ public class UserMenuView {
 					BookMenuView.printSelectMenu(user);
 					break;
 				case 3:
-					System.out.print("반납할 책 번호: ");
+					System.out.println("*** 도서반납 메뉴를 선택했습니다. ***\n");
+					System.out.print("도서번호 입력: ");
 					int bookNo = Integer.parseInt(sc.nextLine());
 					RentalController.returnBook(user, bookNo);
 					break;
 				case 4:
-					CartMenuView.putCart(user.getUserId());
-					break;
-				case 5:         
-					CartMenuView.viewCart(user);
-					break;
-				case 6:
+					System.out.println("*** 회원정보 화면으로 이동합니다. ***");
 					UserMenuView.selectUserInfo(user);
 					break;
-				case 7:
+				case 5:  
+					System.out.println("*** 회원정보수정 화면으로 이동합니다. ***");
 					UserMenuView.updateTemp(user);
 					if(ss.getSet().size()==0) return;
 					break;
 				case 9:
-					logout(user.getUserId());
+					System.out.println("*** 로그아웃 메뉴를 선택했습니다. ***\n");
+					System.out.println("*** 정말 로그아웃하시겠습니까? ( 네 / 아니오 ) ***");
+					String checkLogout = sc.nextLine();
+					if("네".equals(checkLogout)) {
+						logout(user.getUserId());
+						System.out.println("*** 로그아웃되었습니다. ***\n");
+					}else if("아니오".equals(checkLogout)) {
+						System.out.println("*** '아니오'를 입력하셨습니다. *** ");
+						break;
+					}else {
+						System.out.println("*** ( 네 / 아니오 ) 중 하나만 입력해주세요. ***\n");
+						break;
+					}
+					
 					return;
 				default:
 					System.out.println("*** 메뉴에 있는 번호를 입력해주세요. ***");
@@ -145,12 +169,16 @@ public class UserMenuView {
 	 */
 	public static void clearCart(User user) {
 		
-		System.out.println("정말 삭제하시겠습니까? ( 네 or 아니오 ) ");
+		System.out.println("장바구니 목록을 정말 삭제하시겠습니까? ( 네 / 아니오 ) ");
 		String checkClearCart = sc.nextLine();
 		
 		if("네".equals(checkClearCart)) {
 			CartController.clearCart(user.getUserId());
-			System.out.println("장바구니 내역이 모두 삭제되었습니다. ");
+			System.out.println("*** 장바구니 내역이 모두 삭제되었습니다. ***");
+		}else if("아니오".equals(checkClearCart)) {
+			System.out.println("*** '아니오'를 입력하셨습니다. *** ");
+		}else {
+			System.out.println("*** ( 네 / 아니오 ) 중 하나만 입력해주세요. 처음으로 돌아갑니다. ***\n");
 		}
 		
 	}
@@ -160,30 +188,32 @@ public class UserMenuView {
 	 */
 	public static void updateTemp(User user) {
 		while (true) {
-			System.out.println("정보수정/탈퇴를 위해 비밀번호를 입력해 주세요. (수정을 취소하려면 \"exid\" 입력해주세요) ");
+			System.out.println("\n회원정보 수정/탈퇴를 위해 비밀번호를 입력해 주세요. (수정을 취소하려면 \"exid\" 입력) ");
+			
 			String userPwd = sc.nextLine();
 			if (userPwd.equals("exid")) {
-				System.out.println("다시 메뉴로 돌아갑니다. ");
+				System.out.println("*** 다시 메뉴로 돌아갑니다. ***");
 				break;
 			} else if (!(user.getUserPwd().equals(userPwd))) {
-				System.out.println("비밀번호를 잘못입력 하셨습니다. ");
+				System.out.println("*** 비밀번호가 일치하지않습니다. ***");
 				continue;
 			}
-			System.out.println("\n");
-			System.out.println("-------------------------------------------------------------");
-			System.out.println("      1.  수정          2.회원탈퇴         9.   나가기       ");
-			System.out.println("-------------------------------------------------------------");
-			System.out.print("번호를 선택해주세요 : ");
+
+			System.out.println("\n*** 회원정보 수정/탈퇴 ***");
+			System.out.println("---------------------------------------------------------------");
+			System.out.println("        1.   수정       2.   회원탈퇴       9.   나가기        ");
+			System.out.println("---------------------------------------------------------------");
+			System.out.print("메뉴 입력 : ");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
+				System.out.println("*** 회원정보수정 화면으로 이동합니다.*** ");
 				UserMenuView.update(user); // 수정
 				return;
 			case 2:
 				UserMenuView.delete(user);
 				return;
 			case 9:
-				System.out.println("수정화면이 종료 되었습니다. ");
 				return;
 			default:
 				System.out.println("*** 메뉴에 있는 번호를 입력해주세요. ***");
@@ -201,32 +231,41 @@ public class UserMenuView {
 		String userPhone = user.getUserPhone(); // 바꾸기전 전화번호 기억하기
 
 		while (true) {
-			System.out.println("\n");
-			System.out.println("----------------------------------------------------------------------------------------------");
-			System.out.println("1. 비밀번호 변경    2. 이름 변경    3. 전화번호 변경    0. 변경 완료하기 (0번 누를때까지 반복)");
-			System.out.println("----------------------------------------------------------------------------------------------");
-			System.out.print("번호를 입력해주세요 :  ");
+			System.out.println("\n*** 회원정보수정 화면 ***");
+			System.out.println("--------------------------------------------------------------------------------------------------");
+			System.out.println("      1.   비밀번호 변경      2.   이름 변경      3.   전화번호 변경      9.   변경 완료하기      ");
+			System.out.println("--------------------------------------------------------------------------------------------------");
+			System.out.print("메뉴 입력 : ");
 			menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
+				System.out.println("*** 비밀번호를 변경합니다. ***\n");
 				System.out.print("변경할 비밀번호 : ");
 				userPwd = sc.nextLine();
-				System.out.print("변경할 비밀번호 재확인 : ");
+				System.out.print("변경할 비밀번호 확인 : ");
 				String cheuserPwd = sc.nextLine();
 				if (!userPwd.equals(cheuserPwd)) {
-					System.out.println("비밀번호가 일치하지 않습니다.");
+					System.out.println("*** 비밀번호가 일치하지 않습니다. ***");
 					userPwd = user.getUserPwd();
+				}else {
+					System.out.println("*** 비밀번호가 변경되었습니다. ***");
 				}
 				break;
 			case 2:
+				System.out.println("*** 이름을 변경합니다. ***\n");
 				System.out.print("변경할 이름 : ");
 				userName = sc.nextLine();
+				
+				System.out.println("*** 이름이 변경되었습니다. ***");
 				break;
 			case 3:
+				System.out.println("*** 전화번호를 변경합니다. ***\n");
 				System.out.print("변경할 전화번호 : ");
 				userPhone = sc.nextLine();
+				
+				System.out.println("*** 전화번호가 변경되었습니다. ***");
 				break;
-			case 0:
+			case 9:
 				user.setUserPwd(userPwd);
 				user.setUserName(userName);
 				user.setUserPhone(userPhone);
@@ -296,13 +335,13 @@ public class UserMenuView {
 	 */
 	public static void selectUserInfo(User user) {
 		while(true) {
-			System.out.println("회원정보조회를 위해 비밀번호를 입력해주세요. (검색을 취소하려면 \"exid\" 입력해주세요)");
+			System.out.println("\n회원정보조회를 위해 비밀번호를 입력해주세요. (검색을 취소하려면 \"exid\" 입력) ");
 			String userPwd = sc.nextLine();
 			if (userPwd.equals("exid")) {
-				System.out.println("다시 메뉴로 돌아갑니다. ");
+				System.out.println("*** 다시 메뉴로 돌아갑니다. ***");
 				break;
 			} else if (!(user.getUserPwd().equals(userPwd))) {
-				System.out.println("비밀번호가 일치하지않습니다. ");
+				System.out.println("*** 비밀번호가 일치하지않습니다. ***");
 				continue;
 			}
 			UserController.selectByUserId(user.getUserId());
@@ -315,16 +354,19 @@ public class UserMenuView {
 
 	//예약 삭제하기
 	public static void reservationDeleteMenu(User user) {
-		System.out.println("-------------------------------");
-		System.out.println("1. 예약 삭제하기  2. 되돌아가기");
-		System.out.println("-------------------------------");
-		System.out.print("번호를 입력해주세요 :  ");
+		System.out.println("*** 회원정보 메뉴 ***");
+		System.out.println("----------------------------------------------------------------");
+		System.out.println("        1.    예약 삭제하기        2.    메인메뉴로 가기        ");
+		System.out.println("----------------------------------------------------------------");
+		System.out.print("메뉴 입력 : ");
 		int menu = Integer.parseInt(sc.nextLine());
+		
 		switch (menu) {
 		case 1:
-			System.out.print("삭제할 예약 책번호 입력: ");
+			System.out.println("*** 예약 삭제하기 메뉴를 선택했습니다. ***\n");
+			System.out.print("도서번호 입력 : ");
 			int bookNo = Integer.parseInt(sc.nextLine());
-			ReservationContoller.deleteReservation(user.getUserNo(), bookNo);
+			ReservationContoller.deleteReservation(user, bookNo);
 			break;
 		case 2:
 			System.out.println("예약 삭제 화면이 종료 되었습니다. ");

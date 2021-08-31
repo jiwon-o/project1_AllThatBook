@@ -51,8 +51,7 @@ public class RentalDAOImpl implements RentalDAO {
 				} else if (re == 1) {
 					result = 0;
 					con.rollback();
-					throw new SQLException("*** '" + rental.getBookNo() + "'번 도서는 이미 대출중인 도서이므로 대출하실 수 없습니다."
-							+ " 처음 메뉴로 돌아갑니다. ***");
+					throw new SQLException("*** '" + rental.getBookNo() + "'번 도서는 이미 대출중인 도서이므로 대출하실 수 없습니다. ***");
 				} else {
 					// 상태가 2인 경우
 					// 예약 테이블에선 삭제 시켜줘야한다.
@@ -62,11 +61,11 @@ public class RentalDAOImpl implements RentalDAO {
 						Reservation reservation = new Reservation(rental.getBookNo(), rental.getUserNo());
 						if (reservationDAO.deleteReservation(con, reservation) == 0) {
 							con.rollback();
-							throw new SQLException("예약된 도서입니다.");
+							throw new SQLException("*** '" + rental.getBookNo() + "'번 도서는 예약된 도서입니다. ***");
 						}
 					} else {
 						con.rollback();
-						throw new SQLException("예약된 도서입니다.");
+						throw new SQLException("*** '" + rental.getBookNo() + "'번 도서는 예약된 도서입니다. ***");
 					}
 				}
 			} // else끝
@@ -106,7 +105,7 @@ public class RentalDAOImpl implements RentalDAO {
 				} else if (re == 1) {
 					result = 0;
 					con.rollback();
-					throw new SQLException(rental.getBookNo() + "는대출중인도서");
+					throw new SQLException("*** '" + rental.getBookNo() + "'번 도서는 대출중이므로 대출할 수 없습니다. ***");
 				} else {
 					// 상태가 2인 경우
 					// 예약 테이블에선 삭제 시켜줘야한다.
@@ -118,11 +117,11 @@ public class RentalDAOImpl implements RentalDAO {
 						Reservation reservation = new Reservation(rental.getBookNo(), rental.getUserNo());
 						if (reservationDAO.deleteReservation(con, reservation) == 0) {
 							con.rollback();
-							throw new SQLException("책번호 " +rental.getBookNo() + "는 예약된 도서입니다.");
+							throw new SQLException("*** '" + rental.getBookNo() + "'번 도서는 예약된 도서입니다. ***");
 						}
 					} else {
 						con.rollback();
-						throw new SQLException("책번호 " +rental.getBookNo() + "는 예약된 도서입니다.");
+						throw new SQLException("*** '" + rental.getBookNo() + "'번 도서는 예약된 도서입니다. ***");
 					}
 				} // else끝
 			}
@@ -210,7 +209,7 @@ public class RentalDAOImpl implements RentalDAO {
 					con.rollback();
 				}
 			} else {
-				throw new SQLException("대여중인 도서가 아닙니다.");
+				throw new SQLException("*** 대여중인 도서가 아닙니다. ***");
 			}
 		} finally {
 			con.commit();

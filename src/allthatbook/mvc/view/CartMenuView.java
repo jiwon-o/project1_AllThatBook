@@ -20,15 +20,13 @@ public class CartMenuView {
 	 */
 	public static void putCart(String userId) {
 		try {
-			System.out.println("\n");
-			System.out.println(">>>>>>>>> 장바구니 담기 >>>>>>>>>");
-			System.out.print("도서번호 :  ");
+			System.out.print("도서번호 : ");
 			int bookNo = Integer.parseInt(sc.nextLine());
 			
 			CartController.putCart(userId, bookNo);
 			
 		}catch (NumberFormatException e) {
-			FailView.errorMessage("도서번호는 숫자를 입력해주세요.");
+			FailView.errorMessage("*** 도서번호는 숫자를 입력해주세요. ***");
 		}
 		
 
@@ -59,7 +57,7 @@ public class CartMenuView {
 	public static void printCartMenu(User user, Book book) {
 		while(true) {
 			try {
-				System.out.println("*** 검색 목록 메뉴 ***");
+				System.out.println("\n*** 검색 목록 메뉴 ***");
 				System.out.println("-----------------------------------------------------------------------------------------------------------------");
 				System.out.println("       1.   대출하기      2.   예약하기      3.   장바구니 담기      4.   장바구니 보기      5.   돌아가기       ");
 				System.out.println("-----------------------------------------------------------------------------------------------------------------");
@@ -96,7 +94,8 @@ public class CartMenuView {
 					
 					return;
 					
-				case 3:		/////////////////////////
+				case 3:
+					System.out.println("*** 장바구니 목록 화면으로 이동합니다. ***\n");
 					CartMenuView.putCart(user.getUserId(), book);
 					break;
 				case 4:
@@ -135,24 +134,29 @@ public class CartMenuView {
 					RentalController.insertRental(user, rentalBookNo);
 					break;
 				case 2:
-					System.out.print("예약할 책 번호: ");
+					System.out.println("*** 예약하기 메뉴를 선택했습니다. ***\n");
+					System.out.print("도서번호 입력 : ");
 					int reserveBookNo = Integer.parseInt(sc.nextLine());
 					ReservationContoller.insertReservation(user, reserveBookNo);
 					break;
 
 				case 3:
+					System.out.println("*** 장바구니 담기 메뉴를 선택했습니다. ***\n");
 					CartMenuView.putCart(user.getUserId());
-					
 					break;
 				case 4:
+					System.out.println("*** 장바구니 목록 화면으로 이동합니다. ***\n");
 					CartMenuView.viewCart(user);
 					
 					break;
 				case 5:
 					return;
+				default :
+					System.out.println("*** 메뉴에 있는 번호를 입력해주세요. ***");
 				}
+				
 			}catch (NumberFormatException e) {
-				System.out.println("메뉴는 '숫자'만 입력해주세요.");
+				System.out.println("*** 메뉴는 '숫자'만 입력해주세요. ***");
 			}
 			
 		}
@@ -170,35 +174,37 @@ public class CartMenuView {
 	public static void printRentalMenu(User user, Cart cart) {
 		while(true) {
 			try {
-				System.out.println("*** 장바구니 목록 메뉴 ***");
-				System.out.println("---------------------------------------------------------------------------------------------------------------");
-				System.out.println("       1.   전체 목록 대여하기      2.   장바구니 목록 삭제      3.   장바구니 비우기      4.   돌아가기       ");
-				System.out.println("---------------------------------------------------------------------------------------------------------------");
-				System.out.print("번호 입력 :  ");
+				System.out.println("\n*** 장바구니 목록 메뉴 ***");
+				System.out.println("-----------------------------------------------------------------------------------------------------------------");
+				System.out.println("       1.   전체 목록 대출하기      2.   장바구니 목록 삭제      3.   장바구니 비우기      4.   돌아가기       ");
+				System.out.println("-----------------------------------------------------------------------------------------------------------------");
+				System.out.print("메뉴 입력 :  ");
 				switch(Integer.parseInt(sc.nextLine())) {
 				case 1:
-					System.out.println("*** 대출하기를 선택했습니다. ***\n");
+					System.out.println("*** 장바구니의 도서목록을 대여합니다. ***\n");
 					CartController.rentalCartBook(user.getUserId(), cart);
 					CartMenuView.viewCart(user);
 					return;
 				case 2:
-					System.out.println("삭제할 도서번호를 입력해주세요 : ");
+					System.out.println("*** 장바구니 목록을 삭제합니다. ***\n");
+					System.out.print("도서번호 입력 : ");
 					int bookNo = Integer.parseInt(sc.nextLine());
 					CartController.removeCartDetail(user.getUserId(), bookNo);
 					CartMenuView.viewCart(user);
 					return;
 				case 3:
+					System.out.println("*** 장바구니 목록을 모두 삭제합니다. ***\n");
 					UserMenuView.clearCart(user);
-					CartController.clearCart(user.getUserId());
 					CartMenuView.viewCart(user);
 					return;
 					
 				case 4:
 					return;
-					
+				default :
+					System.out.println("*** 메뉴에 있는 번호를 입력해주세요. ***");
 				}
 			}catch (NumberFormatException e) {
-				System.out.println("메뉴는 '숫자'만 입력해주세요.");
+				System.out.println("*** 메뉴는 '숫자'만 입력해주세요. ***");
 			}
 			
 		}

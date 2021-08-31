@@ -36,7 +36,7 @@ public class ReservationDAOImpl implements ReservationDAO {
 			
 			// 2. bookstate가 1인지 확인
 			chk = getBookState(con, reservation);
-			if (chk != 1) throw new SQLException("*** 대출중인 도서만 예약가능 ***");
+			if (chk != 1) throw new SQLException("*** 대출중인 도서만 예약할 수 있습니다. 대출가능하거나 예약중인 도서는 예약할 수 없습니다. ***");
 			
 			//3. 대출중인 사람이 본인인지 확인
 			chk = getUserState(con, reservation);

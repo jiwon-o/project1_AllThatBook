@@ -60,10 +60,10 @@ public class Reservation {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("예약번호: ");
-		builder.append(rezNo);
-		builder.append(", 책번호: ");
+		builder.append("책번호: ");
 		builder.append(bookNo);
+		builder.append(", 예약번호: ");
+		builder.append(rezNo);
 		builder.append(", 회원번호: ");
 		builder.append(userNo);
 		builder.append(", 예약일자: ");

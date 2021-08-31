@@ -73,18 +73,18 @@ public class User {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("회원번호: ");
+		builder.append("\n--------------------------------------------------------- *** 회원정보 *** ---------------------------------------------------------\n");
+		builder.append("\n회원번호: ");
 		builder.append(userNo);
 		builder.append(", 회원ID: ");
 		builder.append(userId);
-		builder.append(", 패스워드: ");
-		builder.append(userPwd);
 		builder.append(", 회원이름: ");
 		builder.append(userName);
 		builder.append(", 연락처: ");
 		builder.append(userPhone);
 		builder.append(", 등록일자: ");
 		builder.append(regDate);
+		builder.append("\n\n");
 		return builder.toString();
 	}
 	

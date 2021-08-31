@@ -27,9 +27,7 @@ public class BookServiceImpl implements BookService {
 	public Book bookSelectByBookNo(int bookNo) throws SQLException {
 		Book book = bookDao.bookSelectByBookNo(bookNo);
 		if(book == null) {
-			throw new SQLException("해당 도서번호에 해당하는 책은 현재 없습니다. ");
-		}else {
-			System.out.println("*** '" + bookNo + "'번 책을 검색합니다. ***");
+			throw new SQLException("*** 해당 도서번호에 해당하는 도서는 현재 없습니다. ***");
 		}
 		
 		return book;
@@ -42,7 +40,7 @@ public class BookServiceImpl implements BookService {
 	public List<Book> bookSelectByBookName(String keyword) throws SQLException {
 		List<Book> bookList = bookDao.bookSelectByBookName(keyword);
 		if(bookList == null || bookList.isEmpty()) {
-			throw new SQLException("입력하신 단어(" + keyword + ")에 해당하는 도서를 찾을 수 없습니다. ");
+			throw new SQLException("*** 입력하신 단어(" + keyword + ")에 해당하는 도서를 찾을 수 없습니다. ***");
 		}else {
 			System.out.println("*** 제목에 '" + keyword + "'이 포함된 도서를 검색합니다. ***");
 		}
@@ -56,7 +54,7 @@ public class BookServiceImpl implements BookService {
 	public List<Book> bookSelectByWriter(String writer) throws SQLException {
 		List<Book> bookList = bookDao.bookSelectByWriter(writer);
 		if(bookList == null || bookList.isEmpty()) {
-			throw new SQLException("입력하신 저자명(" + writer + ")에 해당하는 도서를 찾을 수 없습니다. ");
+			throw new SQLException("*** 입력하신 저자명(" + writer + ")에 해당하는 도서를 찾을 수 없습니다. ***");
 		}
 		return bookList;
 	}
@@ -67,7 +65,7 @@ public class BookServiceImpl implements BookService {
 	public List<Book> bookSelectByPublisher(String publisher) throws SQLException {
 		List<Book> bookList = bookDao.bookSelectByPublisher(publisher);
 		if(bookList == null || bookList.isEmpty()) {
-			throw new SQLException("입력하신 출판사(" + publisher + ")에 해당하는 도서를 찾을 수 없습니다. ");
+			throw new SQLException("*** 입력하신 출판사(" + publisher + ")에 해당하는 도서를 찾을 수 없습니다. ***");
 		}
 		return bookList;
 	}
@@ -76,7 +74,7 @@ public class BookServiceImpl implements BookService {
 	public List<Book> bookSelectByCategory(String category) throws SQLException {
 		List<Book> bookList = bookDao.bookSelectByCategory(category);
 		if(bookList == null || bookList.isEmpty()) {
-			throw new SQLException("입력하신 도서분야(" + category + ")에 해당하는 도서를 찾을 수 없습니다. ");
+			throw new SQLException("*** 입력하신 도서분야(" + category + ")에 해당하는 도서를 찾을 수 없습니다. ***");
 		}
 		return bookList;
 	}
@@ -89,10 +87,10 @@ public class BookServiceImpl implements BookService {
 		List<Book> bookList = bookDao.bookSelectByState(state);
 		if(0<=state && state <=2) {
 			if(bookList == null || bookList.isEmpty()) {
-				throw new SQLException("입력하신 대출여부(" + state + ")에 해당하는 도서를 찾을 수 없습니다. ");
+				throw new SQLException("*** 입력하신 대출여부(" + state + ")에 해당하는 도서를 찾을 수 없습니다. ***");
 			}
 		}else {
-			throw new SQLException("대출가능(0) or 대출중(1) or 예약중(2) 중 하나를 입력해주세요. 처음으로 돌아갑니다. ");
+			throw new SQLException("*** 대출가능(0) or 대출중(1) or 예약중(2) 중 하나를 입력해주세요. 처음으로 돌아갑니다. ***");
 		}
 		
 		return bookList;

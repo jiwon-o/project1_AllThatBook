@@ -114,10 +114,10 @@ public class Rental {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("대출번호: ");
-		builder.append(rentNo);
-		builder.append(", 책번호: ");
+		builder.append("책번호: ");
 		builder.append(bookNo);
+		builder.append(", 대출번호: ");
+		builder.append(rentNo);
 		builder.append(", 회원번호: ");
 		builder.append(userNo);
 		builder.append(", 반납예정일자: ");

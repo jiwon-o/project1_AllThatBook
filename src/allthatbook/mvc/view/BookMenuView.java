@@ -17,42 +17,48 @@ public class BookMenuView {
 	public static void printSelectMenu(User user) {
 		while (true) {
 			System.out.println("\n----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-			System.out.println("      1.   도서번호로 검색      2.   도서명으로 검색      3.   저자명으로 검색      4.   출판사로 검색      5.   도서분야로 검색      6.   대여여부로 검색      9.   돌아가기     ");
+			System.out.println("      1.   도서번호로 검색      2.   도서명으로 검색      3.   저자명으로 검색      4.   출판사로 검색      5.   도서분야로 검색      6.   대출여부로 검색      7.   돌아가기     ");
 			System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 			System.out.print("메뉴 입력 : ");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
+				System.out.println("*** 도서번호로 검색합니다. ***\n");
 				Book book = BookMenuView.selectBookByNo(user); // 도서번호로 검색
 				if (book != null)
 					CartMenuView.printCartMenu(user, book);
 				break;
 			case 2:
+				System.out.println("*** 도서명으로 검색합니다. ***\n");
 				List<Book> bookListByName = BookMenuView.selectBookByName(user); // 도서명으로 검색
 				if (bookListByName != null)
 					CartMenuView.printCartMenu(user);
 				break;
 			case 3:
+				System.out.println("*** 저자명으로 검색합니다. ***\n");
 				List<Book> bookListByWriter = BookMenuView.selectBookByWriter(user); // 저자명으로 검색
 				if (bookListByWriter != null)
 					CartMenuView.printCartMenu(user);
 				break;
 			case 4:
+				System.out.println("*** 출판사로 검색합니다. ***\n");
 				List<Book> bookListByPublisher = BookMenuView.selectBookByPublisher(user); // 출판사로 검색
 				if (bookListByPublisher != null)
 					CartMenuView.printCartMenu(user);
 				break;
 			case 5:
+				System.out.println("*** 도서분야로 검색합니다. ***\n");
 				List<Book> bookListByCateory = BookMenuView.selectBookByCategory(user); // 분야로 검색
 				if (bookListByCateory != null)
 					CartMenuView.printCartMenu(user);
 				break;
 			case 6:
+				System.out.println("*** 대출여부로 검색합니다. ***\n");
 				List<Book> bookListByState = BookMenuView.selectBookByState(user); // 대여 여부로 검색(0: 대여가능, 1: 대여중, 2: 예약중)
 				if (bookListByState != null)
 					CartMenuView.printCartMenu(user);
 				break;
-			case 9:
+			case 7:
 				return;
 			}
 		}
@@ -65,13 +71,13 @@ public class BookMenuView {
 		Book book = null;
 		while (true) {
 			try {
-				System.out.println("*** 도서번호로 검색합니다. ***\n");
+				
 				System.out.print("도서번호 입력 : ");
 				int no = Integer.parseInt(sc.nextLine());
 				book = BookController.bookSelectByBookNo(user, no);
 				if (book == null) {
 
-					System.out.println("다시 하시겠습니까? ( 네 / 아니오 )");
+					System.out.println("\n다시 하시겠습니까? ( 네 / 아니오 )");
 					String choice = sc.nextLine();
 					switch (choice) {
 					case "네":
@@ -88,7 +94,7 @@ public class BookMenuView {
 				System.out.println("'숫자'만 입력해주세요. ");
 
 			}
-			System.out.println("\n");
+
 			return book;
 		}
 	}
@@ -99,12 +105,11 @@ public class BookMenuView {
 	public static List<Book> selectBookByName(User user) {
 		List<Book> bookList = null;
 		while (true) {
-			System.out.println("*** 도서명으로 검색합니다. ***\n");
 			System.out.print("도서명 입력 : ");
 			String keyword = sc.nextLine();
 			bookList = BookController.bookSelectByBookName(user, keyword);
 			if (bookList == null) {
-				System.out.println("다시 하시겠습니까? ( 네 / 아니오 )");
+				System.out.println("\n다시 하시겠습니까? ( 네 / 아니오 )");
 				String choice = sc.nextLine();
 				switch (choice) {
 				case "네":
@@ -118,7 +123,6 @@ public class BookMenuView {
 			}
 			break;
 		}
-		System.out.println("\n");
 		return bookList;
 	}
 
@@ -133,7 +137,7 @@ public class BookMenuView {
 				bookList = BookController.bookSelectByWriter(user, writer);
 				if (bookList == null) {
 
-					System.out.println("다시 하시겠습니까? ( 네 / 아니오 )");
+					System.out.println("\n다시 하시겠습니까? ( 네 / 아니오 )");
 					String choice = sc.nextLine();
 					switch (choice) {
 					case "네":
@@ -147,7 +151,7 @@ public class BookMenuView {
 				}
 				break;
 		}
-		System.out.println("\n");
+
 		return bookList;
 	}
 
@@ -164,7 +168,7 @@ public class BookMenuView {
 				bookList = BookController.bookSelectByPublisher(user, publisher);
 
 				if (bookList == null) {
-					System.out.println("다시 하시겠습니까? ( 네 / 아니오 )");
+					System.out.println("\n다시 하시겠습니까? ( 네 / 아니오 )");
 					String choice = sc.nextLine();
 					switch (choice) {
 					case "네":
@@ -181,7 +185,7 @@ public class BookMenuView {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("\n");
+
 		return bookList;
 	}
 
@@ -199,7 +203,7 @@ public class BookMenuView {
 
 				if (bookList == null) {
 
-					System.out.println("다시 하시겠습니까? ( 네 / 아니오 )");
+					System.out.println("\n다시 하시겠습니까? ( 네 / 아니오 )");
 					String choice = sc.nextLine();
 					switch (choice) {
 					case "네":
@@ -216,7 +220,7 @@ public class BookMenuView {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("\n");
+
 		return bookList;
 	}
 
@@ -227,12 +231,8 @@ public class BookMenuView {
 		List<Book> bookList = null;
 		while (true) {
 			try {
-				System.out.print("대여 여부 ( 대출가능 : 0, 대출 중 : 1, 예약 중 : 2 )\n");
-				System.out.println("\n");
-				System.out.println("원하시는 서비스의 번호를 입력해주세요 : ");
+				System.out.print("대출여부 검색(대출가능: 0, 대출중: 1, 예약중: 2) : ");
 				int state = Integer.parseInt(sc.nextLine());
-
-				System.out.println("\n");
 				bookList = BookController.bookSelectByState(user, state);
 				break;
 			} catch (NumberFormatException e) {
