@@ -1,5 +1,6 @@
 package allthatbook.mvc.view;
 
+import java.util.List;
 import java.util.Scanner;
 
 import allthatbook.mvc.controller.CartController;
@@ -19,7 +20,6 @@ public class CartMenuView {
 		int bookNo = Integer.parseInt(sc.nextLine());
 
 		CartController.putCart(userId, bookNo);
-
 	}
     
     /**
@@ -32,13 +32,37 @@ public class CartMenuView {
 	/**
 	 * 장바구니 메뉴
 	 */
+
 	public static void printCartMenu(User user, Book book) {
-		Scanner sc = new Scanner(System.in);
 		while(true) {
-			System.out.println("1.대여하기  |  2.장바구니 담기  |  3.장바구니 보기  |  4.돌아가기  |  9.메인메뉴로 가기");
+			System.out.println("1.대여하기  |  2.장바구니 담기  |  3.장바구니 보기  |  4.돌아가기  ");
+			System.out.print("번호 입력 > ");
 			switch(Integer.parseInt(sc.nextLine())) {
 			case 1:
 				RentalController.insertRental(user, book);
+				return;
+			case 2:
+				CartMenuView.putCart(user.getUserId());
+				break;
+			case 3:
+				CartMenuView.viewCart(user.getUserId());
+				break;
+			case 4:
+				return;
+			}
+		}
+	}
+	
+	
+	public static void printCartMenu(User user) {
+		while(true) {
+			System.out.println("1.대여하기  |  2.장바구니 담기  |  3.장바구니 보기  |  4.돌아가기  ");
+			System.out.print("번호 입력 > ");
+			switch(Integer.parseInt(sc.nextLine())) {
+			case 1:
+				System.out.print("대여 하실책 번호 입력 > ");
+				int bookNo = Integer.parseInt(sc.nextLine());
+				RentalController.insertRental(user, bookNo);
 				break;
 			case 2:
 				CartMenuView.putCart(user.getUserId());
@@ -47,12 +71,9 @@ public class CartMenuView {
 				CartMenuView.viewCart(user.getUserId());
 				break;
 			case 4:
-				BookMenuView.printSelectMenu(user);
-				break;
-			case 9:
-				//MenuView.printUserMenu(userId);
 				return;
 			}
 		}
 	}
+	
 }

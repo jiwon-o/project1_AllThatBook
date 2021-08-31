@@ -21,7 +21,7 @@ public class UserMenuView {
 				System.out.println(ss.getSet());
 
 				System.out.println("=== AllThatBook Library ===");
-				System.out.println("1. 로그인   |   2. 회원가입   |  9. 종료");
+				System.out.println("1. 로그인   |   2. 회원가입   |  9. 로그아웃");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch (menu) {
 				case 1:
@@ -104,6 +104,7 @@ public class UserMenuView {
 					break;
 				case 6:
 					CartMenuView.viewCart(user.getUserId());
+					//CartMenuView.printCartMenu(user, null);
 					break;
 				case 7:
 					UserMenuView.selectUserInfo(user);

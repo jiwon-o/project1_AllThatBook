@@ -139,7 +139,7 @@ public class UserDAOImpl implements UserDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		List<User> userList = new ArrayList<>();
+		List<User> userList = null;
 		String sql = "select*from users";
 		try {
 			con = DbUtil.getConnection();

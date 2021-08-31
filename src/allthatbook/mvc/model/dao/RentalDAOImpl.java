@@ -11,13 +11,10 @@ import allthatbook.mvc.model.dto.Rental;
 import allthatbook.mvc.util.DbUtil;
 
 public class RentalDAOImpl implements RentalDAO {
-	
-	  /**
-	   * 대여하기
-	   *  1) 책상태 확인하기 (0이면 대여가능)
-	   *  2) Rental 테이블에 insert
-	   *  3) 책상태 변경하기 (1로 수정)
-	   * */
+
+	/**
+	 * 대여하기 1) 책상태 확인하기 (0이면 대여가능) 2) Rental 테이블에 insert 3) 책상태 변경하기 (1로 수정)
+	 */
 
 	@Override
 	public int rentalInsert(Rental rental) throws SQLException {
@@ -64,31 +61,27 @@ public class RentalDAOImpl implements RentalDAO {
 	}//메소드끝
 
 
-
 	/**
 	 * 책상태(bookState) 가져오기
 	 * */
-	public int getBookState(Connection con, Rental rental) throws SQLException{
-		  PreparedStatement ps=null;
-		  ResultSet rs = null;
-		  String sql="select 상태 from books where 책번호=?";
-		  
-		  int result = 0;
-		 try {
-			 ps = con.prepareStatement(sql);
-			 ps.setInt(1, rental.getBookNo());
-			 rs = ps.executeQuery();
-			 if(rs.next()) 
-				 result = rs.getInt(1);
-		  }	   
-        finally {
-    	    DbUtil.close(null, ps , rs);
-        }
-		
+	public int getBookState(Connection con, Rental rental) throws SQLException {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "select 상태 from books where 책번호=?";
+
+		int result = 0;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, rental.getBookNo());
+			rs = ps.executeQuery();
+			if (rs.next())
+				result = rs.getInt(1);
+		} finally {
+			DbUtil.close(null, ps, rs);
+		}
 		return result;
-	}//메소드 끝
-	
-	
+	}// 메소드 끝
+
 	/**
 	 * 대출한 도서 책상태 1로 바꿔주기
 	 * */
@@ -204,21 +197,26 @@ public class RentalDAOImpl implements RentalDAO {
 	}
 	
 
-}//클래스 끝
 
 
 
 
 
 
+	
+	public int changeBookState(Connection con, Rental rental) throws SQLException {
+		PreparedStatement ps = null;
+		String sql = "update books set 상태 = 1 where 책번호 = ?";
+		int result = 0;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, rental.getBookNo());
+			result = ps.executeUpdate();
+		} finally {
+			DbUtil.close(null, ps);
+		}
 
+		return result;
+	}// 메소드 끝
 
-
-
-
-
-
-
-
-
-
+}// 클래스 끝
