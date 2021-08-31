@@ -67,6 +67,7 @@ public class CartMenuView {
 
 				switch(Integer.parseInt(sc.nextLine())) {
 				case 1:
+					System.out.println("*** 대출하기 메뉴를 선택했습니다. ***\n");
 					System.out.println(book.getBookNo() + ". 『 " + book.getBookName() + " 』 도서를 대출하시겠습니까? ( 네 / 아니오 )");
 					String checkRental = sc.nextLine();
 					if("네".equals(checkRental)) {
@@ -121,12 +122,15 @@ public class CartMenuView {
 	public static void printCartMenu(User user) {
 		while(true) {
 			try {
-				System.out.println(" 1. 대여하기    2. 예약하기    3. 장바구니 담기    4. 장바구니 보기    5. 돌아가기 ");
-				System.out.println("------------------------------------------------------------------------------------");
-				System.out.print("번호 입력 :  ");
+				System.out.println("\n*** 검색 목록 메뉴 ***");
+				System.out.println("-----------------------------------------------------------------------------------------------------------------");
+				System.out.println("       1.   대출하기      2.   예약하기      3.   장바구니 담기      4.   장바구니 보기      5.   돌아가기       ");
+				System.out.println("-----------------------------------------------------------------------------------------------------------------");
+				System.out.print("메뉴 입력 : ");
 				switch(Integer.parseInt(sc.nextLine())) {
 				case 1:
-					System.out.print("대여할 도서의 번호입력  : ");  
+					System.out.println("*** 대출하기 메뉴를 선택했습니다. ***\n");
+					System.out.print("도서번호 입력 : ");  
 					int rentalBookNo = Integer.parseInt(sc.nextLine());
 					RentalController.insertRental(user, rentalBookNo);
 					break;
@@ -166,12 +170,14 @@ public class CartMenuView {
 	public static void printRentalMenu(User user, Cart cart) {
 		while(true) {
 			try {
-				System.out.println("------------------------------------------------------------------------------------");
-				System.out.println("  1. 전체 목록 대여하기    2. 장바구니 목록 삭제    3. 장바구니 비우기    4. 돌아가기  ");
-				System.out.println("------------------------------------------------------------------------------------");
+				System.out.println("*** 장바구니 목록 메뉴 ***");
+				System.out.println("---------------------------------------------------------------------------------------------------------------");
+				System.out.println("       1.   전체 목록 대여하기      2.   장바구니 목록 삭제      3.   장바구니 비우기      4.   돌아가기       ");
+				System.out.println("---------------------------------------------------------------------------------------------------------------");
 				System.out.print("번호 입력 :  ");
 				switch(Integer.parseInt(sc.nextLine())) {
 				case 1:
+					System.out.println("*** 대출하기를 선택했습니다. ***\n");
 					CartController.rentalCartBook(user.getUserId(), cart);
 					CartMenuView.viewCart(user);
 					return;

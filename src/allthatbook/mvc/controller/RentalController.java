@@ -14,6 +14,11 @@ public class RentalController {
     
 	private static RentalService rentalService = new RentalServiceImpl();
 	
+	/**
+	 * 도서번호
+	 * @param user
+	 * @param book
+	 */
 	public static void insertRental(User user, Book book) {
 		try {
 			Rental rental = new Rental( book.getBookNo(), user.getUserNo() );
