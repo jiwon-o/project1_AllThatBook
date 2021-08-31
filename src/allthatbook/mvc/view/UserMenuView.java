@@ -302,6 +302,8 @@ public class UserMenuView {
 				continue;
 			}
 			UserController.selectByUserId(user.getUserId());
+			UserController.selectRentalByUserNo(user.getUserNo());
+			UserController.selectReservationByUserNo(user.getUserNo());
 			break;
 		}
 	}

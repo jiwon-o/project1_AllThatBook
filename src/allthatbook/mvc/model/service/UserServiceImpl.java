@@ -10,6 +10,8 @@ import allthatbook.mvc.model.dao.CartDAOImpl;
 import allthatbook.mvc.model.dao.UserDAO;
 import allthatbook.mvc.model.dao.UserDAOImpl;
 import allthatbook.mvc.model.dto.Cart;
+import allthatbook.mvc.model.dto.Rental;
+import allthatbook.mvc.model.dto.Reservation;
 import allthatbook.mvc.model.dto.User;
 import allthatbook.mvc.session.Session;
 import allthatbook.mvc.session.SessionSet;
@@ -116,6 +118,20 @@ public class UserServiceImpl implements UserService {
 	public int userUpdate(User updateUser) throws SQLException {
 		int result = userDao.updateAdminUserInfo(updateUser);
 		return result;
+	}
+
+	@Override
+	public List<Rental> selectRentalByUserNo(int userNo) throws SQLException {
+		List<Rental> rentalList = userDao.selectRentalByUserNo(userNo);
+		if (rentalList == null || rentalList.size() ==0 ) throw new SQLException("대여중인 도서가 없습니다.");
+		return rentalList;
+	}
+
+	@Override
+	public List<Reservation> selectReservationByUserNo(int userNo) throws SQLException {
+		List<Reservation> reservationList = userDao.selectReservationByUserNo(userNo);
+		if (reservationList == null || reservationList.size() ==0 ) throw new SQLException("에약중인 도서가 없습니다.");
+		return reservationList;
 	}
 
 	
