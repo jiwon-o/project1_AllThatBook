@@ -1,6 +1,5 @@
 package allthatbook.mvc.view;
 
-import java.util.List;
 import java.util.Scanner;
 
 import allthatbook.mvc.controller.CartController;

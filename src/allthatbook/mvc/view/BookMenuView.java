@@ -159,7 +159,7 @@ public class BookMenuView {
 			System.out.print("대여 여부 검색 (대출가능: 0, 대출 중: 1, 예약 중: 2)\n > ");
 			int state = Integer.parseInt(sc.nextLine());
 			
-			if(state < 0 || 2 < state) {
+			if(state < 0 ||  2 < state) {
 				throw new SQLException("대여 가능(0), 대여중(1), 예약중(2) 중에서 입력해주세요.");
 			}
 			 System.out.println("\n");
@@ -177,7 +177,6 @@ public class BookMenuView {
 	 * 관리자 도서조회(도서번호) -> 삭제 or 수정 
 	 */
 	public static void bookDeleteOrUpdateMenu(User user, Book book) {
-		Scanner sc = new Scanner(System.in);
 
 		while(true) {
 			int result=0;
