@@ -26,7 +26,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public Book bookSelectByBookNo(int bookNo) throws SQLException {
 		Book book = bookDao.bookSelectByBookNo(bookNo);
-		if(book == null) throw new SQLException(bookNo + "에 해당하는 책은 현재 없습니다.");
+		if(book == null) throw new SQLException("해당 bookNo에 해당하는 책은 현재 없습니다.");
 		return book;
 	}
 
@@ -53,6 +53,8 @@ public class BookServiceImpl implements BookService {
 		}
 		return bookList;
 	}
+	
+	
 
 	@Override
 	public List<Book> bookSelectByPublisher(String publisher) throws SQLException {
@@ -72,6 +74,18 @@ public class BookServiceImpl implements BookService {
 		return bookList;
 	}
 
+	/**
+	 * 대출 여부에 따른 도서 검색
+	 */
+	@Override
+	public List<Book> bookSelectByState(int state) throws SQLException {
+		List<Book> bookList = bookDao.bookSelectByState(state);
+		if(bookList == null || bookList.isEmpty()) {
+			throw new SQLException("입력하신 대여여부(" + state + ")에 해당하는 도서를 찾을 수 없습니다.");
+		}
+		return bookList;
+	}
+	
 	@Override
 	public int bookInsert(Book book) throws SQLException {
 		int result = bookDao.bookInsert(book);
@@ -85,9 +99,9 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public int bookDelete(int bookNo) throws SQLException {
+	public void bookDelete(int bookNo) throws SQLException {
 		int result = bookDao.bookDelete(bookNo);
-		return result;
+		if(result==0)throw new SQLException("도서삭제가 되지 않았습니다.");
 	}
 
 	@Override
@@ -103,6 +117,8 @@ public class BookServiceImpl implements BookService {
 		if(list.size()==0)throw new NotFoundException("모든 도서 예약가능합니다.");
 		return list;
 	}
+
+	
 
 	
 }

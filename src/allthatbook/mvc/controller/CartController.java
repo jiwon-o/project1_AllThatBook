@@ -128,8 +128,8 @@ public class CartController {
 	}
 
 	/**
-	 * 장바구니에 담긴 책 대여
-	 */
+	 * 장바구니에 담긴 책 전체 대여
+	 * */
 	public static void rentalCartBook(String userId, Cart cart) {
 		List<CartDetail> list = cart.getCartDetailList();
 		for (CartDetail cartDetail : list) {

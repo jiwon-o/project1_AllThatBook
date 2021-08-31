@@ -1,9 +1,7 @@
 package allthatbook.mvc.view;
 
 import java.util.Scanner;
-
 import allthatbook.mvc.controller.BookController;
-
 import allthatbook.mvc.controller.UpdateAdminController;
 import allthatbook.mvc.controller.UserController;
 import allthatbook.mvc.model.dto.Book;
@@ -20,7 +18,7 @@ public class AdminMenuView {
 		while(true) {
 			try {
 				System.out.println("-- 관리자 메뉴 --");
-				System.out.println("1. 회원관리   |  2. 도서관리  | 3. 대출관리 |  9. 나가기");
+				System.out.println("1. 회원관리   |  2. 도서관리  | 3. 대출관리 |  9. 돌아가기");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch (menu) {
 				case 1:
@@ -46,15 +44,16 @@ public class AdminMenuView {
 	
 	/**
 	 * 회원관리 메뉴
+	 * @throws Exception 
 	 */
 	public static void userAdminMenu() {
 		while(true) {
 			try {	
 				System.out.println("---관리자 회원 관리---");
-				System.out.println("1. 전체회원 조회 | 2. 회원번호로 조회 | 3. 회원ID로 조회 | 4.회원정보수정 | 5.회원정보삭제| 9. 나가기");
+				System.out.println("1. 전체회원 조회 | 2. 회원번호로 조회 | 3. 회원ID로 조회 | 4.회원정보수정 | 5.회원정보삭제| 9. 돌아가기");
 				int menu=Integer.parseInt(sc.nextLine());
 				int result=0;
-				int userNo=0;
+				int userNo;
 				switch(menu) {
 				case 1 :
 					UserController.userSelect();
@@ -69,6 +68,10 @@ public class AdminMenuView {
 					break;
 				case 4 : //회원정보수정 
 					userNo = InputUserNo();
+					User user = UserController.selectByUserNo(userNo);
+					if(user==null) {
+						break;
+					}
 					User updateuser = updateUser();
 					result = UpdateAdminController.userUpdate(userNo, updateuser);
 					if(result==1)System.out.println(userNo+"번 회원이 수정되었습니다.");
@@ -79,6 +82,8 @@ public class AdminMenuView {
 					break;
 				case 9 :  			
 					return;
+				default : 
+					System.out.println("메뉴에 있는 번호만 입력해주세요.");
 				}
 			} catch (NumberFormatException e) {
 				FailView.errorMessage("메뉴는 숫자만 입력가능합니다.");
@@ -107,14 +112,17 @@ public class AdminMenuView {
 						break;
 					case 2 : //도서정보수정
 						bookNo = InputBookNo();
+						book = BookController.bookSelectByBookNo(user.getUserId(), bookNo);
+						if(book==null) {
+							break;
+						}
 						Book updatebook = updateBook();
 						result = UpdateAdminController.bookUpdate(bookNo, updatebook);
 						if(result==1)System.out.println(bookNo+"번 해당 책이 수정되었습니다.");
 						break;
 					case 3 : 
 						bookNo = InputBookNo();
-						result = BookController.bookDelete(bookNo);	
-						if(result==1)System.out.println(bookNo+"번호가 삭제되었습니다.");
+						BookController.bookDelete(bookNo);	
 						break;
 					case 4 : //도서조회 --- 장바구니 말고 수정, 삭제로 연결되게 
 						BookMenuView.printSelectMenu(user);
@@ -127,6 +135,8 @@ public class AdminMenuView {
 						break;
 					case 9 :
 						return;
+					default:
+						System.out.println("메뉴에 있는 번호만 입력해주세요.");
 				}
 				
 			} catch (NumberFormatException e) {
@@ -135,19 +145,28 @@ public class AdminMenuView {
 		}
 	}	
 
-	/**
-	 * 계속하시겠습니까?
-	 */
-	
+
 	/**
 	 * UserNo 입력받기 
 	 */
-	public static int InputUserNo() {
-		System.out.print("userNo 입력 > ");
-		int userNo = Integer.parseInt(sc.nextLine());
-		return userNo;
+	public static int InputUserNo(){
+		int userNo=0;
+		try {
+			System.out.print("userNo 입력 > ");
+			userNo = Integer.parseInt(sc.nextLine());
+		} catch (Exception e) {
+			
+		}finally {
+			return userNo;
+		}
+//		System.out.print("userNo 입력 > ");
+//	while (!sc.hasNextInt()) { //값이 숫자인지 판별		
+//        String userNo = sc.next();  //값이 숫자가 아니면 버린다.
+//        System.out.print("에러! 숫자가 아닙니다. \n재 선택 : ");
+//		}
+//		int userNo = Integer.parseInt(sc.nextLine()); //위에서 값이 숫자일 경우 이쪽으로 값을 넣어준다.
+//		return userNo;
 	}
-	
 	
 	/**
 	 * UserId 입력받기 
@@ -184,9 +203,15 @@ public class AdminMenuView {
 	 * bookNo입력받기 
 	 */
 	public static int InputBookNo() {
-		System.out.print("bookNo 입력 > ");
-		int bookNo = Integer.parseInt(sc.nextLine());
-		return bookNo;
+		int bookNo=0;
+		try {
+			System.out.print("bookNo 입력 > ");
+			bookNo = Integer.parseInt(sc.nextLine());
+		} catch (Exception e) {
+			
+		}finally {
+			return bookNo;
+		}	
 	}
 	
 	/**

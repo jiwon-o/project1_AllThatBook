@@ -20,7 +20,7 @@ public class UserMenuView {
 				System.out.println(ss.getSet());
 
 				System.out.println("=== AllThatBook Library ===");
-				System.out.println("1. 로그인   |   2. 회원가입   |  9. 종료");
+				System.out.println("1. 로그인   |   2. 회원가입   |  9. 로그아웃");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch (menu) {
 				case 1:
@@ -115,17 +115,10 @@ public class UserMenuView {
 				case 9:
 					logout(user.getUserId());
 					return;
-					
-//				case 100:
-//					CartController.clearCart(user.getUserId());
-//					break;
-//				case 101:
-//					Session session = ss.get(user.getUserId());
-//
-//					Cart cart = (Cart) session.getAttribute("cart");
-//					CartController.rentalCartBook(user.getUserId(), cart);
-//					break;
-					
+				case 100:
+					UserMenuView.clearCart(user);
+					CartController.clearCart(user.getUserId());
+					break;
 				default:
 					System.out.println("메뉴에 있는 번호를 입력해주세요");
 				}
@@ -137,6 +130,21 @@ public class UserMenuView {
 		
 	}
 	
+	/**
+	 * 장바구니 내역 모두 삭제
+	 */
+	public static void clearCart(User user) {
+		
+		System.out.println("정말 삭제하시겠습니까? (네/아니오)");
+		String checkClearCart = sc.nextLine();
+		
+		if("네".equals(checkClearCart)) {
+			CartController.clearCart(user.getUserId());
+			System.out.println("장바구니 내역이 모두 삭제되었습니다.");
+		}
+		
+	}
+
 	/**
 	 * 회원정보수정 화면으로 가기위한 페이지
 	 */
