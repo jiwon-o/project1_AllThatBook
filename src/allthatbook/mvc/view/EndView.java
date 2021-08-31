@@ -79,9 +79,10 @@ public class EndView {
 
 	public static void printViewCart(String id, Cart cart) {
 		System.out.println("------------------------------------------------------  장바구니내용  ----------------------------------------------------------------------");
-
+		System.out.println("\n");
 		List<CartDetail> list = cart.getCartDetailList();
-		System.out.println("----------도서 개수 : " + list.size() + "----------");
+		System.out.println("도서 개수 : "+  list.size());
+		System.out.println("\n");
 		for(CartDetail cartDetail : list) {
 			
 			int bookNo = cartDetail.getBookNo(); //책번호

@@ -20,11 +20,10 @@ public class UserMenuView {
 			try {
 				SessionSet ss = SessionSet.getInstance();
 				System.out.println(ss.getSet());
-
 				System.out.println("=========================================================");
-				System.out.println("                                                        ");
-				System.out.println("                      AllThatBook                       ");
-				System.out.println("                                                        ");
+				System.out.println("                                                         ");
+				System.out.println("                      AllThatBook                        ");
+				System.out.println("                                                         ");
 				System.out.println("=========================================================");
 				System.out.println("---------------------------------------------------------");
 				System.out.println("    1.   로그인       2.    회원가입        9.     종료        ");
