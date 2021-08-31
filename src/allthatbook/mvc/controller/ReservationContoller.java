@@ -12,7 +12,6 @@ import allthatbook.mvc.view.EndView;
 import allthatbook.mvc.view.FailView;
 
 public class ReservationContoller {
-   
 	private static ReservationService reservationService = new ReservationServiceImpl();
 	
 	public static void insertReservation(User user, int bookNo) {
@@ -22,6 +21,15 @@ public class ReservationContoller {
 		    reservationService.insertReservation(reservation);
 		    EndView.printMessage(bookNo + "번 도서 예약 성공했습니다");
 		    //EndView.printMessage(book.getBookNo() + "번 도서 대여 성공");
+		}catch (SQLException e) {
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
+	public static void deleteReservation(int userNo, int bookNo){
+		try {
+		    reservationService.deleteReservation(userNo, bookNo);
+		    EndView.printMessage(bookNo+"번 도서 예약이 삭제되었습니다");
 		}catch (SQLException e) {
 			FailView.errorMessage(e.getMessage());
 		}

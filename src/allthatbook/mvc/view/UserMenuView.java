@@ -61,7 +61,6 @@ public class UserMenuView {
 		System.out.print(" PASSWORD : ");
 		String userPwd = sc.nextLine();
 
-		System.out.println("\n");
 		UserController.login(userId, userPwd);
 	}
 
@@ -93,12 +92,12 @@ public class UserMenuView {
 		while (true) {
 			try {
 				SessionSet ss = SessionSet.getInstance();
+				
+				System.out.println("\n");
 				System.out.println(ss.getSet()); // Set객체
-				System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-
-				System.out.println("1. 전체목록    2. 도서검색 (대여, 예약)   3. 도서반납   5. 장바구니담기    6. 장바구니보기    7. 회원정보     8. 회원정보수정    9. 로그아웃   ");
-
-				System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+				System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------");
+				System.out.println("1. 전체목록    2. 도서검색 (대여, 예약)   3. 도서반납   4. 장바구니담기    5. 장바구니보기    6. 회원정보     7. 회원정보수정    8. 로그아웃   ");
+				System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------");
 				System.out.print("원하시는 서비스의 번호를 입력해주세요 :  ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch (menu) {
@@ -171,7 +170,7 @@ public class UserMenuView {
 				System.out.println("비밀번호를 잘못입력 하셨습니다. ");
 				continue;
 			}
-
+			System.out.println("\n");
 			System.out.println("-------------------------------------------------------------");
 			System.out.println("      1.  수정          2.회원탈퇴         9.   나가기       ");
 			System.out.println("-------------------------------------------------------------");
@@ -267,9 +266,12 @@ public class UserMenuView {
 				
 				String checkString = "탈퇴하겠습니다";				//나중에 문구 수정을 위해서 빼놓음
 				System.out.println("\n");
-				System.out.println("정말 회원탈퇴를 하시겠습니까? ");
-				System.out.println("탈퇴하시려면 괄호안의 문자("+checkString+")를 적어주세요. ");
-				if(!sc.nextLine().equals(checkString)) {
+				System.out.println("정말 회원탈퇴를 하시겠습니까?");
+				System.out.println("취소하려면 (아니오)를 입력해주세요");
+				System.out.println("탈퇴하시려면 괄호안의 문자("+checkString+")를 입력해주세요. ");
+				String checkText = sc.nextLine();
+				if(checkText.equals("아니오")) break;
+				if(!checkText.equals(checkString)) {
 					System.out.println("입력된문자가 잘못되었습니다 다시한번 확인해주세요. ");
 					continue;
 				}
@@ -305,7 +307,29 @@ public class UserMenuView {
 			UserController.selectByUserId(user.getUserId());
 			UserController.selectRentalByUserNo(user.getUserNo());
 			UserController.selectReservationByUserNo(user.getUserNo());
+			UserMenuView.reservationDeleteMenu(user);
 			break;
+		}
+	}
+
+	//예약 삭제하기
+	public static void reservationDeleteMenu(User user) {
+		System.out.println("-------------------------------");
+		System.out.println("1. 예약 삭제하기  2. 되돌아가기");
+		System.out.println("-------------------------------");
+		System.out.print("번호를 입력해주세요 :  ");
+		int menu = Integer.parseInt(sc.nextLine());
+		switch (menu) {
+		case 1:
+			System.out.print("삭제할 예약 책번호 입력: ");
+			int bookNo = Integer.parseInt(sc.nextLine());
+			ReservationContoller.deleteReservation(user.getUserNo(), bookNo);
+			break;
+		case 2:
+			System.out.println("예약 삭제 화면이 종료 되었습니다. ");
+			break;
+		default:
+			System.out.println("메뉴에 있는 '번호'를 입력해주세요");
 		}
 	}
 	

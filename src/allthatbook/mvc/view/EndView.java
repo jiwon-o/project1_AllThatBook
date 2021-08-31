@@ -89,17 +89,19 @@ public class EndView {
 	}
 	
 	public static void printReservation(List<Reservation> list) {
-		System.out.println("\n------------예약목록-----------");
+		System.out.println("------------예약목록-----------");
 		for (Reservation reservation : list) {
 			System.out.println(reservation);
 		}
+		System.out.println("\n");
 	}
 	
 	public static void printRental(List<Rental> list) {
-		System.out.println("\n------------대여목록-----------");
+		System.out.println("------------대여목록-----------");
 		for (Rental rental : list) {
 			System.out.println(rental);
 		}
+		System.out.println("\n");
 	}
 	
 }

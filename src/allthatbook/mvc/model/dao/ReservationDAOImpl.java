@@ -53,9 +53,21 @@ public class ReservationDAOImpl implements ReservationDAO {
 	 * 바로 삭제
 	 */
 	@Override
-	public int deleteReservation(Reservation reservation) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteReservation(int userNo, int bookNo) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql = "delete from reservation where 회원번호 = ? and 책번호 = ?";
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, userNo);
+			ps.setInt(2, bookNo);
+			result = ps.executeUpdate();
+		} finally {
+			DbUtil.close(con, ps);
+		}
+		return result;
 	}
 
 	@Override
