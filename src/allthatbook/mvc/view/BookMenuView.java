@@ -1,5 +1,6 @@
 package allthatbook.mvc.view;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,31 +23,36 @@ public class BookMenuView {
 			switch(menu) {
 			case 1 :
 				Book book =  BookMenuView.selectBookByNo(user); //도서번호로 검색
-				CartMenuView.printCartMenu(user, book);
+				if(book != null) CartMenuView.printCartMenu(user, book);
 				break;
 			case 2 :
-				BookMenuView.selectBookByName(user); //도서명으로 검색
-				CartMenuView.printCartMenu(user);
+				List<Book> bookListByName = BookMenuView.selectBookByName(user); //도서명으로 검색
+				if(bookListByName != null) CartMenuView.printCartMenu(user);
 				break;
 			case 3 :
-				BookMenuView.selectBookByWriter(user); //저자명으로 검색
+				List<Book> bookListByWriter = BookMenuView.selectBookByWriter(user); //저자명으로 검색
+				if(bookListByWriter != null) CartMenuView.printCartMenu(user);
 				break;
 			case 4 :
-				BookMenuView.selectBookByPublisher(user); //출판사로 검색
+				List<Book> bookListByPublisher = BookMenuView.selectBookByPublisher(user); //출판사로 검색
+				if(bookListByPublisher != null) CartMenuView.printCartMenu(user);
 				break;
 			case 5 :
-				BookMenuView.selectBookByCategory(user); //분야로 검색
+				List<Book> bookListByCateory = BookMenuView.selectBookByCategory(user); //분야로 검색
+				if(bookListByCateory != null) CartMenuView.printCartMenu(user);
 				break;
 			case 6 : 
-				//대여여부로 검색
+				List<Book> bookListByState = BookMenuView.selectBookByState(user); //대여 여부로 검색(0: 대여가능, 1: 대여중, 2: 예약중)
+				if(bookListByState != null) CartMenuView.printCartMenu(user);
 				break;
 			case 9 :
-				//printUserMenu(user);
 				return;
 			}
 		}
 	}
 	
+	
+
 	/**
 	 * 도서번호로 검색하기
 	 */
@@ -82,40 +88,67 @@ public class BookMenuView {
 	/**
 	 * 저자명으로 검색하기
 	 */
-	public static void selectBookByWriter(User user) {
+	public static List<Book> selectBookByWriter(User user) {
+		List<Book> bookList = null;
 		try {
 			System.out.print("저자 검색 > ");
 			String writer = sc.nextLine();
-			BookController.bookSelectByWriter(user, writer);
+			bookList = BookController.bookSelectByWriter(user, writer);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		return bookList;
 	}
 	
 	/**
 	 * 출판사로 검색하기
 	 */
-	public static void selectBookByPublisher(User user) {
+	public static List<Book> selectBookByPublisher(User user) {
+		List<Book> bookList = null;
 		try {
 			System.out.print("출판사 검색 > ");
 			String publisher = sc.nextLine();
-			BookController.bookSelectByPublisher(user, publisher);
+			bookList = BookController.bookSelectByPublisher(user, publisher);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		return bookList;
 	}
 		
 	/**
 	 * 도서분야로 검색하기
 	 */
-	public static void selectBookByCategory(User user) {
+	public static List<Book> selectBookByCategory(User user) {
+		List<Book> bookList = null;
 		try {
 			System.out.print("도서분야 검색 > ");
 			String category = sc.nextLine();
-			BookController.bookSelectByCategory(user, category);
+			bookList = BookController.bookSelectByCategory(user, category);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		return bookList;
+	}
+	
+	/**
+	 * 대여 상태로 검색하기(0이면 대여가능, 1이면 대여 중, 2이면 예약 중)
+	 */
+	public static List<Book> selectBookByState(User user) {
+		List<Book> bookList = null;
+		try {
+			System.out.print("대여 여부 검색 (대출가능: 0, 대출 중: 1, 예약 중: 2)\n > ");
+			int state = Integer.parseInt(sc.nextLine());
+			
+			if(state < 0 || 2 < state) {
+				throw new SQLException("대여 가능(0), 대여중(1), 예약중(2) 중에서 입력해주세요.");
+			}
+			
+			bookList = BookController.bookSelectByState(user, state);
+		}catch (SQLException e) {
+			//e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+		return bookList;
 	}
 	
 	//////////////////////////////관리자////////////////////////

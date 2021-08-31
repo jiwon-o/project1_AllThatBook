@@ -17,7 +17,7 @@ import allthatbook.mvc.model.service.BookServiceImpl;
 
 public class EndView {
 	public static void printBookList(User user, List<Book> bookList) {
-		System.out.println("----- 총 도서 수: " + bookList.size() + "개 ----------");
+		System.out.println("----- 총 도서 : " + bookList.size() + "개 ----------");
 		for(Book book : bookList) {
 			System.out.println(book);
 		}
@@ -27,7 +27,7 @@ public class EndView {
 	}
 	
 	public static void printBookList(List<Book> bookList) {
-		System.out.println("----- 총 도서 수: " + bookList.size() + "개 ----------");
+		System.out.println("----- 총 도서 : " + bookList.size() + "개 ----------");
 		for(Book book : bookList) {
 			System.out.println(book);
 		}
@@ -41,7 +41,6 @@ public class EndView {
 		if(user.getUserId().equals("admin")) {
 			BookMenuView.bookDeleteOrUpdateMenu(user, book);
 		}
-		//else printCartMenu(userId);
 	}
 	
 
@@ -70,10 +69,10 @@ public class EndView {
 	/**
 	 * 장바구니 출력
 	 */
-	public static void printViewCart(String id, Cart cart) {
+	public static void printViewCart(String userId, Cart cart) {
 		System.out.println("---장바구니내용---");
 		List<CartDetail> list = cart.getCartDetailList();
-		System.out.println(list.size());
+		System.out.println("----------도서 개수 : " + list.size() + "----------");
 		for(CartDetail cartDetail : list) {
 			
 			int bookNo = cartDetail.getBookNo(); //책번호

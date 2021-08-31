@@ -42,3 +42,4 @@ select 장바구니번호, 책번호, 도서명, 저자명, 출판사명, 출간일, 분야, 상태 from c
 update users set 패스워드=1111 where 회원ID='admin';
 commit
 
+select * from books where 상태 = 1 order by 책번호

@@ -53,6 +53,8 @@ public class BookServiceImpl implements BookService {
 		}
 		return bookList;
 	}
+	
+	
 
 	@Override
 	public List<Book> bookSelectByPublisher(String publisher) throws SQLException {
@@ -72,6 +74,18 @@ public class BookServiceImpl implements BookService {
 		return bookList;
 	}
 
+	/**
+	 * 대출 여부에 따른 도서 검색
+	 */
+	@Override
+	public List<Book> bookSelectByState(int state) throws SQLException {
+		List<Book> bookList = bookDao.bookSelectByState(state);
+		if(bookList == null || bookList.isEmpty()) {
+			throw new SQLException("입력하신 대여여부(" + state + ")에 해당하는 도서를 찾을 수 없습니다.");
+		}
+		return bookList;
+	}
+	
 	@Override
 	public int bookInsert(Book book) throws SQLException {
 		int result = bookDao.bookInsert(book);
@@ -103,6 +117,8 @@ public class BookServiceImpl implements BookService {
 		if(list.size()==0)throw new NotFoundException("모든 도서 예약가능합니다.");
 		return list;
 	}
+
+	
 
 	
 }

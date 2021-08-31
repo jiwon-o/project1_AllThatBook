@@ -14,6 +14,8 @@ import allthatbook.mvc.view.FailView;
 
 public class BookController {
 	static BookService bookService = new BookServiceImpl();
+	static Scanner sc = new Scanner(System.in);
+	
 	/**
 	 * 전체 책 조회
 	 * */
@@ -38,6 +40,20 @@ public class BookController {
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
+			
+			boolean flag = true;
+			while(flag) {
+				System.out.println("다시 하시겠습니까? (yes or no)");
+				String choice = sc.nextLine();
+				if(choice.toUpperCase().equals("yes".toUpperCase())) {
+					BookMenuView.selectBookByNo(user);
+					break;
+				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
+					break;
+				}else {
+					System.out.println("'yes' 또는 'no'를 입력해주세요.");
+				}
+			}
 		}
 		return book;
 	}
@@ -66,6 +82,18 @@ public class BookController {
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
+			while(true) {
+				System.out.println("다시 하시겠습니까? (yes or no)");
+				String choice = sc.nextLine();
+				if(choice.toUpperCase().equals("yes".toUpperCase())) {
+					BookMenuView.selectBookByName(user);
+					break;
+				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
+					break;
+				}else {
+					System.out.println("'yes' 또는 'no'를 입력해주세요.");
+				}
+			}
 		}
 		return bookList;
 	}
@@ -73,61 +101,116 @@ public class BookController {
 	/**
 	 * 저자명에 해당하는 책 조회
 	 */
-	public static void bookSelectByWriter(User user, String writer) {
-		Scanner sc = new Scanner(System.in);
+	public static List<Book> bookSelectByWriter(User user, String writer) {
+		List<Book> bookList = null;
 		try {
-			List<Book> bookList = bookService.bookSelectByWriter(writer);
+			bookList = bookService.bookSelectByWriter(writer);
 			EndView.printBookList(user, bookList);
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
-			System.out.println("다시 하시겠습니까? (yes or no)");
-			String choice = sc.nextLine();
-			if(choice.equals("yes")) {
-				BookMenuView.selectBookByWriter(user);
+			while(true) {
+				System.out.println("다시 하시겠습니까? (yes or no)");
+				String choice = sc.nextLine();
+				if(choice.toUpperCase().equals("yes".toUpperCase())) {
+					BookMenuView.selectBookByWriter(user);
+					break;
+				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
+					break;
+				}else {
+					System.out.println("'yes' 또는 'no'를 입력해주세요.");
+				}
 			}
 		}
+		return bookList;
 		
 	}
 
 	/**
 	 * 출판사에 해당하는 책 조회
 	 */
-	public static void bookSelectByPublisher(User user, String publisher) {
-		Scanner sc = new Scanner(System.in);
+	public static List<Book> bookSelectByPublisher(User user, String publisher) {
+		List<Book> bookList = null;
 		try {
-			List<Book> bookList = bookService.bookSelectByPublisher(publisher);
+			bookList = bookService.bookSelectByPublisher(publisher);
 			EndView.printBookList(user, bookList);
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
-			System.out.println("다시 하시겠습니까? (yes or no)");
-			String choice = sc.nextLine();
-			if(choice.equals("yes")) {
-				BookMenuView.selectBookByPublisher(user);
+			while(true) {
+				System.out.println("다시 하시겠습니까? (yes or no)");
+				String choice = sc.nextLine();
+				if(choice.toUpperCase().equals("yes".toUpperCase())) {
+					BookMenuView.selectBookByPublisher(user);
+					break;
+				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
+					break;
+				}else {
+					System.out.println("'yes' 또는 'no'를 입력해주세요.");
+				}
 			}
 		}
+		return bookList;
 		
 	}
 
 	/**
 	 * 도서분야에 해당하는 책 조회
 	 */
-	public static void bookSelectByCategory(User user, String category) {
-		Scanner sc = new Scanner(System.in);
+	public static List<Book> bookSelectByCategory(User user, String category) {
+		List<Book> bookList = null;
 		try {
-			List<Book> bookList = bookService.bookSelectByCategory(category);
+			bookList = bookService.bookSelectByCategory(category);
 			EndView.printBookList(user, bookList);
 		}catch (SQLException e) {
+			
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
-			System.out.println("다시 하시겠습니까? (yes or no)");
-			String choice = sc.nextLine();
-			if(choice.equals("yes")) {
-				BookMenuView.selectBookByCategory(user);
+			while(true) {
+				System.out.println("다시 하시겠습니까? (yes or no)");
+				String choice = sc.nextLine();
+				if(choice.toUpperCase().equals("yes".toUpperCase())) {
+					BookMenuView.selectBookByCategory(user);
+					break;
+				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
+					break;
+				}else {
+					System.out.println("'yes' 또는 'no'를 입력해주세요.");
+				}
 			}
+			
 		}
+		return bookList;
 		
+	}
+	
+	/**
+	 * 대여 여부에 따른 도서 검색
+	 */
+	public static List<Book> bookSelectByState(User user, int state) {
+		List<Book> bookList = null;
+		try {
+			bookList = bookService.bookSelectByState(state);
+			EndView.printBookList(user, bookList);
+		}catch (SQLException e) {
+			
+			//e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+			while(true) {
+				System.out.println("다시 하시겠습니까? (yes or no)");
+				String choice = sc.nextLine();
+				if(choice.toUpperCase().equals("yes".toUpperCase())) {
+					BookMenuView.selectBookByState(user);
+					break;
+				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
+					break;
+				}else {
+					System.out.println("'yes' 또는 'no'를 입력해주세요.");
+				}
+			}
+			
+		}
+		return bookList;
 	}
 	
 	/**
@@ -187,6 +270,9 @@ public class BookController {
 		}
 		
 	}
+
+
+	
 
 }
 
