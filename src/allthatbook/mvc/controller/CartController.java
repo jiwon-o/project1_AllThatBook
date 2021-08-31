@@ -1,6 +1,7 @@
 package allthatbook.mvc.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import allthatbook.mvc.model.dto.Cart;
@@ -128,13 +129,19 @@ public class CartController {
 	 * */
 	public static void rentalCartBook(String userId, Cart cart) {
 		List<CartDetail> list = cart.getCartDetailList();
+		List<CartDetail> tempList = new ArrayList<CartDetail>();
 		for (CartDetail cartDetail : list) {
 			try {
 				cartService.rentalCartBook(cart, cartDetail);
 				EndView.printMessage(cartDetail.getBookNo() + "번 대여 성공했습니다.");
+				tempList.add(cartDetail);
 			} catch (SQLException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+				FailView.errorMessage(e.getMessage());
 			}
+		}
+		for (CartDetail cartDetail : tempList) {
+			list.remove(cartDetail);
 		}
 	}
 }
