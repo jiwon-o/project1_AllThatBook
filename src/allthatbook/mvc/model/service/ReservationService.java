@@ -12,4 +12,9 @@ public interface ReservationService {
 	 * 예약하기
 	 * */
 	public void insertReservation(Reservation reservation) throws SQLException;
+	
+	/**
+	 * 예약삭제
+	 */
+	public void deleteReservation(int userNo, int bookNo) throws SQLException;
 }

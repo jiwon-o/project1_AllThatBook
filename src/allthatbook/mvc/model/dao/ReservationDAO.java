@@ -22,7 +22,7 @@ public interface ReservationDAO {
 	 * 1. 대출에서 대출대기중인 상태의 책을 대출하면 예약테이블에서 삭제 --> 대출에서 connection 인수로 받아서
 	 * 2. 예약테이블에서 바로 삭제 
 	 * */
-	int deleteReservation(Reservation reservation) throws SQLException; 
+	int deleteReservation(int userNo, int bookNo) throws SQLException; 
 	
 	int deleteReservation(Connection con, Reservation reservation) throws SQLException; 
 	

@@ -19,9 +19,9 @@ public class AdminMenuView {
 		while(true) {
 			try {
 
-				System.out.println("                        관리자 메뉴                         ");
+				System.out.println("                         관리자 메뉴                         ");
 				System.out.println("\n");
-				System.out.println("    1. 회원관리      2. 도서관리     3. 대출관리     9. 나가기     ");
+				System.out.println("    1. 회원관리           2. 도서관리           9. 로그아웃     ");
 				System.out.println("---------------------------------------------------------------------");
 				
 				int menu = Integer.parseInt(sc.nextLine());
@@ -55,7 +55,7 @@ public class AdminMenuView {
 		while(true) {
 			try {	
 				System.out.println("                               관리자 회원 관리                                       ");
-				System.out.println("1. 전체회원 조회  2. 회원번호로 조회  3. 회원ID로 조회   4.회원정보수정   5.회원정보삭제    9. 나가기  ");
+				System.out.println("1. 전체회원 조회  2. 회원번호로 조회  3. 회원ID로 조회   4.회원정보수정   5.회원정보삭제    9. 돌아가기  ");
 				System.out.println("------------------------------------------------------------------------------------------------");
 
 				int menu=Integer.parseInt(sc.nextLine());
@@ -111,7 +111,7 @@ public class AdminMenuView {
 		while(true) {
 			try {
 				System.out.println("                                        관리자 도서 관리                                            ");
-				System.out.println("1. 새 도서등록   2. 도서정보수정   3. 도서삭제   4. 도서조회   5. 대출한도서 조회   6. 예약한도서 조회    9. 나가기    ");
+				System.out.println("1. 새 도서등록          2. 도서정보수정          3. 도서삭제           4. 도서조회            9. 나가기    ");
 				System.out.println("------------------------------------------------------------------------------------------------------------");
 
 				int menu=Integer.parseInt(sc.nextLine());

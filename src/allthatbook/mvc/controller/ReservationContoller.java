@@ -12,7 +12,6 @@ import allthatbook.mvc.view.EndView;
 import allthatbook.mvc.view.FailView;
 
 public class ReservationContoller {
-   
 	private static ReservationService reservationService = new ReservationServiceImpl();
 	
 	public static void insertReservation(User user, int bookNo) {
@@ -27,6 +26,7 @@ public class ReservationContoller {
 		}
 	}
 	
+
 	public static void insertReservation(User user, Book book) {
 		
 		Reservation reservation = new Reservation(book.getBookNo(), user.getUserNo());
@@ -37,5 +37,17 @@ public class ReservationContoller {
 		}catch (SQLException e) {
 			FailView.errorMessage(e.getMessage());
 		}
+		
 	}
+	
+	public static void deleteReservation(int userNo, int bookNo){
+		try {
+		    reservationService.deleteReservation(userNo, bookNo);
+		    EndView.printMessage(bookNo+"번 도서 예약이 삭제되었습니다");
+
+		}catch (SQLException e) {
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+
 }
