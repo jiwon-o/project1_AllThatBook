@@ -218,15 +218,13 @@ public class BookController {
 	 * @param book
 	 * @return int result
 	 */
-	public static int bookInsert(Book book) {
-		int result=0;
+	public static void bookInsert(Book book) {
 		try {
-			result = bookService.bookInsert(book);
+			bookService.bookInsert(book);
+			EndView.printMessage("등록 성공했습니다.");
 		} catch (SQLException e) {
-			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
-		return result;
 	}
 
 	/**

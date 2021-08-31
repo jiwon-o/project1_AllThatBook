@@ -87,9 +87,9 @@ public class BookServiceImpl implements BookService {
 	}
 	
 	@Override
-	public int bookInsert(Book book) throws SQLException {
+	public void bookInsert(Book book) throws SQLException {
 		int result = bookDao.bookInsert(book);
-		return result;
+		if(result==0)throw new SQLException("책등록 실패했습니다.");
 	}
 
 	@Override

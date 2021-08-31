@@ -24,9 +24,6 @@ public class EndView {
 		for(Book book : bookList) {
 			System.out.println(book);
 		}
-		if(user.getUserId().equals("admin")) {
-			BookMenuView.bookDeleteOrUpdateListMenu(user);
-		}
 	}
 	
 	public static void printBookList(List<Book> bookList) {
@@ -43,11 +40,6 @@ public class EndView {
 	
 	public static void printSelectByNo(User user, Book book) {
 		System.out.println(book + "\n");
-
-		if(user.getUserId().equals("admin")) {
-			BookMenuView.bookDeleteOrUpdateMenu(user, book);
-		}
-
 	}
 	
 
