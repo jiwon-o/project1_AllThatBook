@@ -182,7 +182,7 @@ public class RentalDAOImpl implements RentalDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = "select 대여번호, 책번호, 회원번호, "
-				+ "to_char(반납예정일자, 'yy/mm/dd')반납예정일자, to_char(대여일자, 'yy/mm/dd')대여일자, to_char(반납일자, 'yy/mm/dd')반납일자, "
+				+ "반납예정일자, 대여일자, 반납일자, "
 				+ "반납여부, 연체여부 from rental where 책번호 = ? and 회원번호 = ? and 반납여부 = 0";
 		ResultSet rs = null;
 		try {
