@@ -26,7 +26,7 @@ public class RentalController {
 			Rental rental = new Rental( book.getBookNo(), user.getUserNo() );
 			rentalService.insertRental(rental);
 
-			EndView.printMessage("'" + book.getBookNo() + "'번 도서를 대출했습니다.");
+			EndView.printMessage("*** '" + book.getBookNo() + "'번 도서를 대출했습니다. ***");
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
@@ -37,7 +37,6 @@ public class RentalController {
 		Scanner sc = new Scanner(System.in);
 		try {
 			Rental rental = new Rental( bookNo, user.getUserNo() );
-			
 			System.out.println("'" + bookNo + "'번 도서를 대출하시겠습니까? ( 네 / 아니오 )");
 			String checkRental = sc.nextLine();
 			if("네".equals(checkRental)) {
@@ -63,7 +62,9 @@ public class RentalController {
 		try {
 			Rental rental = new Rental(bookNo, user.getUserNo());
 			rentalService.returnBook(rental);
+
 			EndView.printMessage("*** '"+bookNo + "'번 도서를 반납하였습니다. ***");
+
 		}catch (SQLException e) {
 			FailView.errorMessage(e.getMessage());
 		}

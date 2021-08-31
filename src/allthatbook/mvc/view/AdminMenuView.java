@@ -18,11 +18,10 @@ public class AdminMenuView {
 	public static void printAdminMenu(User user) {
 		while(true) {
 			try {
-
-				System.out.println("                         관리자 메뉴                         ");
 				System.out.println("\n");
-				System.out.println("    1. 회원관리           2. 도서관리           9. 로그아웃     ");
-				System.out.println("---------------------------------------------------------------------");
+				System.out.println("---------------------관리자 메뉴----------------------");
+				System.out.println("    1. 회원관리      2. 도서관리      9. 로그아웃     ");
+				System.out.println("------------------------------------------------------");
 				
 				int menu = Integer.parseInt(sc.nextLine());
 				switch (menu) {
@@ -54,9 +53,10 @@ public class AdminMenuView {
 	public static void userAdminMenu() {
 		while(true) {
 			try {	
-				System.out.println("                               관리자 회원 관리                                       ");
-				System.out.println("1. 전체회원 조회  2. 회원번호로 조회  3. 회원ID로 조회   4.회원정보수정   5.회원정보삭제    9. 돌아가기  ");
-				System.out.println("------------------------------------------------------------------------------------------------");
+				System.out.println("\n");
+				System.out.println("-------------------------------------------------------관리자 회원 관리--------------------------------------------------------------------");
+				System.out.println("      1.  전체회원 조회      2.  회원번호로 조회      3.  회원ID로 조회      4.  회원정보수정      5.  회원정보삭제      9.  돌아가기      ");
+				System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 
 				int menu=Integer.parseInt(sc.nextLine());
 				int result=0;
@@ -110,9 +110,10 @@ public class AdminMenuView {
 	public static void bookAdminMenu(User user) {
 		while(true) {
 			try {
-				System.out.println("                                        관리자 도서 관리                                            ");
-				System.out.println("1. 새 도서등록          2. 도서정보수정          3. 도서삭제           4. 도서조회            9. 나가기    ");
-				System.out.println("------------------------------------------------------------------------------------------------------------");
+				System.out.println("\n");
+				System.out.println("---------------------------------------관리자 도서 관리----------------------------------------------");
+				System.out.println("      1.  새 도서등록      2.  도서정보수정      3.  도서삭제      4.  도서조회      9.  나가기      ");
+				System.out.println("-----------------------------------------------------------------------------------------------------");
 
 				int menu=Integer.parseInt(sc.nextLine());
 				int bookNo=0;
@@ -160,28 +161,29 @@ public class AdminMenuView {
 	public static void printSelectMenu(User user) {
 		while(true) {
 			System.out.println("\n");
-			System.out.println("1. 도서번호로 검색    2. 도서명으로 검색    3. 저자명으로 검색    4. 출판사로 검색     5. 도서분야로 검색     6. 대여여부로 검색    9. 돌아가기    ");
-			System.out.println("-----------------------------------------------------------------------------------------------------------------------");
+			System.out.println("-------------------------------------------------------------관리자 도서 검색 메뉴------------------------------------------------------------------");
+			System.out.println("   1.  도서번호로 검색   2.  도서명으로 검색   3.  저자명으로 검색   4.  출판사로 검색   5.  도서분야로 검색   6.  대여여부로 검색   9.  돌아가기   ");
+			System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
 			System.out.print("원하시는 서비스의 번호를 입력해주세요 :  ");
 			int menu =Integer.parseInt(sc.nextLine());
 			switch(menu) {
 			case 1 :
-				Book book =  BookMenuView.selectBookByNo(user); //도서번호로 검색
+				BookMenuView.selectBookByNo(user); //도서번호로 검색
 				return;
 			case 2 :
-				List<Book> bookListByName = BookMenuView.selectBookByName(user); //도서명으로 검색
+				BookMenuView.selectBookByName(user); //도서명으로 검색
 				return;
 			case 3 :
-				List<Book> bookListByWriter = BookMenuView.selectBookByWriter(user); //저자명으로 검색
+				BookMenuView.selectBookByWriter(user); //저자명으로 검색
 				return;
 			case 4 :
-				List<Book> bookListByPublisher = BookMenuView.selectBookByPublisher(user); //출판사로 검색
+				BookMenuView.selectBookByPublisher(user); //출판사로 검색
 				return;
 			case 5 :
-				List<Book> bookListByCateory = BookMenuView.selectBookByCategory(user); //분야로 검색
+				BookMenuView.selectBookByCategory(user); //분야로 검색
 				return;
 			case 6 : 
-				List<Book> bookListByState = BookMenuView.selectBookByState(user); //대여 여부로 검색(0: 대여가능, 1: 대여중, 2: 예약중)
+				BookMenuView.selectBookByState(user); //대여 여부로 검색(0: 대여가능, 1: 대여중, 2: 예약중)
 				return;
 			case 9 :
 				return;

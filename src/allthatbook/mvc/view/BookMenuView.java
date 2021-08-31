@@ -78,6 +78,7 @@ public class BookMenuView {
 				if (book == null) {
 
 					System.out.println("\n다시 하시겠습니까? ( 네 / 아니오 )");
+
 					String choice = sc.nextLine();
 					switch (choice) {
 					case "네":
@@ -91,7 +92,7 @@ public class BookMenuView {
 				}
 			} catch (NumberFormatException e) {
 				// e.printStackTrace();
-				System.out.println("'숫자'만 입력해주세요. ");
+				System.out.println("*** '숫자'만 입력해주세요. ***");
 
 			}
 
@@ -109,7 +110,9 @@ public class BookMenuView {
 			String keyword = sc.nextLine();
 			bookList = BookController.bookSelectByBookName(user, keyword);
 			if (bookList == null) {
+
 				System.out.println("\n다시 하시겠습니까? ( 네 / 아니오 )");
+
 				String choice = sc.nextLine();
 				switch (choice) {
 				case "네":
@@ -138,6 +141,7 @@ public class BookMenuView {
 				if (bookList == null) {
 
 					System.out.println("\n다시 하시겠습니까? ( 네 / 아니오 )");
+
 					String choice = sc.nextLine();
 					switch (choice) {
 					case "네":
@@ -168,7 +172,9 @@ public class BookMenuView {
 				bookList = BookController.bookSelectByPublisher(user, publisher);
 
 				if (bookList == null) {
+
 					System.out.println("\n다시 하시겠습니까? ( 네 / 아니오 )");
+
 					String choice = sc.nextLine();
 					switch (choice) {
 					case "네":
@@ -204,6 +210,7 @@ public class BookMenuView {
 				if (bookList == null) {
 
 					System.out.println("\n다시 하시겠습니까? ( 네 / 아니오 )");
+
 					String choice = sc.nextLine();
 					switch (choice) {
 					case "네":
@@ -231,12 +238,13 @@ public class BookMenuView {
 		List<Book> bookList = null;
 		while (true) {
 			try {
+
 				System.out.print("대출여부 검색(대출가능: 0, 대출중: 1, 예약중: 2) : ");
 				int state = Integer.parseInt(sc.nextLine());
 				bookList = BookController.bookSelectByState(user, state);
 				break;
 			} catch (NumberFormatException e) {
-				FailView.errorMessage("메뉴에 있는 '숫자'만 입력해주세요. ");
+				FailView.errorMessage("*** 메뉴에 있는 '숫자'만 입력해주세요. ***");
 			}
 		}
 		return bookList;
@@ -251,8 +259,9 @@ public class BookMenuView {
 		while(true) {
 			int result=0;
 
+			System.out.println("---------------------------------------------------------------------------");
 			System.out.println("1. 선택도서 수정    2. 선택도서 삭제    3. 돌아가기    9. 메인메뉴로 가기  ");
-			System.out.println("--------------------------------------------------------------------------");
+			System.out.println("---------------------------------------------------------------------------");
 			int menu = Integer.parseInt(sc.nextLine());
 
 			switch (menu) {
@@ -260,7 +269,7 @@ public class BookMenuView {
 				Book updatebook = AdminMenuView.updateBook();
 				result = UpdateAdminController.bookUpdate(book.getBookNo(), updatebook);
 				if (result == 1)
-					System.out.println(book.getBookNo() + " 번 해당 책이 수정되었습니다.");
+					System.out.println("*** '"+book.getBookNo() + "' 번 해당 책이 수정되었습니다. ***");
 				break;
 			case 2:
 				BookController.bookDelete(book.getBookNo());
@@ -278,8 +287,9 @@ public class BookMenuView {
 		Scanner sc = new Scanner(System.in);
 		boolean flag = true;
 		while (flag) {
+			System.out.println("--------------------------------------------------------------------------");
 			System.out.println("1. 선택도서 수정    2. 선택도서 삭제    3. 돌아가기    9. 메인메뉴로 가기 ");
-			System.out.println("---------------------------------------------------------------------------");
+			System.out.println("--------------------------------------------------------------------------");
 			int menu = Integer.parseInt(sc.nextLine());
 			int bookNo = 0;
 			int result = 0;
@@ -289,7 +299,7 @@ public class BookMenuView {
 				Book updatebook = AdminMenuView.updateBook();
 				result = UpdateAdminController.bookUpdate(bookNo, updatebook);
 				if (result == 1)
-					System.out.println(bookNo + "번 해당 책이 수정되었습니다.");
+					System.out.println("*** '"+bookNo + "'번 해당 책이 수정되었습니다. ***");
 				break;
 			case 2:
 				bookNo = AdminMenuView.InputBookNo();

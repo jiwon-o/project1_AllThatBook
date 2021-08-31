@@ -32,6 +32,7 @@ public class UserMenuView {
 					UserMenuView.register(); // 회원가입
 					break;
 				case 9:
+
 					System.out.println("*** 정말 종료하시겠습니까? ( 네 / 아니오 ) ***");
 					String checkLogout = sc.nextLine();
 					if("네".equals(checkLogout)) {
@@ -48,7 +49,6 @@ public class UserMenuView {
 						System.out.println("*** ( 네 / 아니오 ) 중 하나만 입력해주세요. ***\n");
 						break;
 					}
-					
 					
 				default:
 					System.out.println("*** 메뉴에 있는 번호를 입력해주세요. ***\n");
