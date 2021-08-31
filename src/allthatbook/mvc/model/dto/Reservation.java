@@ -10,7 +10,11 @@ public class Reservation {
     
     public Reservation() {}
     
-    
+    public Reservation(int bookNo, int userNo) {
+    	super();
+    	this.bookNo = bookNo;
+    	this.userNo = userNo;
+    }
     
 	public Reservation(int rezNo, int bookNo, int userNo, Date rezDate) {
 		super();

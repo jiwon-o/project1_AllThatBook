@@ -14,4 +14,8 @@ public interface RentalDAO {
 	   * */
 	   int rentalInsert(Rental rental) throws SQLException;
 	   
+	   /**
+	    * ¹Ý³³ÇÏ±â
+	    * */
+	   int returnBook(Rental rental) throws SQLException; 
 }

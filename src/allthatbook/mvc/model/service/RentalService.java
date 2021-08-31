@@ -13,4 +13,9 @@ public interface RentalService {
 	 * */
     public void insertRental(Rental rental) throws SQLException;
 	
+    
+    /**
+     * ¹Ý³³ÇÏ±â
+     * */
+    public void returnBook(Rental rental) throws SQLException;
 }
