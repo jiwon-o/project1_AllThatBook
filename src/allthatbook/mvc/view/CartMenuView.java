@@ -6,7 +6,10 @@ import java.util.Scanner;
 import allthatbook.mvc.controller.CartController;
 import allthatbook.mvc.controller.RentalController;
 import allthatbook.mvc.model.dto.Book;
+import allthatbook.mvc.model.dto.Cart;
 import allthatbook.mvc.model.dto.User;
+import allthatbook.mvc.session.Session;
+import allthatbook.mvc.session.SessionSet;
 
 public class CartMenuView {
 	private static Scanner sc = new Scanner(System.in);
@@ -58,7 +61,7 @@ public class CartMenuView {
 			case 2:
 				CartMenuView.putCart(user.getUserId(), book);
 				break;
-			case 3:
+			case 3:		/////////////////////////
 				CartMenuView.viewCart(user.getUserId());
 				
 				break;
@@ -85,8 +88,14 @@ public class CartMenuView {
 			case 2:
 				CartMenuView.putCart(user.getUserId());
 				break;
-			case 3:
+			case 3:		/////////////////////////
 				CartMenuView.viewCart(user.getUserId());
+				SessionSet ss = SessionSet.getInstance();
+				Session session = ss.get(user.getUserId());
+
+				Cart cart = (Cart) session.getAttribute("cart");
+				CartController.rentalCartBook( user.getUserId(), cart);
+				//세션에 있는 cart객체 안에 있는 cartDetailList 안에 번호에 맞는 삭제
 				break;
 			case 4:
 				return;

@@ -4,7 +4,10 @@ import java.util.Scanner;
 
 import allthatbook.mvc.controller.BookController;
 import allthatbook.mvc.controller.CartController;
+import allthatbook.mvc.controller.RentalController;
+import allthatbook.mvc.controller.ReservationContoller;
 import allthatbook.mvc.controller.UserController;
+import allthatbook.mvc.model.dto.Cart;
 import allthatbook.mvc.model.dto.User;
 import allthatbook.mvc.session.Session;
 import allthatbook.mvc.session.SessionSet;
@@ -96,6 +99,7 @@ public class UserMenuView {
 				System.out.println(" " + user.getUserId() + "님이 로그인 중입니다.");
 				System.out.println("\n");
 				System.out.println(
+
 						"1. 전체목록    2. 도서검색 (대여, 예약)   3. 도서반납   4. 책신청   5. 장바구니담기    6. 장바구니보기    7. 회원정보     8. 회원정보수정    9. 로그아웃    100. 장바구니 비우기");
 				System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------");
 				System.out.print("원하시는 서비스의 번호를 입력해주세요 :  ");
@@ -133,7 +137,18 @@ public class UserMenuView {
 				case 100:
 					UserMenuView.clearCart(user);
 					CartController.clearCart(user.getUserId());
+				    break;
+				case 101:
+					System.out.print("예약할 책 번호: ");
+					int bookNo = sc.nextInt();
+					ReservationContoller.insertReservation(user, bookNo);
 					break;
+				case 102:
+					System.out.print("반납할 책 번호: ");
+					RentalController.returnBook(user, sc.nextInt());
+					break;
+					
+
 				default:
 					System.out.println("\n");
 					System.out.println(" 메뉴에 있는 번호를 입력해주세요");

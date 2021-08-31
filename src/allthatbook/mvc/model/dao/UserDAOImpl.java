@@ -49,6 +49,11 @@ public class UserDAOImpl implements UserDAO {
 		int result = 0;
 		try {
 			con = DbUtil.getConnection();
+			
+			String userId = user.getUserId();
+			User user2 = selectByUserId(userId);
+			if (user2 != null) throw new SQLException("중복된 아이디가 존재합니다.");
+			
 			ps = con.prepareStatement(
 					"insert into users(회원번호, 회원ID, 패스워드, 회원이름, 연락처, 등록일자) values (user_seq_no.nextval, ?, ?, ?, ?, sysdate)");
 			ps.setString(1, user.getUserId());
@@ -200,6 +205,7 @@ public class UserDAOImpl implements UserDAO {
 			DbUtil.close(con, ps, rs);
 		}
 		return user;
+		
 	}
 	/**
 	 * 관리자 회원정보수정 
