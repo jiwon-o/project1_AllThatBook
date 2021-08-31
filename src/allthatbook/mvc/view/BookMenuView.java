@@ -15,8 +15,10 @@ public class BookMenuView {
 	 */
 	public static void printSelectMenu(User user) {
 		while(true) {
-			System.out.println("1.도서번호로 검색  |  2.도서명으로 검색  |  3.저자명으로 검색  |  4.출판사로 검색  |  5.도서분야로 검색  |  6.대여여부로 검색  |  9.돌아가기");
-			System.out.print("번호 입력 > ");
+			System.out.println("\n");
+			System.out.println("1. 도서번호로 검색    2. 도서명으로 검색    3. 저자명으로 검색    4. 출판사로 검색     5. 도서분야로 검색     6. 대여여부로 검색    9. 돌아가기    ");
+			System.out.println("-----------------------------------------------------------------------------------------------------------------------");
+			System.out.print("원하시는 서비스의 번호를 입력해주세요 :  ");
 			int menu =Integer.parseInt(sc.nextLine());
 			switch(menu) {
 			case 1 :
@@ -52,13 +54,13 @@ public class BookMenuView {
 		Book book = null;
 		while(true) {
 			try {
-				System.out.print("책번호 입력 > ");
+				System.out.print("도서번호를 입력해주세요 : ");
 				int no = Integer.parseInt(sc.nextLine());
-				
+				 System.out.println("\n");
 				book = BookController.bookSelectByBookNo(userId, no);
 			}catch (NumberFormatException e) {
 				//e.printStackTrace();
-				System.out.println("숫자만 입력해주세요.");
+				System.out.println("'숫자'만 입력해주세요. ");
 			}
 			
 		return book;
@@ -70,8 +72,9 @@ public class BookMenuView {
 	 */
 	public static void selectBookByName(String userId) {
 		try {
-			System.out.print("단어 검색 > ");
+			System.out.print("책의 이름을 입력해주세요 : ");
 			String keyword = sc.nextLine();
+			 System.out.println("\n");
 			BookController.bookSelectByBookName(userId, keyword);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -83,8 +86,9 @@ public class BookMenuView {
 	 */
 	public static void selectBookByWriter(String userId) {
 		try {
-			System.out.print("저자 검색 > ");
+			System.out.print("저자를 입력해주세요 : ");
 			String writer = sc.nextLine();
+			 System.out.println("\n");
 			BookController.bookSelectByWriter(userId, writer);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -96,8 +100,9 @@ public class BookMenuView {
 	 */
 	public static void selectBookByPublisher(String userId) {
 		try {
-			System.out.print("출판사 검색 > ");
+			System.out.print("출판사를 입력해주세요 : ");
 			String publisher = sc.nextLine();
+			 System.out.println("\n");
 			BookController.bookSelectByPublisher(userId, publisher);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -109,8 +114,9 @@ public class BookMenuView {
 	 */
 	public static void selectBookByCategory(String userId) {
 		try {
-			System.out.print("도서분야 검색 > ");
+			System.out.print("찾으시는 분야를 입력해주세요 : ");
 			String category = sc.nextLine();
+			 System.out.println("\n");
 			BookController.bookSelectByCategory(userId, category);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -126,7 +132,8 @@ public class BookMenuView {
 		boolean flag = true;
 		while(flag) {
 			int result=0;
-			System.out.println("1. 선택도서 수정 | 2. 선택도서 삭제 | 3. 돌아가기 | 9. 메인메뉴로 가기");
+			System.out.println("1. 선택도서 수정    2. 선택도서 삭제    3. 돌아가기    9. 메인메뉴로 가기  ");
+			System.out.println("-------------------------------------------------------------");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch(menu) {
 				case 1 :
@@ -155,7 +162,8 @@ public class BookMenuView {
 		Scanner sc = new Scanner(System.in);
 		boolean flag = true;
 		while(flag) {
-			System.out.println("1. 선택도서 수정 | 2. 선택도서 삭제 | 3. 돌아가기 | 9. 메인메뉴로 가기");
+			System.out.println("1. 선택도서 수정    2. 선택도서 삭제    3. 돌아가기    9. 메인메뉴로 가기 ");
+			System.out.println("------------------------------------------------------------");
 			int menu = Integer.parseInt(sc.nextLine());
 			int bookNo=0;
 			int result=0;

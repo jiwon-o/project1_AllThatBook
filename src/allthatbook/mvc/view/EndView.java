@@ -17,7 +17,8 @@ import allthatbook.mvc.model.service.BookServiceImpl;
 
 public class EndView {
 	public static void printBookList(String userId, List<Book> bookList) {
-		System.out.println("----- 총 도서 수: " + bookList.size() + "개 ----------");
+		System.out.println("----------------------------------------------    총 도서 수: " + bookList.size() + "개    ------------------------------------------");
+		System.out.println("\n");
 		for(Book book : bookList) {
 			System.out.println(book);
 		}
@@ -29,7 +30,8 @@ public class EndView {
 	}
 	
 	public static void printBookList(List<Book> bookList) {
-		System.out.println("----- 총 도서 수: " + bookList.size() + "개 ----------");
+		System.out.println("----------------------------------------------    총 도서 수: " + bookList.size() + "개   -------------------------------------------");
+		System.out.println("\n");
 		for(Book book : bookList) {
 			System.out.println(book);
 		}
@@ -55,7 +57,7 @@ public class EndView {
 	 * User 전체 출력
 	 */
 	public static void printUserList(List<User> userList){
-		System.out.println("-----전체 User "+userList.size()+"명------");
+		System.out.println("---------------------------------  전체 User "+userList.size()+  " ----------------------------------------------------------");
 		for(User user : userList) {
 			System.out.println(user);
 		}
@@ -73,7 +75,7 @@ public class EndView {
 	 * 장바구니 출력
 	 */
 	public static void printViewCart(String id, Cart cart) {
-		System.out.println("---장바구니내용---");
+		System.out.println("------------------------------------------------------  장바구니내용  ----------------------------------------------------------------------");
 		List<CartDetail> list = cart.getCartDetailList();
 		System.out.println(list.size());
 		for(CartDetail cartDetail : list) {
@@ -82,12 +84,14 @@ public class EndView {
 			//책번호로 책정보를 출력하는 메소드
 			Book book = BookController.bookSelectByBookNo2(bookNo);
 			System.out.println(book);
+		
 		}
 		
-		
+		System.out.println("\n");
 		Scanner sc = new Scanner(System.in);
 		while(true) {
-			System.out.println("1.대여하기  |  2.목록 삭제하기  |  3.장바구니 비우기  |  4.돌아가기");
+			System.out.println("1. 대여하기    2. 목록 삭제하기    3. 장바구니 비우기    4. 돌아가기   ");
+			System.out.println("---------------------------------------------------------");
 			switch(Integer.parseInt(sc.nextLine())) {
 			case 1:
 				CartController.rentalCartBook(id, cart);
@@ -109,7 +113,8 @@ public class EndView {
 
 		Scanner sc = new Scanner(System.in);
 		while(true) {
-			System.out.println("1.대여하기  |  2.장바구니 담기  |  3.장바구니 보기  |  4.돌아가기  |  9.메인메뉴로 가기");
+			System.out.println("1. 대여하기   2. 장바구니 담기    3. 장바구니 보기    4. 돌아가기    9. 메인메뉴로 가기  ");
+			System.out.println("-----------------------------------------------------------------------");
 			switch(Integer.parseInt(sc.nextLine())) {
 			case 1:
 				//book객체 쓸거야
