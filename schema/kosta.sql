@@ -1,6 +1,6 @@
 select * from users;
-select * from books;
-select * from rental;
+select * from books where 책번호 = 122;
+select * from rental where 책번호 = 122;
 commit
 
 select * from rental;

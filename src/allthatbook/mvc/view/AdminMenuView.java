@@ -190,20 +190,31 @@ public class AdminMenuView {
 	 *	bookInsert에 필요한 book정보 넣기 
 	 */
 	public static Book InputBook() {
-		Book book = new Book();
-		System.out.println("bookNo은 자동배정됩니다. ");
-		
-		System.out.print("bookName 입력 : ");
-		book.setBookName(sc.nextLine());
-		System.out.print("bookWriter 입력  : ");
-		book.setBookWriter(sc.nextLine());
-		System.out.print("bookPublisher 입력  : ");
-		book.setBookPublisher(sc.nextLine());
-		System.out.println("출간일은 현재 날짜가 들어갑니다. ");
 
-		System.out.print("bookField 입력  : ");
-		book.setBookField(sc.nextLine());
-		System.out.println("bookState 기본 대출가능0으로 들어갑니다. ");
+		Book book = null;
+		while(true) {
+	        System.out.println("bookNo는 자동배정됩니다.");
+	        
+	        System.out.print("bookName 입력 : ");
+	        String bookName = sc.nextLine();
+	        if(bookName.equals("")) {
+	        	System.out.println("bookName은 입력 필수");
+	        	continue;
+	        }
+	        System.out.print("bookWriter 입력 : ");
+	        String bookWriter = sc.nextLine();
+	        System.out.print("bookPublisher 입력 : ");
+	        String bookPublisher = sc.nextLine();
+	        System.out.println("출간일은 자동배정됩니다.");
+	        String pubDate = sc.nextLine();
+	        System.out.print("bookField 입력 : ");
+	        String bookField = sc.nextLine();
+	        System.out.println("bookState 기본 대출가능0으로 들어갑니다.");
+	        
+	        book = new Book(0, bookName, bookWriter, bookPublisher, pubDate, bookField, 0);
+	        break;
+		}
+
 
 		return book;
 	}

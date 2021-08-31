@@ -18,7 +18,7 @@ public interface CartService {
 	/**
 	 * 장바구니 책 대여하기
 	 * */
-	public int rentalCartBook(Cart cart, CartDetail cartDetail) throws SQLException;
+	public void rentalCartBook(Cart cart, CartDetail cartDetail) throws SQLException;
 	
 	
 	/**

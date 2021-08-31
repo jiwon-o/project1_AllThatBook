@@ -18,6 +18,7 @@ public class RentalController {
 		try {
 			Rental rental = new Rental( book.getBookNo(), user.getUserNo() );
 			rentalService.insertRental(rental);
+
 			EndView.printMessage(book.getBookNo() + "번의 도서를 대여했습니다.");
 		}catch (SQLException e) {
 			//e.printStackTrace();
@@ -35,4 +36,17 @@ public class RentalController {
 			FailView.errorMessage(e.getMessage());
 		}
 	}
+	
+	//public static void returnBook(User user, Book book) {
+	public static void returnBook(User user, int bookNo) {
+		//int bookNo = book.getBookNo;
+		try {
+			Rental rental = new Rental(bookNo, user.getUserNo());
+			rentalService.returnBook(rental);
+			EndView.printMessage(bookNo + "번 반납 성공");
+		}catch (SQLException e) {
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
 }

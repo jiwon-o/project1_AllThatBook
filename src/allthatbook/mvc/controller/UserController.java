@@ -41,7 +41,6 @@ public class UserController {
 			System.out.println("\n");
 			EndView.printMessage("회원가입이 완료되었습니다.");
 		} catch (SQLException e) {
-			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		} catch (PwdCheckException e) { // 비밀번호가 일치하지 않을 때
 			e.printStackTrace();
