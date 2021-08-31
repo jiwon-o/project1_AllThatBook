@@ -71,7 +71,8 @@ public class BookMenuView {
 				System.out.println("'숫자'만 입력해주세요. ");
 
 			}
-		return book;
+			 System.out.println("\n");
+			 return book;
 		}
 	}
 	
@@ -90,6 +91,7 @@ public class BookMenuView {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("\n");
 		return bookList;
 	}
 	
@@ -107,6 +109,7 @@ public class BookMenuView {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("\n");
 		return bookList;
 	}
 	
@@ -125,6 +128,7 @@ public class BookMenuView {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("\n");
 		return bookList;
 	}
 		
@@ -142,6 +146,7 @@ public class BookMenuView {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("\n");
 		return bookList;
 	}
 	
@@ -157,12 +162,13 @@ public class BookMenuView {
 			if(state < 0 || 2 < state) {
 				throw new SQLException("대여 가능(0), 대여중(1), 예약중(2) 중에서 입력해주세요.");
 			}
-			
+			 System.out.println("\n");
 			bookList = BookController.bookSelectByState(user, state);
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
+		System.out.println("\n");
 		return bookList;
 	}
 	
@@ -183,7 +189,7 @@ public class BookMenuView {
 				case 1 :
 					Book updatebook = AdminMenuView.updateBook();
 					result = UpdateAdminController.bookUpdate(book.getBookNo(), updatebook);
-					if(result==1)System.out.println(book.getBookNo()+"번 해당 책이 수정되었습니다.");
+					if(result==1)System.out.println(book.getBookNo()+" 번 해당 책이 수정되었습니다.");
 					break;
 				case 2 :
 					BookController.bookDelete(book.getBookNo());	

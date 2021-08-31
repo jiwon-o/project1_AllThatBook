@@ -54,7 +54,6 @@ public class CartController {
 			if(cart.chkCartDuplicate(bookNo)) { //true면 중복되는책 존재
 				throw new SQLException("이미 장바구니에 담은 책은 중복해서 담을 수 없습니다.");
 			}
-			
 			cartService.insertBook(bookNo, cart);
 			EndView.printMessage("장바구니에 담았습니다");
 			System.out.println("\n");
