@@ -5,6 +5,7 @@ import java.util.Scanner;
 import allthatbook.mvc.controller.BookController;
 import allthatbook.mvc.controller.CartController;
 import allthatbook.mvc.controller.UserController;
+import allthatbook.mvc.model.dto.Cart;
 import allthatbook.mvc.model.dto.User;
 import allthatbook.mvc.session.Session;
 import allthatbook.mvc.session.SessionSet;
@@ -115,8 +116,15 @@ public class UserMenuView {
 					logout(user.getUserId());
 					return;
 					
-				case 100:
-					CartController.clearCart(user.getUserId());
+//				case 100:
+//					CartController.clearCart(user.getUserId());
+//					break;
+//				case 101:
+//					Session session = ss.get(user.getUserId());
+//
+//					Cart cart = (Cart) session.getAttribute("cart");
+//					CartController.rentalCartBook(user.getUserId(), cart);
+//					break;
 					
 				default:
 					System.out.println("메뉴에 있는 번호를 입력해주세요");

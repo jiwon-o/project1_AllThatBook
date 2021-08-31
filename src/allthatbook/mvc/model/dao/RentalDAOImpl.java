@@ -7,11 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
+import allthatbook.mvc.model.dto.Cart;
+import allthatbook.mvc.model.dto.CartDetail;
 import allthatbook.mvc.model.dto.Rental;
 import allthatbook.mvc.util.DbUtil;
 
 public class RentalDAOImpl implements RentalDAO {
-
+	CartDAO cartDAO = new CartDAOImpl();
+	
 	/**
 	 * 대여하기 1) 책상태 확인하기 (0이면 대여가능) 2) Rental 테이블에 insert 3) 책상태 변경하기 (1로 수정)
 	 */
@@ -49,10 +52,54 @@ public class RentalDAOImpl implements RentalDAO {
 					// 상태가 2인 경우 예약된 회원번호와 대여하려는 회원의 번호가 같으면 대출진행
 				}
 			} // else끝
-
+			
+			
 			con.commit();
 		} finally {
+			DbUtil.close(con, ps, null);
+		}
+
+		return result;
+	}// 메소드끝
+	
+	public int rentalInsert(Cart cart, Rental rental) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "INSERT INTO RENTAL(대여번호, 책번호, 회원번호, 반납예정일자, 대여일자, 반납일자)"
+				+ " VALUES(RENTAL_SEQ_NO.NEXTVAL, ?, ?, sysdate+14, sysdate, null)";
+		int result = 0;
+		try {
+			con = DbUtil.getConnection();
+			con.setAutoCommit(false); // 자동커밋해지
+
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, rental.getBookNo());
+			ps.setInt(2, rental.getUserNo());
+			result = ps.executeUpdate();
+			if (result == 0) { //
+				con.rollback();
+			} else {
+				// 책 꺼내오고 책 상태에 따라 진행
+
+				int re = getBookState(con, rental);
+
+				if (re == 0) {
+					// 대여진행 --> 책상태 1로 변경
+					changeBookState(con, rental);
+					CartDetail cartDetail = new CartDetail(cart.getCartId(), rental.getBookNo());
+					cartDAO.deleteCartDetail(con, cart, cartDetail);
+				} else if (re == 1) {
+					result = 0;
+					con.rollback();
+					// throw new SQLException(rental.getBookNo() + "는대출중인도서");
+				} else {
+					// 상태가 2인 경우 예약된 회원번호와 대여하려는 회원의 번호가 같으면 대출진행
+				}
+			} // else끝
+			// delete 추가
+			
 			con.commit();
+		} finally {
 			DbUtil.close(con, ps, null);
 		}
 
