@@ -57,6 +57,7 @@ public class CartController {
 			
 			cartService.insertBook(bookNo, cart);
 			EndView.printMessage("장바구니에 담았습니다");
+			System.out.println("\n");
 			
 		}catch(Exception e) {
 			//e.printStackTrace();
@@ -134,7 +135,7 @@ public class CartController {
 	
 	
 	/**
-	 * 장바구니에 담긴 책 대여
+	 * 장바구니에 담긴 책 전체 대여
 	 * */
 	public static void rentalCartBook(String userId, Cart cart) {
 		try {

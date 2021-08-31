@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void deleteUserInfo(User user) throws SQLException {
 		int result = userDao.deleteUserInfo(user);
-		if (result == 0) throw new SQLException("회원탈퇴가 되지 않았습니다.");
+		if (result == 0) throw new SQLException("회원탈퇴가 실패했습니다.");
 	}
 
 
@@ -100,13 +100,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void deleteAdminUserInfo(User user) throws SQLException {
 		int result = userDao.deleteUserInfo(user);
-		if(result==0)throw new SQLException("회원삭제가 되지 않았습니다.");
+		if(result==0)throw new SQLException("회원삭제가 실패했습니다.");
 	}
 
 	@Override
 	public void deleteUserInfo(int userNo) throws SQLException {
 		int result = userDao.deleteUserInfo(userNo);
-		if(result==0)throw new SQLException("회원삭제가 되지 않았습니다.");
+		if(result==0)throw new SQLException("회원삭제가 실패했습니다.");
 	}
 	
 	/**

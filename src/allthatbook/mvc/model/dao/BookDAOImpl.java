@@ -62,7 +62,7 @@ public class BookDAOImpl implements BookDAO {
 		ResultSet rs = null;
 		List<Book> bookList = new ArrayList<Book>();
 		
-		try {//select * from board where upper(subject) like upper(?)
+		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement("select * from books where upper(도서명) like upper(?) order by 책번호");
 			ps.setString(1, "%"+keyword+"%");
@@ -87,7 +87,7 @@ public class BookDAOImpl implements BookDAO {
 		ResultSet rs = null;
 		List<Book> bookList = new ArrayList<Book>();
 		
-		try {//select * from board where upper(subject) like upper(?)
+		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement("select * from books where upper(저자명) like upper(?) order by 책번호");
 			ps.setString(1, "%"+writer+"%");
@@ -112,7 +112,7 @@ public class BookDAOImpl implements BookDAO {
 		ResultSet rs = null;
 		List<Book> bookList = new ArrayList<Book>();
 		
-		try {//select * from board where upper(subject) like upper(?)
+		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement("select * from books where upper(출판사명) like upper(?) order by 책번호");
 			ps.setString(1, "%"+publisher+"%");
@@ -137,7 +137,7 @@ public class BookDAOImpl implements BookDAO {
 		ResultSet rs = null;
 		List<Book> bookList = new ArrayList<Book>();
 		
-		try {//select * from board where upper(subject) like upper(?)
+		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement("select * from books where upper(분야) like upper(?) order by 책번호");
 			ps.setString(1, "%"+category+"%");
@@ -155,6 +155,31 @@ public class BookDAOImpl implements BookDAO {
 		return bookList;
 	}
 
+	@Override
+	public List<Book> bookSelectByState(int state) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Book> bookList = new ArrayList<Book>();
+		
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("select * from books where 상태 = ? order by 책번호");
+			ps.setInt(1, state);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Book book = new Book(rs.getInt(1),  rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+				bookList.add(book);
+			}
+			
+		}finally {
+			DbUtil.close(con, ps, rs);
+		}
+		return bookList;
+	}
+	
 	@Override
 	public int bookInsert(Book book) throws SQLException {
 		Connection con = null;
@@ -224,6 +249,27 @@ public class BookDAOImpl implements BookDAO {
 		return result;
 	}
 
+	public List<Book> bookPossibleRentalSelect() throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Book> list = new ArrayList<Book>();
+		
+			try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement("select * from books where 상태=0 order by 책번호 desc");
+			rs= ps.executeQuery();
+			while(rs.next()) {
+
+				Book book = new Book(rs.getInt(1),  rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7));
+
+	        	list.add(book);
+			}
+		}finally {
+			DbUtil.close(con, ps, rs);
+		}
+		return list;
+	}
 
 	public List<Book> bookRentalSelect() throws SQLException {
 		Connection con = null;
@@ -269,6 +315,8 @@ public class BookDAOImpl implements BookDAO {
 		}
 		return list;
 	}
+
+	
 
 	
 

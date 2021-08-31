@@ -1,5 +1,6 @@
 package allthatbook.mvc.view;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,38 +17,44 @@ public class BookMenuView {
 	 */
 	public static void printSelectMenu(User user) {
 		while(true) {
-			System.out.println("1.도서번호로 검색  |  2.도서명으로 검색  |  3.저자명으로 검색  |  4.출판사로 검색  |  5.도서분야로 검색  |  6.대여여부로 검색  |  9.돌아가기");
-			System.out.print("번호 입력 > ");
+			System.out.println("\n");
+			System.out.println("1. 도서번호로 검색    2. 도서명으로 검색    3. 저자명으로 검색    4. 출판사로 검색     5. 도서분야로 검색     6. 대여여부로 검색    9. 돌아가기    ");
+			System.out.println("-----------------------------------------------------------------------------------------------------------------------");
+			System.out.print("원하시는 서비스의 번호를 입력해주세요 :  ");
 			int menu =Integer.parseInt(sc.nextLine());
 			switch(menu) {
 			case 1 :
 				Book book =  BookMenuView.selectBookByNo(user); //도서번호로 검색
-				CartMenuView.printCartMenu(user, book);
-
+				if(book != null) CartMenuView.printCartMenu(user, book);
 				break;
 			case 2 :
-				BookMenuView.selectBookByName(user); //도서명으로 검색
-				CartMenuView.printCartMenu(user);
+				List<Book> bookListByName = BookMenuView.selectBookByName(user); //도서명으로 검색
+				if(bookListByName != null) CartMenuView.printCartMenu(user);
 				break;
 			case 3 :
-				BookMenuView.selectBookByWriter(user); //저자명으로 검색
+				List<Book> bookListByWriter = BookMenuView.selectBookByWriter(user); //저자명으로 검색
+				if(bookListByWriter != null) CartMenuView.printCartMenu(user);
 				break;
 			case 4 :
-				BookMenuView.selectBookByPublisher(user); //출판사로 검색
+				List<Book> bookListByPublisher = BookMenuView.selectBookByPublisher(user); //출판사로 검색
+				if(bookListByPublisher != null) CartMenuView.printCartMenu(user);
 				break;
 			case 5 :
-				BookMenuView.selectBookByCategory(user); //분야로 검색
+				List<Book> bookListByCateory = BookMenuView.selectBookByCategory(user); //분야로 검색
+				if(bookListByCateory != null) CartMenuView.printCartMenu(user);
 				break;
 			case 6 : 
-				//대여여부로 검색
+				List<Book> bookListByState = BookMenuView.selectBookByState(user); //대여 여부로 검색(0: 대여가능, 1: 대여중, 2: 예약중)
+				if(bookListByState != null) CartMenuView.printCartMenu(user);
 				break;
 			case 9 :
-				//printUserMenu(user);
 				return;
 			}
 		}
 	}
 	
+	
+
 	/**
 	 * 도서번호로 검색하기
 	 */
@@ -55,11 +62,14 @@ public class BookMenuView {
 		Book book = null;
 		while(true) {
 			try {
-				System.out.print("책번호 입력 > ");
+				System.out.print("도서번호를 입력해주세요 : ");
 				int no = Integer.parseInt(sc.nextLine());
+				 System.out.println("\n");
 				book = BookController.bookSelectByBookNo(user, no);
 			}catch (NumberFormatException e) {
-				System.out.println("숫자만 입력해주세요.");
+				//e.printStackTrace();
+				System.out.println("'숫자'만 입력해주세요. ");
+
 			}
 		return book;
 		}
@@ -71,9 +81,12 @@ public class BookMenuView {
 	public static List<Book> selectBookByName(User user) {
 		List<Book> bookList = null;
 		try {
-			System.out.print("단어 검색 > ");
+			System.out.print("책의 이름을 입력해주세요 : ");
 			String keyword = sc.nextLine();
+
+			 System.out.println("\n");
 			bookList = BookController.bookSelectByBookName(user, keyword);
+
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -83,40 +96,74 @@ public class BookMenuView {
 	/**
 	 * 저자명으로 검색하기
 	 */
-	public static void selectBookByWriter(User user) {
+	public static List<Book> selectBookByWriter(User user) {
+		List<Book> bookList = null;
 		try {
-			System.out.print("저자 검색 > ");
+			System.out.print("저자를 입력해주세요 : ");
 			String writer = sc.nextLine();
-			BookController.bookSelectByWriter(user, writer);
+
+			 System.out.println("\n");
+			bookList = BookController.bookSelectByWriter(user, writer);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		return bookList;
 	}
 	
 	/**
 	 * 출판사로 검색하기
 	 */
-	public static void selectBookByPublisher(User user) {
+	public static List<Book> selectBookByPublisher(User user) {
+		List<Book> bookList = null;
 		try {
-			System.out.print("출판사 검색 > ");
+			System.out.print("출판사를 입력해주세요 : ");
 			String publisher = sc.nextLine();
-			BookController.bookSelectByPublisher(user, publisher);
+
+			 System.out.println("\n");
+			bookList = BookController.bookSelectByPublisher(user, publisher);
+
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		return bookList;
 	}
 		
 	/**
 	 * 도서분야로 검색하기
 	 */
-	public static void selectBookByCategory(User user) {
+	public static List<Book> selectBookByCategory(User user) {
+		List<Book> bookList = null;
 		try {
-			System.out.print("도서분야 검색 > ");
+			System.out.print("찾으시는 분야를 입력해주세요 : ");
 			String category = sc.nextLine();
-			BookController.bookSelectByCategory(user, category);
+
+			 System.out.println("\n");
+			bookList = BookController.bookSelectByCategory(user, category);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		return bookList;
+	}
+	
+	/**
+	 * 대여 상태로 검색하기(0이면 대여가능, 1이면 대여 중, 2이면 예약 중)
+	 */
+	public static List<Book> selectBookByState(User user) {
+		List<Book> bookList = null;
+		try {
+			System.out.print("대여 여부 검색 (대출가능: 0, 대출 중: 1, 예약 중: 2)\n > ");
+			int state = Integer.parseInt(sc.nextLine());
+			
+			if(state < 0 || 2 < state) {
+				throw new SQLException("대여 가능(0), 대여중(1), 예약중(2) 중에서 입력해주세요.");
+			}
+			
+			bookList = BookController.bookSelectByState(user, state);
+		}catch (SQLException e) {
+			//e.printStackTrace();
+			FailView.errorMessage(e.getMessage());
+		}
+		return bookList;
 	}
 	
 	//////////////////////////////관리자////////////////////////
@@ -128,7 +175,9 @@ public class BookMenuView {
 
 		while(true) {
 			int result=0;
-			System.out.println("1. 선택도서 수정 | 2. 선택도서 삭제 | 3. 돌아가기");
+
+			System.out.println("1. 선택도서 수정    2. 선택도서 삭제    3. 돌아가기    9. 메인메뉴로 가기  ");
+			System.out.println("-------------------------------------------------------------");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch(menu) {
 				case 1 :
@@ -149,8 +198,10 @@ public class BookMenuView {
 	 */
 	public static void bookDeleteOrUpdateListMenu(User user) {
 		Scanner sc = new Scanner(System.in);
-		while(true) {
-			System.out.println("1. 선택도서 수정 | 2. 선택도서 삭제 | 3. 돌아가기");
+		boolean flag = true;
+		while(flag) {
+			System.out.println("1. 선택도서 수정    2. 선택도서 삭제    3. 돌아가기    9. 메인메뉴로 가기 ");
+			System.out.println("------------------------------------------------------------");
 			int menu = Integer.parseInt(sc.nextLine());
 			int bookNo=0;
 			int result=0;
