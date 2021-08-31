@@ -41,7 +41,7 @@ public class UserController {
 		try {
 			userService.register(user, pwdCheck);
 			System.out.println("\n");
-			EndView.printMessage("회원가입이 완료되었습니다.");
+			EndView.printMessage("회원가입이 완료되었습니다. ");
 		} catch (SQLException e) {
 			FailView.errorMessage(e.getMessage());
 		} catch (PwdCheckException e) { // 비밀번호가 일치하지 않을 때
@@ -56,7 +56,7 @@ public class UserController {
 	public static void updateUserInfo(User user) {
 		try {
 			userService.updateUserInfo(user);
-			EndView.printMessage("수정이 완료되었습니다. 다시 로그인 해주세요");
+			EndView.printMessage("수정이 완료되었습니다 다시 로그인 해주세요. ");
 			UserMenuView.logout(user.getUserId()); //수정 되어서 다시 로그인 시키기
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -70,7 +70,7 @@ public class UserController {
 	public static void deleteUserInfo(User user) {
 		try {
 			userService.deleteUserInfo(user);
-			EndView.printMessage("회원탈퇴가 성공되었습니다. 로그인 화면으로 이동합니다.");
+			EndView.printMessage("회원탈퇴가 완료되었습니다 로그인 화면으로 이동합니다. ");
 			UserMenuView.logout(user.getUserId()); //수정 되어서 다시 로그인 시키기
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -84,7 +84,7 @@ public class UserController {
 	public static void deleteAdminUserInfo(int userNo) {
 		try {
 			userService.deleteUserInfo(userNo);
-			EndView.printMessage("회원삭제가 되었습니다.");
+			EndView.printMessage("회원삭제가 되었습니다. ");
 		} catch (SQLException e) {
 			FailView.errorMessage(e.getMessage());
 		} 

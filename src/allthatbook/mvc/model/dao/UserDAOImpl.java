@@ -55,7 +55,7 @@ public class UserDAOImpl implements UserDAO {
 			
 			String userId = user.getUserId();
 			User user2 = selectByUserId(userId);
-			if (user2 != null) throw new SQLException("중복된 아이디가 존재합니다.");
+			if (user2 != null) throw new SQLException("중복된 아이디가 존재합니다. ");
 			
 			ps = con.prepareStatement(
 					"insert into users(회원번호, 회원ID, 패스워드, 회원이름, 연락처, 등록일자) values (user_seq_no.nextval, ?, ?, ?, ?, sysdate)");
@@ -142,7 +142,7 @@ public class UserDAOImpl implements UserDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		List<User> userList = null;
+		List<User> userList = new ArrayList();
 		String sql = "select*from users";
 		try {
 			con = DbUtil.getConnection();

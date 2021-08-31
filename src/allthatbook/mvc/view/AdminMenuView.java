@@ -1,5 +1,6 @@
 package allthatbook.mvc.view;
 
+import java.util.List;
 import java.util.Scanner;
 import allthatbook.mvc.controller.BookController;
 import allthatbook.mvc.controller.UpdateAdminController;
@@ -21,7 +22,7 @@ public class AdminMenuView {
 				System.out.println("                        관리자 메뉴                         ");
 				System.out.println("\n");
 				System.out.println("    1. 회원관리      2. 도서관리     3. 대출관리     9. 나가기     ");
-				System.out.println("----------------------------------------------------------");
+				System.out.println("---------------------------------------------------------------------");
 				
 				int menu = Integer.parseInt(sc.nextLine());
 				switch (menu) {
@@ -37,10 +38,10 @@ public class AdminMenuView {
 					UserMenuView.logout(user.getUserId());
 					return;
 				default:
-					System.out.println("메뉴에 있는 번호를 입력해주세요. ");
+					System.out.println("메뉴에 있는 '번호'를 입력해주세요. ");
 				}
 			} catch (NumberFormatException e) {
-				FailView.errorMessage("메뉴는 숫자만 입력가능합니다. ");
+				FailView.errorMessage("메뉴는 '숫자'만 입력가능합니다. ");
 			}
 
 		}
@@ -55,11 +56,12 @@ public class AdminMenuView {
 			try {	
 				System.out.println("                               관리자 회원 관리                                       ");
 				System.out.println("1. 전체회원 조회  2. 회원번호로 조회  3. 회원ID로 조회   4.회원정보수정   5.회원정보삭제    9. 나가기  ");
-				System.out.println("----------------------------------------------------------------------------------");
+				System.out.println("------------------------------------------------------------------------------------------------");
 
 				int menu=Integer.parseInt(sc.nextLine());
 				int result=0;
 				int userNo;
+				User user;
 				switch(menu) {
 				case 1 :
 					UserController.userSelect();
@@ -74,7 +76,7 @@ public class AdminMenuView {
 					break;
 				case 4 : //회원정보수정 
 					userNo = InputUserNo();
-					User user = UserController.selectByUserNo(userNo);
+					user = UserController.selectByUserNo(userNo);
 					if(user==null) {
 						break;
 					}
@@ -83,16 +85,20 @@ public class AdminMenuView {
 					if(result==1)System.out.println(userNo+"번 회원이 수정되었습니다. ");
 					break;
 				case 5 : 
-					userNo=InputUserNo();
+					userNo = InputUserNo();
+					user = UserController.selectByUserNo(userNo);
+					if(user==null) {
+						break;
+					}
 					UserController.deleteAdminUserInfo(userNo);
 					break;
 				case 9 :  			
 					return;
 				default : 
-					System.out.println("메뉴에 있는 번호만 입력해주세요. ");
+					System.out.println("메뉴에 있는 '번호'만 입력해주세요. ");
 				}
 			} catch (NumberFormatException e) {
-				FailView.errorMessage("메뉴는 숫자만 입력가능합니다. ");
+				FailView.errorMessage("메뉴는 '숫자'만 입력가능합니다. ");
 			}
 		}
 		
@@ -106,7 +112,8 @@ public class AdminMenuView {
 			try {
 				System.out.println("                                        관리자 도서 관리                                            ");
 				System.out.println("1. 새 도서등록   2. 도서정보수정   3. 도서삭제   4. 도서조회   5. 대출한도서 조회   6. 예약한도서 조회    9. 나가기    ");
-				System.out.println("------------------------------------------------------------------------------------------------");
+				System.out.println("------------------------------------------------------------------------------------------------------------");
+
 				int menu=Integer.parseInt(sc.nextLine());
 				int bookNo=0;
 				int result=0;
@@ -114,8 +121,9 @@ public class AdminMenuView {
 				switch(menu) {
 					case 1 :
 						book=InputBook();
-						result = BookController.bookInsert(book);
-						if(result==1) System.out.println(book.getBookNo()+"등록되었습니다. ");
+						BookController.bookInsert(book);
+
+
 						break;
 					case 2 : //도서정보수정
 						bookNo = InputBookNo();
@@ -125,33 +133,61 @@ public class AdminMenuView {
 						}
 						Book updatebook = updateBook();
 						result = UpdateAdminController.bookUpdate(bookNo, updatebook);
-						if(result==1)System.out.println(bookNo+"번 해당 책이 수정되었습니다. ");
+						if(result==1)System.out.println(bookNo+"번 해당 도서가 수정되었습니다. ");
 						break;
 					case 3 : 
 						bookNo = InputBookNo();
 						BookController.bookDelete(bookNo);	
 						break;
-					case 4 : //도서조회 --- 장바구니 말고 수정, 삭제로 연결되게 
-						BookMenuView.printSelectMenu(user);
-						break;
-					case 5 : //대출한도서 : 상태가 1인도서 조회 
-						BookController.bookRentalSelect();
-						break;
-					case 6 : //예약도서 조회 : 상태가 2인도서 조회
-						BookController.bookReserveSelect();
+					case 4 : 
+						printSelectMenu(user);
 						break;
 					case 9 :
 						return;
 					default:
-						System.out.println("메뉴에 있는 번호만 입력해주세요. ");
+						System.out.println("메뉴에 있는 '번호'만 입력해주세요. ");
 				}
 				
 			} catch (NumberFormatException e) {
-				FailView.errorMessage("메뉴는 숫자만 입력가능합니다. ");
+				FailView.errorMessage("메뉴는 '숫자'만 입력가능합니다. ");
 			}
 		}
 	}	
-
+	
+	/**
+	 * 관리자 도서 검색 메뉴
+	 */
+	public static void printSelectMenu(User user) {
+		while(true) {
+			System.out.println("\n");
+			System.out.println("1. 도서번호로 검색    2. 도서명으로 검색    3. 저자명으로 검색    4. 출판사로 검색     5. 도서분야로 검색     6. 대여여부로 검색    9. 돌아가기    ");
+			System.out.println("-----------------------------------------------------------------------------------------------------------------------");
+			System.out.print("원하시는 서비스의 번호를 입력해주세요 :  ");
+			int menu =Integer.parseInt(sc.nextLine());
+			switch(menu) {
+			case 1 :
+				Book book =  BookMenuView.selectBookByNo(user); //도서번호로 검색
+				return;
+			case 2 :
+				List<Book> bookListByName = BookMenuView.selectBookByName(user); //도서명으로 검색
+				return;
+			case 3 :
+				List<Book> bookListByWriter = BookMenuView.selectBookByWriter(user); //저자명으로 검색
+				return;
+			case 4 :
+				List<Book> bookListByPublisher = BookMenuView.selectBookByPublisher(user); //출판사로 검색
+				return;
+			case 5 :
+				List<Book> bookListByCateory = BookMenuView.selectBookByCategory(user); //분야로 검색
+				return;
+			case 6 : 
+				List<Book> bookListByState = BookMenuView.selectBookByState(user); //대여 여부로 검색(0: 대여가능, 1: 대여중, 2: 예약중)
+				return;
+			case 9 :
+				return;
+			}
+		}
+	}
 
 	/**
 	 * UserNo 입력받기 
@@ -167,57 +203,50 @@ public class AdminMenuView {
 		}finally {
 			return userNo;
 		}
-//		System.out.print("userNo 입력 > ");
-//	while (!sc.hasNextInt()) { //값이 숫자인지 판별		
-//        String userNo = sc.next();  //값이 숫자가 아니면 버린다.
-//        System.out.print("에러! 숫자가 아닙니다. \n재 선택 : ");
-//		}
-//		int userNo = Integer.parseInt(sc.nextLine()); //위에서 값이 숫자일 경우 이쪽으로 값을 넣어준다.
-//		return userNo;
-
 	}
-	
+
 	/**
 	 * UserId 입력받기 
 	 */
 	public static String InputUserId() {
-		System.out.print("userId 입력 : ");
+		System.out.print("UserId 입력 : ");
 		String userId = sc.nextLine();
 		return userId;
 	}
 
 	/**
 	 *	bookInsert에 필요한 book정보 넣기 
-	 */
+	 */	
 	public static Book InputBook() {
-
 		Book book = null;
 		while(true) {
-	        System.out.println("bookNo는 자동배정됩니다.");
+	        System.out.println("도서번호는 자동배정됩니다.");
 	        
-	        System.out.print("bookName 입력 : ");
+	        System.out.print("도서이름 입력 : ");
 	        String bookName = sc.nextLine();
 	        if(bookName.equals("")) {
-	        	System.out.println("bookName은 입력 필수");
+	        	System.out.println("도서이름의 입력은 필수입니다. ");
 	        	continue;
 	        }
-	        System.out.print("bookWriter 입력 : ");
+	        System.out.print("저자명 입력 : ");
 	        String bookWriter = sc.nextLine();
-	        System.out.print("bookPublisher 입력 : ");
+	        System.out.print("출판사 입력 : ");
 	        String bookPublisher = sc.nextLine();
-	        System.out.println("출간일은 자동배정됩니다.");
-	        String pubDate = sc.nextLine();
-	        System.out.print("bookField 입력 : ");
+	        System.out.print("도서분야 입력 : ");
 	        String bookField = sc.nextLine();
-	        System.out.println("bookState 기본 대출가능0으로 들어갑니다.");
-	        
-	        book = new Book(0, bookName, bookWriter, bookPublisher, pubDate, bookField, 0);
+	        System.out.println("도서대여는 기본 대출가능 '0' 으로 들어갑니다.");
+	        if(bookName.equals("")||bookWriter.equals("")||bookPublisher.equals("")||bookField.equals("")) {
+	              System.out.println("<도서이름, 저자명, 출판사, 도서분야는 입력 필수>");
+	              continue;
+	           }
+	        book = new Book(0, bookName, bookWriter, bookPublisher, bookField, 0);
 	        break;
 		}
 
 
 		return book;
 	}
+
 	
 	/**
 	 * bookNo입력받기 
@@ -226,7 +255,7 @@ public class AdminMenuView {
 
 		int bookNo=0;
 		try {
-			System.out.print("bookNo 입력  : ");
+			System.out.print("도서번호 입력  : ");
 			bookNo = Integer.parseInt(sc.nextLine());
 		} catch (Exception e) {
 			
@@ -240,13 +269,13 @@ public class AdminMenuView {
 	 */
 	private static User updateUser() {
 		User updateUser = new User();
-		System.out.println("수정할 userId 입력(수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
+		System.out.println("수정할 UserID 입력 (수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
 		updateUser.setUserId(sc.nextLine());
-		System.out.println("수정할 userPwd 입력(수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
+		System.out.println("수정할 UserPASSWORD 입력 (수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
 		updateUser.setUserPwd(sc.nextLine());
-		System.out.println("수정할 userName 입력(수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
+		System.out.println("수정할 UserNAME 입력 (수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
 		updateUser.setUserName(sc.nextLine());
-		System.out.println("수정할 userPhone 입력(수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
+		System.out.println("수정할 UserPHONE 입력 (수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
 		updateUser.setUserPhone(sc.nextLine()); 
 
 		return updateUser;
@@ -257,13 +286,13 @@ public class AdminMenuView {
 	 */
 	public static Book updateBook() {
 		Book updateBook = new Book();		
-		System.out.print("수정할 bookName 입력(수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
+		System.out.print("수정할 도서이름 입력 (수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
 		updateBook.setBookName(sc.nextLine());
-		System.out.print("수정할 bookWriter 입력(수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
+		System.out.print("수정할 저자명 입력 (수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
 		updateBook.setBookWriter(sc.nextLine());
-		System.out.print("수정할 bookPublisher 입력(수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
+		System.out.print("수정할 출판사 입력 (수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
 		updateBook.setBookPublisher(sc.nextLine());
-		System.out.print("수정할 bookField 입력 >(수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
+		System.out.print("수정할 도서분야 입력 (수정을 원하지 않을 시 ENTER 을 눌러주세요) : ");
 		updateBook.setBookField(sc.nextLine());
 		
 		return updateBook;

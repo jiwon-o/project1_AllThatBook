@@ -42,6 +42,21 @@ public class BookController {
 			FailView.errorMessage(e.getMessage());
 	
 			
+
+			boolean flag = true;
+			while(flag) {
+				System.out.println("다시 하시겠습니까? ( yes or no )");
+				String choice = sc.nextLine();
+				if(choice.toUpperCase().equals("yes".toUpperCase())) {
+					BookMenuView.selectBookByNo(user);
+					break;
+				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
+					break;
+				}else {
+					System.out.println("( yes or no )를 입력해주세요. ");
+				}
+			}
+
 		}
 		return book;
 	}
@@ -70,6 +85,20 @@ public class BookController {
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
+
+			while(true) {
+				System.out.println("다시 하시겠습니까? ( yes or no )");
+				String choice = sc.nextLine();
+				if(choice.toUpperCase().equals("yes".toUpperCase())) {
+					BookMenuView.selectBookByName(user);
+					break;
+				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
+					break;
+				}else {
+					System.out.println("( yes or no )를 입력해주세요. ");
+				}
+			}
+
 		}
 		return bookList;
 	}
@@ -85,6 +114,19 @@ public class BookController {
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
+
+			while(true) {
+				System.out.println("다시 하시겠습니까? ( yes or no )");
+				String choice = sc.nextLine();
+				if(choice.toUpperCase().equals("yes".toUpperCase())) {
+					BookMenuView.selectBookByWriter(user);
+					break;
+				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
+					break;
+				}else {
+					System.out.println("( yes or no )를 입력해주세요. ");
+				}
+			}
 		}
 		return bookList;
 		
@@ -101,7 +143,18 @@ public class BookController {
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
-			
+			while(true) {
+				System.out.println("다시 하시겠습니까? ( yes or no )");
+				String choice = sc.nextLine();
+				if(choice.toUpperCase().equals("yes".toUpperCase())) {
+					BookMenuView.selectBookByPublisher(user);
+					break;
+				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
+					break;
+				}else {
+					System.out.println("( yes or no )를 입력해주세요. ");
+				}
+			}
 		}
 		return bookList;
 		
@@ -118,7 +171,18 @@ public class BookController {
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
-			
+			while(true) {
+				System.out.println("다시 하시겠습니까? ( yes or no )");
+				String choice = sc.nextLine();
+				if(choice.toUpperCase().equals("yes".toUpperCase())) {
+					BookMenuView.selectBookByCategory(user);
+					break;
+				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
+					break;
+				}else {
+					System.out.println("( yes or no )를 입력해주세요. ");
+				}
+			}
 			
 		}
 		return bookList;
@@ -136,6 +200,18 @@ public class BookController {
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
+			while(true) {
+				System.out.println("다시 하시겠습니까? ( yes or no )");
+				String choice = sc.nextLine();
+				if(choice.toUpperCase().equals("yes".toUpperCase())) {
+					BookMenuView.selectBookByState(user);
+					break;
+				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
+					break;
+				}else {
+					System.out.println("( yes or no )를 입력해주세요. ");
+				}
+			}
 			
 		}
 		return bookList;
@@ -146,15 +222,13 @@ public class BookController {
 	 * @param book
 	 * @return int result
 	 */
-	public static int bookInsert(Book book) {
-		int result=0;
+	public static void bookInsert(Book book) {
 		try {
-			result = bookService.bookInsert(book);
+			bookService.bookInsert(book);
+			EndView.printMessage("등록 성공했습니다.");
 		} catch (SQLException e) {
-			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
-		return result;
 	}
 
 	/**
@@ -168,36 +242,7 @@ public class BookController {
 		} catch (SQLException e) {
 			FailView.errorMessage(e.getMessage());
 		}
-	}
-	
-	/**
-	 * 관리자-도서관리-대출중도서조회
-	 * */
-	public static void bookRentalSelect() {
-		try {
-			List<Book> list = bookService.bookRentalSelect();
-			EndView.printBookList(list);
-		}catch (Exception e) {
-			FailView.errorMessage(e.getMessage());
-		}
-	}
-
-
-	/**
-	 * 관리자-도서관리-예약된 도서 조회
-	 */
-	public static void bookReserveSelect() {
-		try {
-			List<Book> list = bookService.bookReserveSelect();
-			EndView.printBookList(list);
-		}catch (Exception e) {
-			FailView.errorMessage(e.getMessage());
-		}
-		
-	}
-
-
-	
+	}	
 
 }
 

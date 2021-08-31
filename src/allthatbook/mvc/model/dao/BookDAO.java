@@ -59,18 +59,8 @@ public interface BookDAO {
 	 */
 
 	int bookDelete(int bookNo) throws SQLException;
-	
-	/**
-	 * 대출한 도서 조회
-	 */
-	List<Book> bookRentalSelect()throws SQLException;
-	
-	/**
-	 * 예약된 도서 조회
-	 */
-	List<Book> bookReserveSelect()throws SQLException;
 
 
-	
+	List<Book> bookReserveSelect() throws SQLException;
 
 }

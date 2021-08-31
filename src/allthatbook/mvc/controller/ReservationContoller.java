@@ -20,7 +20,7 @@ public class ReservationContoller {
 		Reservation reservation = new Reservation(bookNo, user.getUserNo());
 		try {
 		    reservationService.insertReservation(reservation);
-		    EndView.printMessage(bookNo + "번 도서 예약 성공");
+		    EndView.printMessage(bookNo + "번 도서 예약 성공했습니다");
 		    //EndView.printMessage(book.getBookNo() + "번 도서 대여 성공");
 		}catch (SQLException e) {
 			FailView.errorMessage(e.getMessage());

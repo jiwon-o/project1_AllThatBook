@@ -47,7 +47,6 @@ public class UpdateAdminController {
 		try {
 			Book book = bookSelect(bookNo);
 			updateBook.setBookNo(bookNo);
-			updateBook.setPubDate(book.getPubDate());
 			updateBook.setBookState(book.getBookState());
 			if(updateBook.getBookName().isEmpty())updateBook.setBookName(book.getBookName()); 
 			if(updateBook.getBookWriter().isEmpty())updateBook.setBookWriter(book.getBookWriter()); 

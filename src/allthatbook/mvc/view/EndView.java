@@ -25,9 +25,6 @@ public class EndView {
 		for(Book book : bookList) {
 			System.out.println(book);
 		}
-		if(user.getUserId().equals("admin")) {
-			BookMenuView.bookDeleteOrUpdateListMenu(user);
-		}
 	}
 	
 	public static void printBookList(List<Book> bookList) {
@@ -43,12 +40,8 @@ public class EndView {
 
 	
 	public static void printSelectByNo(User user, Book book) {
+		System.out.println("----------------------------------------------    검색 된 도서   -------------------------------------------");
 		System.out.println(book + "\n");
-
-		if(user.getUserId().equals("admin")) {
-			BookMenuView.bookDeleteOrUpdateMenu(user, book);
-		}
-
 	}
 	
 
@@ -79,6 +72,7 @@ public class EndView {
 	 */
 
 	public static void printViewCart(User user, Cart cart) {
+		System.out.println("\n");
 		System.out.println("------------------------------------------------------  장바구니내용  ----------------------------------------------------------------------");
 		System.out.println("\n");
 		List<CartDetail> list = cart.getCartDetailList();

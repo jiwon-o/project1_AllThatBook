@@ -15,7 +15,6 @@ public interface CartDAO {
     */
 	int cartInsert(int userNo) throws SQLException;
 	
-	
 	int insertBook(int bookNo, Cart cart) throws SQLException;
 	
 	int deleteCartDetail(Cart cart, CartDetail cartDetail) throws SQLException;

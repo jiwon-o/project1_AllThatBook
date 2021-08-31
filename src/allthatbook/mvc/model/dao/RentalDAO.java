@@ -17,7 +17,6 @@ public interface RentalDAO {
 
 	   int rentalInsert(Cart cart, Rental rental) throws SQLException;
 	   
-	   
 	   /**
 	    * ¹Ý³³ÇÏ±â
 	    * */
