@@ -120,6 +120,7 @@ public class RentalDAOImpl implements RentalDAO {
 		ResultSet rs = null;
 		try {
 			con = DbUtil.getConnection();
+			con.setAutoCommit(false); //자동커밋해지
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, rental.getBookNo());
 			ps.setInt(2, rental.getUserNo());
@@ -138,6 +139,8 @@ public class RentalDAOImpl implements RentalDAO {
 						changeBookState(con, rental, 0);
 					}
 					result = 1;
+			    }else {
+			    	con.rollback();
 			    }
 				
 			}else {
@@ -145,9 +148,10 @@ public class RentalDAOImpl implements RentalDAO {
 			}
 			
 		}finally {
+			con.commit();
 			DbUtil.close(con, ps, rs);
 		}
-
+ 
 		return result;
 	}
 	
@@ -157,7 +161,7 @@ public class RentalDAOImpl implements RentalDAO {
 	public int updateRental(Connection con, Rental rental) throws SQLException {
 		PreparedStatement ps = null;
 		int result = 0;
-		String sql = "update rental set 반납일자 = sysdate, 반납여부 = 1, 연체여부 = ? where 회원번호 = ? and 책번호 = ? ";
+		String sql = "update rental set 반납일자 = sysdate, 반납여부 = 1, 연체여부 = ? where 회원번호 = ? and 책번호 = ? and 반납여부 = 0";
 		Date date = new Date(LocalDate.now().getYear()-1900, LocalDate.now().getMonthValue()-1, LocalDate.now().getDayOfMonth());
 		try {
 			ps = con.prepareStatement(sql);
@@ -197,26 +201,5 @@ public class RentalDAOImpl implements RentalDAO {
 	}
 	
 
-
-
-
-
-
-
-	
-	public int changeBookState(Connection con, Rental rental) throws SQLException {
-		PreparedStatement ps = null;
-		String sql = "update books set 상태 = 1 where 책번호 = ?";
-		int result = 0;
-		try {
-			ps = con.prepareStatement(sql);
-			ps.setInt(1, rental.getBookNo());
-			result = ps.executeUpdate();
-		} finally {
-			DbUtil.close(null, ps);
-		}
-
-		return result;
-	}// 메소드 끝
 
 }// 클래스 끝

@@ -112,7 +112,7 @@ public class AdminMenuView {
 						break;
 					case 2 : //도서정보수정
 						bookNo = InputBookNo();
-						book = BookController.bookSelectByBookNo(user.getUserId(), bookNo);
+						book = BookController.bookSelectByBookNo(user, bookNo);
 						if(book==null) {
 							break;
 						}
