@@ -1,14 +1,10 @@
 package allthatbook.mvc.model.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.PseudoColumnUsage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
-import allthatbook.mvc.model.dto.Rental;
 import allthatbook.mvc.model.dto.Reservation;
 import allthatbook.mvc.util.DbUtil;
 
@@ -34,7 +30,6 @@ public class ReservationDAOImpl implements ReservationDAO {
 			int chk = chkDuplicate(con, reservation);
 			if (chk == 1)
 				throw new SQLException("예약불가능(1명만가능)");
-
 			// 2. bookstate가 1인지 확인
 			chk = getBookState(con, reservation);
 			if (chk != 1)

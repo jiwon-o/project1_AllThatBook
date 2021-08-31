@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import allthatbook.mvc.exception.PwdCheckException;
+import allthatbook.mvc.model.dto.Rental;
+import allthatbook.mvc.model.dto.Reservation;
 import allthatbook.mvc.model.dto.User;
 import allthatbook.mvc.model.service.UserService;
 import allthatbook.mvc.model.service.UserServiceImpl;
@@ -39,7 +41,7 @@ public class UserController {
 		try {
 			userService.register(user, pwdCheck);
 			System.out.println("\n");
-			EndView.printMessage("회원가입이 완료되었습니다.");
+			EndView.printMessage("회원가입이 완료되었습니다. ");
 		} catch (SQLException e) {
 			FailView.errorMessage(e.getMessage());
 		} catch (PwdCheckException e) { // 비밀번호가 일치하지 않을 때
@@ -54,7 +56,7 @@ public class UserController {
 	public static void updateUserInfo(User user) {
 		try {
 			userService.updateUserInfo(user);
-			EndView.printMessage("수정이 완료되었습니다. 다시 로그인 해주세요");
+			EndView.printMessage("수정이 완료되었습니다 다시 로그인 해주세요. ");
 			UserMenuView.logout(user.getUserId()); //수정 되어서 다시 로그인 시키기
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -68,7 +70,7 @@ public class UserController {
 	public static void deleteUserInfo(User user) {
 		try {
 			userService.deleteUserInfo(user);
-			EndView.printMessage("회원탈퇴가 성공되었습니다. 로그인 화면으로 이동합니다.");
+			EndView.printMessage("회원탈퇴가 완료되었습니다 로그인 화면으로 이동합니다. ");
 			UserMenuView.logout(user.getUserId()); //수정 되어서 다시 로그인 시키기
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -82,7 +84,7 @@ public class UserController {
 	public static void deleteAdminUserInfo(int userNo) {
 		try {
 			userService.deleteUserInfo(userNo);
-			EndView.printMessage("회원삭제가 되었습니다.");
+			EndView.printMessage("회원삭제가 되었습니다. ");
 		} catch (SQLException e) {
 			FailView.errorMessage(e.getMessage());
 		} 
@@ -142,5 +144,28 @@ public class UserController {
 		
 	}
 	
-
+	/**
+	 * 회원번호를 받아 대여목록을 출력
+	 * */
+	public static void selectRentalByUserNo(int userNo){
+		try {
+		    List<Rental> rentalList = userService.selectRentalByUserNo(userNo);
+		    EndView.printRental(rentalList);
+		}catch (SQLException e) {
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
+	/**
+	 * 회원번호를 받아 예약목록을 출력
+	 * */
+	public static void selectReservationByUserNo(int userNo){
+		try {
+		    List<Reservation> reservationList = userService.selectReservationByUserNo(userNo);
+		    EndView.printReservation(reservationList);
+		}catch (SQLException e) {
+			FailView.errorMessage(e.getMessage());
+		}
+	}
+	
 }

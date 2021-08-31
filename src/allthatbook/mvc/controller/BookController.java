@@ -42,6 +42,21 @@ public class BookController {
 			FailView.errorMessage(e.getMessage());
 	
 			
+
+			boolean flag = true;
+			while(flag) {
+				System.out.println("다시 하시겠습니까? ( yes or no )");
+				String choice = sc.nextLine();
+				if(choice.toUpperCase().equals("yes".toUpperCase())) {
+					BookMenuView.selectBookByNo(user);
+					break;
+				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
+					break;
+				}else {
+					System.out.println("( yes or no )를 입력해주세요. ");
+				}
+			}
+
 		}
 		return book;
 	}
@@ -70,6 +85,20 @@ public class BookController {
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
+
+			while(true) {
+				System.out.println("다시 하시겠습니까? ( yes or no )");
+				String choice = sc.nextLine();
+				if(choice.toUpperCase().equals("yes".toUpperCase())) {
+					BookMenuView.selectBookByName(user);
+					break;
+				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
+					break;
+				}else {
+					System.out.println("( yes or no )를 입력해주세요. ");
+				}
+			}
+
 		}
 		return bookList;
 	}
@@ -85,6 +114,19 @@ public class BookController {
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
+
+			while(true) {
+				System.out.println("다시 하시겠습니까? ( yes or no )");
+				String choice = sc.nextLine();
+				if(choice.toUpperCase().equals("yes".toUpperCase())) {
+					BookMenuView.selectBookByWriter(user);
+					break;
+				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
+					break;
+				}else {
+					System.out.println("( yes or no )를 입력해주세요. ");
+				}
+			}
 		}
 		return bookList;
 		
@@ -101,7 +143,18 @@ public class BookController {
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
-			
+			while(true) {
+				System.out.println("다시 하시겠습니까? ( yes or no )");
+				String choice = sc.nextLine();
+				if(choice.toUpperCase().equals("yes".toUpperCase())) {
+					BookMenuView.selectBookByPublisher(user);
+					break;
+				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
+					break;
+				}else {
+					System.out.println("( yes or no )를 입력해주세요. ");
+				}
+			}
 		}
 		return bookList;
 		
@@ -118,7 +171,18 @@ public class BookController {
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
-			
+			while(true) {
+				System.out.println("다시 하시겠습니까? ( yes or no )");
+				String choice = sc.nextLine();
+				if(choice.toUpperCase().equals("yes".toUpperCase())) {
+					BookMenuView.selectBookByCategory(user);
+					break;
+				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
+					break;
+				}else {
+					System.out.println("( yes or no )를 입력해주세요. ");
+				}
+			}
 			
 		}
 		return bookList;
@@ -136,6 +200,18 @@ public class BookController {
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
+			while(true) {
+				System.out.println("다시 하시겠습니까? ( yes or no )");
+				String choice = sc.nextLine();
+				if(choice.toUpperCase().equals("yes".toUpperCase())) {
+					BookMenuView.selectBookByState(user);
+					break;
+				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
+					break;
+				}else {
+					System.out.println("( yes or no )를 입력해주세요. ");
+				}
+			}
 			
 		}
 		return bookList;

@@ -20,7 +20,7 @@ public class BookMenuView {
 			System.out.println(
 					"1. 도서번호로 검색    2. 도서명으로 검색    3. 저자명으로 검색    4. 출판사로 검색     5. 도서분야로 검색     6. 대여여부로 검색    9. 돌아가기    ");
 			System.out.println(
-					"-----------------------------------------------------------------------------------------------------------------------");
+					"--------------------------------------------------------------------------------------------------------------------------------------");
 			System.out.print("원하시는 서비스의 번호를 입력해주세요 :  ");
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
@@ -66,6 +66,7 @@ public class BookMenuView {
 	public static Book selectBookByNo(User user) {
 		Book book = null;
 		while (true) {
+			try {
 				System.out.print("도서번호를 입력해주세요 : ");
 				int no = Integer.parseInt(sc.nextLine());
 				System.out.println("\n");
@@ -84,6 +85,11 @@ public class BookMenuView {
 						System.out.println("네 or 아니오 중 하나를 입력해주세요... 처음으로 돌아갑니다.");
 					}
 				}
+			} catch (NumberFormatException e) {
+				// e.printStackTrace();
+				System.out.println("'숫자'만 입력해주세요. ");
+
+			}
 			System.out.println("\n");
 			return book;
 		}
@@ -113,7 +119,6 @@ public class BookMenuView {
 					}
 				}
 				break;
-			
 		}
 		System.out.println("\n");
 		return bookList;
@@ -217,10 +222,8 @@ public class BookMenuView {
 				e.printStackTrace();
 			}
 		}
-
 		System.out.println("\n");
 		return bookList;
-
 	}
 
 	/**
@@ -230,30 +233,32 @@ public class BookMenuView {
 		List<Book> bookList = null;
 		while (true) {
 			try {
-				System.out.print("대여 여부 검색 (대출가능: 0, 대출 중: 1, 예약 중: 2)\n > ");
+				System.out.print("대여 여부 ( 대출가능 : 0, 대출 중 : 1, 예약 중 : 2 )\n");
+				System.out.println("\n");
+				System.out.println("원하시는 서비스의 번호를 입력해주세요 : ");
 				int state = Integer.parseInt(sc.nextLine());
 
 				System.out.println("\n");
 				bookList = BookController.bookSelectByState(user, state);
 				break;
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (NumberFormatException e) {
+				FailView.errorMessage("메뉴에 있는 '숫자'만 입력해주세요. ");
 			}
 		}
 		return bookList;
 	}
-
+	
 	////////////////////////////// 관리자////////////////////////
 	/**
-	 * 관리자 도서조회(도서번호) -> 삭제 or 수정
+	 * 관리자 도서조회(도서번호) -> 삭제 or 수정 
 	 */
 	public static void bookDeleteOrUpdateMenu(User user, Book book) {
 
-		while (true) {
-			int result = 0;
+		while(true) {
+			int result=0;
 
 			System.out.println("1. 선택도서 수정    2. 선택도서 삭제    3. 돌아가기    9. 메인메뉴로 가기  ");
-			System.out.println("-------------------------------------------------------------");
+			System.out.println("--------------------------------------------------------------------------");
 			int menu = Integer.parseInt(sc.nextLine());
 
 			switch (menu) {
@@ -280,7 +285,7 @@ public class BookMenuView {
 		boolean flag = true;
 		while (flag) {
 			System.out.println("1. 선택도서 수정    2. 선택도서 삭제    3. 돌아가기    9. 메인메뉴로 가기 ");
-			System.out.println("------------------------------------------------------------");
+			System.out.println("---------------------------------------------------------------------------");
 			int menu = Integer.parseInt(sc.nextLine());
 			int bookNo = 0;
 			int result = 0;

@@ -42,7 +42,7 @@ public class UserMenuView {
 					System.exit(0);
 				default:
 					System.out.println();
-					System.out.println(" 메뉴에 있는 번호를 입력해주세요. ");
+					System.out.println(" 메뉴에 있는 '번호'를 입력해주세요. ");
 					System.out.println();
 				}
 			}catch (NumberFormatException e) {
@@ -101,56 +101,38 @@ public class UserMenuView {
 				int menu = Integer.parseInt(sc.nextLine());
 				switch (menu) {
 				case 1:
-					BookController.bookSelect();// 전체 상품조회
+					BookController.bookSelect();
 					break;
 				case 2 :
 					BookMenuView.printSelectMenu(user);
 					break;
 				case 3:
-
-					break;
-				case 4:
-
-					break;
-				case 5:         
-					CartMenuView.putCart(user.getUserId());
-					break;
-				case 6:
-					CartMenuView.viewCart(user.getUserId());
-					//CartMenuView.printCartMenu(user, null);
-					break;
-				case 7:
-					UserMenuView.selectUserInfo(user);
-					break;
-				case 8:
-					UserMenuView.updateTemp(user);
-					if(ss.getSet().size()==0) return;
-					break;
-				case 9:
-					logout(user.getUserId());
-					return;
-				case 100:
-					UserMenuView.clearCart(user);
-					CartController.clearCart(user.getUserId());
-				    break;
-				case 101:
-					System.out.print("예약할 책 번호: ");
-					int bookNo = sc.nextInt();
-					ReservationContoller.insertReservation(user, bookNo);
-					break;
-				case 102:
 					System.out.print("반납할 책 번호: ");
 					RentalController.returnBook(user, sc.nextInt());
 					break;
-					
-
+				case 4:
+					CartMenuView.putCart(user.getUserId());
+					break;
+				case 5:         
+					CartMenuView.viewCart(user);
+					break;
+				case 6:
+					UserMenuView.selectUserInfo(user);
+					break;
+				case 7:
+					UserMenuView.updateTemp(user);
+					if(ss.getSet().size()==0) return;
+					break;
+				case 8:
+					logout(user.getUserId());
+					return;
 				default:
 					System.out.println("\n");
-					System.out.println(" 메뉴에 있는 번호를 입력해주세요");
+					System.out.println(" 메뉴에 있는 '번호'를 입력해주세요");
 				}
 			}catch (NumberFormatException e) {
 				System.out.println("\n");
-				System.out.println(" 메뉴는 숫자만 입력해주세요.");
+				System.out.println(" 메뉴는 '숫자'만 입력해주세요.");
 
 			}
 		}
@@ -162,12 +144,12 @@ public class UserMenuView {
 	 */
 	public static void clearCart(User user) {
 		
-		System.out.println("정말 삭제하시겠습니까? (네/아니오)");
+		System.out.println("정말 삭제하시겠습니까? ( 네 or 아니오 ) ");
 		String checkClearCart = sc.nextLine();
 		
 		if("네".equals(checkClearCart)) {
 			CartController.clearCart(user.getUserId());
-			System.out.println("장바구니 내역이 모두 삭제되었습니다.");
+			System.out.println("장바구니 내역이 모두 삭제되었습니다. ");
 		}
 		
 	}
@@ -177,13 +159,13 @@ public class UserMenuView {
 	 */
 	public static void updateTemp(User user) {
 		while (true) {
-			System.out.println("정보수정/탈퇴를 위해 비밀번호를 입력해 주세요. (수정을 취소하려면 \"exid\" 입력해주세요)");
+			System.out.println("정보수정/탈퇴를 위해 비밀번호를 입력해 주세요. (수정을 취소하려면 \"exid\" 입력해주세요) ");
 			String userPwd = sc.nextLine();
 			if (userPwd.equals("exid")) {
-				System.out.println("다시 메뉴로 돌아갑니다.");
+				System.out.println("다시 메뉴로 돌아갑니다. ");
 				break;
 			} else if (!(user.getUserPwd().equals(userPwd))) {
-				System.out.println("비밀번호를 잘못입력 하셨습니다.");
+				System.out.println("비밀번호를 잘못입력 하셨습니다. ");
 				continue;
 			}
 
@@ -200,10 +182,10 @@ public class UserMenuView {
 				UserMenuView.delete(user);
 				return;
 			case 9:
-				System.out.println("수정화면이 종료 되었습니다.");
+				System.out.println("수정화면이 종료 되었습니다. ");
 				return;
 			default:
-				System.out.println("메뉴에 있는 번호를 입력해주세요");
+				System.out.println("메뉴에 있는 '번호'를 입력해주세요. ");
 			}
 		}
 	}
@@ -251,7 +233,7 @@ public class UserMenuView {
 				UserController.updateUserInfo(user);
 				return;
 			default:
-				System.out.println("메뉴에 있는 번호를 입력해주세요");
+				System.out.println("메뉴에 있는 '번호'를 입력해주세요");
 			}
 		}
 	}
@@ -268,7 +250,7 @@ public class UserMenuView {
 				System.out.print("탈퇴할 아이디 : ");
 				String userId = sc.nextLine();
 				if( !(user.getUserId().equals(userId)) ) {
-					System.out.println("아이디가 틀렸습니다.");
+					System.out.println("아이디가 틀렸습니다. ");
 					continue;
 				}
 				System.out.print("탈퇴할 아이디의 비밀번호 : ");
@@ -276,16 +258,16 @@ public class UserMenuView {
 				System.out.print("탈퇴할 아이디의 비밀번호 재확인 : ");
 				String checkUserPwd = sc.nextLine();
 				if( !(user.getUserPwd().equals(userPwd) && user.getUserPwd().equals(checkUserPwd)) ) {	// !(참&&참)
-					System.out.println("비밀번호가 일치하지않습니다.");
+					System.out.println("비밀번호가 일치하지않습니다. ");
 					continue;
 				}
 				
 				String checkString = "탈퇴하겠습니다";				//나중에 문구 수정을 위해서 빼놓음
 				System.out.println("\n");
 				System.out.println("정말 회원탈퇴를 하시겠습니까? ");
-				System.out.println("탈퇴하시려면 괄호안의 문자("+checkString+")를 적어주세요.");
+				System.out.println("탈퇴하시려면 괄호안의 문자("+checkString+")를 적어주세요. ");
 				if(!sc.nextLine().equals(checkString)) {
-					System.out.println("입력된문자가 잘못되었습니다 다시한번 확인해주세요.");
+					System.out.println("입력된문자가 잘못되었습니다 다시한번 확인해주세요. ");
 					continue;
 				}
 				
@@ -295,10 +277,10 @@ public class UserMenuView {
 				return;
 			}
 		case "아니오" :
-			System.out.println("메뉴로 돌아갑니다.");
+			System.out.println("메뉴로 돌아갑니다. ");
 		break;
 		default :
-			System.out.println("( 네 or 아니오 )중에서 입력해 주세요.");
+			System.out.println("( 네 or 아니오 )중에서 입력해 주세요. ");
 		}
 	}
 	
@@ -311,13 +293,15 @@ public class UserMenuView {
 			System.out.println("회원정보조회를 위해 비밀번호를 입력해주세요. (검색을 취소하려면 \"exid\" 입력해주세요)");
 			String userPwd = sc.nextLine();
 			if (userPwd.equals("exid")) {
-				System.out.println("다시 메뉴로 돌아갑니다.");
+				System.out.println("다시 메뉴로 돌아갑니다. ");
 				break;
 			} else if (!(user.getUserPwd().equals(userPwd))) {
-				System.out.println("비밀번호가 일치하지않습니다.");
+				System.out.println("비밀번호가 일치하지않습니다. ");
 				continue;
 			}
 			UserController.selectByUserId(user.getUserId());
+			UserController.selectRentalByUserNo(user.getUserNo());
+			UserController.selectReservationByUserNo(user.getUserNo());
 			break;
 		}
 	}
