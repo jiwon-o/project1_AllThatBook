@@ -85,14 +85,17 @@ public class BookMenuView {
 					default:
 						System.out.println("네 or 아니오 중 하나를 입력해주세요... 처음으로 돌아갑니다.");
 					}
-
+					
 				}
 			} catch (NumberFormatException e) {
 				// e.printStackTrace();
 				System.out.println("'숫자'만 입력해주세요. ");
 
 			}
-			return book;
+
+			 System.out.println("\n");
+			 return book;
+
 		}
 	}
 
@@ -119,11 +122,15 @@ public class BookMenuView {
 					default:
 						System.out.println("네 or 아니오 중 하나를 입력해주세요... 처음으로 돌아갑니다.");					}
 				}
+				break;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			return bookList;
+			
 		}
+
+		System.out.println("\n");
+		return bookList;
 
 	}
 
@@ -152,11 +159,16 @@ public class BookMenuView {
 					default:
 						System.out.println("네 or 아니오 중 하나를 입력해주세요... 처음으로 돌아갑니다.");					}
 				}
+				break;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			return bookList;
+			
 		}
+
+		System.out.println("\n");
+		return bookList;
+
 	}
 
 	/**
@@ -185,13 +197,16 @@ public class BookMenuView {
 					default:
 						System.out.println("네 or 아니오 중 하나를 입력해주세요... 처음으로 돌아갑니다.");					}
 				}
+				break;
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			return bookList;
+			
 		}
-		
+
+		System.out.println("\n");
+		return bookList;
 	}
 
 	/**
@@ -220,12 +235,17 @@ public class BookMenuView {
 					default:
 						System.out.println("네 or 아니오 중 하나를 입력해주세요... 처음으로 돌아갑니다.");					}
 				}
+				
+				break;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			return bookList;
+			
 		}
-		
+
+		System.out.println("\n");
+		return bookList;
+
 	}
 
 	/**
@@ -238,15 +258,18 @@ public class BookMenuView {
 				System.out.print("대여 여부 검색 (대출가능: 0, 대출 중: 1, 예약 중: 2)\n > ");
 				int state = Integer.parseInt(sc.nextLine());
 
+				System.out.println("\n");
 				bookList = BookController.bookSelectByState(user, state);
+				break;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			return bookList;
-		}
-		
-	}
 
+			
+		}
+		return bookList;
+
+	}
 	////////////////////////////// 관리자////////////////////////
 	/**
 	 * 관리자 도서조회(도서번호) -> 삭제 or 수정
@@ -260,18 +283,19 @@ public class BookMenuView {
 			System.out.println("1. 선택도서 수정    2. 선택도서 삭제    3. 돌아가기    9. 메인메뉴로 가기  ");
 			System.out.println("-------------------------------------------------------------");
 			int menu = Integer.parseInt(sc.nextLine());
-			switch (menu) {
-			case 1:
-				Book updatebook = AdminMenuView.updateBook();
-				result = UpdateAdminController.bookUpdate(book.getBookNo(), updatebook);
-				if (result == 1)
-					System.out.println(book.getBookNo() + "번 해당 책이 수정되었습니다.");
-				break;
-			case 2:
-				BookController.bookDelete(book.getBookNo());
-				break;
-			case 3:
-				return;
+
+			switch(menu) {
+				case 1 :
+					Book updatebook = AdminMenuView.updateBook();
+					result = UpdateAdminController.bookUpdate(book.getBookNo(), updatebook);
+					if(result==1)System.out.println(book.getBookNo()+" 번 해당 책이 수정되었습니다.");
+					break;
+				case 2 :
+					BookController.bookDelete(book.getBookNo());	
+					break;
+				case 3:
+					return;
+
 			}
 		}
 	}

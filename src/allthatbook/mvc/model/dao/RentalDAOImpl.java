@@ -117,11 +117,11 @@ public class RentalDAOImpl implements RentalDAO {
 						Reservation reservation = new Reservation(rental.getBookNo(), rental.getUserNo());
 						if (reservationDAO.deleteReservation(con, reservation) == 0) {
 							con.rollback();
-							throw new SQLException("예약된 도서입니다.");
+							throw new SQLException("책번호 " +rental.getBookNo() + "는 예약된 도서입니다.");
 						}
 					} else {
 						con.rollback();
-						throw new SQLException("예약된 도서입니다.");
+						throw new SQLException("책번호 " +rental.getBookNo() + "는 예약된 도서입니다.");
 					}
 				} // else끝
 

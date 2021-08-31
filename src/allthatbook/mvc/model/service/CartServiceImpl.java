@@ -34,7 +34,7 @@ public class CartServiceImpl implements CartService {
 	public void rentalCartBook(Cart cart, CartDetail cartDetail) throws SQLException { //0이면 대여실패 //1이면 대여성공
 		Rental rental = new Rental(cartDetail.getBookNo(), cart.getUserNo());
 		int result = rentalDAO.rentalInsert(cart, rental);
-		if (result != 0)cart.removeCartDetail(cartDetail);
+		//if (result != 0)cart.removeCartDetail(cartDetail);
 		if (result == 0) throw new SQLException("장바구니에서 담기 실패");
 	}
 
