@@ -60,4 +60,7 @@ public interface BookDAO {
 
 	int bookDelete(int bookNo) throws SQLException;
 
+
+	List<Book> bookReserveSelect() throws SQLException;
+
 }

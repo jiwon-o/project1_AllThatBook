@@ -216,7 +216,7 @@ public class BookDAOImpl implements BookDAO {
 	public int bookUpdate(Book updatebook) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql="update books set 도서명=?, 저자명=?, 출판사명=?, 출간일=TO_DATE(?, 'YY/MM/DD'), 분야=? where 책번호=?";
+		String sql="update books set 도서명=?, 저자명=?, 출판사명=?, 분야=? where 책번호=?";
 		
 		int result=0;	
 		try {
