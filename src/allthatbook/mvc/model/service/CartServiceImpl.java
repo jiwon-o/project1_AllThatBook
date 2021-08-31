@@ -31,14 +31,11 @@ public class CartServiceImpl implements CartService {
 	 * 장바구니에 있는 책을 대여한다.
 	 * */
 	@Override
-	public int rentalCartBook(Cart cart, CartDetail cartDetail) throws SQLException { //0이면 대여실패 //1이면 대여성공
+	public void rentalCartBook(Cart cart, CartDetail cartDetail) throws SQLException { //0이면 대여실패 //1이면 대여성공
 		Rental rental = new Rental(cartDetail.getBookNo(), cart.getUserNo());
-		int result = rentalDAO.rentalInsert(rental);
-		if (result ==0) return 0;
-		else {
-			cartDAO.deleteCartDetail(cart, cartDetail);
-			return 1;
-		}
+		int result = rentalDAO.rentalInsert(cart, rental);
+		if (result != 0)cart.removeCartDetail(cartDetail);
+		if (result == 0) throw new SQLException("장바구니에서 담기 실패");
 	}
 
 	/**

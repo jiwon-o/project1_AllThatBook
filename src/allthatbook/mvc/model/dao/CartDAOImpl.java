@@ -105,8 +105,7 @@ public class CartDAOImpl implements CartDAO {
 	 * 대여상세테이블에서 삭제하는 메소드
 	 * */
 	@Override
-	public int deleteCartDetail(Cart cart, CartDetail cartDetail) throws SQLException{
-		Connection con = null;
+	public int deleteCartDetail(Connection con, Cart cart, CartDetail cartDetail) throws SQLException{
 		PreparedStatement ps = null;
 		int result = 0;
 		String sql = "delete from cart_detail where 장바구니번호 = ? and 책번호 = ?";
@@ -123,6 +122,31 @@ public class CartDAOImpl implements CartDAO {
 	    finally {
 	    	DbUtil.close(null, ps);
 	    }
+		return result;
+	}
+	/**
+	 * 장바구니에서
+	 * 대여상세를 하나씩 삭제하는 메소드
+	 * */
+	@Override
+	public int deleteCartDetail(Cart cart, CartDetail cartDetail) throws SQLException{
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql = "delete from cart_detail where 장바구니번호 = ? and 책번호 = ?";
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, cartDetail.getCartId());
+			ps.setInt(2,  cartDetail.getBookNo());
+			result = ps.executeUpdate();
+			
+			//cart.removeCartDetail(cartDetail); //카트객체에 있는 list에서도 제거
+			
+		}
+		finally {
+			DbUtil.close(con, ps);
+		}
 		return result;
 	}
 

@@ -21,6 +21,14 @@ public class Rental {
 		  
 	  }
 	  
+	  public Rental (int rentNo, int bookNo, int userNo, Date exreturnDate) {
+		  super();
+			this.rentNo = rentNo;
+			this.bookNo = bookNo;
+			this.userNo = userNo;
+			this.exreturnDate = exreturnDate;
+	  }
+	  
 	  public Rental(int rentNo, int bookNo, int userNo, Date exreturnDate, Date rentDate, Date returnDate,
 			int returnState, int overdueState) {
 		super();
