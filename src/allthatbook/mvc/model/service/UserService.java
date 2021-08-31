@@ -5,7 +5,8 @@ import java.util.List;
 
 import allthatbook.mvc.exception.NotFoundException;
 import allthatbook.mvc.exception.PwdCheckException;
-import allthatbook.mvc.model.dao.UserDAOImpl;
+import allthatbook.mvc.model.dto.Rental;
+import allthatbook.mvc.model.dto.Reservation;
 import allthatbook.mvc.model.dto.User;
 
 public interface UserService {
@@ -56,4 +57,14 @@ public interface UserService {
 	 */
 	 int userUpdate(User updateUser) throws SQLException;
 	
+	 
+	/**
+	 * 대여중인 목록 
+	 * */ 
+	List<Rental> selectRentalByUserNo(int userNo) throws SQLException;
+	 
+	 /**
+	  * 예약중인 목록
+	  * */
+	List<Reservation> selectReservationByUserNo(int userNo) throws SQLException;
 }

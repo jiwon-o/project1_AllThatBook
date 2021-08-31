@@ -1,5 +1,6 @@
 package allthatbook.mvc.model.dao;
 
+import java.awt.peer.TrayIconPeer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import allthatbook.mvc.model.dto.Rental;
+import allthatbook.mvc.model.dto.Reservation;
 import allthatbook.mvc.model.dto.User;
 import allthatbook.mvc.util.DbUtil;
 
@@ -231,5 +234,51 @@ public class UserDAOImpl implements UserDAO {
 			DbUtil.close(con, ps);
 		}
 		return result;
+	}
+
+	@Override
+	public List<Rental> selectRentalByUserNo(int userNo) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "select * from rental where 회원번호 = ? and 반납여부 = 0";
+		List<Rental> list = new ArrayList<Rental>();
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, userNo);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Rental rental = new Rental(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getDate(4), rs.getDate(5));
+				list.add(rental);
+			}
+			
+		}finally {
+		    DbUtil.close(con, ps, rs);	
+		}
+		return list;
+	}
+
+	@Override
+	public List<Reservation> selectReservationByUserNo(int userNo) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "select * from reservation where 회원번호 = ?";
+		List<Reservation> list = new ArrayList<Reservation>();
+		try {
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, userNo);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Reservation reservation = new Reservation(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getDate(4));
+				list.add(reservation);
+			}
+			
+		}finally {
+		    DbUtil.close(con, ps, rs);	
+		}
+		return list;
 	}
 }

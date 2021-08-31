@@ -11,6 +11,7 @@ import allthatbook.mvc.model.dto.Book;
 import allthatbook.mvc.model.dto.Cart;
 import allthatbook.mvc.model.dto.CartDetail;
 import allthatbook.mvc.model.dto.Rental;
+import allthatbook.mvc.model.dto.Reservation;
 import allthatbook.mvc.model.dto.User;
 import allthatbook.mvc.model.service.BookService;
 import allthatbook.mvc.model.service.BookServiceImpl;
@@ -77,7 +78,7 @@ public class EndView {
 	 * 장바구니 출력
 	 */
 
-	public static void printViewCart(String id, Cart cart) {
+	public static void printViewCart(User user, Cart cart) {
 		System.out.println("\n");
 		System.out.println("------------------------------------------------------  장바구니내용  ----------------------------------------------------------------------");
 		System.out.println("\n");
@@ -91,6 +92,20 @@ public class EndView {
 			Book book = BookController.bookSelectByBookNo2(bookNo);
 			System.out.println(book);
 
+		}
+	}
+	
+	public static void printReservation(List<Reservation> list) {
+		System.out.println("\n------------예약목록-----------");
+		for (Reservation reservation : list) {
+			System.out.println(reservation);
+		}
+	}
+	
+	public static void printRental(List<Rental> list) {
+		System.out.println("\n------------대여목록-----------");
+		for (Rental rental : list) {
+			System.out.println(rental);
 		}
 	}
 	

@@ -98,56 +98,37 @@ public class UserMenuView {
 				System.out.println(" " + user.getUserId() + "님이 로그인 중입니다.");
 				System.out.println("\n");
 				System.out.println(
-
-						"1. 전체목록    2. 도서검색 (대여, 예약)   3. 도서반납   4. 책신청   5. 장바구니담기    6. 장바구니보기    7. 회원정보     8. 회원정보수정    9. 로그아웃    100. 장바구니 비우기");
-				System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------");
+						"1. 전체목록    2. 도서검색 (대여, 예약)   3. 도서반납   4. 장바구니담기    5. 장바구니보기    6. 회원정보    7. 회원정보수정    8. 로그아웃	  ");
+				System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------");
 				System.out.print("원하시는 서비스의 번호를 입력해주세요 :  ");
 				int menu = Integer.parseInt(sc.nextLine());
 				switch (menu) {
 				case 1:
-					BookController.bookSelect();// 전체 상품조회
+					BookController.bookSelect();
 					break;
 				case 2 :
 					BookMenuView.printSelectMenu(user);
 					break;
 				case 3:
-
+					System.out.print("반납할 책 번호: ");
+					RentalController.returnBook(user, sc.nextInt());
 					break;
 				case 4:
-
-					break;
-				case 5:         
 					CartMenuView.putCart(user.getUserId());
 					break;
-				case 6:
-					CartMenuView.viewCart(user.getUserId());
-					//CartMenuView.printCartMenu(user, null);
+				case 5:         
+					CartMenuView.viewCart(user);
 					break;
-				case 7:
+				case 6:
 					UserMenuView.selectUserInfo(user);
 					break;
-				case 8:
+				case 7:
 					UserMenuView.updateTemp(user);
 					if(ss.getSet().size()==0) return;
 					break;
-				case 9:
+				case 8:
 					logout(user.getUserId());
 					return;
-				case 100:
-					UserMenuView.clearCart(user);
-					CartController.clearCart(user.getUserId());
-				    break;
-				case 101:
-					System.out.print("예약할 책 번호 : ");
-					int bookNo = sc.nextInt();
-					ReservationContoller.insertReservation(user, bookNo);
-					break;
-				case 102:
-					System.out.print("반납할 책 번호 : ");
-					RentalController.returnBook(user, sc.nextInt());
-					break;
-					
-
 				default:
 					System.out.println("\n");
 					System.out.println(" 메뉴에 있는 '번호'를 입력해주세요");
@@ -320,6 +301,8 @@ public class UserMenuView {
 				continue;
 			}
 			UserController.selectByUserId(user.getUserId());
+			UserController.selectRentalByUserNo(user.getUserNo());
+			UserController.selectReservationByUserNo(user.getUserNo());
 			break;
 		}
 	}

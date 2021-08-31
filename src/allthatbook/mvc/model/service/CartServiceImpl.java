@@ -16,14 +16,17 @@ import allthatbook.mvc.view.FailView;
 public class CartServiceImpl implements CartService {
     CartDAO cartDAO = new CartDAOImpl();
 	RentalDAO rentalDAO = new RentalDAOImpl();
+	BookService bookService = new BookServiceImpl();
 	
 	/**
 	 * 장바구니에 책을 담는다.
 	 * */
 	@Override
 	public void insertBook(int bookNo, Cart cart) throws SQLException {
+		bookService.bookSelectByBookNo(bookNo);
 		int result = cartDAO.insertBook(bookNo, cart);
         if (result == 0) throw new SQLException("장바구니 담기 실패했습니다. ");
+
 	}
 
 	
