@@ -18,7 +18,7 @@ public class RentalServiceImpl implements RentalService {
 	public void returnBook(Rental rental) throws SQLException {
 		int result = rentalDAO.returnBook(rental);
 		
-		if(result ==0) throw new SQLException(" ¹Ý³³½ÇÆÐ ");
+		if(result ==0) throw new SQLException("*** ¹Ý³³½ÇÆÐ ***");
 		
 	}
 	

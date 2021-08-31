@@ -27,7 +27,11 @@ public class UserServiceImpl implements UserService {
 		if (user == null) {
 			throw new NotFoundException("*** 아이디 또는 비밀번호가 잘못 입력되었습니다. 정확히 입력해주세요. ***\n");
 		}else {
-			System.out.println("*** 로그인 되었습니다. ***");
+			if (userId.equals("admin")) {
+				System.out.println("*** 관리자 계정으로 로그인 되었습니다. ***");
+			}else {
+				System.out.println("*** 로그인 되었습니다. ***");
+			}
 		}
 		// 로그인 된 정보 저장하기
 		Session session = new Session(userId);
@@ -83,7 +87,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void updateUserInfo(User user) throws SQLException {
 		int result = userDao.updateUserInfo(user);
-		if (result == 0) throw new SQLException("정보가 변경되지 않았습니다. ");
+		if (result == 0) throw new SQLException("*** 정보가 변경되지 않았습니다. ***");
 	}
 
 
@@ -94,7 +98,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void deleteUserInfo(User user) throws SQLException {
 		int result = userDao.deleteUserInfo(user);
-		if (result == 0) throw new SQLException("회원탈퇴가 실패했습니다. ");
+		if (result == 0) throw new SQLException("*** 회원탈퇴가 실패했습니다. ***");
 	}
 
 
@@ -104,13 +108,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void deleteAdminUserInfo(User user) throws SQLException {
 		int result = userDao.deleteUserInfo(user);
-		if(result==0)throw new SQLException("회원삭제가 실패했습니다. ");
+		if(result==0)throw new SQLException("*** 회원삭제가 실패했습니다. ***");
 	}
 
 	@Override
 	public void deleteUserInfo(int userNo) throws SQLException {
 		int result = userDao.deleteUserInfo(userNo);
-		if(result==0)throw new SQLException("회원삭제가 실패했습니다. ");
+		if(result==0)throw new SQLException("*** 회원삭제가 실패했습니다. ***");
 	}
 	
 	/**
@@ -125,14 +129,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<Rental> selectRentalByUserNo(int userNo) throws SQLException {
 		List<Rental> rentalList = userDao.selectRentalByUserNo(userNo);
-		if (rentalList == null || rentalList.size() ==0 ) throw new SQLException("\n대출중인 도서가 없습니다.");
+		if (rentalList == null || rentalList.size() ==0 ) throw new SQLException("\n*** 대출중인 도서가 없습니다. ***");
 		return rentalList;
 	}
 
 	@Override
 	public List<Reservation> selectReservationByUserNo(int userNo) throws SQLException {
 		List<Reservation> reservationList = userDao.selectReservationByUserNo(userNo);
-		if (reservationList == null || reservationList.size() ==0 ) throw new SQLException("\n예약중인 도서가 없습니다.");
+		if (reservationList == null || reservationList.size() ==0 ) throw new SQLException("\n*** 예약중인 도서가 없습니다. ***");
 		return reservationList;
 	}
 

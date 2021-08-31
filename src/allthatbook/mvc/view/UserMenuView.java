@@ -32,9 +32,10 @@ public class UserMenuView {
 					UserMenuView.register(); // 회원가입
 					break;
 				case 9:
-					System.out.println("\n-------------------------------------------------------------");
+					System.out.println("\n");
+					System.out.println("-----------------------------------------------------------");
 					System.out.println("   감사합니다. 다음에 또 'AllThatBook' 과 함께해주세요.    ");
-					System.out.println("-------------------------------------------------------------");
+					System.out.println("-----------------------------------------------------------");
 					System.exit(0);
 				default:
 					System.out.println("*** 메뉴에 있는 번호를 입력해주세요. ***\n");
