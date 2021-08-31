@@ -199,7 +199,6 @@ public class RentalDAOImpl implements RentalDAO {
 				if (ur == 1) {
 					// 해당하는 책번호 상태 변경, 만약 예약자가 존재하면 상태 2로, 존재하지 않으면 0으로
 					int chkRez = checkReservation(con, rental); // 1이면 예약존재
-					System.out.println(chkRez);
 					if (chkRez > 0) {
 						changeBookState(con, rental, 2);
 					} else {
