@@ -52,9 +52,9 @@ public class CartController {
 
 			cartService.insertBook(bookNo, cart);
 			EndView.printMessage("장바구니에 담았습니다");
-
-		} catch (Exception e) {
-			// e.printStackTrace();
+			System.out.println("\n");
+		}catch(Exception e) {
+			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 	}

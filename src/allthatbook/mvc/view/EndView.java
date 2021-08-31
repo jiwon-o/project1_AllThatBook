@@ -16,8 +16,11 @@ import allthatbook.mvc.model.service.BookService;
 import allthatbook.mvc.model.service.BookServiceImpl;
 
 public class EndView {
+
 	public static void printBookList(User user, List<Book> bookList) {
-		System.out.println("----- 총 도서 : " + bookList.size() + "개 ----------");
+		System.out.println("----------------------------------------------    총 도서 수: " + bookList.size() + "개    ------------------------------------------");
+		System.out.println("\n");
+
 		for(Book book : bookList) {
 			System.out.println(book);
 		}
@@ -27,7 +30,9 @@ public class EndView {
 	}
 	
 	public static void printBookList(List<Book> bookList) {
-		System.out.println("----- 총 도서 : " + bookList.size() + "개 ----------");
+		System.out.println("----------------------------------------------    총 도서 수: " + bookList.size() + "개   -------------------------------------------");
+		System.out.println("\n");
+
 		for(Book book : bookList) {
 			System.out.println(book);
 		}
@@ -54,7 +59,7 @@ public class EndView {
 	 * User 전체 출력
 	 */
 	public static void printUserList(List<User> userList){
-		System.out.println("-----전체 User "+userList.size()+"명------");
+		System.out.println("---------------------------------  전체 User "+userList.size()+  " ----------------------------------------------------------");
 		for(User user : userList) {
 			System.out.println(user);
 		}
@@ -71,8 +76,10 @@ public class EndView {
 	/**
 	 * 장바구니 출력
 	 */
-	public static void printViewCart(String userId, Cart cart) {
-		System.out.println("---장바구니내용---");
+
+	public static void printViewCart(String id, Cart cart) {
+		System.out.println("------------------------------------------------------  장바구니내용  ----------------------------------------------------------------------");
+
 		List<CartDetail> list = cart.getCartDetailList();
 		System.out.println("----------도서 개수 : " + list.size() + "----------");
 		for(CartDetail cartDetail : list) {
@@ -81,9 +88,9 @@ public class EndView {
 			//책번호로 책정보를 출력하는 메소드
 			Book book = BookController.bookSelectByBookNo2(bookNo);
 			System.out.println(book);
+
 		}
 	}
-
 	
 }
 
