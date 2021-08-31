@@ -81,16 +81,29 @@ public class BookMenuView {
 	 */
 	public static List<Book> selectBookByName(User user) {
 		List<Book> bookList = null;
-		try {
+		while (true) {
+
 			System.out.print("책의 이름을 입력해주세요 : ");
 			String keyword = sc.nextLine();
-
-			 System.out.println("\n");
+			System.out.println("\n");
 			bookList = BookController.bookSelectByBookName(user, keyword);
-
-		}catch (Exception e) {
-			e.printStackTrace();
+			if (bookList == null) {
+				System.out.println("다시 하시겠습니까? ( 네 or 아니오 )");
+				String choice = sc.nextLine();
+				switch (choice) {
+				case "네":
+					continue;
+				case "아니오":
+					System.out.println("처음으로 돌아갑니다.");
+					break;
+				default:
+					System.out.println("네 or 아니오 중 하나를 입력해주세요... 처음으로 돌아갑니다.");					}
+			}
+			break;
+			
+			
 		}
+
 		System.out.println("\n");
 		return bookList;
 	}
@@ -100,14 +113,28 @@ public class BookMenuView {
 	 */
 	public static List<Book> selectBookByWriter(User user) {
 		List<Book> bookList = null;
-		try {
+		while(true) {
+			
 			System.out.print("저자를 입력해주세요 : ");
 			String writer = sc.nextLine();
 
-			 System.out.println("\n");
+			System.out.println("\n");
 			bookList = BookController.bookSelectByWriter(user, writer);
-		}catch (Exception e) {
-			e.printStackTrace();
+			if (bookList == null) {
+
+				System.out.println("다시 하시겠습니까? ( 네 or 아니오 )");
+				String choice = sc.nextLine();
+				switch (choice) {
+				case "네":
+					continue;
+				case "아니오":
+					System.out.println("처음으로 돌아갑니다.");
+					break;
+				default:
+					System.out.println("네 or 아니오 중 하나를 입력해주세요... 처음으로 돌아갑니다.");					}
+			}
+			break;
+			
 		}
 		System.out.println("\n");
 		return bookList;
@@ -118,15 +145,29 @@ public class BookMenuView {
 	 */
 	public static List<Book> selectBookByPublisher(User user) {
 		List<Book> bookList = null;
-		try {
+		while(true) {
+			
 			System.out.print("출판사를 입력해주세요 : ");
 			String publisher = sc.nextLine();
 
-			 System.out.println("\n");
+			System.out.println("\n");
 			bookList = BookController.bookSelectByPublisher(user, publisher);
+			
+			if (bookList == null) {
 
-		}catch (Exception e) {
-			e.printStackTrace();
+				System.out.println("다시 하시겠습니까? ( 네 or 아니오 )");
+				String choice = sc.nextLine();
+				switch (choice) {
+				case "네":
+					continue;
+				case "아니오":
+					System.out.println("처음으로 돌아갑니다.");
+					break;
+				default:
+					System.out.println("네 or 아니오 중 하나를 입력해주세요... 처음으로 돌아갑니다.");					}
+			}
+			break;
+
 		}
 		System.out.println("\n");
 		return bookList;
@@ -137,14 +178,29 @@ public class BookMenuView {
 	 */
 	public static List<Book> selectBookByCategory(User user) {
 		List<Book> bookList = null;
-		try {
+		while(true) {
+			
 			System.out.print("찾으시는 분야를 입력해주세요 : ");
 			String category = sc.nextLine();
 
-			 System.out.println("\n");
+			System.out.println("\n");
 			bookList = BookController.bookSelectByCategory(user, category);
-		}catch (Exception e) {
-			e.printStackTrace();
+			
+			if (bookList == null) {
+
+				System.out.println("다시 하시겠습니까? ( 네 or 아니오 )");
+				String choice = sc.nextLine();
+				switch (choice) {
+				case "네":
+					continue;
+				case "아니오":
+					System.out.println("처음으로 돌아갑니다.");
+					break;
+				default:
+					System.out.println("네 or 아니오 중 하나를 입력해주세요... 처음으로 돌아갑니다.");					}
+			}
+			
+			break;
 		}
 		System.out.println("\n");
 		return bookList;
@@ -155,20 +211,18 @@ public class BookMenuView {
 	 */
 	public static List<Book> selectBookByState(User user) {
 		List<Book> bookList = null;
-		try {
-			System.out.print("대여 여부 검색 (대출가능: 0, 대출 중: 1, 예약 중: 2)\n > ");
-			int state = Integer.parseInt(sc.nextLine());
-			
-			if(state < 0 || 2 < state) {
-				throw new SQLException("대여 가능(0), 대여중(1), 예약중(2) 중에서 입력해주세요.");
+		while(true) {
+			try {
+				System.out.print("대여 여부 검색 (대출가능: 0, 대출 중: 1, 예약 중: 2)\n > ");
+				int state = Integer.parseInt(sc.nextLine());
+
+				System.out.println("\n");
+				bookList = BookController.bookSelectByState(user, state);
+				break;
+			} catch (NumberFormatException e) {
+				FailView.errorMessage("숫자만 입력해주세요.");
 			}
-			 System.out.println("\n");
-			bookList = BookController.bookSelectByState(user, state);
-		}catch (SQLException e) {
-			//e.printStackTrace();
-			FailView.errorMessage(e.getMessage());
 		}
-		System.out.println("\n");
 		return bookList;
 	}
 	

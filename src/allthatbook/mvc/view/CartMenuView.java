@@ -118,7 +118,7 @@ public class CartMenuView {
 	
 	public static void printRentalMenu(User user) {
 		while(true) {
-			System.out.println("1.전체 목록 대여하기  |  4.돌아가기  ");
+			System.out.println("  1.전체 목록 대여하기  |  2.돌아가기  ");
 			System.out.print("번호 입력 > ");
 			switch(Integer.parseInt(sc.nextLine())) {
 			case 1:
@@ -127,19 +127,8 @@ public class CartMenuView {
 				RentalController.insertRental(user, bookNo);
 				break;
 			case 2:
-				CartMenuView.putCart(user.getUserId());
-				break;
-			case 3:		/////////////////////////
-				CartMenuView.viewCart(user.getUserId());
-				SessionSet ss = SessionSet.getInstance();
-				Session session = ss.get(user.getUserId());
-
-				Cart cart = (Cart) session.getAttribute("cart");
-				CartController.rentalCartBook( user.getUserId(), cart);
-				//세션에 있는 cart객체 안에 있는 cartDetailList 안에 번호에 맞는 삭제
-				break;
-			case 4:
 				return;
+				
 			}
 		}
 	}
