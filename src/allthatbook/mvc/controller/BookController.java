@@ -40,10 +40,12 @@ public class BookController {
 		}catch (SQLException e) {
 
 			FailView.errorMessage(e.getMessage());
+	
 			
+
 			boolean flag = true;
 			while(flag) {
-				System.out.println("다시 하시겠습니까? (yes or no)");
+				System.out.println("다시 하시겠습니까? ( yes or no )");
 				String choice = sc.nextLine();
 				if(choice.toUpperCase().equals("yes".toUpperCase())) {
 					BookMenuView.selectBookByNo(user);
@@ -51,9 +53,10 @@ public class BookController {
 				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
 					break;
 				}else {
-					System.out.println("'yes' 또는 'no'를 입력해주세요.");
+					System.out.println("( yes or no )를 입력해주세요. ");
 				}
 			}
+
 		}
 		return book;
 	}
@@ -82,8 +85,9 @@ public class BookController {
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
+
 			while(true) {
-				System.out.println("다시 하시겠습니까? (yes or no)");
+				System.out.println("다시 하시겠습니까? ( yes or no )");
 				String choice = sc.nextLine();
 				if(choice.toUpperCase().equals("yes".toUpperCase())) {
 					BookMenuView.selectBookByName(user);
@@ -91,9 +95,10 @@ public class BookController {
 				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
 					break;
 				}else {
-					System.out.println("'yes' 또는 'no'를 입력해주세요.");
+					System.out.println("( yes or no )를 입력해주세요. ");
 				}
 			}
+
 		}
 		return bookList;
 	}
@@ -109,8 +114,9 @@ public class BookController {
 		}catch (SQLException e) {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
+
 			while(true) {
-				System.out.println("다시 하시겠습니까? (yes or no)");
+				System.out.println("다시 하시겠습니까? ( yes or no )");
 				String choice = sc.nextLine();
 				if(choice.toUpperCase().equals("yes".toUpperCase())) {
 					BookMenuView.selectBookByWriter(user);
@@ -118,7 +124,7 @@ public class BookController {
 				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
 					break;
 				}else {
-					System.out.println("'yes' 또는 'no'를 입력해주세요.");
+					System.out.println("( yes or no )를 입력해주세요. ");
 				}
 			}
 		}
@@ -138,7 +144,7 @@ public class BookController {
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 			while(true) {
-				System.out.println("다시 하시겠습니까? (yes or no)");
+				System.out.println("다시 하시겠습니까? ( yes or no )");
 				String choice = sc.nextLine();
 				if(choice.toUpperCase().equals("yes".toUpperCase())) {
 					BookMenuView.selectBookByPublisher(user);
@@ -146,7 +152,7 @@ public class BookController {
 				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
 					break;
 				}else {
-					System.out.println("'yes' 또는 'no'를 입력해주세요.");
+					System.out.println("( yes or no )를 입력해주세요. ");
 				}
 			}
 		}
@@ -163,11 +169,10 @@ public class BookController {
 			bookList = bookService.bookSelectByCategory(category);
 			EndView.printBookList(user, bookList);
 		}catch (SQLException e) {
-			
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 			while(true) {
-				System.out.println("다시 하시겠습니까? (yes or no)");
+				System.out.println("다시 하시겠습니까? ( yes or no )");
 				String choice = sc.nextLine();
 				if(choice.toUpperCase().equals("yes".toUpperCase())) {
 					BookMenuView.selectBookByCategory(user);
@@ -175,7 +180,7 @@ public class BookController {
 				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
 					break;
 				}else {
-					System.out.println("'yes' 또는 'no'를 입력해주세요.");
+					System.out.println("( yes or no )를 입력해주세요. ");
 				}
 			}
 			
@@ -193,11 +198,10 @@ public class BookController {
 			bookList = bookService.bookSelectByState(state);
 			EndView.printBookList(user, bookList);
 		}catch (SQLException e) {
-			
 			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 			while(true) {
-				System.out.println("다시 하시겠습니까? (yes or no)");
+				System.out.println("다시 하시겠습니까? ( yes or no )");
 				String choice = sc.nextLine();
 				if(choice.toUpperCase().equals("yes".toUpperCase())) {
 					BookMenuView.selectBookByState(user);
@@ -205,7 +209,7 @@ public class BookController {
 				}else if(choice.toUpperCase().equals("no".toUpperCase())) {
 					break;
 				}else {
-					System.out.println("'yes' 또는 'no'를 입력해주세요.");
+					System.out.println("( yes or no )를 입력해주세요. ");
 				}
 			}
 			

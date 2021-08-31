@@ -29,6 +29,15 @@ public class Rental {
 			this.exreturnDate = exreturnDate;
 	  }
 	  
+	  public Rental (int rentNo, int bookNo, int userNo, Date exreturnDate, Date rentDate) {
+		  super();
+			this.rentNo = rentNo;
+			this.bookNo = bookNo;
+			this.userNo = userNo;
+			this.exreturnDate = exreturnDate;
+			this.rentDate = rentDate;
+	  }
+	  
 	  public Rental(int rentNo, int bookNo, int userNo, Date exreturnDate, Date rentDate, Date returnDate,
 			int returnState, int overdueState) {
 		super();
@@ -101,24 +110,27 @@ public class Rental {
 	public void setOverdueState(int overdueState) {
 		this.overdueState = overdueState;
 	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Rental [rentNo=");
+		builder.append("대여번호: ");
 		builder.append(rentNo);
-		builder.append(", bookNo=");
+		builder.append(", 책번호: ");
 		builder.append(bookNo);
-		builder.append(", userNo=");
+		builder.append(", 회원번호: ");
 		builder.append(userNo);
-		builder.append(", rentDate=");
+		builder.append(", 반납예정일자: ");
+		builder.append(exreturnDate);
+		builder.append(", 대여일자: ");
 		builder.append(rentDate);
-		builder.append(", returnDate=");
+		builder.append(", 반납일자: ");
 		builder.append(returnDate);
-		builder.append(", returnState=");
+		builder.append(", 반납여부: ");
 		builder.append(returnState);
-		builder.append(", overdueState=");
+		builder.append(", 연체여부: ");
 		builder.append(overdueState);
-		builder.append("]");
 		return builder.toString();
 	}
+
 }

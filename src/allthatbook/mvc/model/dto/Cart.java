@@ -61,16 +61,17 @@ public class Cart {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Cart [cartId=");
+		builder.append("장바구니번호: ");
 		builder.append(cartId);
-		builder.append(", userNo=");
+		builder.append(", 회원번호");
 		builder.append(userNo);
-		builder.append(", cartDetailList=");
-		builder.append(cartDetailList);
-		builder.append("]");
+		if(cartDetailList != null) {
+			builder.append("\n<<<<<<장바구니 상세>>>>>>");
+			for (CartDetail cartDetail : cartDetailList) {
+				builder.append("\n");
+				builder.append(cartDetail);
+			}
+		}
 		return builder.toString();
 	}
-
-	
-	
 }

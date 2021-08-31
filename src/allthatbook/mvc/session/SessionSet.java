@@ -50,4 +50,10 @@ public class SessionSet {// ΩÃ±€≈Ê
 		set.remove(session);
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(set);
+		return builder.toString();
+	}
 }

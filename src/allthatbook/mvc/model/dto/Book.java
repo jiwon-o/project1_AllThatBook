@@ -6,14 +6,13 @@ public class Book {
 	private String bookName;
 	private String bookWriter;
 	private String bookPublisher;
-	private String pubDate; //출간일
 	private String bookField; //책 분야
 	private int bookState; //대여가능: 0, 대여중: 1, 예약 대기상태: 2
   
     public Book() {}
 
-	public Book(int bookNo, String bookName, String bookWriter, String bookPublisher,  String bookField, 
-				int bookState) {
+
+	public Book(int bookNo, String bookName, String bookWriter, String bookPublisher, String bookField, int bookState) {
 		super();
 		this.bookNo = bookNo;
 		this.bookName = bookName;
@@ -57,15 +56,6 @@ public class Book {
 		this.bookPublisher = bookPublisher;
 	}
 
-	public String getPubDate() {
-		return pubDate;
-	}
-	
-
-	public void setPubDate(String pubDate) {
-		this.pubDate = pubDate;
-	}
-
 	public int getBookState() {
 		return bookState;
 	}
@@ -107,21 +97,18 @@ public class Book {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Book [bookNo=");
+		builder.append("책번호: ");
 		builder.append(bookNo);
-		builder.append(", bookName=");
+		builder.append(", 도서명: ");
 		builder.append(bookName);
-		builder.append(", bookWriter=");
+		builder.append(", 저자명: ");
 		builder.append(bookWriter);
-		builder.append(", bookPublisher=");
+		builder.append(", 출판사명: ");
 		builder.append(bookPublisher);
-		builder.append(", pubDate=");
-		builder.append(pubDate);
-		builder.append(", bookField=");
+		builder.append(", 분야: ");
 		builder.append(bookField);
-		builder.append(", bookState=");
+		builder.append(", 상태: ");
 		builder.append(bookState);
-		builder.append("]");
 		return builder.toString();
 	}
   
