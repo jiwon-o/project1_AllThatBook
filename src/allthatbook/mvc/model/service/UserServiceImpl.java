@@ -123,14 +123,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<Rental> selectRentalByUserNo(int userNo) throws SQLException {
 		List<Rental> rentalList = userDao.selectRentalByUserNo(userNo);
-		if (rentalList == null || rentalList.size() ==0 ) throw new SQLException("대여중인 도서가 없습니다.");
+		if (rentalList == null || rentalList.size() ==0 ) throw new SQLException("\n대여중인 도서가 없습니다.");
 		return rentalList;
 	}
 
 	@Override
 	public List<Reservation> selectReservationByUserNo(int userNo) throws SQLException {
 		List<Reservation> reservationList = userDao.selectReservationByUserNo(userNo);
-		if (reservationList == null || reservationList.size() ==0 ) throw new SQLException("에약중인 도서가 없습니다.");
+		if (reservationList == null || reservationList.size() ==0 ) throw new SQLException("\n예약중인 도서가 없습니다.");
 		return reservationList;
 	}
 
