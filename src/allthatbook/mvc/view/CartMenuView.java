@@ -53,7 +53,16 @@ public class CartMenuView {
 
 			switch(Integer.parseInt(sc.nextLine())) {
 			case 1:
-				RentalController.insertRental(user, book);
+				System.out.println(" < " + book.getBookName() + " > 책을 대여하시겠습니까? ( 네 or 아니오 )");
+				String checkRental = sc.nextLine();
+				if("네".equals(checkRental)) {
+					RentalController.insertRental(user, book);
+				}else if("아니오".equals(checkRental)) {
+					return;
+				}else {
+					System.out.println("( 네 or 아니오 ) 중 하나만 입력해주세요.");
+				}
+				
 				return;
 			case 2:
 				CartMenuView.putCart(user.getUserId(), book);
