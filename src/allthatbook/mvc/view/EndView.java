@@ -77,7 +77,7 @@ public class EndView {
 	 * 장바구니 출력
 	 */
 
-	public static void printViewCart(String id, Cart cart) {
+	public static void printViewCart(User user, Cart cart) {
 		System.out.println("------------------------------------------------------  장바구니내용  ----------------------------------------------------------------------");
 		System.out.println("\n");
 		List<CartDetail> list = cart.getCartDetailList();

@@ -6,6 +6,7 @@ import java.util.List;
 
 import allthatbook.mvc.model.dto.Cart;
 import allthatbook.mvc.model.dto.CartDetail;
+import allthatbook.mvc.model.dto.User;
 import allthatbook.mvc.model.service.BookService;
 import allthatbook.mvc.model.service.BookServiceImpl;
 import allthatbook.mvc.model.service.CartService;
@@ -111,15 +112,15 @@ public class CartController {
 	/**
 	 * 장바구니 보기
 	 */
-	public static Cart viewCart(String userId) {
+	public static Cart viewCart(User user) {
 		SessionSet ss = SessionSet.getInstance();
-		Session session = ss.get(userId);
+		Session session = ss.get(user.getUserId());
 
 		Cart cart = (Cart) session.getAttribute("cart");
 		if (cart == null) { // 장바구니가 없는 고객
 			FailView.errorMessage("장바구니가 비었습니다");
 		} else {
-			EndView.printViewCart(userId, cart);
+			EndView.printViewCart(user, cart);
 		}
 		
 		return cart;
