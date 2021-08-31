@@ -38,7 +38,7 @@ public class BookController {
 			book = bookService.bookSelectByBookNo(bookNo);
 			EndView.printSelectByNo(user, book);
 		}catch (SQLException e) {
-			//e.printStackTrace();
+
 			FailView.errorMessage(e.getMessage());
 			
 			boolean flag = true;
@@ -232,17 +232,14 @@ public class BookController {
 	/**
 	 * 관리자-도서관리-도서삭제
 	 * @param bookNo
-	 * @return int result
 	 */
-	public static int bookDelete(int bookNo) {
-		int result=0;
+	public static void bookDelete(int bookNo) {
 		try {
-			result = bookService.bookDelete(bookNo);
+			bookService.bookDelete(bookNo);
+			EndView.printMessage("도서삭제가 되었습니다.");
 		} catch (SQLException e) {
-			e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
-		return result;
 	}
 	
 	/**

@@ -26,7 +26,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public Book bookSelectByBookNo(int bookNo) throws SQLException {
 		Book book = bookDao.bookSelectByBookNo(bookNo);
-		if(book == null) throw new SQLException(bookNo + "에 해당하는 책은 현재 없습니다.");
+		if(book == null) throw new SQLException("해당 bookNo에 해당하는 책은 현재 없습니다.");
 		return book;
 	}
 
@@ -99,9 +99,9 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public int bookDelete(int bookNo) throws SQLException {
+	public void bookDelete(int bookNo) throws SQLException {
 		int result = bookDao.bookDelete(bookNo);
-		return result;
+		if(result==0)throw new SQLException("도서삭제가 되지 않았습니다.");
 	}
 
 	@Override

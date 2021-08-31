@@ -57,7 +57,7 @@ public interface BookService {
 	 * 책 삭제
 	 */
 
-	int bookDelete(int bookNo) throws SQLException;
+	void bookDelete(int bookNo) throws SQLException;
 
 	/**
 	 * 대출중 도서 조회

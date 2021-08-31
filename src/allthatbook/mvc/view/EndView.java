@@ -38,9 +38,11 @@ public class EndView {
 	
 	public static void printSelectByNo(User user, Book book) {
 		System.out.println(book + "\n");
+
 		if(user.getUserId().equals("admin")) {
 			BookMenuView.bookDeleteOrUpdateMenu(user, book);
 		}
+
 	}
 	
 
