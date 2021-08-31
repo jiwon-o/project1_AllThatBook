@@ -1,6 +1,7 @@
 package allthatbook.mvc.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import allthatbook.mvc.model.dto.Cart;
@@ -49,7 +50,6 @@ public class CartController {
 			if (cart.chkCartDuplicate(bookNo)) { // true면 중복되는책 존재
 				throw new SQLException("이미 장바구니에 담은 책은 중복해서 담을 수 없습니다.");
 			}
-
 			cartService.insertBook(bookNo, cart);
 			EndView.printMessage("장바구니에 담았습니다");
 			System.out.println("\n");
@@ -128,13 +128,19 @@ public class CartController {
 	 * */
 	public static void rentalCartBook(String userId, Cart cart) {
 		List<CartDetail> list = cart.getCartDetailList();
+		List<CartDetail> tempList = new ArrayList<CartDetail>();
 		for (CartDetail cartDetail : list) {
 			try {
 				cartService.rentalCartBook(cart, cartDetail);
 				EndView.printMessage(cartDetail.getBookNo() + "번 대여 성공했습니다.");
+				tempList.add(cartDetail);
 			} catch (SQLException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+				FailView.errorMessage(e.getMessage());
 			}
+		}
+		for (CartDetail cartDetail : tempList) {
+			list.remove(cartDetail);
 		}
 	}
 }
