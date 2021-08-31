@@ -112,7 +112,8 @@ public class UserMenuView {
 					break;
 				case 3:
 					System.out.print("반납할 책 번호: ");
-					RentalController.returnBook(user, sc.nextInt());
+					int bookNo = Integer.parseInt(sc.nextLine());
+					RentalController.returnBook(user, bookNo);
 					break;
 				case 4:
 					CartMenuView.putCart(user.getUserId());

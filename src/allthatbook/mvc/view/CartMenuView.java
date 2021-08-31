@@ -67,9 +67,10 @@ public class CartMenuView {
 				return;
 			case 2:
 				System.out.print("예약할 책 번호: ");
-				int reserveBookNo = sc.nextInt();
+				int reserveBookNo = Integer.parseInt(sc.nextLine());
 				ReservationContoller.insertReservation(user, reserveBookNo);
 				return;
+				
 			case 3:		/////////////////////////
 				CartMenuView.putCart(user.getUserId(), book);
 				break;
@@ -100,7 +101,7 @@ public class CartMenuView {
 				break;
 			case 2:
 				System.out.print("예약할 책 번호: ");
-				int reserveBookNo = sc.nextInt();
+				int reserveBookNo = Integer.parseInt(sc.nextLine());
 				ReservationContoller.insertReservation(user, reserveBookNo);
 				break;
 
