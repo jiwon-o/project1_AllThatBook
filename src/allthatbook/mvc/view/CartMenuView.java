@@ -37,13 +37,23 @@ public class CartMenuView {
 	/**
 	 * 장바구니 담기(책번호로 검색했을 때)
 	 */
-	public static void putCart(String userId, Book book) {
+	public static void putCart(User user, Book book) {
 		try {
-			System.out.println(">>>>>>>>> 장바구니 담기 >>>>>>>>>");
+			System.out.println("'" +book.getBookNo()+"'번 도서를 장바구니에 담으시겠습니까? (네 / 아니오)");
+			String checkCart = sc.nextLine();
+			if("네".equals(checkCart)) {
+				CartController.putCart(user.getUserId(), book.getBookNo());
+			}else if("아니오".equals(checkCart)) {
+				System.out.println("*** 장바구니 담기를 취소했습니다. ***\n");
+				CartMenuView.printCartMenu(user, book);
+			}else {
+				System.out.println("*** ( 네 / 아니오 ) 중 하나만 입력해주세요. ***\n");
+				CartMenuView.printCartMenu(user, book);
+			}
 			
-			CartController.putCart(userId, book.getBookNo());
+			
 		}catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 	}
@@ -95,8 +105,8 @@ public class CartMenuView {
 					return;
 					
 				case 3:
-					System.out.println("*** 장바구니 목록 화면으로 이동합니다. ***\n");
-					CartMenuView.putCart(user.getUserId(), book);
+					System.out.println("*** 장바구니 담기 메뉴를 선택했습니다. ***\n");
+					CartMenuView.putCart(user, book);
 					break;
 				case 4:
 					CartMenuView.viewCart(user);

@@ -108,7 +108,7 @@ public class UserMenuView {
 				System.out.println("\n");
 				System.out.println(ss.getSet()); // Set객체
 				System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-				System.out.println("      1.  전체목록      2.  도서검색(대여, 예약)      3.  도서반납      4.   회원정보조회      5.   회원정보수정      9.   로그아웃      ");
+				System.out.println("      1.  전체도서목록      2.  도서검색(대여, 예약)      3.  도서반납      4.   회원정보조회      5.   회원정보수정      9.   로그아웃      ");
 				System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 				System.out.print("메뉴 입력 : ");
 
@@ -188,7 +188,7 @@ public class UserMenuView {
 	 */
 	public static void updateTemp(User user) {
 		while (true) {
-			System.out.println("\n회원정보 수정/탈퇴를 위해 비밀번호를 입력해 주세요. (수정을 취소하려면 \"exid\" 입력) ");
+			System.out.println("\n회원정보 수정를 위해 비밀번호를 입력해 주세요. (수정을 취소하려면 \"exid\" 입력) ");
 			
 			String userPwd = sc.nextLine();
 			if (userPwd.equals("exid")) {
@@ -207,10 +207,11 @@ public class UserMenuView {
 			int menu = Integer.parseInt(sc.nextLine());
 			switch (menu) {
 			case 1:
-				System.out.println("*** 회원정보수정 화면으로 이동합니다.*** ");
+				System.out.println("*** 회원정보수정 화면으로 이동합니다. ***");
 				UserMenuView.update(user); // 수정
 				return;
 			case 2:
+				System.out.println("*** 회원탈퇴 화면으로 이동합니다. ***\n");
 				UserMenuView.delete(user);
 				return;
 			case 9:
@@ -288,10 +289,10 @@ public class UserMenuView {
 		switch(checkDeleteID) {
 		case "네" :
 			while(true) {
-				System.out.print("탈퇴할 아이디 : ");
+				System.out.print("\n탈퇴할 아이디 : ");
 				String userId = sc.nextLine();
 				if( !(user.getUserId().equals(userId)) ) {
-					System.out.println("아이디가 틀렸습니다. ");
+					System.out.println("*** 아이디 또는 비밀번호가 일치하지 않습니다. ***");
 					continue;
 				}
 				System.out.print("탈퇴할 아이디의 비밀번호 : ");
@@ -299,19 +300,17 @@ public class UserMenuView {
 				System.out.print("탈퇴할 아이디의 비밀번호 재확인 : ");
 				String checkUserPwd = sc.nextLine();
 				if( !(user.getUserPwd().equals(userPwd) && user.getUserPwd().equals(checkUserPwd)) ) {	// !(참&&참)
-					System.out.println("비밀번호가 일치하지않습니다. ");
+					System.out.println("*** 아이디 또는 비밀번호가 일치하지 않습니다. ***");
 					continue;
 				}
 				
 				String checkString = "탈퇴하겠습니다";				//나중에 문구 수정을 위해서 빼놓음
-				System.out.println("\n");
-				System.out.println("정말 회원탈퇴를 하시겠습니까?");
-				System.out.println("취소하려면 (아니오)를 입력해주세요");
-				System.out.println("탈퇴하시려면 괄호안의 문자("+checkString+")를 입력해주세요. ");
+
+				System.out.println("정말 회원탈퇴를 하시겠습니까? (취소하려면 '아니오'를, 탈퇴하시려면 (" +checkString+")를 입력해주세요.)");
 				String checkText = sc.nextLine();
 				if(checkText.equals("아니오")) break;
 				if(!checkText.equals(checkString)) {
-					System.out.println("입력된문자가 잘못되었습니다 다시한번 확인해주세요. ");
+					System.out.println("*** 입력된문자가 잘못되었습니다 다시한번 확인해주세요. ***");
 					continue;
 				}
 				

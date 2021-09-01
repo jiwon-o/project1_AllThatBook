@@ -25,7 +25,7 @@ select * from users where 회원ID='admin' and 패스워드='q1w2e3r4';
 
 insert into users(회원번호, 회원ID, 패스워드, 회원이름, 연락처, 등록일자) values (user_seq_no.nextval, 'oh', '1234', '오지원', '010-0000-0000', sysdate);
 
-delete from users where 회원ID='zxcv';
+delete from users where 회원ID='ojw123';
 delete from books where 회워
 
 
@@ -46,8 +46,8 @@ select * from users where 회원ID='bbb';
 select * from users where 회원번호=31;
 
 delete from users where 회원번호=33;
-delete from rental where 회원번호=31;
-select * from rental where 회원번호=31;
+delete from rental where 회원번호=70;
+select * from rental where 회원번호=70;
 
 select 장바구니번호, 책번호, 도서명, 저자명, 출판사명, 출간일, 분야, 상태 from cart_detail join books using(책번호);
 select 장바구니번호, 책번호, 도서명, 저자명, 출판사명, to_char(출간일, 'yy/mm/dd') 출간일, 분야, 상태 from cart_detail join books using(책번호);
@@ -64,7 +64,7 @@ select 장바구니번호, 회원번호 from cart;
 select * from cart_detail;
 select 장바구니번호, 책번호 from cart_detail;
 
-delete from cart;
+delete from cart where 회원번호=;
 
 select * from books;
 select 책번호, 도서명, 저자명, 출판사명, to_char(출간일, 'yy/mm/dd')출간일, 분야, 상태 from books;

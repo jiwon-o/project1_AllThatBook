@@ -30,10 +30,11 @@ public class BookServiceImpl implements BookService {
 
 			throw new SQLException("*** 해당 도서번호에 해당하는 도서는 현재 없습니다. ***");
 
-		}else {
-			System.out.println("*** '" + bookNo + "'번 책을 검색합니다. ***");
-
 		}
+//		else {
+//			System.out.println("*** '" + bookNo + "'번 책을 검색합니다. ***");
+//
+//		}
 		
 		return book;
 	}
@@ -119,7 +120,8 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public void bookDelete(int bookNo) throws SQLException {
 		int result = bookDao.bookDelete(bookNo);
-		if(result==0)throw new SQLException("*** 도서삭제가 되지 않았습니다. ***");
+		if(result==0)throw new SQLException("*** '" + bookNo + "'번에 해당하는 도서를 찾을 수 없습니다. ***");
+		
 	}
 
 }

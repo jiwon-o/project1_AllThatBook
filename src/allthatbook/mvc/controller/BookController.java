@@ -152,7 +152,7 @@ public class BookController {
 	public static void bookInsert(Book book) {
 		try {
 			bookService.bookInsert(book);
-			EndView.printMessage("*** 등록 성공했습니다. ***");
+			EndView.printMessage("*** 『 " + book.getBookName() + " 』 도서를 등록했습니다. ***");
 		} catch (SQLException e) {
 			FailView.errorMessage(e.getMessage());
 		}
@@ -165,7 +165,7 @@ public class BookController {
 	public static void bookDelete(int bookNo) {
 		try {
 			bookService.bookDelete(bookNo);
-			EndView.printMessage("*** 도서삭제가 되었습니다. ***");
+			EndView.printMessage("***'" + bookNo + "'번 도서가 삭제되었습니다. ***");
 		} catch (SQLException e) {
 			FailView.errorMessage(e.getMessage());
 		}

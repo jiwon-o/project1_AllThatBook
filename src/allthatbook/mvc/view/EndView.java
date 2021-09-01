@@ -53,17 +53,19 @@ public class EndView {
 	 * User 전체 출력
 	 */
 	public static void printUserList(List<User> userList){
-		System.out.println("---------------------------------  전체 User "+userList.size()+  " ----------------------------------------------------------");
+		System.out.println("\n---------------------------------------------------------- *** 전체 회원 목록 (" + userList.size() + "개) *** ----------------------------------------------------------\n");
 		for(User user : userList) {
 			System.out.println(user);
 		}
-		System.out.println();
+		System.out.println("\n-----------------------------------------------------------------------------------------------------------------------------------------------------\n");
 	}
 	/**
 	 * UserId로 조회해서 출력
 	 */
 	public static void printSelectByUserId(User user) {
+		System.out.println("\n--------------------------------------------------------- *** 회원정보 *** ---------------------------------------------------------\n");
 		System.out.println(user);
+		System.out.println("\n");
 		
 	}
 
@@ -73,7 +75,7 @@ public class EndView {
 
 	public static void printViewCart(User user, Cart cart) {
 		List<CartDetail> list = cart.getCartDetailList();
-		System.out.println("\n------------------------------------------------------------- *** 장바구니 목록 (" + list.size() + "개 ***) -------------------------------------------------------------\n");
+		System.out.println("\n------------------------------------------------------------- *** 장바구니 목록 (" + list.size() + "개) ***) -------------------------------------------------------------\n");
 		for(CartDetail cartDetail : list) {
 			
 			int bookNo = cartDetail.getBookNo(); //책번호

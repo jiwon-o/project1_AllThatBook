@@ -73,8 +73,8 @@ public class User {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("\n--------------------------------------------------------- *** 회원정보 *** ---------------------------------------------------------\n");
-		builder.append("\n회원번호: ");
+		
+		builder.append("회원번호: ");
 		builder.append(userNo);
 		builder.append(", 회원ID: ");
 		builder.append(userId);
@@ -84,7 +84,6 @@ public class User {
 		builder.append(userPhone);
 		builder.append(", 등록일자: ");
 		builder.append(regDate);
-		builder.append("\n\n");
 		return builder.toString();
 	}
 	

@@ -21,12 +21,12 @@ public class UpdateAdminController {
 			updateUser.setUserNo(userNo);
 			updateUser.setRegDate(user.getRegDate());
 			if(updateUser.getUserId().isEmpty())updateUser.setUserId(user.getUserId());
-			if(updateUser.getUserPwd().isEmpty())updateUser.setUserPwd(user.getUserPwd());
+//			if(updateUser.getUserPwd().isEmpty())updateUser.setUserPwd(user.getUserPwd());
 			if(updateUser.getUserName().isEmpty())updateUser.setUserName(user.getUserName());
 			if(updateUser.getUserPhone().isEmpty())updateUser.setUserPhone(user.getUserPhone());
 			result=userService.userUpdate(updateUser);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		}
 		return result;

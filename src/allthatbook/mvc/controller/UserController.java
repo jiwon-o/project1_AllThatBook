@@ -2,6 +2,7 @@ package allthatbook.mvc.controller;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Scanner;
 
 import allthatbook.mvc.exception.PwdCheckException;
 import allthatbook.mvc.model.dto.Rental;
@@ -72,7 +73,7 @@ public class UserController {
 			EndView.printMessage("*** 회원탈퇴가 완료되었습니다 로그인 화면으로 이동합니다. ***");
 			UserMenuView.logout(user.getUserId()); //수정 되어서 다시 로그인 시키기
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			FailView.errorMessage(e.getMessage());
 		} 
 	}
@@ -81,9 +82,22 @@ public class UserController {
 	 * 회원삭제
 	 */
 	public static void deleteAdminUserInfo(int userNo) {
+		Scanner sc = new Scanner(System.in);
 		try {
-			userService.deleteUserInfo(userNo);
-			EndView.printMessage("*** 회원삭제가 되었습니다. ***");
+			System.out.println("\n'"+userNo+"'번 회원의 정보를 정말로 삭제하시겠습니까? ( 네 / 아니오 )");
+			String checkDeleteUser = sc.nextLine();
+			if("네".equals(checkDeleteUser)) {
+				userService.deleteUserInfo(userNo);
+				EndView.printMessage("*** 회원정보를 삭제하였습니다. ***");
+			}else if("아니오".equals(checkDeleteUser)) {
+				System.out.println("*** 회원삭제를 취소했습니다. ***\n");
+				return;
+			}else {
+				System.out.println("*** ( 네 / 아니오 ) 중 하나만 입력해주세요. ***\n");
+				return;
+			}
+			
+			
 		} catch (SQLException e) {
 			FailView.errorMessage(e.getMessage());
 		} 
@@ -108,6 +122,7 @@ public class UserController {
 		try {
 			user = userService.selectByUserNo(userNo);
 			EndView.printSelectByUserId(user);
+			System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
 			
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
@@ -122,6 +137,7 @@ public class UserController {
 		try {
 			User user = userService.selectByUserId(userId);
 			EndView.printSelectByUserId(user);
+			System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
 		} catch (Exception e) {
 			FailView.errorMessage(e.getMessage());
 		}

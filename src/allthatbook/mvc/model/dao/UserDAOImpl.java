@@ -143,15 +143,14 @@ public class UserDAOImpl implements UserDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<User> userList = new ArrayList();
-		String sql = "select*from users";
+		String sql = "select * from users order by 회원번호";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				User user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getString(6));
+				User user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
 				userList.add(user);
 			}
 		} finally {
@@ -168,7 +167,7 @@ public class UserDAOImpl implements UserDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		User user = null;
-		String sql = "select*from users where 회원번호=?";
+		String sql = "select * from users where 회원번호=?";
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
@@ -217,19 +216,18 @@ public class UserDAOImpl implements UserDAO {
 	public int updateAdminUserInfo(User updateUser) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql="update users set 회원ID=?, 패스워드=?, 회원이름=?, 연락처=? where 회원번호=?";
+		String sql="update users set 회원ID=?, 회원이름=?, 연락처=? where 회원번호=?";
 		int result=0;	
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
 			ps.setString(1, updateUser.getUserId());
-			ps.setString(2, updateUser.getUserPwd());
-			ps.setString(3, updateUser.getUserName());
-			ps.setString(4, updateUser.getUserPhone());
-			ps.setInt(5, updateUser.getUserNo());
+			ps.setString(2, updateUser.getUserName());
+			ps.setString(3, updateUser.getUserPhone());
+			ps.setInt(4, updateUser.getUserNo());
 			result=ps.executeUpdate();
 		}catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}finally {
 			DbUtil.close(con, ps);
 		}
